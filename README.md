@@ -50,21 +50,30 @@ The interpreter consists of 4 main components:
 
 ---
 
-## Quick Start
+## Quick Start (এক ক্লিকে ইনস্টল ও রান)
 
-### Installation
-
-No external dependencies required! Just Python 3.6+
+### ১. ইনস্টলেশন (যেকোনো কম্পিউটার থেকে মাত্র ১টি কমান্ড):
 
 ```bash
-# Clone or download the Bangla language files
-cd bangla-lang
+pip install git+https://github.com/tasfiqueofficial/BanglaThon.git
 ```
 
-### Running Programs
+ইনস্টল হয়ে গেলে আপনার কম্পিউটারের **যেকোনো ফোল্ডার বা ড্রাইভ** থেকে `bangla` কমান্ড সরাসরি কাজ করবে!
+
+### ২. প্রোগ্রাম রান করা (Usage):
 
 ```bash
-python3 main.py <program.bng>
+# যেকোনো .bl কোড ফাইল রান করতে
+bangla run hello.bl
+
+# অথবা সরাসরি:
+bangla hello.bl
+
+# সরাসরি টার্মিনালে কোড লেখার জন্য (Interactive Mode)
+bangla
+
+# ভার্সন দেখতে
+bangla --version
 ```
 
 Or directly from Python:
