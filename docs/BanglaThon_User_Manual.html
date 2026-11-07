@@ -351,46 +351,39 @@
 
     <h1>২. ডাউনলোড ও ইনস্টলেশন নির্দেশিকা</h1>
     <p>
-      বাংলথন একটি অত্যন্ত হালকা (Lightweight) এবং আধুনিক সফটওয়্যার। এর সবচেয়ে বড় কারিগরি সুবিধা হলো <strong>শূন্য ডিপেন্ডেন্সি (Zero External Dependencies)</strong>। অর্থাৎ বাড়তি কোনো জটিল লাইব্রেরি ছাড়াই যেকোনো পিসিতে এটি সরাসরি চলবে।
+      বাংলথন অত্যন্ত হালকা ও আধুনিক। এর সবচেয়ে বড় সুবিধা হলো <strong>শূন্য ডিপেন্ডেন্সি (Zero External Dependencies)</strong>—বাড়তি কোনো লাইব্রেরি ছাড়াই যেকোনো পিসিতে এটি সরাসরি চলবে।
     </p>
 
-    <h2>২.১ পূর্বশর্ত (Prerequisites)</h2>
-    <p>কম্পিউটারে শুধুমাত্র <strong>Python 3.7 বা তার পরবর্তী যেকোনো সংস্করণ</strong> ইনস্টল থাকা আবশ্যক। উইন্ডোজ, ম্যাক বা লিনাক্স সব অপারেটিং সিস্টেমে এটি সমর্থিত।</p>
-
-    <h2>২.২ পদ্ধতি ১: সবচেয়ে সহজ উপায় (১-লাইনের গ্লোবাল ইনস্টল)</h2>
-    <p>যেকোনো ব্যবহারকারী তার কম্পিউটারের <strong>Command Prompt (CMD)</strong> অথবা <strong>Terminal</strong> ওপেন করে নিচের একটি মাত্র কমান্ড দিলেই গিটহাব থেকে সরাসরি বাংলাথন ইনস্টল হয়ে যাবে:</p>
+    <h2>২.১ পদ্ধতি ১: উইন্ডোজ PowerShell ১-লাইন ইনস্টলার (স্বয়ংক্রিয়)</h2>
+    <p>উইন্ডোজ ১০ ও ১১ ব্যবহারকারীরা কোনো ফাইল ডাউনলোড না করেই সরাসরি <strong>PowerShell</strong> ওপেন করে নিচের ১টি লাইন পেস্ট করে এন্টার দিলেই পুরো সেটআপ স্বয়ংক্রিয়ভাবে সম্পন্ন হবে:</p>
     
+    <div class="code-box">
+irm https://raw.githubusercontent.com/tasfiqueofficial/BanglaThon/main/install.ps1 | iex
+    </div>
+    <div class="callout" style="padding:6px 12px; margin:6px 0;">
+      <strong>ইনস্টল শেষে ফাইল রান করবেন যেভাবে:</strong><br>
+      নতুন যেকোনো CMD বা PowerShell উইন্ডো খুলে সরাসরি লিখুন:
+      <br>• ফাইল রান করতে: <span class="inline-code">bangla run apnar_file.bl</span>
+      <br>• লাইভ কোড লিখতে: <span class="inline-code">bangla</span>
+    </div>
+
+    <h2>২.২ পদ্ধতি ২: পাইথন pip ১-লাইন ইনস্টলার (উইন্ডোজ, ম্যাক ও লিনাক্স)</h2>
+    <p>যেকোনো কম্পিউটারের টার্মিনাল বা CMD থেকে সরাসরি গিটহাব প্যাকেজ ইনস্টল করতে:</p>
     <div class="code-box">
 pip install git+https://github.com/tasfiqueofficial/BanglaThon.git
     </div>
-    <div class="callout">
-      <strong>টিপস:</strong> এই কমান্ডটি কার্যকর হওয়ার পর পিসির যেকোনো ড্রাইভ বা ফোল্ডারে টার্মিনাল খুলে <span class="inline-code">bangla</span> কমান্ডটি সরাসরি ব্যবহার করা যাবে।
-    </div>
 
-    <h2>২.৩ পদ্ধতি ২: গিট ক্লোন ও সোর্স থেকে ইনস্টলেশন</h2>
-    <p>যদি সম্পূর্ণ সোর্স কোড ও এক্সাম্পলসহ ডাউনলোড করে নিজের পিসিতে ইনস্টল করতে চান:</p>
+    <h2>২.৩ পদ্ধতি ৩: গিট ক্লোন ও সোর্স থেকে ইনস্টলেশন</h2>
+    <p>সম্পূর্ণ সোর্সকোড ও টেস্টসহ নিজের পিসিতে নামিয়ে ইনস্টল করতে:</p>
     <div class="code-box">
-<span class="cm"># ধাপ ১: রিপোজিটরি ক্লোন</span>
 git clone https://github.com/tasfiqueofficial/BanglaThon.git
-
-<span class="cm"># ধাপ ২: ফোল্ডারে প্রবেশ</span>
 cd BanglaThon
-
-<span class="cm"># ধাপ ৩: গ্লোবাল সিএলআই হিসেবে ইনস্টল</span>
 pip install .
     </div>
 
-    <h2>২.৪ পদ্ধতি ৩: গিট ছাড়া সাধারণ জিপ (ZIP) ডাউনলোড</h2>
-    <p>যাদের কম্পিউটারে Git ইনস্টল নেই:</p>
-    <ol style="padding-left:18px; font-size:12px; margin-bottom:8px;">
-      <li>ব্রাউজারে যান: <span class="inline-code">https://github.com/tasfiqueofficial/BanglaThon</span></li>
-      <li>সবুজ রঙের <strong>Code</strong> ড্রপডাউন থেকে <strong>Download ZIP</strong>-এ ক্লিক করুন।</li>
-      <li>ফাইলটি আনজিপ করে ফোল্ডারের ভেতর CMD ওপেন করে টাইপ করুন: <span class="inline-code">pip install .</span></li>
-    </ol>
-
-    <h2>২.৫ পদ্ধতি ৪: অফলাইন ও পেনড্রাইভ মোড (ইন্টারনেটবিহীন স্কুলের জন্য)</h2>
+    <h2>২.৪ পদ্ধতি ৪: সাধারণ জিপ (ZIP) ও অফলাইন পেনড্রাইভ মোড</h2>
     <p>
-      গ্রামের স্কুলের কম্পিউটার ল্যাবে ইন্টারনেট না থাকলেও পেনড্রাইভে করে <span class="inline-code">BanglaThon</span> ফোল্ডারটি কপি করে নিলে কোনো ইনস্টলেশন ছাড়াই সরাসরি <span class="inline-code">python main.py &lt;file.bl&gt;</span> দিয়ে প্রোগ্রাম চালানো যাবে।
+      যাদের কম্পিউটারে Git নেই তারা <span class="inline-code">github.com/tasfiqueofficial/BanglaThon</span> থেকে <strong>Download ZIP</strong> দিয়ে আনজিপ করে ভেতর থেকে <span class="inline-code">pip install .</span> দিতে পারবেন। ইন্টারনেটরহিত প্রান্তিক স্কুলের ল্যাবে পেনড্রাইভে ফোল্ডারটি নিয়ে সরাসরি <span class="inline-code">python main.py &lt;file.bl&gt;</span> দিয়েও চলবে।
     </p>
 
     <div class="page-footer">
