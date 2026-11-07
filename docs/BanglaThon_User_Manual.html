@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>BanglaThon Complete Instruction Manual & Language Specification</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green: #006a4e;
+      --green-dark: #004d38;
+      --green-light: #e8f5e9;
+      --red: #d90429;
+      --red-dark: #990000;
+      --red-light: #fef2f2;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #cbd5e1;
+      --code-bg: #0f172a;
+      --code-text: #f8fafc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    @page {
+      size: A4 portrait;
+      margin: 15mm 15mm 16mm 15mm;
+    }
+
+    body {
+      background-color: #f1f5f9;
+      font-family: 'Hind Siliguri', 'Plus Jakarta Sans', sans-serif;
+      color: var(--text);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Print Controls */
+    .screen-toolbar {
+      position: fixed;
+      top: 14px;
+      right: 20px;
+      z-index: 1000;
+      display: flex;
+      gap: 10px;
+      background: white;
+      padding: 8px 16px;
+      border-radius: 9999px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      border: 1px solid var(--border);
+    }
+    .print-btn {
+      background: var(--red);
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 9999px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Hind Siliguri', sans-serif;
+    }
+
+    /* 10 Individual Fixed A4 Pages */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 10px auto 25px auto;
+      background: white;
+      padding: 16mm 18mm 18mm 18mm;
+      box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      page-break-after: always;
+      box-sizing: border-box;
+    }
+
+    @media print {
+      body { background: white; }
+      .screen-toolbar { display: none !important; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        width: 100%;
+        min-height: 100vh;
+        padding: 0;
+        page-break-after: always;
+      }
+    }
+
+    /* Running Header & Footer */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1.5px solid var(--green);
+      padding-bottom: 6px;
+      margin-bottom: 16px;
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .page-header .brand { color: var(--green); font-weight: 800; }
+
+    .page-footer {
+      margin-top: auto;
+      border-top: 1px solid var(--border);
+      padding-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10.5px;
+      color: var(--muted);
+    }
+    .page-num { font-weight: 700; color: var(--red); }
+
+    /* Typography */
+    h1, h2, h3, h4 { color: var(--green-dark); font-weight: 800; }
+    h1 { font-size: 24px; line-height: 1.25; margin-bottom: 12px; }
+    h2 { font-size: 18px; border-left: 4px solid var(--red); padding-left: 8px; margin: 14px 0 8px 0; }
+    h3 { font-size: 14.5px; color: var(--text); margin: 10px 0 4px 0; }
+    p { font-size: 12.5px; color: #1e293b; margin-bottom: 8px; text-align: justify; }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11.5px;
+      margin: 8px 0 12px 0;
+    }
+    th {
+      background: var(--green);
+      color: white;
+      text-align: left;
+      padding: 6px 10px;
+      font-weight: 700;
+      border: 1px solid var(--border);
+    }
+    td {
+      padding: 6px 10px;
+      border: 1px solid var(--border);
+      color: #1e293b;
+    }
+    tr:nth-child(even) { background-color: #f8fafc; }
+
+    /* Code Blocks */
+    pre, code { font-family: 'Fira Code', monospace; }
+    .code-box {
+      background: var(--code-bg);
+      color: var(--code-text);
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 11px;
+      line-height: 1.45;
+      margin: 8px 0;
+      border-left: 3px solid var(--green);
+      overflow-x: auto;
+    }
+    .code-box .kw { color: #38bdf8; font-weight: 700; }
+    .code-box .fn { color: #fbbf24; }
+    .code-box .str { color: #4ade80; }
+    .code-box .num { color: #f472b6; }
+    .code-box .cm { color: #94a3b8; font-style: italic; }
+
+    .inline-code {
+      background: #f1f5f9;
+      color: var(--red-dark);
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      border: 1px solid #e2e8f0;
+    }
+
+    /* Callout & Cards */
+    .callout {
+      background: var(--green-light);
+      border-left: 4px solid var(--green);
+      padding: 10px 14px;
+      border-radius: 4px;
+      margin: 10px 0;
+      font-size: 12px;
+    }
+    .callout.red {
+      background: var(--red-light);
+      border-left-color: var(--red);
+    }
+
+    /* Cover Page Elements */
+    .cover-page {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      text-align: center;
+      padding: 25mm 10mm 15mm 10mm;
+    }
+    .cover-top-badge {
+      display: inline-block;
+      background: var(--green-light);
+      color: var(--green-dark);
+      border: 1.5px solid var(--green);
+      padding: 6px 18px;
+      border-radius: 9999px;
+      font-weight: 800;
+      font-size: 13px;
+      margin-bottom: 25px;
+    }
+    .cover-title {
+      font-size: 42px;
+      font-weight: 900;
+      color: var(--red-dark);
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+    .cover-subtitle {
+      font-size: 20px;
+      color: var(--green);
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .cover-desc {
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 550px;
+      margin: 0 auto 35px auto;
+      line-height: 1.6;
+    }
+    .cover-card {
+      background: #f8fafc;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+      max-width: 500px;
+      margin: 0 auto;
+      text-align: left;
+      font-size: 12.5px;
+    }
+    .cover-footer {
+      border-top: 2px solid var(--green);
+      padding-top: 15px;
+      font-size: 11.5px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="screen-toolbar">
+    <button class="print-btn" onclick="window.print()">🖨️ প্রিন্ট / Save as 10-Page PDF</button>
+  </div>
+
+  <!-- ==========================================
+       PAGE 1: COVER PAGE
+       ========================================== -->
+  <div class="page">
+    <div class="cover-page">
+      <div>
+        <div class="cover-top-badge">
+          🇧🇩 গণপ্রজাতন্ত্রী বাংলাদেশ • গবেষণা ও প্রযুক্তি উদ্ভাবন ২০২৬
+        </div>
+        <h1 class="cover-title">বাংলথন (BanglaThon)</h1>
+        <div class="cover-subtitle">অফিসিয়াল ইউজার ও ডেভেলপার ইনস্ট্রাকশন ম্যানুয়াল</div>
+        <p class="cover-desc">
+          মাতৃভাষা বাংলায় প্রোগ্রামিং ও কম্পিউটেশনাল থিঙ্কিং বিকাশের জন্য স্ক্র্যাচ থেকে নির্মিত সম্পূর্ণ স্বাধীন ও ওপেন-সোর্স (FOSS) প্রোগ্রামিং ল্যাঙ্গুয়েজ এবং এবস্ট্রাক্ট সিনট্যাক্স ট্রি (AST) ইন্টারপ্রেটার।
+        </p>
+
+        <div class="cover-card">
+          <div style="font-weight:800; color:var(--green-dark); margin-bottom:8px; font-size:14px; border-bottom:1px solid #e2e8f0; padding-bottom:4px;">
+            📋 ডকুমেন্ট পরিচিতি ও মেটাডাটা
+          </div>
+          <div><strong>সফটওয়্যার সংস্করণ:</strong> BanglaThon v0.1.0 (Core LTS)</div>
+          <div><strong>প্রণেতা ও উদ্ভাবক:</strong> তাসফিক শিকদার কৌশিক</div>
+          <div><strong>প্রতিষ্ঠান:</strong> কম্পিউটার সায়েন্স অ্যান্ড ইঞ্জিনিয়ারিং বিভাগ (CSE), রাঙ্গামাটি বিজ্ঞান ও প্রযুক্তি বিশ্ববিদ্যালয় (RMSTU)</div>
+          <div><strong>অফিসিয়াল রিপোজিটরি:</strong> github.com/tasfiqueofficial/BanglaThon</div>
+          <div><strong>প্রতিযোগিতা:</strong> জিয়াউর রহমান ফাউন্ডেশন (ZRF) — <em>ভবিষ্যৎ বিজ্ঞানীর খোঁজে ২০২৬</em></div>
+          <div><strong>লাইসেন্স ও দর্শন:</strong> ১০০% ফ্রি এবং ওপেন-সোর্স (Free and Open Source Software)</div>
+        </div>
+      </div>
+
+      <div class="cover-footer">
+        <strong>উৎসর্গ:</strong> ১৯৫২ সালের ভাষা আন্দোলনের অমর শহীদ এবং ড. মেহেদী হাসান খান (অভ্র কি-বোর্ড এর স্বপ্নদ্রষ্টা)-এর প্রতি শ্রদ্ধাজ্ঞাপনপূর্বক।<br>
+        <em>"ভাষার জন্য টাকা নেবো কেন? — ভাষা হোক উন্মুক্ত, কোডিং হোক সার্বজনীন।"</em>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       PAGE 2: ভূমিকা, দর্শন ও অনুপ্রেরণা
+       ========================================== -->
+  <div class="page">
+    <div class="page-header">
+      <span class="brand">BanglaThon Manual</span>
+      <span>অধ্যায় ১: ভূমিকা, দর্শন ও জাতীয় প্রয়োজনীয়তা</span>
+    </div>
+
+    <h1>১. ভূমিকা, দর্শন ও জাতীয় প্রয়োজনীয়তা</h1>
+
+    <h2>১.১ পটভূমি ও ভাষাগত দেয়াল (The Linguistic Barrier)</h2>
+    <p>
+      বাংলাদেশে প্রাথমিক, মাধ্যমিক ও উচ্চ-মাধ্যমিক স্তরের ৮৫% এরও বেশি শিক্ষার্থী বাংলা মাধ্যমে পড়াশোনা করে। কিন্তু যখনই তারা কম্পিউটার সায়েন্স, আইসিটি বা প্রোগ্রামিংয়ের জগতে প্রবেশ করে, তাদের সামনে এক বিশাল ভাষাগত প্রাচীর দাঁড়িয়ে যায়। পৃথিবীর প্রায় সব মূলধারার প্রোগ্রামিং ল্যাঙ্গুয়েজ (C++, Java, Python) ইংরেজি কি-ওয়ার্ডের ওপর নির্ভরশীল।
+    </p>
+    <p>
+      শিক্ষাতাত্ত্বিক গবেষণায় প্রমাণিত হয়েছে যে, একজন নতুন শিক্ষার্থীকে একই সাথে অ্যালগরিদমিক লজিক এবং বিদেশি ইংরেজি শব্দ বুঝতে বাধ্য করলে তার মস্তিষ্কে <strong>৬০% অতিরিক্ত মানসিক চাপ (Cognitive Overhead)</strong> তৈরি হয়। ফলে কোটি কোটি মেধাবী শিক্ষার্থী শুরুতেই হতাশ হয়ে প্রোগ্রামিং শেখা ছেড়ে দেয়।
+    </p>
+
+    <h2>১.২ ড. মেহেদী হাসান খান ও অভ্র কি-বোর্ডের অনুপ্রেরণা</h2>
+    <div class="callout red">
+      <div style="font-weight:800; font-size:13.5px; color:var(--red-dark); margin-bottom:4px;">
+        ❝ ভাষার জন্য টাকা নেবো কেন? ❞
+      </div>
+      <div>
+        — <strong>ড. মেহেদী হাসান খান</strong> (স্বপ্নদ্রষ্টা: অভ্র কি-বোর্ড, একুশে পদকপ্রাপ্ত ২০২৫/২০২৬)
+      </div>
+      <p style="margin-top:6px; font-size:12px;">
+        ২০০৩ সালে তরুণ মেডিকেল শিক্ষার্থী ডা. মেহেদী হাসান খান যখন বাংলা লেখার যুগান্তকারী সফটওয়্যার 'অভ্র' তৈরি করেন, তখন বড় ভাইদের বাণিজ্যিক অফার প্রত্যাখ্যান করে তিনি বলেছিলেন—<em>"ভাষার জন্য টাকা নেবো কেন?"</em> এবং তাঁর স্লোগান ছিল—<em>"ভাষা হোক উন্মুক্ত"</em>।
+      </p>
+    </div>
+
+    <h2>১.৩ অবাণিজ্যিক অঙ্গীকার (Our Non-Commercial Ethos)</h2>
+    <p>
+      আমরা বিশ্বাস করি, যে ভাষার তরে ১৯৫২ সালে আমাদের পূর্বপুরুষেরা রক্ত দিয়ে রাজপথ রঞ্জিত করেছিলেন, সে ভাষার শিক্ষামূলক প্রযুক্তিকে আমাদের টিম কখনো কোনো বাণিজ্যিক পণ্য বা পেইড সার্ভিসে রূপান্তর করবে না। অভ্র যেমন কোটি বাঙালির জন্য বাংলা লেখাকে উন্মুক্ত করেছিল, <strong>বাংলথন (BanglaThon)</strong> তেমনি কোটি শিক্ষার্থীর জন্য কোডিং ও অ্যালগরিদম শেখাকে আজীবন সম্পূর্ণ উন্মুক্ত ও ফ্রি (FOSS) রাখবে।
+    </p>
+
+    <h2>১.৪ মূল লক্ষ্য ও উদ্দেশ্যসমূহ</h2>
+    <ul style="padding-left:18px; font-size:12px; margin-bottom:12px;">
+      <li><strong>তৃণমূল ডিজিটাল রূপান্তর:</strong> গ্রাম ও চরাঞ্চলের প্রতিটি স্কুলের শিক্ষার্থীদের কাছে প্রোগ্রামিং সহজবোধ্য করা।</li>
+      <li><strong>স্বাধীন ইন্টারপ্রেটার আর্কিটেকচার:</strong> কোনো ব্রাউজার নির্ভরতা বা পাইথন টেক্সট-র‍্যাপার নয়; সম্পূর্ণ নিজস্ব লেক্সার ও পার্সার দিয়ে গঠিত পূর্ণাঙ্গ সিস্টেম।</li>
+      <li><strong>সিপি (Competitive Programming) ফোকাসড:</strong> ইন-বিল্ট সর্টিং, সর্বোচ্চ-সর্বনিম্ন মান নির্ণয় ও ফাস্ট আই/ও মেকানিজম।</li>
+    </ul>
+
+    <div class="page-footer">
+      <span>BanglaThon v0.1.0 Official Documentation</span>
+      <span class="page-num">পৃষ্ঠা ২</span>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       PAGE 3: ডাউনলোড ও ইনস্টলেশন প্রক্রিয়া
+       ========================================== -->
+  <div class="page">
+    <div class="page-header">
+      <span class="brand">BanglaThon Manual</span>
+      <span>অধ্যায় ২: ডাউনলোড ও ইনস্টলেশন প্রক্রিয়া</span>
+    </div>
+
+    <h1>২. ডাউনলোড ও ইনস্টলেশন নির্দেশিকা</h1>
+    <p>
+      বাংলথন একটি অত্যন্ত হালকা (Lightweight) এবং আধুনিক সফটওয়্যার। এর সবচেয়ে বড় কারিগরি সুবিধা হলো <strong>শূন্য ডিপেন্ডেন্সি (Zero External Dependencies)</strong>। অর্থাৎ বাড়তি কোনো জটিল লাইব্রেরি ছাড়াই যেকোনো পিসিতে এটি সরাসরি চলবে।
+    </p>
+
+    <h2>২.১ পূর্বশর্ত (Prerequisites)</h2>
+    <p>কম্পিউটারে শুধুমাত্র <strong>Python 3.7 বা তার পরবর্তী যেকোনো সংস্করণ</strong> ইনস্টল থাকা আবশ্যক। উইন্ডোজ, ম্যাক বা লিনাক্স সব অপারেটিং সিস্টেমে এটি সমর্থিত।</p>
+
+    <h2>২.২ পদ্ধতি ১: সবচেয়ে সহজ উপায় (১-লাইনের গ্লোবাল ইনস্টল)</h2>
+    <p>যেকোনো ব্যবহারকারী তার কম্পিউটারের <strong>Command Prompt (CMD)</strong> অথবা <strong>Terminal</strong> ওপেন করে নিচের একটি মাত্র কমান্ড দিলেই গিটহাব থেকে সরাসরি বাংলাথন ইনস্টল হয়ে যাবে:</p>
+    
+    <div class="code-box">
+pip install git+https://github.com/tasfiqueofficial/BanglaThon.git
+    </div>
+    <div class="callout">
+      <strong>টিপস:</strong> এই কমান্ডটি কার্যকর হওয়ার পর পিসির যেকোনো ড্রাইভ বা ফোল্ডারে টার্মিনাল খুলে <span class="inline-code">bangla</span> কমান্ডটি সরাসরি ব্যবহার করা যাবে।
+    </div>
+
+    <h2>২.৩ পদ্ধতি ২: গিট ক্লোন ও সোর্স থেকে ইনস্টলেশন</h2>
+    <p>যদি সম্পূর্ণ সোর্স কোড ও এক্সাম্পলসহ ডাউনলোড করে নিজের পিসিতে ইনস্টল করতে চান:</p>
+    <div class="code-box">
+<span class="cm"># ধাপ ১: রিপোজিটরি ক্লোন</span>
+git clone https://github.com/tasfiqueofficial/BanglaThon.git
+
+<span class="cm"># ধাপ ২: ফোল্ডারে প্রবেশ</span>
+cd BanglaThon
+
+<span class="cm"># ধাপ ৩: গ্লোবাল সিএলআই হিসেবে ইনস্টল</span>
+pip install .
+    </div>
+
+    <h2>২.৪ পদ্ধতি ৩: গিট ছাড়া সাধারণ জিপ (ZIP) ডাউনলোড</h2>
+    <p>যাদের কম্পিউটারে Git ইনস্টল নেই:</p>
+    <ol style="padding-left:18px; font-size:12px; margin-bottom:8px;">
+      <li>ব্রাউজারে যান: <span class="inline-code">https://github.com/tasfiqueofficial/BanglaThon</span></li>
+      <li>সবুজ রঙের <strong>Code</strong> ড্রপডাউন থেকে <strong>Download ZIP</strong>-এ ক্লিক করুন।</li>
+      <li>ফাইলটি আনজিপ করে ফোল্ডারের ভেতর CMD ওপেন করে টাইপ করুন: <span class="inline-code">pip install .</span></li>
+    </ol>
+
+    <h2>২.৫ পদ্ধতি ৪: অফলাইন ও পেনড্রাইভ মোড (ইন্টারনেটবিহীন স্কুলের জন্য)</h2>
+    <p>
+      গ্রামের স্কুলের কম্পিউটার ল্যাবে ইন্টারনেট না থাকলেও পেনড্রাইভে করে <span class="inline-code">BanglaThon</span> ফোল্ডারটি কপি করে নিলে কোনো ইনস্টলেশন ছাড়াই সরাসরি <span class="inline-code">python main.py &lt;file.bl&gt;</span> দিয়ে প্রোগ্রাম চালানো যাবে।
+    </p>
+
+    <div class="page-footer">
+      <span>BanglaThon v0.1.0 Official Documentation</span>
+      <span class="page-num">পৃষ্ঠা ৩</span>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       PAGE 4: কোড লেখার প্রাথমিক নিয়ম ও রানিং মোড
+       ========================================== -->
+  <div class="page">
+    <div class="page-header">
+      <span class="brand">BanglaThon Manual</span>
+      <span>অধ্যায় ৩: কোড লেখার নিয়ম ও রানিং মোড</span>
+    </div>
+
+    <h1>৩. কোড লেখার নিয়ম ও এক্সিকিউশন মোড</h1>
+
+    <h2>৩.১ প্রথম প্রোগ্রাম রচনা (<span class="inline-code">hello.bl</span>)</h2>
+    <p>
+      আপনার কম্পিউটারের যেকোনো টেক্সট এডিটর (যেমন: Notepad, VS Code) দিয়ে একটি নতুন ফাইল তৈরি করুন এবং সেভ করুন <span class="inline-code">hello.bl</span> নামে:
+    </p>
+
+    <div class="code-box">
+<span class="cm"># এটি আমার প্রথম বাংলাথন প্রোগ্রাম</span>
+<span class="kw">dekhao</span> <span class="str">"আসসালামু আলাইকুম বাংলাদেশ!"</span>
+<span class="kw">dekhao</span> <span class="str">"বাংলা ভাষায় কোডিং এখন বাস্তব।"</span>
+
+<span class="kw">dhori</span> shongkha_a = <span class="num">25</span>
+<span class="kw">dhori</span> shongkha_b = <span class="num">15</span>
+<span class="kw">dekhao</span> <span class="str">"যোগফল: "</span> + (shongkha_a + shongkha_b)
+    </div>
+
+    <h2>৩.২ টার্মিনাল থেকে ফাইল এক্সিকিউট করা</h2>
+    <p>টার্মিনাল বা সিএমডি ওপেন করে ফাইলটি রান করার কমান্ড:</p>
+    <div class="code-box">
+<span class="cm"># স্ট্যান্ডার্ড রান কমান্ড:</span>
+bangla run hello.bl
+
+<span class="cm"># সরাসরি ফাইল পাথ দিয়েও চলবে:</span>
+bangla hello.bl
+    </div>
+
+    <h2>৩.৩ লাইভ ইন্টারেক্টিভ মোড (Interactive REPL Mode)</h2>
+    <p>
+      Python-এর মতো বাংলাথনেও রয়েছে একটি উচ্চক্ষমতাসম্পন্ন <strong>ইন্টারেক্টিভ কনসোল (REPL)</strong>। টার্মিনালে কোনো আর্গুমেন্ট ছাড়া শুধু <span class="inline-code">bangla</span> লিখলেই লাইভ মোড চালু হয়:
+    </p>
+    <div class="code-box">
+$ bangla
+Bangla Programming Language v0.1.0 — Interactive Mode
+Exit korte 'exit' likhun
+
+&gt;&gt; <span class="kw">dhori</span> x = <span class="num">100</span>
+&gt;&gt; <span class="kw">dhori</span> y = <span class="num">50</span>
+&gt;&gt; <span class="kw">dekhao</span> x - y
+50
+&gt;&gt; <span class="kw">jodi</span> (x &gt; y) { <span class="kw">dekhao</span> <span class="str">"x boro!"</span> }
+x boro!
+&gt;&gt; exit
+Bidai!
+    </div>
+
+    <h2>৩.৪ ফাইল এক্সটেনশন নীতি</h2>
+    <p>
+      বাংলাথন সোর্স কোড মূলত দুটি এক্সটেনশন সমর্থন করে:
+    </p>
+    <ul style="padding-left:18px; font-size:12px; margin-bottom:8px;">
+      <li><span class="inline-code">.bl</span> (Bangla Language) — স্ট্যান্ডার্ড এক্সটেনশন।</li>
+      <li><span class="inline-code">.bng</span> (Bangla Script) — এক্সটেন্ডেড স্ক্রিপ্ট সমর্থন।</li>
+    </ul>
+
+    <h2>৩.৫ মন্তব্য ও ডকুমেন্টেশন (Comments)</h2>
+    <p>কোডের মাঝে মন্তব্য লিখতে হ্যাশ (<span class="inline-code">#</span>) চিহ্ন ব্যবহার করা হয়। ইন্টারপ্রেটার এটি এড়িয়ে যায়:</p>
+    <div class="code-box">
+<span class="cm"># এটি একটি সিঙ্গেল-লাইন কমেন্ট</span>
+<span class="kw">dhori</span> roll = <span class="num">101</span> <span class="cm"># রোল নম্বর সেট করা হলো</span>
+    </div>
+
+    <div class="page-footer">
+      <span>BanglaThon v0.1.0 Official Documentation</span>
+      <span class="page-num">পৃষ্ঠা ৪</span>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       PAGE 5: সিনট্যাক্স স্পেসিফিকেশন: ভেরিয়েবল ও অপারেটরস
+       ========================================== -->
+  <div class="page">
+    <div class="page-header">
+      <span class="brand">BanglaThon Manual</span>
+      <span>অধ্যায় ৪: ভেরিয়েবল, ডেটা টাইপ ও অপারেটরস</span>
+    </div>
+
+    <h1>৪. ভেরিয়েবল, ডেটা টাইপ ও অপারেটরস</h1>
+
+    <h2>৪.১ ভেরিয়েবল ঘোষণা ও অ্যাসাইনমেন্ট</h2>
+    <p>
+      বাংলাথনে যেকোনো ভেরিয়েবল তৈরি করতে <span class="inline-code">dhori</span> কি-ওয়ার্ড ব্যবহার করা হয়:
+    </p>
+    <div class="code-box">
+<span class="kw">dhori</span> boyosh = <span class="num">21</span>               <span class="cm"># নতুন ভেরিয়েবল তৈরি</span>
+<span class="kw">dhori</span> naam = <span class="str">"Tasfique"</span>          <span class="cm"># স্ট্রিং ভেরিয়েবল</span>
+boyosh = <span class="num">22</span>                      <span class="cm"># বিদ্যমান ভেরিয়েবলের মান পরিবর্তন</span>
+    </div>
+
+    <h2>৪.২ সমর্থিত ডেটা টাইপসমূহ (Data Types)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ডেটা টাইপ</th>
+          <th>বাংলাথনে উদাহরণ</th>
+          <th>ইংরেজি সমতুল্য</th>
+          <th>বিবরণ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Number</strong></td>
+          <td><span class="inline-code">dhori x = 42</span>, <span class="inline-code">3.14</span></td>
+          <td>int / float</td>
+          <td>পূর্ণসংখ্যা ও দশমিক সংখ্যা</td>
+        </tr>
+        <tr>
+          <td><strong>String</strong></td>
+          <td><span class="inline-code">"সোনার বাংলা"</span></td>
+          <td>str</td>
+          <td>ইউনিকোড ও ল্যাটিন টেক্সট</td>
+        </tr>
+        <tr>
+          <td><strong>Boolean</strong></td>
+          <td><span class="inline-code">shotti</span> / <span class="inline-code">mittha</span></td>
+          <td>bool (True/False)</td>
+          <td>লজিক্যাল সত্য বা মিথ্যা</td>
+        </tr>
+        <tr>
+          <td><strong>List/Array</strong></td>
+          <td><span class="inline-code">talika(1, 2, 3)</span></td>
+          <td>list / array</td>
+          <td>ডাইনামিক অ্যারে মেমোরি</td>
+        </tr>
+        <tr>
+          <td><strong>Null</strong></td>
+          <td><span class="inline-code">khali</span></td>
+          <td>None / null</td>
+          <td>শূন্য বা অনির্ধারিত মান</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>৪.৩ গাণিতিক অপারেটরস (Arithmetic Operators)</h2>
+    <div class="code-box">
+<span class="kw">dekhao</span> <span class="num">10</span> + <span class="num">5</span>   <span class="cm"># যোগ (১৫)</span>
+<span class="kw">dekhao</span> <span class="num">10</span> - <span class="num">5</span>   <span class="cm"># বিয়োগ (৫)</span>
+<span class="kw">dekhao</span> <span class="num">10</span> * <span class="num">5</span>   <span class="cm"># গুণ (৫০)</span>
+<span class="kw">dekhao</span> <span class="num">10</span> / <span class="num">4</span>   <span class="cm"># ভাগ (২.৫)</span>
+<span class="kw">dekhao</span> <span class="num">10</span> % <span class="num">3</span>   <span class="cm"># মডুলাস বা ভাগশেষ (১)</span>
+    </div>
+
+    <h2>৪.৪ তুলনামূলক অপারেটরস (Comparison Operators)</h2>
+    <p>তুলনার ফলাফল হিসেবে সর্বদা <span class="inline-code">shotti</span> অথবা <span class="inline-code">mittha</span> রিটার্ন করে:</p>
+    <div class="code-box">
+<span class="kw">dekhao</span> <span class="num">5</span> &gt; <span class="num">3</span>    <span class="cm"># shotti (বৃহত্তর)</span>
+<span class="kw">dekhao</span> <span class="num">5</span> &lt; <span class="num">3</span>    <span class="cm"># mittha (ক্ষুদ্রতর)</span>
+<span class="kw">dekhao</span> <span class="num">5</span> == <span class="num">5</span>   <span class="cm"># shotti (সমান)</span>
+<span class="kw">dekhao</span> <span class="num">5</span> != <span class="num">3</span>   <span class="cm"># shotti (অসমান)</span>
+    </div>
+
+    <h2>৪.৫ লজিক্যাল অপারেটরস (Logical Operators)</h2>
+    <p>বাংলাথনে ইংরেজি <span class="inline-code">and</span>, <span class="inline-code">or</span>, <span class="inline-code">not</span>-এর বদলে সরাসরি বাংলা শব্দ ব্যবহৃত হয়:</p>
+    <div class="code-box">
+<span class="kw">dekhao</span> shotti <span class="kw">ebong</span> shotti  <span class="cm"># shotti (Logical AND)</span>
+<span class="kw">dekhao</span> shotti <span class="kw">ba</span> mittha     <span class="cm"># shotti (Logical OR)</span>
+<span class="kw">dekhao</span> <span class="kw">noy</span> shotti           <span class="cm"># mittha (Logical NOT)</span>
+    </div>
+
+    <div class="page-footer">
+      <span>BanglaThon v0.1.0 Official Documentation</span>
+      <span class="page-num">পৃষ্ঠা ৫</span>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       PAGE 6: কন্ট্রোল ফ্লো — শর্ত ও লুপ
+       ========================================== -->
+  <div class="page">
+    <div class="page-header">
+      <span class="brand">BanglaThon Manual</span>
+      <span>অধ্যায় ৫: কন্ট্রোল ফ্লো — শর্ত ও লুপ</span>
+    </div>
+
+    <h1>৫. কন্ট্রোল ফ্লো (Control Flow)</h1>
+
+    <h2>৫.১ শর্তযুক্ত শাখা (<span class="inline-code">jodi / nahole</span>)</h2>
+    <p>শর্ত সাপেক্ষে কোড চালানোর জন্য <span class="inline-code">jodi</span> এবং বিকল্পের জন্য <span class="inline-code">nahole</span> ব্যবহৃত হয়:</p>
+    <div class="code-box">
+<span class="kw">dhori</span> marks = <span class="num">75</span>
+
+<span class="kw">jodi</span> (marks &gt;= <span class="num">80</span>) {
+    <span class="kw">dekhao</span> <span class="str">"গ্রেড: A+"</span>
+} <span class="kw">nahole</span> <span class="kw">jodi</span> (marks &gt;= <span class="num">70</span>) {
+    <span class="kw">dekhao</span> <span class="str">"গ্রেড: A"</span>
+} <span class="kw">nahole</span> {
+    <span class="kw">dekhao</span> <span class="str">"আরও ভালো করতে হবে!"</span>
+}
+    </div>
+
+    <h2>৫.২ হোয়াইল লুপ (<span class="inline-code">jotokkhon</span>)</h2>
+    <p>যতক্ষণ একটি শর্ত সত্য থাকে, ততক্ষণ ব্লকটি পুনরাবৃত্তি করতে <span class="inline-code">jotokkhon</span> ব্যবহৃত হয়:</p>
+    <div class="code-box">
+<span class="kw">dhori</span> shongkha = <span class="num">1</span>
+
+<span class="kw">jotokkhon</span> (shongkha &lt;= <span class="num">5</span>) {
+    <span class="kw">dekhao</span> <span class="str">"গণনা: "</span> + shongkha
+    shongkha = shongkha + <span class="num">1</span>
+}
+    </div>
+
+    <h2>৫.৩ ফর লুপ (<span class="inline-code">jonno</span>)</h2>
+    <p>সি-স্টাইল ক্লাসিক্যাল ৩-অংশের ফর লুপ চালানোর সিনট্যাক্স:</p>
+    <div class="code-box">
+<span class="kw">jonno</span> (<span class="kw">dhori</span> i = <span class="num">0</span>; i &lt; <span class="num">5</span>; i = i + <span class="num">1</span>) {
+    <span class="kw">dekhao</span> <span class="str">"ধাপ নম্বর: "</span> + i
+}
+    </div>
+
+    <h2>৫.৪ লুপ নিয়ন্ত্রণ (<span class="inline-code">thamo</span> ও <span class="inline-code">cholo</span>)</h2>
+    <p>
+      লুপ তাৎক্ষণিকভাবে থামাতে <span class="inline-code">thamo</span> (break) এবং পরবর্তী পুনরাবৃত্তিতে চলে যেতে <span class="inline-code">cholo</span> (continue) ব্যবহৃত হয়:
+    </p>
+    <div class="code-box">
+<span class="kw">jonno</span> (<span class="kw">dhori</span> i = <span class="num">1</span>; i &lt;= <span class="num">10</span>; i = i + <span class="num">1</span>) {
+    <span class="kw">jodi</span> (i == <span class="num">3</span>) {
+        <span class="kw">cholo</span>   <span class="cm"># ৩ স্কিপ করবে</span>
+    }
+    <span class="kw">jodi</span> (i == <span class="num">7</span>) {
+        <span class="kw">thamo</span>   <span class="cm"># ৭-এ পৌঁছে লুপ বন্ধ হয়ে যাবে</span>
+    }
+    <span class="kw">dekhao</span> i
+}
+    </div>
+
+    <div class="page-footer">
+      <span>BanglaThon v0.1.0 Official Documentation</span>
+      <span class="page-num">পৃষ্ঠা ৬</span>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       PAGE 7: ফাংশন ও স্কোপ রেজোলিউশন
+       ========================================== -->
+  <div class="page">
+    <div class="page-header">
+      <span class="brand">BanglaThon Manual</span>
+      <span>অধ্যায় ৬: ফাংশন ও স্কোপ আর্কিটেকচার</span>
+    </div>
+
+    <h1>৬. ফাংশন ও স্কোপ আর্কিটেকচার</h1>
+
+    <h2>৬.১ ফাংশন ডিক্লারেশন (<span class="inline-code">kaj</span> ও <span class="inline-code">ferot</span>)</h2>
+    <p>
+      বাংলাথনে যেকোনো সাবরুটিন বা ফাংশন তৈরি করতে <span class="inline-code">kaj</span> কি-ওয়ার্ড ব্যবহৃত হয়। ফলাফল রিটার্ন করতে <span class="inline-code">ferot</span> ব্যবহৃত হয়:
+    </p>
+    <div class="code-box">
+<span class="kw">kaj</span> <span class="fn">jogfol</span>(a, b) {
+    <span class="kw">ferot</span> a + b
+}
+
+<span class="kw">dhori</span> ans = <span class="fn">jogfol</span>(<span class="num">12</span>, <span class="num">18</span>)
+<span class="kw">dekhao</span> <span class="str">"যোগফল হলো: "</span> + ans    <span class="cm"># আউটপুট: ৩০</span>
+    </div>
+
+    <h2>৬.২ রিটার্ন ছাড়া ফাংশন (Procedure)</h2>
+    <div class="code-box">
+<span class="kw">kaj</span> <span class="fn">shagotom</span>(user) {
+    <span class="kw">dekhao</span> <span class="str">"স্বাগতম, "</span> + user + <span class="str">"!"</span>
+}
+
+<span class="fn">shagotom</span>(<span class="str">"তাসফিক"</span>)
+    </div>
+
+    <h2>৬.৩ স্কোপিং নিয়ম (Lexical Scoping)</h2>
+    <p>ফাংশনের ভেতর তৈরি ভেরিয়েবল বাইরে অ্যাক্সেসযোগ্য নয় (Local Scope):</p>
+    <div class="code-box">
+<span class="kw">dhori</span> global_x = <span class="num">100</span>
+
+<span class="kw">kaj</span> <span class="fn">test_scope</span>() {
+    <span class="kw">dhori</span> local_y = <span class="num">50</span>
+    <span class="kw">dekhao</span> global_x   <span class="cm"># ১০০ প্রিন্ট হবে (গ্লোবাল অ্যাক্সেসযোগ্য)</span>
+    <span class="kw">dekhao</span> local_y    <span class="cm"># ৫০ প্রিন্ট হবে</span>
+}
+
+<span class="fn">test_scope</span>()
+<span class="cm"># dekhao local_y     # এটি চালালে এরর আসবে: variable পাওয়া যায়নি</span>
+    </div>
+
+    <h2>৬.৪ রিকার্সিভ ফাংশন (Recursion in BanglaThon)</h2>
+    <p>ফ্যাক্টরিয়াল নির্ণয়ে রিকার্শন কলিংয়ের নিখুঁত রূপায়ন:</p>
+    <div class="code-box">
+<span class="kw">kaj</span> <span class="fn">factorial</span>(n) {
+    <span class="kw">jodi</span> (n &lt;= <span class="num">1</span>) {
+        <span class="kw">ferot</span> <span class="num">1</span>
+    }
+    <span class="kw">ferot</span> n * <span class="fn">factorial</span>(n - <span class="num">1</span>)
+}
+
+<span class="kw">dekhao</span> <span class="str">"৫ এর ফ্যাক্টরিয়াল: "</span> + <span class="fn">factorial</span>(<span class="num">5</span>)  <span class="cm"># ১২০</span>
+    </div>
+
+    <div class="page-footer">
+      <span>BanglaThon v0.1.0 Official Documentation</span>
+      <span class="page-num">পৃষ্ঠা ৭</span>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       PAGE 8: বিল্ট-ইন ফাংশন ও সিপি লাইব্রেরি
+       ========================================== -->
+  <div class="page">
+    <div class="page-header">
+      <span class="brand">BanglaThon Manual</span>
+      <span>অধ্যায় ৭: ইন-বিল্ট লাইব্রেরি ও কম্পিটিটিভ প্রোগ্রামিং</span>
+    </div>
+
+    <h1>৭. ইন-বিল্ট লাইব্রেরি ও সিপি ফাংশনালিটি</h1>
+    <p>
+      প্রতিযোগিতামূলক প্রোগ্রামিং (CP) ও গাণিতিক সমস্যার দ্রুত সমাধানের জন্য বাংলাথনে আধুনিক ইন-বিল্ট লাইব্রেরি যুক্ত করা হয়েছে:
+    </p>
+
+    <h2>৭.১ সিপি ও অ্যারে বিল্ট-ইন ফাংশন তালিকা</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ফাংশনের নাম</th>
+          <th>ব্যবহারের সিনট্যাক্স</th>
+          <th>কাজ ও রিটার্ন মান</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="inline-code">dhoirgo(x)</span></td>
+          <td><span class="inline-code">dhoirgo(arr)</span> বা <span class="inline-code">dhoirgo("বাংলা")</span></td>
+          <td>তালিকা বা স্ট্রিংয়ের মোট উপাদান সংখ্যা (Length)</td>
+        </tr>
+        <tr>
+          <td><span class="inline-code">juktokoro(L, v)</span></td>
+          <td><span class="inline-code">juktokoro(my_list, 42)</span></td>
+          <td>তালিকায় নতুন উপাদান শেষে পুশ করা (Append)</td>
+        </tr>
+        <tr>
+          <td><span class="inline-code">shajao(L)</span></td>
+          <td><span class="inline-code">shajao(my_list)</span></td>
+          <td>ছোট থেকে বড় ক্রমে সর্ট করা তালিকা ফেরত দেয়</td>
+        </tr>
+        <tr>
+          <td><span class="inline-code">ulto(x)</span></td>
+          <td><span class="inline-code">ulto(my_list)</span> বা <span class="inline-code">ulto("ABC")</span></td>
+          <td>তালিকা বা স্ট্রিং রিভার্স/উল্টে ফেলা</td>
+        </tr>
+        <tr>
+          <td><span class="inline-code">jog_koro(L)</span></td>
+          <td><span class="inline-code">jog_koro(my_list)</span></td>
+          <td>তালিকার সকল সংখ্যার সমষ্টি নির্ণয় (Sum)</td>
+        </tr>
+        <tr>
+          <td><span class="inline-code">shorbo_boro(L)</span></td>
+          <td><span class="inline-code">shorbo_boro(my_list)</span></td>
+          <td>তালিকার সর্বোচ্চ মান শনাক্তকরণ (Max Element)</td>
+        </tr>
+        <tr>
+          <td><span class="inline-code">shorbo_choto(L)</span></td>
+          <td><span class="inline-code">shorbo_choto(my_list)</span></td>
+          <td>তালিকার সর্বনিম্ন মান শনাক্তকরণ (Min Element)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>৭.২ অ্যারে ম্যানিপুলেশনের পূর্ণাঙ্গ উদাহরণ</h2>
+    <div class="code-box">
+<span class="cm"># ডাইনামিক অ্যারে তৈরি</span>
+<span class="kw">dhori</span> roll_list = <span class="fn">talika</span>(<span class="num">45</span>, <span class="num">12</span>, <span class="num">89</span>, <span class="num">3</span>, <span class="num">76</span>)
+
+<span class="kw">dekhao</span> <span class="str">"মোট ছাত্র: "</span> + <span class="fn">dhoirgo</span>(roll_list)        <span class="cm"># ৫</span>
+<span class="kw">dekhao</span> <span class="str">"সর্বোচ্চ রোল: "</span> + <span class="fn">shorbo_boro</span>(roll_list)   <span class="cm"># ৮৯</span>
+<span class="kw">dekhao</span> <span class="str">"সর্বনিম্ন রোল: "</span> + <span class="fn">shorbo_choto</span>(roll_list)  <span class="cm"># ৩</span>
+
+<span class="cm"># সর্টিং এক্সিকিউশন:</span>
+<span class="kw">dhori</span> sorted = <span class="fn">shajao</span>(roll_list)
+<span class="kw">dekhao</span> <span class="str">"সাজানো তালিকা: "</span> + sorted               <span class="cm"># [3, 12, 45, 76, 89]</span>
+
+<span class="cm"># নতুন উপাদান যোগ:</span>
+<span class="fn">juktokoro</span>(roll_list, <span class="num">99</span>)
+<span class="kw">dekhao</span> <span class="str">"নতুন তালিকা: "</span> + roll_list
+    </div>
+
+    <h2>৭.৩ ইনপুট গ্রহণ (<span class="inline-code">nao</span>)</h2>
+    <p>ব্যবহারকারীর কাছ থেকে কনসোল থেকে ইনপুট নিতে ব্যবহৃত হয়:</p>
+    <div class="code-box">
+<span class="kw">dekhao</span> <span class="str">"আপনার নাম লিখুন: "</span>
+<span class="kw">dhori</span> user_name = <span class="fn">nao</span>()
+<span class="kw">dekhao</span> <span class="str">"শুভকামনা, "</span> + user_name
+    </div>
+
+    <div class="page-footer">
+      <span>BanglaThon v0.1.0 Official Documentation</span>
+      <span class="page-num">পৃষ্ঠা ৮</span>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       PAGE 9: পূর্ণাঙ্গ অ্যালগরিদম লাইব্রেরি
+       ========================================== -->
+  <div class="page">
+    <div class="page-header">
+      <span class="brand">BanglaThon Manual</span>
+      <span>অধ্যায় ৮: পূর্ণাঙ্গ অ্যালগরিদম লাইব্রেরি</span>
+    </div>
+
+    <h1>৮. বাস্তব প্রজেক্ট ও অ্যালগরিদম এক্সাম্পলস</h1>
+
+    <h2>৮.১ মৌলিক সংখ্যা নির্ণয় (Prime Number Checker)</h2>
+    <div class="code-box">
+<span class="kw">kaj</span> <span class="fn">is_prime</span>(n) {
+    <span class="kw">jodi</span> (n &lt;= <span class="num">1</span>) { <span class="kw">ferot</span> mittha }
+    <span class="kw">jonno</span> (<span class="kw">dhori</span> i = <span class="num">2</span>; i * i &lt;= n; i = i + <span class="num">1</span>) {
+        <span class="kw">jodi</span> (n % i == <span class="num">0</span>) { <span class="kw">ferot</span> mittha }
+    }
+    <span class="kw">ferot</span> shotti
+}
+
+<span class="kw">dhori</span> check_num = <span class="num">29</span>
+<span class="kw">jodi</span> (<span class="fn">is_prime</span>(check_num)) {
+    <span class="kw">dekhao</span> check_num + <span class="str">" একটি মৌলিক সংখ্যা।"</span>
+}
+    </div>
+
+    <h2>৮.২ ফিবোনাচ্চি সিরিজ অ্যালগরিদম</h2>
+    <div class="code-box">
+<span class="kw">kaj</span> <span class="fn">fib</span>(n) {
+    <span class="kw">jodi</span> (n &lt;= <span class="num">1</span>) { <span class="kw">ferot</span> n }
+    <span class="kw">ferot</span> <span class="fn">fib</span>(n - <span class="num">1</span>) + <span class="fn">fib</span>(n - <span class="num">2</span>)
+}
+<span class="kw">dekhao</span> <span class="str">"৭ম ফিবোনাচ্চি পদ: "</span> + <span class="fn">fib</span>(<span class="num">7</span>)   <span class="cm"># ১৩</span>
+    </div>
+
+    <h2>৮.৩ গণিতের নামতা প্রিন্টার (Nested Loop Table)</h2>
+    <div class="code-box">
+<span class="kw">dhori</span> table_num = <span class="num">5</span>
+<span class="kw">dekhao</span> <span class="str">"--- ৫ এর ঘরের নামতা ---"</span>
+
+<span class="kw">jonno</span> (<span class="kw">dhori</span> i = <span class="num">1</span>; i &lt;= <span class="num">10</span>; i = i + <span class="num">1</span>) {
+    <span class="kw">dhori</span> gunfol = table_num * i
+    <span class="kw">dekhao</span> table_num + <span class="str">" x "</span> + i + <span class="str">" = "</span> + gunfol
+}
+    </div>
+
+    <h2>৮.৪ প্যালিনড্রোম চেকার (String Palindrome)</h2>
+    <div class="code-box">
+<span class="kw">dhori</span> word = <span class="str">"madam"</span>
+<span class="kw">dhori</span> reversed_word = <span class="fn">ulto</span>(word)
+
+<span class="kw">jodi</span> (word == reversed_word) {
+    <span class="kw">dekhao</span> word + <span class="str">" একটি প্যালিনড্রোম শব্দ!"</span>
+}
+    </div>
+
+    <div class="page-footer">
+      <span>BanglaThon v0.1.0 Official Documentation</span>
+      <span class="page-num">পৃষ্ঠা ৯</span>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       PAGE 10: এরর ডায়াগনস্টিকস ও আর্কিটেকচার
+       ========================================== -->
+  <div class="page">
+    <div class="page-header">
+      <span class="brand">BanglaThon Manual</span>
+      <span>অধ্যায় ৯: এরর ডায়াগনস্টিকস, আর্কিটেকচার ও ভবিষ্যৎ</span>
+    </div>
+
+    <h1>৯. এরর ডায়াগনস্টিকস ও প্রযুক্তিগত আর্কিটেকচার</h1>
+
+    <h2>৯.১ বাংলায় স্পষ্ট এরর রিপোর্টিং (Error Diagnostics)</h2>
+    <p>
+      ইংরেজি সফটওয়্যারের জটিল এরর মেসেজের বদলে বাংলাথনে লাইন ও কলাম ট্র্যাক করে সম্পূর্ণ বাংলায় স্পষ্ট বার্তা দেওয়া হয়:
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>বাংলাথন এরর মেসেজ</th>
+          <th>কারণ</th>
+          <th>সমাধান</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="inline-code">ত্রুটি: 'x' নামে কোনো variable পাওয়া যায়নি</span></td>
+          <td>ভেরিয়েবল ঘোষণার আগেই ব্যবহার</td>
+          <td>আগে <span class="inline-code">dhori x = ...</span> দিয়ে ঘোষণা করুন</td>
+        </tr>
+        <tr>
+          <td><span class="inline-code">ত্রুটি: শূন্য দিয়ে ভাগ করা সম্ভব নয়</span></td>
+          <td>ZeroDivision (হারানো বিভাজন)</td>
+          <td>ভাজক ০ কিনা তা <span class="inline-code">jodi</span> দিয়ে চেক করুন</td>
+        </tr>
+        <tr>
+          <td><span class="inline-code">ত্রুটি: Index এর বাইরে (out of range)</span></td>
+          <td>অ্যারের সীমার বাইরের ইনডেক্স কল</td>
+          <td><span class="inline-code">dhoirgo(arr)</span> এর চেয়ে কম ইনডেক্স দিন</td>
+        </tr>
+        <tr>
+          <td><span class="inline-code">[Parser Error] Expected '}'</span></td>
+          <td>ব্র্যাকেট বা সিনট্যাক্স অসম্পূর্ণ</td>
+          <td>কার্লি ব্র্যাকেট ঠিকভাবে বন্ধ করুন</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>৯.২ আন্ডার-দ্য-হুড আর্কিটেকচার (Under the Hood)</h2>
+    <div style="background:#f8fafc; border:1px solid var(--border); padding:10px; border-radius:6px; font-size:11.5px; margin-bottom:12px;">
+      <strong>সিস্টেম পাইপলাইন:</strong>
+      <code>Source (.bl)</code> ➔ <code>Lexer (Tokenization)</code> ➔ <code>Recursive Descent Parser</code> ➔ <code>AST Nodes</code> ➔ <code>Precomputed Dispatch Optimizer (~31.5% Speedup)</code> ➔ <code>Tree-Walking Runtime</code>
+      <br><br>
+      <strong>ভেরিফিকেশন:</strong> স্বয়ংক্রিয় টেস্ট স্যুটে <strong>৩০/৩০টি কোর টেস্ট সম্পূর্ণ পাস (Pass Rate 100%)</strong>।
+    </div>
+
+    <h2>৯.৩ ভবিষ্যৎ রোডম্যাপ (Future Roadmap)</h2>
+    <ul style="padding-left:18px; font-size:12px; margin-bottom:12px;">
+      <li><strong>১) Bytecode Virtual Machine (VM):</strong> সি/সি++ এ লো-লেভেল বাইটকোড ভিএম তৈরি করে এক্সিকিউশন স্পিড ১০ গুণ বাড়ানো।</li>
+      <li><strong>২) VS Code Bangla Extension:</strong> বাংলা কি-ওয়ার্ডের জন্য সিনট্যাক্স হাইলাইটিং ও অটো-কমপ্লিশন।</li>
+      <li><strong>৩) Web IDE & Playground:</strong> কোনো সফটওয়্যার ইনস্টল না করেই ব্রাউজারে কোড রান করার উন্মুক্ত প্ল্যাটফর্ম।</li>
+    </ul>
+
+    <div class="callout" style="margin-top:auto;">
+      <strong>উন্মুক্ত যোগাযোগ ও অবদান:</strong> প্রজেক্টটি সকলের জন্য উন্মুক্ত। যেকোনো পরামর্শ বা অবদানের জন্য ভিজিট করুন:<br>
+      🌐 <strong>GitHub:</strong> <a href="https://github.com/tasfiqueofficial/BanglaThon" style="color:var(--green-dark);font-weight:700;">github.com/tasfiqueofficial/BanglaThon</a>
+    </div>
+
+    <div class="page-footer">
+      <span>BanglaThon v0.1.0 Official Documentation</span>
+      <span class="page-num">পৃষ্ঠা ১০</span>
+    </div>
+  </div>
+
+</body>
+</html>
