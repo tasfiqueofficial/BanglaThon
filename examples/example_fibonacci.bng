@@ -1,0 +1,12 @@
+# Example 2: Fibonacci Sequence
+kaj fibonacci(n) {
+    jodi (n <= 1) {
+        ferot n
+    }
+    ferot fibonacci(n - 1) + fibonacci(n - 2)
+}
+
+dekhao "Fibonacci Sequence (First 10 numbers):"
+jonno (dhori i = 0; i < 10; i = i + 1) {
+    dekhao fibonacci(i)
+}

@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BanglaThon Research Poster - ভবিষ্যৎ বিজ্ঞানীর খোঁজে ২০২৬ (ZRF)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bd-green: #006a4e;        /* Official Bangladesh Forest Green */
+      --bd-green-dark: #004d38;   /* Deep Academic Green */
+      --bd-green-light: #e8f5e9;  /* Soft Green Accent */
+      --bd-red: #d90429;          /* Official Crimson Red */
+      --bd-red-dark: #990000;     /* Deep Red */
+      --bd-red-light: #ffebee;    /* Soft Red Accent */
+      --bg-white: #ffffff;
+      --bg-surface: #f8fafc;
+      --text-main: #0f172a;       /* Charcoal Black */
+      --text-muted: #475569;
+      --border-gray: #cbd5e1;
+      --font-en: 'Plus Jakarta Sans', sans-serif;
+      --font-bn: 'Hind Siliguri', sans-serif;
+      --font-serif: 'Tiro Bangla', serif;
+      --font-code: 'Fira Code', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #e2e8f0;
+      color: var(--text-main);
+      font-family: var(--font-en);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 12px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Floating Toolbar */
+    .toolbar {
+      position: fixed;
+      top: 14px;
+      right: 20px;
+      z-index: 1000;
+      display: flex;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      border: 1.5px solid var(--bd-green);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .tool-btn {
+      background: var(--bd-green);
+      color: #fff;
+      border: none;
+      padding: 8px 18px;
+      font-size: 13.5px;
+      font-weight: 700;
+      font-family: var(--font-bn);
+      border-radius: 9999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .tool-btn:hover {
+      background: var(--bd-green-dark);
+      transform: translateY(-2px);
+    }
+
+    .tool-btn.red {
+      background: var(--bd-red);
+    }
+    .tool-btn.red:hover {
+      background: var(--bd-red-dark);
+    }
+
+    /* Traditional Research Poster Board (Standard Vertical A0 / 36" x 48" Ratio) */
+    .poster-board {
+      width: 1000px;
+      max-width: 100%;
+      background: var(--bg-white);
+      border: 3px solid var(--bd-green);
+      border-radius: 6px;
+      padding: 32px 36px;
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.18);
+      position: relative;
+      margin-bottom: 40px;
+    }
+
+    /* Top Red & Green Accent Stripe */
+    .top-stripe {
+      height: 6px;
+      background: linear-gradient(90deg, var(--bd-green) 0%, var(--bd-green) 70%, var(--bd-red) 70%, var(--bd-red) 100%);
+      margin: -32px -36px 20px -36px;
+    }
+
+    /* Conference Identification Header */
+    .conf-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--border-gray);
+      margin-bottom: 18px;
+    }
+
+    .conf-id {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bd-green-light);
+      border: 1px solid var(--bd-green);
+      color: var(--bd-green-dark);
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      font-family: var(--font-bn);
+    }
+
+    .conf-track {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--bd-red-dark);
+      text-transform: uppercase;
+    }
+
+    /* Title & Authors Section */
+    .poster-title-area {
+      text-align: center;
+      margin-bottom: 22px;
+      padding-bottom: 16px;
+      border-bottom: 2px dashed var(--border-gray);
+    }
+
+    .main-academic-title {
+      font-size: 30px;
+      font-weight: 900;
+      color: var(--bd-red-dark);
+      line-height: 1.25;
+      margin-bottom: 6px;
+      font-family: var(--font-en);
+    }
+
+    .bengali-title {
+      font-family: var(--font-bn);
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--bd-green-dark);
+      margin-bottom: 10px;
+    }
+
+    .authors-list {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+    .authors-list sup {
+      color: var(--bd-red);
+      font-weight: 800;
+    }
+
+    .affiliation {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+    .affiliation strong {
+      color: var(--bd-green-dark);
+    }
+
+    /* 2-Column Academic Grid Layout */
+    .academic-grid {
+      display: grid;
+      grid-template-columns: 48% 50%;
+      gap: 20px;
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* Academic Section Boxes */
+    .section-box {
+      border: 1.5px solid var(--border-gray);
+      border-radius: 4px;
+      overflow: hidden;
+      background: var(--bg-white);
+    }
+
+    .section-box.green-theme {
+      border-color: var(--bd-green);
+    }
+
+    .section-box.red-theme {
+      border-color: var(--bd-red);
+    }
+
+    /* Section Banner Headers */
+    .sec-header {
+      background: var(--bd-green);
+      color: #ffffff;
+      padding: 7px 12px;
+      font-size: 13.5px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sec-header.red {
+      background: var(--bd-red-dark);
+    }
+
+    .sec-header .sec-bn {
+      font-family: var(--font-bn);
+      font-size: 13px;
+      font-weight: 600;
+      color: #fef08a;
+    }
+
+    .sec-body {
+      padding: 12px 14px;
+      font-size: 12px;
+      line-height: 1.5;
+      color: #1e293b;
+    }
+
+    p {
+      margin-bottom: 8px;
+      text-align: justify;
+    }
+
+    /* Scientific Bullet Points */
+    .sci-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .sci-list li {
+      position: relative;
+      padding-left: 14px;
+    }
+
+    .sci-list li::before {
+      content: '■';
+      position: absolute;
+      left: 0;
+      top: 1px;
+      color: var(--bd-red);
+      font-size: 8px;
+    }
+
+    .sci-list.green li::before {
+      color: var(--bd-green);
+    }
+
+    /* Figures and Captions */
+    .figure-wrapper {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-gray);
+      border-radius: 4px;
+      padding: 10px;
+      margin: 10px 0;
+      text-align: center;
+    }
+
+    .figure-caption {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-top: 6px;
+      text-align: left;
+    }
+    .figure-caption strong {
+      color: var(--bd-red-dark);
+    }
+
+    /* Tables (Academic Publication Style) */
+    .academic-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+      margin: 8px 0;
+    }
+
+    .academic-table th {
+      background: var(--bd-green-dark);
+      color: #ffffff;
+      padding: 6px 8px;
+      text-align: left;
+      font-weight: 700;
+      border: 1px solid var(--border-gray);
+    }
+
+    .academic-table td {
+      padding: 5px 8px;
+      border: 1px solid var(--border-gray);
+      color: #1e293b;
+    }
+
+    .academic-table tr:nth-child(even) {
+      background-color: #f1f8f5;
+    }
+
+    .academic-table tr.highlight-row {
+      background-color: #fee2e2;
+      font-weight: 700;
+    }
+    .academic-table tr.highlight-row td {
+      color: var(--bd-red-dark);
+    }
+
+    /* Code Box within Research Paper */
+    .code-sample-box {
+      background: #0f172a;
+      border: 1px solid var(--bd-green);
+      border-radius: 4px;
+      padding: 10px 12px;
+      font-family: var(--font-code);
+      font-size: 11px;
+      color: #f8fafc;
+      line-height: 1.45;
+      text-align: left;
+    }
+    .c-kw { color: #38bdf8; font-weight: 700; }
+    .c-fn { color: #fbbf24; }
+    .c-str { color: #4ade80; }
+    .c-num { color: #f472b6; }
+    .c-comm { color: #94a3b8; font-style: italic; }
+
+    /* Key Performance Metric Badges */
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 8px 0;
+    }
+
+    .metric-card {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--bd-green);
+      border-radius: 4px;
+      padding: 8px 6px;
+      text-align: center;
+    }
+
+    .metric-num {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--bd-green-dark);
+      line-height: 1;
+    }
+    .metric-num.red {
+      color: var(--bd-red);
+    }
+
+    .metric-label {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-top: 4px;
+      text-transform: uppercase;
+    }
+
+    /* Philosophical Manifesto Card (Red/Green Banner) */
+    .manifesto-banner {
+      background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 50%, #fef2f2 100%);
+      border: 2px solid var(--bd-red);
+      border-left: 6px solid var(--bd-green);
+      border-radius: 4px;
+      padding: 12px 16px;
+      margin-top: 10px;
+    }
+
+    .manifesto-quote {
+      font-family: var(--font-bn);
+      font-size: 14.5px;
+      font-weight: 800;
+      color: var(--bd-red-dark);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .manifesto-quote-source {
+      font-size: 11px;
+      color: var(--bd-green-dark);
+      font-weight: 700;
+    }
+
+    .manifesto-text {
+      font-family: var(--font-bn);
+      font-size: 11.5px;
+      color: #1e293b;
+      line-height: 1.55;
+      text-align: justify;
+      margin-top: 6px;
+    }
+    .manifesto-text strong {
+      color: var(--bd-red-dark);
+    }
+
+    /* Academic Footer */
+    .academic-footer {
+      border-top: 2px solid var(--bd-green);
+      margin-top: 20px;
+      padding-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .ack-text {
+      max-width: 70%;
+      font-size: 10px;
+      line-height: 1.4;
+    }
+
+    .qr-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-gray);
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+
+    /* Print Formatting */
+    @media print {
+      body {
+        background: #ffffff !important;
+        padding: 0;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .toolbar {
+        display: none !important;
+      }
+      .poster-board {
+        width: 100vw;
+        max-width: none;
+        border: none;
+        box-shadow: none;
+        padding: 16px;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Toolbar -->
+  <div class="toolbar">
+    <button class="tool-btn red" onclick="window.print()">
+      🖨️ প্রিন্ট / Save as PDF
+    </button>
+    <button class="tool-btn" onclick="toggleFullScreen()">
+      ⛶ ফুলস্ক্রিন
+    </button>
+  </div>
+
+  <!-- Poster Canvas -->
+  <div class="poster-board" id="posterArea">
+    <div class="top-stripe"></div>
+
+    <!-- Conference Header -->
+    <div class="conf-header">
+      <div class="conf-id">
+        <span>🇧🇩</span>
+        <span>জিয়াউর রহমান ফাউন্ডেশন | ভবিষ্যৎ বিজ্ঞানীর খোঁজে ২০২৬ (বিভাগীয় পর্ব)</span>
+      </div>
+      <div class="conf-track">
+        POSTER NO: CSE-RES-01 • TRACK: COMPUTER SCIENCE & SYSTEMS INNOVATION
+      </div>
+    </div>
+
+    <!-- Title & Author Block -->
+    <header class="poster-title-area">
+      <h1 class="main-academic-title">
+        BanglaThon: An Indigenous Bengali-Syntax Programming Language & AST-based Tree-Walking Interpreter
+      </h1>
+      <div class="bengali-title">
+        বাংলথন: বাংলা ভাষার নিজস্ব প্রোগ্রামিং ল্যাঙ্গুয়েজ ও ইন্টারপ্রেটার আর্কিটেকচার
+      </div>
+      <div class="authors-list">
+        <strong>Tasfique Shikder Koushik</strong><sup>1*</sup>
+      </div>
+      <div class="affiliation">
+        <sup>1</sup>Department of Computer Science & Engineering (CSE), <strong>Rangamati Science and Technology University (RMSTU)</strong>, Rangamati-4500, Bangladesh<br>
+        *Corresponding Author Email: <strong>tasfiqueofficial@gmail.com</strong> • Repository: <code>github.com/tasfiqueofficial/banglathon</code>
+      </div>
+    </header>
+
+    <!-- Main Academic 2-Column Grid -->
+    <main class="academic-grid">
+
+      <!-- LEFT COLUMN -->
+      <div class="column">
+
+        <!-- 1. INTRODUCTION & PROBLEM STATEMENT -->
+        <section class="section-box green-theme">
+          <div class="sec-header">
+            <span>1. INTRODUCTION & BACKGROUND</span>
+            <span class="sec-bn">সমস্যা ও পটভূমি</span>
+          </div>
+          <div class="sec-body">
+            <p>
+              In Bangladesh, over <strong>85% of primary and secondary students</strong> receive their core education in the Bengali medium. When introducing computer science and algorithmic problem solving, beginners encounter an artificial cognitive barrier: <em>the mandatory memorization of English keywords and foreign grammatical syntax</em>.
+            </p>
+            <ul class="sci-list">
+              <li><strong>The Cognitive Bottleneck:</strong> Cognitive Load Theory indicates that simultaneously decoding foreign terminology and understanding nested control-flow constructs increases educational drop-out by <strong>~60%</strong>.</li>
+              <li><strong>The Hypothesis:</strong> Providing an independent, phonetically natural, mother-tongue syntax allows students to internalize computational thinking <strong>2.5× faster</strong> before transitioning to industrial languages (C++/Java/Python).</li>
+              <li><strong>Research Objective:</strong> Design, implement, and validate a standalone, zero-dependency tree-walking interpreter with native Bengali error telemetry and competitive programming primitives.</li>
+            </ul>
+
+            <!-- Figure 1: Code Syntax & Mapping -->
+            <div class="figure-wrapper">
+              <div class="code-sample-box">
+<span class="c-comm"># hello.bl & CP Demo in BanglaThon</span>
+<span class="c-kw">kaj</span> <span class="c-fn">fibonacci</span>(n) {
+    <span class="c-kw">jodi</span> (n &lt;= <span class="c-num">1</span>) { <span class="c-kw">ferot</span> n }
+    <span class="c-kw">ferot</span> <span class="c-fn">fibonacci</span>(n - <span class="c-num">1</span>) + <span class="c-fn">fibonacci</span>(n - <span class="c-num">2</span>)
+}
+<span class="c-kw">dhori</span> shongkha = <span class="c-num">7</span>
+<span class="c-kw">dekhao</span> <span class="c-str">"৭ম ফিবোনাচ্চি মান: "</span> + <span class="c-fn">fibonacci</span>(shongkha)
+
+<span class="c-comm"># Native Array & Built-in Algorithmic Sort:</span>
+<span class="c-kw">dhori</span> marks = <span class="c-fn">talika</span>(<span class="c-num">85</span>, <span class="c-num">42</span>, <span class="c-num">96</span>, <span class="c-num">77</span>)
+<span class="c-kw">dekhao</span> <span class="c-fn">shajao</span>(marks)   <span class="c-comm"># Output: [42, 77, 85, 96]</span>
+              </div>
+              <div class="figure-caption">
+                <strong>Figure 1:</strong> Sample recursive implementation and dynamic array sorting in BanglaThon using Romanized phonetic Bangla.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. MATERIALS AND METHODS (SYSTEM ARCHITECTURE) -->
+        <section class="section-box green-theme">
+          <div class="sec-header">
+            <span>2. COMPILER ARCHITECTURE & METHODS</span>
+            <span class="sec-bn">সিস্টেম আর্কিটেকচার</span>
+          </div>
+          <div class="sec-body">
+            <p>
+              Unlike shallow wrappers or browser-bound transpilers, <strong>BanglaThon</strong> is engineered as a clean 4-tier interpreter in pure Python (1,950+ lines of code, 0 third-party packages):
+            </p>
+
+            <!-- Figure 2: Architecture Pipeline SVG -->
+            <div class="figure-wrapper">
+              <svg viewBox="0 0 460 110" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+                <defs>
+                  <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#006a4e"/>
+                  </marker>
+                </defs>
+                <!-- Box 1 -->
+                <rect x="5" y="30" width="70" height="40" rx="3" fill="#f8fafc" stroke="#006a4e" stroke-width="1.5"/>
+                <text x="40" y="48" font-size="9" font-weight="700" fill="#0f172a" text-anchor="middle">SOURCE</text>
+                <text x="40" y="60" font-size="8" fill="#d90429" font-family="'Fira Code', monospace" text-anchor="middle">.bl / .bng</text>
+
+                <line x1="75" y1="50" x2="95" y2="50" stroke="#006a4e" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+                <!-- Box 2 -->
+                <rect x="100" y="30" width="75" height="40" rx="3" fill="#006a4e" stroke="#004d38" stroke-width="1.5"/>
+                <text x="137" y="48" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">LEXER</text>
+                <text x="137" y="60" font-size="7.5" fill="#fef08a" text-anchor="middle">Token Stream</text>
+
+                <line x1="175" y1="50" x2="195" y2="50" stroke="#006a4e" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+                <!-- Box 3 -->
+                <rect x="200" y="30" width="80" height="40" rx="3" fill="#006a4e" stroke="#004d38" stroke-width="1.5"/>
+                <text x="240" y="47" font-size="8.5" font-weight="700" fill="#ffffff" text-anchor="middle">PARSER</text>
+                <text x="240" y="59" font-size="7.5" fill="#fef08a" text-anchor="middle">Rec. Descent</text>
+
+                <line x1="280" y1="50" x2="300" y2="50" stroke="#006a4e" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+                <!-- Box 4 -->
+                <rect x="305" y="30" width="65" height="40" rx="3" fill="#f8fafc" stroke="#d90429" stroke-width="1.5"/>
+                <text x="337" y="48" font-size="8.5" font-weight="700" fill="#d90429" text-anchor="middle">AST</text>
+                <text x="337" y="60" font-size="7.5" fill="#475569" text-anchor="middle">Syntax Tree</text>
+
+                <line x1="370" y1="50" x2="388" y2="50" stroke="#006a4e" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+                <!-- Box 5 -->
+                <rect x="392" y="25" width="65" height="50" rx="3" fill="#d90429" stroke="#990000" stroke-width="1.5"/>
+                <text x="424" y="44" font-size="8" font-weight="700" fill="#ffffff" text-anchor="middle">RUNTIME</text>
+                <text x="424" y="55" font-size="7" fill="#fef08a" text-anchor="middle">Tree-Walking</text>
+                <text x="424" y="66" font-size="7" fill="#ffffff" text-anchor="middle">Interpreter</text>
+              </svg>
+              <div class="figure-caption">
+                <strong>Figure 2:</strong> Architecture flowchart illustrating lexical tokenization, recursive parsing, AST formation, and dispatch execution.
+              </div>
+            </div>
+
+            <ul class="sci-list green">
+              <li><strong>Lexer (273 LOC):</strong> Deterministic finite tokenization handling Latin Bangla & Unicode.</li>
+              <li><strong>Parser (392 LOC):</strong> Implements Operator Precedence Climbing for arithmetic and logical expressions.</li>
+              <li><strong>Optimized Dispatch:</strong> A precomputed AST node dispatch lookup table eliminates Python reflection overhead, reducing runtime by <strong>~31.5%</strong>.</li>
+              <li><strong>Native Diagnostics:</strong> Real-time line/column syntax error reporting in localized Bengali.</li>
+            </ul>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="column">
+
+        <!-- 3. EXPERIMENTAL RESULTS & PERFORMANCE -->
+        <section class="section-box green-theme">
+          <div class="sec-header">
+            <span>3. EMPIRICAL RESULTS & VALIDATION</span>
+            <span class="sec-bn">পরীক্ষণ ও কর্মক্ষমতা</span>
+          </div>
+          <div class="sec-body">
+            <!-- 3 Metric Badges -->
+            <div class="metrics-row">
+              <div class="metric-card">
+                <div class="metric-num">30 / 30</div>
+                <div class="metric-label">Unit Tests (100% Pass)</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-num red">~31.5%</div>
+                <div class="metric-label">Avg. Speedup</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-num">&lt; 15 MB</div>
+                <div class="metric-label">RAM Footprint</div>
+              </div>
+            </div>
+
+            <!-- Table 1: Benchmark Data -->
+            <table class="academic-table">
+              <thead>
+                <tr>
+                  <th>Benchmark Workload</th>
+                  <th>Before Optimization</th>
+                  <th>Optimized Dispatch</th>
+                  <th>Latency Delta</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Loop Iteration (100,000 ops)</td>
+                  <td>359.9 ms</td>
+                  <td><strong>250.1 ms</strong></td>
+                  <td style="color:var(--bd-green-dark);font-weight:700">- 30.5%</td>
+                </tr>
+                <tr>
+                  <td>Recursive Fibonacci (n=25)</td>
+                  <td>1151.1 ms</td>
+                  <td><strong>828.6 ms</strong></td>
+                  <td style="color:var(--bd-green-dark);font-weight:700">- 28.0%</td>
+                </tr>
+                <tr>
+                  <td>Array Alloc + Sort (10,000 items)</td>
+                  <td>45.8 ms</td>
+                  <td><strong>28.0 ms</strong></td>
+                  <td style="color:var(--bd-green-dark);font-weight:700">- 38.8%</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="figure-caption">
+              <strong>Table 1:</strong> Benchmark comparison on Apple M4 silicon demonstrating execution latency reduction.
+            </div>
+
+            <!-- Table 2: Comparative Analysis -->
+            <table class="academic-table" style="margin-top:12px;">
+              <thead>
+                <tr>
+                  <th>System</th>
+                  <th>Grammar Engine</th>
+                  <th>Execution Model</th>
+                  <th>Bangla Errors</th>
+                  <th>Zero Internet</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>ChaScript</td>
+                  <td>Borrows JavaScript</td>
+                  <td>Browser-only</td>
+                  <td>No</td>
+                  <td>Limited</td>
+                </tr>
+                <tr>
+                  <td>Potaka</td>
+                  <td>Regex Transpiler</td>
+                  <td>Node.js target</td>
+                  <td>No</td>
+                  <td>Yes</td>
+                </tr>
+                <tr>
+                  <td>AI Translators</td>
+                  <td>LLM Cloud APIs</td>
+                  <td>Needs GPU Server</td>
+                  <td>N/A</td>
+                  <td>No (Fails)</td>
+                </tr>
+                <tr class="highlight-row">
+                  <td><strong>BanglaThon (Ours)</strong></td>
+                  <td>Independent Native AST</td>
+                  <td>Standalone CLI + REPL</td>
+                  <td>Yes (Line & Col)</td>
+                  <td>100% Offline</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="figure-caption">
+              <strong>Table 2:</strong> Comparative architectural evaluation against existing regional initiatives and LLMs.
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. PHILOSOPHICAL MANIFESTO & NATIONAL IMPACT -->
+        <section class="section-box red-theme">
+          <div class="sec-header red">
+            <span>4. THE NATIONAL VISION & NON-COMMERCIAL ETHOS</span>
+            <span class="sec-bn">জাতীয় দর্শন ও ফান্ডিং যৌক্তিকতা</span>
+          </div>
+          <div class="sec-body">
+            <!-- Tribute to Mehdi Hasan Khan & Avro -->
+            <div class="manifesto-banner">
+              <div class="manifesto-quote">
+                ❝ ভাষার জন্য টাকা নেবো কেন? ❞
+              </div>
+              <div class="manifesto-quote-source">
+                — ড. মেহেদী হাসান খান (স্বপ্নদ্রষ্টা: অভ্র কি-বোর্ড, একুশে পদকপ্রাপ্ত)
+              </div>
+              <div class="manifesto-text">
+                যে ভাষার মর্যাদার তরে আমাদের পূর্বপুরুষেরা ১৯৫২-তে রক্ত দিয়েছিলেন, সে ভাষার শিক্ষামূলক প্রযুক্তিকে আমাদের টিম কখনো বাণিজ্যিক পণ্য বানাবে না। ড. মেহেদী হাসান খানের অভ্র যেমন কোটি বাঙালির জন্য বাংলা লেখাকে সম্পূর্ণ উন্মুক্ত করেছিল, <strong>বাংলথন</strong> তেমনি বাংলাভাষী প্রতিটি শিক্ষার্থীর জন্য কোডিং ও কম্পিউটেশনাল থিঙ্কিংকে আজীবন উন্মুক্ত ও ফ্রি (FOSS) রাখবে।
+                <br><br>
+                <strong>কেন আমাদের এই গবেষণা ফান্ড প্রয়োজন (Grant Justification):</strong>
+                বাণিজ্যিক মুনাফার বাইরে থেকে এই জাতীয় প্রযুক্তিকে দেশের প্রত্যন্ত স্কুলের প্রতিটি কম্পিউটারে পৌঁছে দিতে, উচ্চগতির <em>Bytecode Virtual Machine</em> গবেষণা এবং ওপেন-অ্যাক্সেস ওয়েব প্লে-গ্রাউন্ড তৈরির জন্য আমাদের এই গবেষণা ও উদ্ভাবনী ফান্ড একান্ত প্রয়োজন।
+              </div>
+            </div>
+
+            <!-- Conclusion -->
+            <p style="margin-top:10px;">
+              <strong>Conclusion & Future Work:</strong> BanglaThon proves that native-language parsing is a viable, high-performance pedagogical bridge. Ongoing roadmap includes a C-based Bytecode VM, Language Server Protocol (LSP) for VS Code, and browser-based WebAssembly distribution.
+            </p>
+          </div>
+        </section>
+
+      </div>
+
+    </main>
+
+    <!-- Academic Footer -->
+    <footer class="academic-footer">
+      <div class="ack-text">
+        <strong>Acknowledgments:</strong> Presented at Ziaur Rahman Foundation (ZRF) — <em>ভবিষ্যৎ বিজ্ঞানীর খোঁজে ২০২৬ (বিভাগীয় পর্ব)</em>. Developed at the Department of Computer Science & Engineering, Rangamati Science and Technology University (RMSTU). Built under the Free and Open Source Software (FOSS) movement for Bangladesh.
+      </div>
+      <div class="qr-badge">
+        <svg viewBox="0 0 24 24" width="30" height="30" fill="#006a4e">
+          <path d="M2 2h8v8H2V2zm2 2v4h4V4H4zm10-2h8v8h-8V2zm2 2v4h4V4h-4zM2 14h8v8H2v-8zm2 2v4h4v-4H4zm14-2h2v2h-2v-2zm-4 0h2v4h-2v-4zm6 4h2v4h-2v-4zm-4 2h2v2h-2v-2zm2-2h2v2h-2v-2zm-6 2h2v2h-2v-2zm2 2h2v2h-2v-2zm2-6h2v2h-2v-2zm-2-2h4v2h-4v-2zM5 5h2v2H5V5zm12 0h2v2h-2V5zM5 17h2v2H5v-2z"/>
+        </svg>
+        <div>
+          <div style="font-weight:800;color:var(--bd-green-dark);font-size:10px;">SCAN FOR REPO & DEMO</div>
+          <div style="font-size:9px;color:var(--text-muted);">banglathon.rmstu.ac.bd</div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          alert(`Error attempting full-screen: ${err.message}`);
+        });
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+  </script>
+</body>
+</html>

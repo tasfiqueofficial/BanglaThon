@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bangla-lang"
+version = "0.1.0"
+description = "A competitive-programming focused programming language with Romanized Bangla syntax"
+readme = "README.md"
+requires-python = ">=3.7"
+authors = [
+    { name = "Tasfique" }
+]
+
+[project.scripts]
+bangla = "bangla_lang.main:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["bangla_lang*"]

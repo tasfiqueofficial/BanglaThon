@@ -1,0 +1,29 @@
+# Example 4: Array Manipulation
+dekhao "=== Array Manipulation Demo ==="
+
+dhori numbers = talika(5, 2, 8, 1, 9, 3, 7, 4)
+dekhao "Original array:"
+dekhao numbers
+
+dekhao "Sorted array:"
+dekhao shajao(numbers)
+
+dekhao "Reversed array:"
+dekhao ulto(numbers)
+
+dekhao "Array length:"
+dekhao dhoirgo(numbers)
+
+dekhao "Sum of all elements:"
+dekhao jog_koro(numbers)
+
+dekhao "Maximum value:"
+dekhao shorbo_boro(numbers)
+
+dekhao "Minimum value:"
+dekhao shorbo_choto(numbers)
+
+# Add new elements
+dekhao "After appending 100:"
+juktokoro(numbers, 100)
+dekhao numbers

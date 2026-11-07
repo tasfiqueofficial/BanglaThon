@@ -1,0 +1,7 @@
+dhori x=5,y=10
+
+jodi(x>y){
+    dekhao "x boro"
+}
+
+

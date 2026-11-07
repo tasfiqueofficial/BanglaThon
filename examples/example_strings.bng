@@ -1,0 +1,12 @@
+# Example 7: String Manipulation
+dhori word = "Bangla"
+
+dekhao "=== String Manipulation ==="
+dekhao "Original word: " + word
+dekhao "Reversed word: " + ulto(word)
+dekhao "Length: " + dhoirgo(word)
+
+dekhao "Each character:"
+jonno (dhori i = 0; i < dhoirgo(word); i = i + 1) {
+    dekhao word[i]
+}

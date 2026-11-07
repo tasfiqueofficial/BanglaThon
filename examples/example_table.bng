@@ -1,0 +1,8 @@
+# Example 6: Multiplication Table
+dekhao "=== Multiplication Table (1-10) ==="
+
+jonno (dhori i = 1; i <= 10; i = i + 1) {
+    jonno (dhori j = 1; j <= 10; j = j + 1) {
+        dekhao i * j
+    }
+}

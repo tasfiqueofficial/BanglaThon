@@ -1,0 +1,12 @@
+# Example 5: Factorial Calculator
+kaj factorial(n) {
+    jodi (n <= 1) {
+        ferot 1
+    }
+    ferot n * factorial(n - 1)
+}
+
+dekhao "=== Factorial Calculator ==="
+jonno (dhori i = 1; i <= 10; i = i + 1) {
+    dekhao i + "! = " + factorial(i)
+}

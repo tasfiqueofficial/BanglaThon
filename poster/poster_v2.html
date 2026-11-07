@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banglathon - Future Scientist Search 2026 | Research Poster</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #060a12;
+      --card-bg: rgba(13, 20, 36, 0.78);
+      --card-border: rgba(56, 189, 248, 0.22);
+      --card-hover: rgba(56, 189, 248, 0.4);
+      --cyan: #38bdf8;
+      --cyan-glow: rgba(56, 189, 248, 0.35);
+      --teal: #2dd4bf;
+      --emerald: #10b981;
+      --amber: #fbbf24;
+      --coral: #f43f5e;
+      --purple: #a855f7;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+      --font-bn: 'Hind Siliguri', sans-serif;
+      --font-mono: 'Fira Code', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #020408;
+      color: var(--text);
+      font-family: var(--font-sans);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 24px 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Floating Toolbar */
+    .toolbar {
+      position: fixed;
+      top: 14px;
+      right: 20px;
+      z-index: 1000;
+      display: flex;
+      gap: 10px;
+      background: rgba(10, 16, 30, 0.85);
+      backdrop-filter: blur(16px);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .tool-btn {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: #fff;
+      border: none;
+      padding: 8px 18px;
+      font-size: 13.5px;
+      font-weight: 600;
+      font-family: var(--font-bn);
+      border-radius: 9999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .tool-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px var(--cyan-glow);
+    }
+
+    .tool-btn.gold {
+      background: linear-gradient(135deg, #d97706, #b45309);
+    }
+
+    /* Vertical Poster Board (Claude's Portrait Canvas, Optimized for High-Res Print & Display) */
+    .poster-canvas {
+      width: 900px;
+      max-width: 100%;
+      background: radial-gradient(circle at 50% 0%, #0d1a33 0%, #060b17 50%, #03060d 100%);
+      border: 1.5px solid rgba(56, 189, 248, 0.3);
+      border-radius: 20px;
+      padding: 40px 44px;
+      position: relative;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9), 0 0 60px rgba(56, 189, 248, 0.12);
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+
+    /* Ambient Glow Effects */
+    .poster-canvas::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      left: 15%;
+      width: 500px;
+      height: 350px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.16) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .poster-canvas::after {
+      content: '';
+      position: absolute;
+      bottom: -150px;
+      right: -100px;
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(45, 212, 191, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Top Ribbon */
+    .top-ribbon {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: #94a3b8;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 14px;
+      margin-bottom: 24px;
+    }
+
+    .top-ribbon-left {
+      font-family: var(--font-bn);
+      color: var(--amber);
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .top-ribbon-right {
+      color: #7dd3fc;
+      font-size: 11px;
+    }
+
+    /* Hero Section: Title & Terminal */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 28px;
+      align-items: start;
+      margin-bottom: 24px;
+    }
+
+    .brand-title {
+      font-size: 64px;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      line-height: 1.05;
+      background: linear-gradient(135deg, #2dd4bf 0%, #38bdf8 55%, #818cf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+      filter: drop-shadow(0 4px 16px rgba(45, 212, 191, 0.3));
+    }
+
+    .tagline-bn {
+      font-family: var(--font-bn);
+      font-size: 21px;
+      font-weight: 700;
+      color: #f59e0b;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-desc {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #cbd5e1;
+      max-width: 480px;
+    }
+
+    .author-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      margin-top: 14px;
+      font-size: 12.5px;
+      color: #e2e8f0;
+    }
+
+    .author-badge strong {
+      color: var(--cyan);
+    }
+
+    /* Terminal Card */
+    .terminal-card {
+      background: #030712;
+      border: 1.5px solid rgba(56, 189, 248, 0.3);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7), 0 0 25px rgba(56, 189, 248, 0.15);
+    }
+
+    .terminal-header {
+      background: #0b1324;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .traffic-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .dot.red { background: #ef4444; }
+    .dot.yellow { background: #f59e0b; }
+    .dot.green { background: #10b981; }
+
+    .terminal-title {
+      margin-left: 12px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #94a3b8;
+    }
+
+    .terminal-body {
+      padding: 14px 16px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: #e2e8f0;
+    }
+
+    .t-keyword { color: #38bdf8; font-weight: 600; }
+    .t-fn { color: #fbbf24; }
+    .t-str { color: #34d399; }
+    .t-num { color: #f472b6; }
+    .t-comment { color: #64748b; font-style: italic; }
+    .t-output {
+      color: #2dd4bf;
+      border-top: 1px dashed rgba(255, 255, 255, 0.15);
+      padding-top: 8px;
+      margin-top: 8px;
+      font-weight: 600;
+    }
+    .cursor {
+      display: inline-block;
+      width: 7px;
+      height: 13px;
+      background: #2dd4bf;
+      vertical-align: middle;
+      animation: blink 1s infinite;
+    }
+    @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+
+    /* The Problem Box */
+    .problem-banner {
+      background: linear-gradient(90deg, rgba(244, 63, 94, 0.12) 0%, rgba(15, 23, 42, 0.6) 100%);
+      border: 1px solid rgba(244, 63, 94, 0.35);
+      border-left: 4px solid var(--coral);
+      border-radius: 10px;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .problem-tag {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      color: #fda4af;
+      white-space: nowrap;
+      text-transform: uppercase;
+      font-family: var(--font-sans);
+    }
+
+    .problem-text {
+      font-size: 13px;
+      color: #cbd5e1;
+      line-height: 1.45;
+    }
+
+    /* Section Headings */
+    .sec-label {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .sec-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(56, 189, 248, 0.4), transparent);
+    }
+
+    /* How It Works Pipeline */
+    .pipeline-wrapper {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .pipe-node {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 12px 8px;
+      text-align: center;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .pipe-node.highlight-node {
+      background: linear-gradient(135deg, #0d9488, #0f766e);
+      border-color: #2dd4bf;
+      box-shadow: 0 0 20px rgba(45, 212, 191, 0.35);
+    }
+    .pipe-node.highlight-node .node-title { color: #ffffff; }
+    .pipe-node.highlight-node .node-sub { color: #ccfbf1; }
+
+    .node-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 3px;
+    }
+
+    .node-sub {
+      font-size: 9.5px;
+      color: #94a3b8;
+      font-family: var(--font-mono);
+    }
+
+    .pipe-arrow {
+      position: absolute;
+      right: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--cyan);
+      font-size: 10px;
+      z-index: 2;
+    }
+
+    /* Key Features 3x2 Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      backdrop-filter: blur(10px);
+      transition: border-color 0.2s;
+    }
+
+    .feature-card:hover {
+      border-color: var(--card-hover);
+    }
+
+    .f-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--amber);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .f-desc {
+      font-size: 12px;
+      line-height: 1.45;
+      color: #cbd5e1;
+    }
+
+    /* Benchmarks & Stats Row */
+    .benchmark-row {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .benchmark-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 16px 20px;
+    }
+
+    .bench-sub {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-bottom: 12px;
+    }
+
+    .bench-item {
+      margin-bottom: 10px;
+    }
+
+    .bench-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11.5px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .bench-bar-track {
+      height: 12px;
+      background: rgba(15, 23, 42, 0.8);
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      position: relative;
+    }
+
+    .bench-bar-before {
+      background: #334155;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      border-radius: 6px;
+    }
+
+    .bench-bar-after {
+      background: linear-gradient(90deg, #2dd4bf, #38bdf8);
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      border-radius: 6px;
+      z-index: 2;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+    }
+
+    /* Right Stats Column */
+    .stat-cards-col {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .big-stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      text-align: center;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .big-num {
+      font-size: 38px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 4px;
+      color: var(--amber);
+    }
+
+    .big-num.teal {
+      color: #2dd4bf;
+      filter: drop-shadow(0 2px 10px rgba(45, 212, 191, 0.3));
+    }
+
+    .big-label {
+      font-size: 11.5px;
+      color: #94a3b8;
+      line-height: 1.35;
+    }
+
+    /* Comparison Table & Impact Row */
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .diff-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11.5px;
+    }
+
+    .diff-table th {
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--cyan);
+      text-align: left;
+      padding: 6px 10px;
+      font-weight: 700;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .diff-table td {
+      padding: 6px 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+    }
+
+    .diff-table tr.active-row {
+      background: rgba(45, 212, 191, 0.1);
+      font-weight: 600;
+    }
+    .diff-table tr.active-row td {
+      color: #2dd4bf;
+    }
+
+    .impact-card {
+      background: linear-gradient(135deg, rgba(20, 36, 70, 0.8) 0%, rgba(12, 23, 44, 0.95) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .impact-title {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      color: var(--cyan);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .impact-desc {
+      font-size: 12.5px;
+      color: #e2e8f0;
+      line-height: 1.5;
+    }
+
+    /* Manifesto & Mehdi Hasan Khan (Avro) Tribute Card */
+    .manifesto-card {
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.09) 0%, rgba(13, 20, 36, 0.95) 50%, rgba(16, 185, 129, 0.08) 100%);
+      border: 1.5px solid rgba(251, 191, 36, 0.45);
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba(251, 191, 36, 0.12);
+    }
+
+    .manifesto-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .manifesto-quote-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(251, 191, 36, 0.15);
+      border: 1px solid rgba(251, 191, 36, 0.5);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-family: var(--font-bn);
+      color: #fef08a;
+      font-size: 13.5px;
+      font-weight: 700;
+    }
+
+    .manifesto-quote-pill small {
+      color: #cbd5e1;
+      font-weight: 500;
+      font-size: 11px;
+    }
+
+    .manifesto-tag {
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--emerald);
+      font-family: var(--font-bn);
+      background: rgba(16, 185, 129, 0.15);
+      padding: 5px 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+
+    .manifesto-body {
+      font-family: var(--font-bn);
+      font-size: 12.8px;
+      line-height: 1.6;
+      color: #e2e8f0;
+      text-align: justify;
+    }
+
+    .manifesto-body strong {
+      color: var(--amber);
+    }
+
+    /* Footer */
+    .poster-footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11.5px;
+      color: #94a3b8;
+    }
+
+    .footer-brand {
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .footer-brand span {
+      color: var(--cyan);
+    }
+
+    .footer-tags {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      color: #64748b;
+    }
+
+    /* Print Overrides */
+    @media print {
+      body {
+        padding: 0;
+        background: #060a12 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .toolbar {
+        display: none !important;
+      }
+      .poster-canvas {
+        width: 100vw;
+        max-width: none;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        padding: 24px;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Toolbar -->
+  <div class="toolbar">
+    <button class="tool-btn gold" onclick="window.print()">
+      🖨️ পোস্টার প্রিন্ট / PDF সংরক্ষণ
+    </button>
+    <button class="tool-btn" onclick="toggleFullScreen()">
+      ⛶ ফুলস্ক্রিন
+    </button>
+  </div>
+
+  <!-- Main Canvas -->
+  <div class="poster-canvas" id="posterArea">
+
+    <!-- Top Ribbon -->
+    <div class="top-ribbon">
+      <div class="top-ribbon-left">
+        <span>🏆</span>
+        <span>ভবিষ্যৎ বিজ্ঞানীর খোঁজে ২০২৬ · বিভাগীয় পর্ব</span>
+      </div>
+      <div class="top-ribbon-right">
+        FUTURE SCIENTIST SEARCH 2026 · ZIAUR RAHMAN FOUNDATION
+      </div>
+    </div>
+
+    <!-- Hero Title & Code Terminal -->
+    <div class="hero-grid">
+      <div>
+        <h1 class="brand-title">Banglathon</h1>
+        <div class="tagline-bn">
+          <span>বাংলায় প্রোগ্রামিং, বাংলার জন্য</span>
+        </div>
+        <p class="brand-desc">
+          A native Bangla-syntax programming language and standalone AST interpreter, engineered from scratch for STEM education and competitive programming.
+        </p>
+
+        <div class="author-badge">
+          <span>👨‍💻 উদ্ভাবক:</span>
+          <strong>তাসফিক শিকদার কৌশিক</strong>
+          <span>• সিএসই বিভাগ, রাঙ্গামাটি বিজ্ঞান ও প্রযুক্তি বিশ্ববিদ্যালয় (RMSTU)</span>
+        </div>
+      </div>
+
+      <!-- Live Code Window -->
+      <div class="terminal-card">
+        <div class="terminal-header">
+          <div class="traffic-dots">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <span class="terminal-title">hello.bl — BanglaThon CLI</span>
+        </div>
+        <div class="terminal-body">
+          <span class="t-keyword">dhori</span> x = <span class="t-num">10</span><br>
+          <span class="t-keyword">jodi</span> (x &gt; <span class="t-num">5</span>) {<br>
+          &nbsp;&nbsp;<span class="t-keyword">dekhao</span> <span class="t-str">"x boro"</span><br>
+          }<br>
+          <span class="t-comment"># CP Built-in:</span><br>
+          <span class="t-keyword">dhori</span> arr = <span class="t-fn">talika</span>(<span class="t-num">8</span>, <span class="t-num">3</span>, <span class="t-num">5</span>)<br>
+          <span class="t-keyword">dekhao</span> <span class="t-fn">shajao</span>(arr)<br>
+          <div class="t-output">
+            &gt; x boro<br>
+            &gt; [3, 5, 8]<span class="cursor"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- The Problem Banner -->
+    <div class="problem-banner">
+      <div class="problem-tag">THE PROBLEM</div>
+      <div class="problem-text">
+        Every mainstream language uses English keywords. Bengali-medium beginners must decipher an alien vocabulary while simultaneously learning logic—imposing a <strong>60% cognitive overhead</strong> that drives capable students away from computer science.
+      </div>
+    </div>
+
+    <!-- How It Works Pipeline -->
+    <div class="sec-label">HOW IT WORKS · 100% INDEPENDENT COMPILER ARCHITECTURE</div>
+    <div class="pipeline-wrapper">
+      <div class="pipe-node">
+        <div class="node-title">Source</div>
+        <div class="node-sub">.bl / .bng file</div>
+        <span class="pipe-arrow">➜</span>
+      </div>
+
+      <div class="pipe-node">
+        <div class="node-title">Lexer</div>
+        <div class="node-sub">token stream</div>
+        <span class="pipe-arrow">➜</span>
+      </div>
+
+      <div class="pipe-node">
+        <div class="node-title">Parser</div>
+        <div class="node-sub">own grammar</div>
+        <span class="pipe-arrow">➜</span>
+      </div>
+
+      <div class="pipe-node">
+        <div class="node-title">AST</div>
+        <div class="node-sub">syntax tree</div>
+        <span class="pipe-arrow">➜</span>
+      </div>
+
+      <div class="pipe-node">
+        <div class="node-title">Interpreter</div>
+        <div class="node-sub">tree-walking</div>
+        <span class="pipe-arrow">➜</span>
+      </div>
+
+      <div class="pipe-node highlight-node">
+        <div class="node-title">Output</div>
+        <div class="node-sub">terminal result</div>
+      </div>
+    </div>
+
+    <!-- Key Features -->
+    <div class="sec-label">KEY ARCHITECTURAL FEATURES</div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="f-title">🔤 Banglish Syntax</div>
+        <div class="f-desc">
+          <code style="color:var(--cyan)">dhori, jodi, nahole, jonno, dekhao</code>. Bangla phonetics in Latin letters—works seamlessly on any standard keyboard with zero IME requirements.
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="f-title">🏛️ Independent Grammar</div>
+        <div class="f-desc">
+          Own recursive-descent parser and Abstract Syntax Tree (AST). It does not borrow another language's runtime or rely on browser engines.
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="f-title">⚡ Built for CP (Competitive Prog.)</div>
+        <div class="f-desc">
+          Built-in array ops, 2D matrices, recursion, <code style="color:var(--cyan)">shajao()</code> (sort), <code style="color:var(--cyan)">shorbo_boro()</code> (max), gcd, prime checking, and fast I/O.
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="f-title">🛡️ Bangla Error Messages</div>
+        <div class="f-desc">
+          Errors are pinpointed in clear Bengali with exact line & column tracking, plus intelligent <em>"Did you mean...?"</em> suggestions for typo resolution.
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="f-title">💻 Standalone Offline Tool</div>
+        <div class="f-desc">
+          Runs 100% offline from terminal CLI or REPL. Install once with pip and use the <code style="color:var(--cyan)">bangla</code> command globally from any directory.
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="f-title">🚀 Optimized Dispatch Engine</div>
+        <div class="f-desc">
+          A precomputed AST dispatch table replaces dynamic reflection lookups, slashing average runtime by <strong>~31.5%</strong>.
+        </div>
+      </div>
+    </div>
+
+    <!-- Benchmarks & Verification Row -->
+    <div class="benchmark-row">
+      <div class="benchmark-card">
+        <div class="sec-label" style="margin-bottom:4px">MEASURED SPEED-UP & BENCHMARKING</div>
+        <div class="bench-sub">Before vs after dispatch table optimization · Benchmarked on Apple M4 (MacBook Air)</div>
+
+        <!-- Metric 1 -->
+        <div class="bench-item">
+          <div class="bench-label-row">
+            <span>Loop Execution (100,000 iterations)</span>
+            <span style="color:#2dd4bf">250.1 ms <span style="color:#94a3b8;font-weight:400">(was 359.9 ms) · -30.5%</span></span>
+          </div>
+          <div class="bench-bar-track">
+            <div class="bench-bar-before" style="width: 100%"></div>
+            <div class="bench-bar-after" style="width: 69.5%"></div>
+          </div>
+        </div>
+
+        <!-- Metric 2 -->
+        <div class="bench-item">
+          <div class="bench-label-row">
+            <span>Recursive Fibonacci (n=25)</span>
+            <span style="color:#2dd4bf">828.6 ms <span style="color:#94a3b8;font-weight:400">(was 1151.1 ms) · -28.0%</span></span>
+          </div>
+          <div class="bench-bar-track">
+            <div class="bench-bar-before" style="width: 100%"></div>
+            <div class="bench-bar-after" style="width: 72.0%"></div>
+          </div>
+        </div>
+
+        <!-- Metric 3 -->
+        <div class="bench-item">
+          <div class="bench-label-row">
+            <span>Array Build & Sort (10,000 items)</span>
+            <span style="color:#2dd4bf">28.0 ms <span style="color:#94a3b8;font-weight:400">(was 45.8 ms) · -38.8%</span></span>
+          </div>
+          <div class="bench-bar-track">
+            <div class="bench-bar-before" style="width: 100%"></div>
+            <div class="bench-bar-after" style="width: 61.1%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Stat Cards -->
+      <div class="stat-cards-col">
+        <div class="big-stat-card">
+          <div class="big-num">30 / 30</div>
+          <div class="big-label">Core language features pass the automated test suite (100%)</div>
+        </div>
+        <div class="big-stat-card">
+          <div class="big-num teal">~31.5%</div>
+          <div class="big-label">Average execution time reduction (tested range 28% – 41%)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comparative Table & Impact -->
+    <div class="bottom-grid">
+      <div class="feature-card" style="padding:14px">
+        <div class="sec-label" style="margin-bottom:8px">HOW IT DIFFERS · COMPETITIVE ANALYSIS</div>
+        <table class="diff-table">
+          <thead>
+            <tr>
+              <th>System</th>
+              <th>Grammar / AST</th>
+              <th>Runtime</th>
+              <th>Bangla Errors</th>
+              <th>Zero Internet</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>ChaSript</strong></td>
+              <td>Reuses JavaScript's</td>
+              <td>Browser only</td>
+              <td>No</td>
+              <td>Limited</td>
+            </tr>
+            <tr>
+              <td><strong>Potaka</strong></td>
+              <td>Regex Transpiler</td>
+              <td>Node.js target</td>
+              <td>No</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td><strong>AI Code Tools</strong></td>
+              <td>LLM token translation</td>
+              <td>Needs cloud GPU</td>
+              <td>N/A</td>
+              <td>No (Offline Fails)</td>
+            </tr>
+            <tr class="active-row">
+              <td><strong>Banglathon</strong></td>
+              <td>Independent Native AST</td>
+              <td>Offline CLI + REPL</td>
+              <td>Yes (Line & Col)</td>
+              <td>100% Offline</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="impact-card">
+        <div class="impact-title">🌟 NATIONAL IMPACT</div>
+        <div class="impact-desc">
+          An empowering pedagogical bridge for Bengali-medium learners—from classes 8 to 12 through university level—building solid computational thinking before transitioning to C++, Python, or Java.
+        </div>
+      </div>
+    </div>
+
+    <!-- National Vision & Mehdi Hasan Khan (Avro) Tribute / Funding Justification -->
+    <div class="manifesto-card">
+      <div class="manifesto-header">
+        <div class="manifesto-quote-pill">
+          <span>❝ ভাষার জন্য টাকা নেবো কেন? ❞</span>
+          <small>— ড. মেহেদী হাসান খান (অভ্র কি-বোর্ড এর স্বপ্নদ্রষ্টা, একুশে পদকপ্রাপ্ত)</small>
+        </div>
+        <div class="manifesto-tag">
+          ভাষা হোক উন্মুক্ত • কোডিং হোক সার্বজনীন
+        </div>
+      </div>
+      <div class="manifesto-body">
+        <strong>আমাদের দর্শন ও গবেষণা ফান্ডের যৌক্তিকতা (The Non-Profit Mission):</strong> 
+        যে ভাষার মর্যাদার তরে আমাদের পূর্বপুরুষেরা রক্ত দিয়ে গেছেন, সে ভাষার শিক্ষামূলক প্রযুক্তিকে আমাদের টিম কখনো কোনো বাণিজ্যিক পণ্য (Commercial Product) বানাবে না। ড. মেহেদী হাসান খানের অভ্র যেমন কোটি বাঙালির জন্য বাংলা লেখাকে সম্পূর্ণ বিনামূল্যে উন্মুক্ত করে দিয়েছিল, <strong>বাংলথন (BanglaThon)</strong> তেমনি প্রতিটি শিক্ষার্থীর জন্য প্রোগ্রামিং ও কম্পিউটেশনাল থিঙ্কিংকে আজীবন উন্মুক্ত ও ফ্রি (FOSS) রাখবে। কোনো বাণিজ্যিক মুনাফা ছাড়া এই জাতীয় শিক্ষামূলক প্রযুক্তিকে দেশের প্রত্যন্ত স্কুলের প্রতিটি কম্পিউটারে পৌঁছে দিতে, বাইটকোড ভার্চুয়াল মেশিন গবেষণা এবং বাংলা সিনট্যাক্স টুলস বিনির্মাণে আমাদের এই গবেষণা ও স্টার্টআপ ফান্ড একান্ত প্রয়োজন।
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="poster-footer">
+      <div class="footer-brand">
+        Banglathon <span>· by Tasfique Shikder Koushik (RMSTU)</span>
+      </div>
+      <div class="footer-tags">
+        Built in Pure Python · Custom Lexer · Recursive Parser · AST · Tree-Walking VM · Global CLI
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          alert(`Error attempting full-screen: ${err.message}`);
+        });
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+  </script>
+</body>
+</html>

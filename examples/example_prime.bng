@@ -1,0 +1,25 @@
+# Example 3: Prime Number Checker
+kaj is_prime(n) {
+    jodi (n < 2) {
+        ferot mittha
+    }
+    jodi (n == 2) {
+        ferot shotti
+    }
+    jodi (n % 2 == 0) {
+        ferot mittha
+    }
+    jonno (dhori i = 3; i * i <= n; i = i + 2) {
+        jodi (n % i == 0) {
+            ferot mittha
+        }
+    }
+    ferot shotti
+}
+
+dekhao "Prime numbers from 1 to 30:"
+jonno (dhori num = 2; num <= 30; num = num + 1) {
+    jodi (is_prime(num)) {
+        dekhao num
+    }
+}
