@@ -10,61 +10,79 @@ Write-Host "   বাংলা ভাষার নিজস্ব প্রো�
 Write-Host "==========================================================" -ForegroundColor Green
 Write-Host ""
 
-# 1. Check for Python or Py launcher
-$pythonCmd = Get-Command python -ErrorAction SilentlyContinue
-if (-not $pythonCmd) {
-    $pythonCmd = Get-Command py -ErrorAction SilentlyContinue
+function Test-RealPython($cmd) {
+    if (-not $cmd) { return $false }
+    try {
+        $out = & $cmd --version 2>&1 | Out-String
+        if ($out -like "*Python 3*" -and $out -notlike "*not found*" -and $out -notlike "*MicrosoftStore*") {
+            return $true
+        }
+    } catch {}
+    return $false
 }
 
-if (-not $pythonCmd) {
-    Write-Host "[!] কোনো পাইথন পাওয়া যায়নি। স্বয়ংক্রিয়ভাবে উইন্ডোজ প্যাকেজ ম্যানেজার (winget) দিয়ে পাইথন ইনস্টল করা হচ্ছে..." -ForegroundColor Yellow
-    $wingetCmd = Get-Command winget -ErrorAction SilentlyContinue
-    if ($wingetCmd) {
-        winget install Python.Python.3.12 --silent --accept-package-agreements --accept-source-agreements
-        $pythonCmd = Get-Command python -ErrorAction SilentlyContinue
+$hasRealPy = $false
+$realPyExe = ""
+
+# Check 'py' launcher first
+$pyLauncher = Get-Command py -ErrorAction SilentlyContinue
+if ($pyLauncher -and (Test-RealPython "py")) {
+    $hasRealPy = $true
+    $realPyExe = "py"
+}
+
+# Check 'python'
+if (-not $hasRealPy) {
+    $pythonCmd = Get-Command python -ErrorAction SilentlyContinue
+    if ($pythonCmd -and (Test-RealPython "python")) {
+        $hasRealPy = $true
+        $realPyExe = "python"
     }
 }
 
-if ($pythonCmd) {
-    $pyExe = $pythonCmd.Source
-    $pyDir = Split-Path $pyExe
-    Write-Host "[+] পাইথন পাওয়া গেছে: $pyExe" -ForegroundColor Green
+# If no real Python, auto-install via winget
+if (-not $hasRealPy) {
+    Write-Host "[!] আপনার উইন্ডোজ ১১-তে আসল পাইথন পাওয়া যায়নি।" -ForegroundColor Yellow
+    Write-Host "[+] উইন্ডোজ ১১ প্যাকেজ ম্যানেজার (winget) দিয়ে স্বয়ংক্রিয়ভাবে পাইথন ইনস্টল করা হচ্ছে..." -ForegroundColor Cyan
     
-    Write-Host "[+] BanglaThon ডাউনলোড ও আপডেট করা হচ্ছে..." -ForegroundColor Cyan
-    & $pyExe -m pip install --upgrade git+https://github.com/tasfiqueofficial/BanglaThon.git --quiet
+    $wingetCmd = Get-Command winget -ErrorAction SilentlyContinue
+    if ($wingetCmd) {
+        Write-Host "[+] পাইথন ডাউনলোড হচ্ছে, অনুগ্রহ করে ৩০-৪০ সেকেন্ড অপেক্ষা করুন..." -ForegroundColor White
+        & winget install -e --id Python.Python.3.12 --scope user --override "/quiet InstallAllUsers=0 PrependPath=1 Include_pip=1" --accept-package-agreements --accept-source-agreements
+        
+        # Refresh environment variables
+        $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+        
+        if (Test-RealPython "py") { $hasRealPy = $true; $realPyExe = "py" }
+        elseif (Test-RealPython "python") { $hasRealPy = $true; $realPyExe = "python" }
+    }
+}
+
+if ($hasRealPy) {
+    Write-Host "[+] পাইথন সক্রিয় পাওয়া গেছে: $realPyExe" -ForegroundColor Green
+    Write-Host "[+] BanglaThon ডাউনলোড ও ইনস্টল করা হচ্ছে..." -ForegroundColor Cyan
     
-    # Get Python Scripts directory
-    $scriptsDir = (& $pyExe -c "import sysconfig; print(sysconfig.get_path('scripts'))" 2>$null)
+    & $realPyExe -m pip install --upgrade git+https://github.com/tasfiqueofficial/BanglaThon.git --quiet
+    
+    # Scripts directory
+    $scriptsDir = (& $realPyExe -c "import sysconfig; print(sysconfig.get_path('scripts'))" 2>$null)
     if ($scriptsDir) { $scriptsDir = $scriptsDir.Trim() }
 
-    # Prepare universal wrapper content
-    $cmdContent = "@echo off`r`nwhere python >nul 2>nul`r`nif %ERRORLEVEL% equ 0 (`r`n    python -m bangla_lang %*`r`n) else (`r`n    py -m bangla_lang %*`r`n)"
-    $ps1Content = "param([Parameter(ValueFromRemainingArguments=`$true)]`$p)`r`n& python -m bangla_lang @p"
+    # Universal Wrapper
+    $cmdContent = "@echo off`r`nwhere py >nul 2>nul`r`nif %ERRORLEVEL% equ 0 (`r`n    py -m bangla_lang %*`r`n) else (`r`n    python -m bangla_lang %*`r`n)"
+    $ps1Content = "param([Parameter(ValueFromRemainingArguments=`$true)]`$p)`r`nif (Get-Command py -ErrorAction SilentlyContinue) { & py -m bangla_lang @p } else { & python -m bangla_lang @p }"
 
-    # Target folders to inject bangla executable into (covers ALL cases):
     $targetDirs = @()
-    
-    # Location 1: WindowsApps (Guaranteed to be in PATH on 100% of Windows 10/11)
     if ($env:LOCALAPPDATA -and (Test-Path "$env:LOCALAPPDATA\Microsoft\WindowsApps")) {
         $targetDirs += "$env:LOCALAPPDATA\Microsoft\WindowsApps"
     }
-    
-    # Location 2: Right next to python.exe (Guaranteed to be in PATH because python is active)
-    if ($pyDir -and (Test-Path $pyDir)) {
-        $targetDirs += $pyDir
-    }
-    
-    # Location 3: Python Scripts directory
     if ($scriptsDir -and (Test-Path $scriptsDir)) {
         $targetDirs += $scriptsDir
     }
-    
-    # Location 4: User .bangla\bin
     $banglaHome = "$HOME\.bangla\bin"
     New-Item -ItemType Directory -Force -Path $banglaHome | Out-Null
     $targetDirs += $banglaHome
 
-    # Write bangla.cmd and bangla.ps1 to all locations
     foreach ($dir in $targetDirs) {
         try {
             Set-Content -Path "$dir\bangla.cmd" -Value $cmdContent -Force -ErrorAction SilentlyContinue
@@ -73,19 +91,14 @@ if ($pythonCmd) {
         } catch {}
     }
 
-    # Ensure $banglaHome and $scriptsDir are in Windows User PATH permanently
     $userPath = [Environment]::GetEnvironmentVariable("Path", "User")
     $newPaths = @($banglaHome)
     if ($scriptsDir) { $newPaths += $scriptsDir }
 
     foreach ($p in $newPaths) {
-        if ($userPath -notlike "*$p*") {
-            $userPath = "$userPath;$p"
-        }
+        if ($userPath -notlike "*$p*") { $userPath = "$userPath;$p" }
     }
     [Environment]::SetEnvironmentVariable("Path", $userPath, "User")
-
-    # Update CURRENT active session PATH immediately so it works in the same window!
     $env:Path = [Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + $userPath + ";$($targetDirs -join ';')"
 
     Write-Host ""
@@ -93,12 +106,13 @@ if ($pythonCmd) {
     Write-Host " [✓] অভিনন্দন! BanglaThon সম্পূর্ণ সফলভাবে প্রস্তুত হয়েছে!    " -ForegroundColor Green
     Write-Host "==========================================================" -ForegroundColor Green
     Write-Host ""
-    Write-Host "এখনই যেকোনো ফোল্ডারে টার্মিনাল/CMD/VS Code-এ সরাসরি চালান:" -ForegroundColor Yellow
-    Write-Host "   bangla run apnar_file.bl" -ForegroundColor Cyan
-    Write-Host ""
-    Write-Host "অথবা সরাসরি লাইভ কনসোলে লিখুন:" -ForegroundColor Yellow
-    Write-Host "   bangla" -ForegroundColor Cyan
+    Write-Host "এখন সরাসরি আপনার ফাইলে লিখুন ও রান করুন:" -ForegroundColor Yellow
+    Write-Host "   bangla run tas.bl" -ForegroundColor Cyan
     Write-Host ""
 } else {
-    Write-Host "[!] কম্পিউটারে পাইথন পাওয়া যায়নি। দয়া করে python.org থেকে Python ইনস্টল করে নিন।" -ForegroundColor Red
+    Write-Host ""
+    Write-Host "[!] স্বয়ংক্রিয় ইনস্টলেশনে সমস্যা হয়েছে। নিচের ২টির একটি সহজ উপায় করুন:" -ForegroundColor Red
+    Write-Host "    উপায় ১: PowerShell-এ লিখুন: winget install Python.Python.3.12" -ForegroundColor Yellow
+    Write-Host "    উপায় ২: PowerShell-এ শুধু 'python' লিখে এন্টার দিন, Microsoft Store খুললে 'Get/Install' চাপুন।" -ForegroundColor Yellow
+    Write-Host ""
 }
