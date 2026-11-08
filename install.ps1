@@ -20,15 +20,29 @@ if ($pythonCmd) {
     
     try {
         & $pythonCmd.Source -m pip install git+https://github.com/tasfiqueofficial/BanglaThon.git --quiet
+        
+        # Auto-detect Python Scripts directory and add to PATH if missing
+        $scriptsDir = (& $pythonCmd.Source -c "import sysconfig; print(sysconfig.get_path('scripts'))" 2>$null).Trim()
+        if ($scriptsDir -and (Test-Path $scriptsDir)) {
+            $userPath = [Environment]::GetEnvironmentVariable("Path", "User")
+            if ($userPath -notlike "*$scriptsDir*") {
+                [Environment]::SetEnvironmentVariable("Path", "$userPath;$scriptsDir", "User")
+                Write-Host "[+] Python Scripts ফোল্ডার Windows PATH-এ স্বয়ংক্রিয়ভাবে যুক্ত করা হয়েছে।" -ForegroundColor Green
+            }
+            # Refresh current PowerShell session PATH immediately
+            $env:Path = [Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [Environment]::GetEnvironmentVariable("Path", "User") + ";$scriptsDir"
+        }
+
         Write-Host ""
         Write-Host "======================================================" -ForegroundColor Green
         Write-Host " [✓] অভিনন্দন! BanglaThon সফলভাবে ইনস্টল হয়েছে!        " -ForegroundColor Green
         Write-Host "======================================================" -ForegroundColor Green
         Write-Host ""
         Write-Host "যেভাবে ফাইল রান করবেন:" -ForegroundColor Yellow
-        Write-Host "  1. যেকোনো ফোল্ডারে টার্মিনাল/CMD খুলুন" -ForegroundColor White
-        Write-Host "  2. রান করুন: bangla run apnar_file.bl" -ForegroundColor Cyan
-        Write-Host "  3. সরাসরি কোড লিখতে চালান: bangla" -ForegroundColor Cyan
+        Write-Host "  1. রান করুন: bangla run apnar_file.bl" -ForegroundColor Cyan
+        Write-Host "  2. সরাসরি কোড লিখতে চালান: bangla" -ForegroundColor Cyan
+        Write-Host "  3. যদি 'bangla' না পায়, তবে টার্মিনালটি বন্ধ করে নতুন করে খুলুন," -ForegroundColor White
+        Write-Host "     অথবা সরাসরি চালান: python -m bangla_lang run apnar_file.bl" -ForegroundColor White
         Write-Host ""
     } catch {
         Write-Host "[!] ত্রুটি: pip ইনস্টলেশনে সমস্যা হয়েছে — $_" -ForegroundColor Red
