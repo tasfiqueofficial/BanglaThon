@@ -1,0 +1,7 @@
+dhori desh = "Bangladesh"
+dhori bochor = 2026
+dekhao "Amader Desh: " + desh
+dekhao "Bochar: " + bochor
+
+dhori shongkha = talika(45, 12, 89, 3)
+dekhao "Shajano: " + shajao(shongkha)
