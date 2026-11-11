@@ -73,6 +73,9 @@ if ($env:LOCALAPPDATA) {
 # 5. Create Universal CMD & BAT Launchers (Exempt from PowerShell ExecutionPolicy)
 $cmdContent = @"
 @echo off
+chcp 65001 >nul 2>&1
+set PYTHONUTF8=1
+set PYTHONIOENCODING=utf-8
 if exist "C:\BanglaThon\runtime\python.exe" (
     "C:\BanglaThon\runtime\python.exe" "C:\BanglaThon\runtime\main.py" %*
 ) else (
@@ -88,9 +91,15 @@ $csharp = @"
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 
 class BanglaApp {
     static int Main(string[] args) {
+        try {
+            Console.OutputEncoding = Encoding.UTF8;
+            Console.InputEncoding = Encoding.UTF8;
+        } catch {}
+
         string py = @"C:\BanglaThon\runtime\python.exe";
         string script = @"C:\BanglaThon\runtime\main.py";
         if (!File.Exists(py)) {
@@ -106,6 +115,8 @@ class BanglaApp {
         }
         ProcessStartInfo psi = new ProcessStartInfo();
         psi.FileName = py;
+        psi.EnvironmentVariables["PYTHONUTF8"] = "1";
+        psi.EnvironmentVariables["PYTHONIOENCODING"] = "utf-8";
         string fullArgs = "\"" + script + "\"";
         foreach (string a in args) {
             fullArgs += " \"" + a + "\"";

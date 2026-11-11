@@ -402,7 +402,135 @@ test()
 ''',
         should_fail=True
     ))
-    
+
+    # Test 31: Native Bangla print (user request example)
+    results.append(run_test(
+        "Native Bangla Print",
+        '''দেখাও "তুমি কেমন আছো"
+''',
+        expected_output="তুমি কেমন আছো"
+    ))
+
+    # Test 32: Native Bangla variables, digits, quotes, and Dari (।)
+    results.append(run_test(
+        "Native Bangla Variables & Numerals",
+        '\ufeff' + '''ধরি নাম = 'বাংলাদেশ'।
+ধরি সাল = ২০২৬।
+ধরি দশমিক_মান = ৩.৫
+দেখাও নাম + " " + সাল + " " + দশমিক_মান
+দেখাও “ভালো থেকো”
+''',
+        expected_output="বাংলাদেশ 2026 3.5\nভালো থেকো"
+    ))
+
+    # Test 33: Mixed Banglish and Native Bangla in same script
+    results.append(run_test(
+        "Mixed Banglish + Native Bangla Syntax",
+        '''ধরি x = ১০
+dhori y = 20
+যদি (x < y এবং সত্যি) {
+    dekhao x + y
+} নাহলে {
+    দেখাও "সমান বা বড়"
+}
+''',
+        expected_output="30"
+    ))
+
+    # Test 34: Native Bangla loops (যতক্ষণ, জন্য, থামো, চলো) & compound assignments
+    results.append(run_test(
+        "Native Bangla Loops & Compound Assignment",
+        '''ধরি মোট = ০
+জন্য (ধরি ক = ১; ক <= ১০; ক += ১) {
+    যদি (ক == ৩) { চলো }
+    যদি (ক == ৬) { থামো }
+    মোট += ক
+}
+দেখাও মোট
+
+ধরি সংখ্যা = ৪
+যতক্ষণ (সংখ্যা > ০) {
+    সংখ্যা -= ২
+}
+দেখাও সংখ্যা
+''',
+        expected_output="12\n0"
+    ))
+
+    # Test 35: Native Bangla functions, recursion, and boolean/logic (নয় vs নয় NFC)
+    results.append(run_test(
+        "Native Bangla Functions & Logic",
+        '''কাজ গুনফল(ক, খ) {
+    ফেরত ক * খ
+}
+দেখাও গুনফল(৬, ৭)
+দেখাও সত্য এবং মিথ্যা
+দেখাও সত্য অথবা মিথ্যা
+দেখাও নয় মিথ্যা
+দেখাও নয় সত্যি
+''',
+        expected_output="42\nmittha\nshotti\nshotti\nmittha"
+    ))
+
+    # Test 36: Native Bangla lists, [] literals, and list built-ins
+    results.append(run_test(
+        "Native Bangla List Built-ins & Bracket Literals",
+        '''ধরি তালিকা_১ = তালিকা(৫, ২, ৮, ১)
+ধরি তালিকা_২ = [১০, ২০, ৩০]
+যুক্তকরো(তালিকা_১, ৯)
+দেখাও সাজাও(তালিকা_১)
+দেখাও উল্টো(তালিকা_১)
+দেখাও যোগ_করো(তালিকা_১)
+দেখাও সর্বোচ্চ(তালিকা_১)
+দেখাও সর্বনিম্ন(তালিকা_১)
+দেখাও দৈর্ঘ্য(তালিকা_২)
+দেখাও বাদ_দাও(তালিকা_২, ১)
+দেখাও তালিকা_২
+দেখাও আছে(তালিকা_২, ৩০)
+দেখাও পরিসর(১, ৬, ২)
+''',
+        expected_output="[1, 2, 5, 8, 9]\n[9, 1, 8, 2, 5]\n25\n9\n1\n3\n20\n[10, 30]\nshotti\n[1, 3, 5]"
+    ))
+
+    # Test 37: New Math, Power (**), Type Conversion & String Built-ins
+    results.append(run_test(
+        "Math, Type Conversion & String Built-ins",
+        '''দেখাও ২ ** ৩ ** ২
+দেখাও -২ ** ২
+দেখাও ২ ** -১
+দেখাও ঘাত(৩, ৪)
+দেখাও বর্গমূল(৮১)
+দেখাও পরম(-২৫)
+দেখাও পূর্ণ("৪২") + ৮
+দেখাও দশমিক("৩.৫") * ২
+দেখাও ধরন(১২৩)
+দেখাও ধরন("হ্যালো")
+দেখাও ধরন(সত্যি)
+দেখাও ধরন(খালি)
+দেখাও ধরন([১, ২])
+দেখাও বড়_হাতের("bangla")
+দেখাও ছোট_হাতের("BANGLA")
+দেখাও ভাঙো("আমি বাংলায় কোড লিখি")
+''',
+        expected_output="512\n-4\n0.5\n81\n9\n25\n50\n7.0\nshongkha\nlekha\nshotti_mittha\nkhali\ntalika\nBANGLA\nbangla\n[আমি, বাংলায়, কোড, লিখি]"
+    ))
+
+    # Test 38: Error handling - negative square root
+    results.append(run_test(
+        "Error: Negative sqrt",
+        '''দেখাও বর্গমূল(-9)
+''',
+        should_fail=True
+    ))
+
+    # Test 39: Error handling - modulo by zero
+    results.append(run_test(
+        "Error: Modulo by Zero",
+        '''দেখাও ১০ % ০
+''',
+        should_fail=True
+    ))
+
     # Summary
     print(f"\n{'='*60}")
     print("TEST SUMMARY")

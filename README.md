@@ -100,28 +100,30 @@ interpreter.interpret(ast)
 
 ## Language Reference
 
-### Keywords
+### Keywords (Banglish & বাংলা দুটোই সাপোর্ট করে)
 
-| Bangla | English | Purpose |
-|--------|---------|---------|
-| `dhori` | declare | Variable declaration |
-| `jodi` | if | Conditional statement |
-| `nahole` | else | Else/else-if block |
-| `jotokkhon` | while | While loop |
-| `jonno` | for | For loop (C-style) |
-| `kaj` | function | Function definition |
-| `ferot` | return | Return from function |
-| `dekhao` | show/print | Print output |
-| `nao` | take | Get user input |
-| `talika` | list/array | Create array |
-| `thamo` | break | Break from loop |
-| `cholo` | continue | Continue to next iteration |
-| `shotti` | true | Boolean true |
-| `mittha` | false | Boolean false |
-| `khali` | null | Null/none value |
-| `ebong` | and | Logical AND |
-| `ba` | or | Logical OR |
-| `noy` | not | Logical NOT |
+| Banglish | বাংলা (Unicode) | English | Purpose |
+|----------|-----------------|---------|---------|
+| `dhori` | `ধরি` / `ধরো` | declare | Variable declaration |
+| `jodi` | `যদি` | if | Conditional statement |
+| `nahole` | `নাহলে` / `নয়তো` | else | Else/else-if block |
+| `jotokkhon` | `যতক্ষণ` | while | While loop |
+| `jonno` | `জন্য` | for | For loop (C-style) |
+| `kaj` | `কাজ` | function | Function definition |
+| `ferot` | `ফেরত` | return | Return from function |
+| `dekhao` | `দেখাও` | show/print | Print output |
+| `nao` | `নাও` | take | Get user input |
+| `talika` | `তালিকা` (বা `[...]`) | list/array | Create array |
+| `thamo` | `থামো` / `থাম` | break | Break from loop |
+| `cholo` | `চলো` / `চল` | continue | Continue to next iteration |
+| `shotti` | `সত্যি` / `সত্য` | true | Boolean true |
+| `mittha` | `মিথ্যা` | false | Boolean false |
+| `khali` | `খালি` | null | Null/none value |
+| `ebong` | `এবং` | and | Logical AND |
+| `ba` | `বা` / `অথবা` | or | Logical OR |
+| `noy` | `নয়` / `নয়` | not | Logical NOT |
+
+> **বোনাস বাংলা সাপোর্ট:** বাংলা সংখ্যা (`০-৯`), বাংলা ভ্যারিয়েবল নাম (`ধরি মোট = ১০`), এবং বাংলা দাড়ি (`।`) স্টেটমেন্ট শেষে ব্যবহার করা যায়। যেমন: `দেখাও "তুমি কেমন আছো"`!
 
 ### Data Types
 
@@ -308,32 +310,45 @@ numbers[0] = 10
 numbers[2] = 99
 ```
 
-#### Built-in List Functions
+#### Built-in Functions (Banglish & বাংলা)
+
+| Banglish | বাংলা | Description |
+|----------|-------|-------------|
+| `dhoirgo(x)` | `দৈর্ঘ্য(x)` | Length of list or string |
+| `juktokoro(lst, val)` | `যুক্তকরো(তালিকা, মান)` | Append element to list |
+| `bad_dao(lst, [idx])` | `বাদ_দাও(তালিকা, [অবস্থান])` | Pop last or indexed element |
+| `shajao(lst)` | `সাজাও(তালিকা)` | Return sorted list |
+| `ulto(x)` | `উল্টো(x)` | Return reversed list or string |
+| `jog_koro(lst)` | `যোগ_করো(তালিকা)` | Sum of list elements |
+| `shorbo_boro(lst)` | `সর্বোচ্চ(তালিকা)` | Maximum element |
+| `shorbo_choto(lst)` | `সর্বনিম্ন(তালিকা)` | Minimum element |
+| `ache(col, item)` | `আছে(তালিকা, উপাদান)` | Membership check (`shotti`/`mittha`) |
+| `porishor(...)` | `পরিসর(...)` | Range list (`porishor(5)` or `(1, 6, 2)`) |
+| `purno(x)` | `পূর্ণ(x)` | Convert to integer (supports `"৪২"`) |
+| `doshomik(x)` | `দশমিক(x)` | Convert to float |
+| `lekha(x)` | `লেখা(x)` | Convert to string |
+| `dhoron(x)` | `ধরন(x)` | Inspect type name |
+| `porom(x)` | `পরম(x)` | Absolute value `abs(x)` |
+| `borgomul(x)` | `বর্গমূল(x)` | Square root `sqrt(x)` |
+| `ghat(a, b)` | `ঘাত(a, b)` | Power `a ** b` |
+| `boro_hater(s)` | `বড়_হাতের(s)` | Uppercase string |
+| `choto_hater(s)` | `ছোট_হাতের(s)` | Lowercase string |
+| `bhangao(s, [sep])` | `ভাঙো(s, [আলাদাকারী])` | Split string into list |
 
 ```bangla
 dhori nums = talika(3, 1, 4, 1, 5, 9, 2, 6)
-
-# Length
 dekhao dhoirgo(nums)           # 8
-
-# Append (mutates list)
 juktokoro(nums, 100)           # Adds 100 to end
-
-# Sort (returns new list)
 dhori sorted = shajao(nums)    # Returns sorted copy
-
-# Reverse (returns new list)
 dhori reversed = ulto(nums)    # Returns reversed copy
-dhori rev_str = ulto("Bangla") # Also works on strings
-
-# Sum
 dekhao jog_koro(nums)          # Sum of all elements
-
-# Max
 dekhao shorbo_boro(nums)       # Maximum value
-
-# Min
 dekhao shorbo_choto(nums)      # Minimum value
+
+# একই কাজ সরাসরি বাংলায়:
+ধরি সংখ্যা = [৩, ১, ৪, ১, ৫]
+দেখাও সাজাও(সংখ্যা)
+দেখাও যোগ_করো(সংখ্যা)
 ```
 
 ### User Input
@@ -343,9 +358,9 @@ dekhao shorbo_choto(nums)      # Minimum value
 dhori naam = nao("Apnar naam ki? ")
 dekhao "Hello " + naam
 
-# Convert to number
-dhori num_str = nao("Ekta sankhya likun: ")
-# Note: Input is always a string, convert manually if needed
+# Convert input string to integer/float directly
+ধরি বয়স = পূর্ণ(নাও("আপনার বয়স কত? "))
+দেখাও "আগামী বছর বয়স হবে: " + (বয়স + ১)
 ```
 
 ### Comments

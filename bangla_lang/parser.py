@@ -9,13 +9,15 @@ Recursive Descent মানে: প্রতিটা grammar rule-এর জন
 nested structure-এর মতো।
 
 Grammar precedence (niche theke upor e — nicher gula age evaluate hoy):
-    or_expr    -> and_expr (('ba' | OR) and_expr)*
-    and_expr   -> not_expr (('ebong' | AND) not_expr)*
-    not_expr   -> ('noy' | NOT) not_expr | comparison
+    or_expr    -> and_expr (('ba' | 'বা' | OR) and_expr)*
+    and_expr   -> not_expr (('ebong' | 'এবং' | AND) not_expr)*
+    not_expr   -> ('noy' | 'নয়' | NOT) not_expr | comparison
     comparison -> addition ((> | < | >= | <= | == | !=) addition)*
     addition   -> term ((+ | -) term)*
-    term       -> factor ((* | / | %) factor)*
-    factor     -> NUMBER | STRING | IDENTIFIER | '(' or_expr ')' | call | list
+    term       -> unary ((* | / | %) unary)*
+    unary      -> '-' unary | power
+    power      -> call_or_primary ('**' unary)?
+    primary    -> NUMBER | STRING | IDENTIFIER | '(' or_expr ')' | list | nao
 """
 
 try:
@@ -34,6 +36,15 @@ except ImportError:
         FunctionDefNode, ReturnNode, BreakNode, ContinueNode,
         ExpressionStatementNode, ProgramNode,
     )
+
+
+COMPOUND_ASSIGN_OPS = {
+    "PLUS_ASSIGN": "PLUS",
+    "MINUS_ASSIGN": "MINUS",
+    "STAR_ASSIGN": "STAR",
+    "SLASH_ASSIGN": "SLASH",
+    "PERCENT_ASSIGN": "PERCENT",
+}
 
 
 class ParserError(Exception):
@@ -82,15 +93,31 @@ class Parser:
         while self._check("NEWLINE"):
             self._advance()
 
+    def _skip_separators(self):
+        while self._check("NEWLINE", "SEMICOLON"):
+            self._advance()
+
+    def _parse_expr_list(self, close_type, close_msg):
+        """Parse zero or more comma-separated expressions until close_type."""
+        items = []
+        if not self._check(close_type):
+            items.append(self._or_expr())
+            while self._match("COMMA"):
+                if self._check(close_type):
+                    break
+                items.append(self._or_expr())
+        self._expect(close_type, close_msg)
+        return items
+
     # ---- entry point -------------------------------------------------
     def parse(self):
         statements = []
-        self._skip_newlines()
+        self._skip_separators()
         while not self._check("EOF"):
             stmt = self._statement()
             if stmt is not None:
                 statements.append(stmt)
-            self._skip_newlines()
+            self._skip_separators()
         return ProgramNode(statements)
 
     # ---- statements ----------------------------------------------------
@@ -117,11 +144,10 @@ class Parser:
         if tok.type == "CONTINUE":
             self._advance()
             return ContinueNode()
-        if tok.type == "IDENTIFIER" and self._peek(1).type == "ASSIGN":
+        if tok.type == "IDENTIFIER" and self._peek(1).type in ("ASSIGN", *COMPOUND_ASSIGN_OPS):
             return self._assignment()
         if tok.type == "IDENTIFIER" and self._peek(1).type == "LBRACKET":
-            # could be index-assignment (nums[0] = 5) or just an expression statement (nums[0])
-            saved_pos = self.pos
+            # could be index-assignment (nums[0] = 5) or an expression statement (nums[0])
             expr = self._or_expr()
             if isinstance(expr, IndexNode) and self._check("ASSIGN"):
                 self._advance()  # consume '='
@@ -136,25 +162,33 @@ class Parser:
     def _block(self):
         """{ statement* } — returns a list of statements"""
         self._expect("LBRACE", "Expected '{' to start a block")
-        self._skip_newlines()
+        self._skip_separators()
         statements = []
         while not self._check("RBRACE") and not self._check("EOF"):
             stmt = self._statement()
             if stmt is not None:
                 statements.append(stmt)
-            self._skip_newlines()
+            self._skip_separators()
         self._expect("RBRACE", "Expected '}' to close a block")
         return statements
 
     def _var_decl(self):
         self._expect("DHORI")
-        name_tok = self._expect("IDENTIFIER", "Expected variable name after 'dhori'")
+        name_tok = self._expect("IDENTIFIER", "Expected variable name after 'dhori'/'ধরি'")
         self._expect("ASSIGN", f"Expected '=' after variable name '{name_tok.value}'")
         value_expr = self._or_expr()
         return VarDeclNode(name_tok.value, value_expr)
 
     def _assignment(self):
         name_tok = self._expect("IDENTIFIER")
+        op_tok = self._peek()
+        if op_tok.type in COMPOUND_ASSIGN_OPS:
+            self._advance()
+            rhs = self._or_expr()
+            return AssignNode(
+                name_tok.value,
+                BinaryOpNode(IdentifierNode(name_tok.value), COMPOUND_ASSIGN_OPS[op_tok.type], rhs),
+            )
         self._expect("ASSIGN")
         value_expr = self._or_expr()
         return AssignNode(name_tok.value, value_expr)
@@ -166,7 +200,7 @@ class Parser:
 
     def _if_statement(self):
         self._expect("JODI")
-        self._expect("LPAREN", "Expected '(' after 'jodi'")
+        self._expect("LPAREN", "Expected '(' after 'jodi'/'যদি'")
         condition = self._or_expr()
         self._expect("RPAREN", "Expected ')' after condition")
         self._skip_newlines()
@@ -178,7 +212,7 @@ class Parser:
             self._advance()
             self._skip_newlines()
             if self._check("JODI"):
-                # 'nahole jodi' -> else-if, represented as a nested IfNode
+                # 'nahole jodi' / 'নাহলে যদি' -> else-if, represented as a nested IfNode
                 else_branch = [self._if_statement()]
             else:
                 else_branch = self._block()
@@ -187,7 +221,7 @@ class Parser:
 
     def _while_statement(self):
         self._expect("JOTOKKHON")
-        self._expect("LPAREN", "Expected '(' after 'jotokkhon'")
+        self._expect("LPAREN", "Expected '(' after 'jotokkhon'/'যতক্ষণ'")
         condition = self._or_expr()
         self._expect("RPAREN", "Expected ')' after condition")
         self._skip_newlines()
@@ -196,7 +230,7 @@ class Parser:
 
     def _for_statement(self):
         self._expect("JONNO")
-        self._expect("LPAREN", "Expected '(' after 'jonno'")
+        self._expect("LPAREN", "Expected '(' after 'jonno'/'জন্য'")
 
         # init: either a var-decl or an assignment
         if self._check("DHORI"):
@@ -218,12 +252,14 @@ class Parser:
 
     def _function_def(self):
         self._expect("KAJ")
-        name_tok = self._expect("IDENTIFIER", "Expected function name after 'kaj'")
+        name_tok = self._expect("IDENTIFIER", "Expected function name after 'kaj'/'কাজ'")
         self._expect("LPAREN", "Expected '(' after function name")
         params = []
         if not self._check("RPAREN"):
             params.append(self._expect("IDENTIFIER").value)
             while self._match("COMMA"):
+                if self._check("RPAREN"):
+                    break
                 params.append(self._expect("IDENTIFIER").value)
         self._expect("RPAREN", "Expected ')' after parameter list")
         self._skip_newlines()
@@ -232,8 +268,8 @@ class Parser:
 
     def _return_statement(self):
         self._expect("FEROT")
-        # 'ferot' with no expression -> return null
-        if self._check("NEWLINE", "RBRACE", "EOF"):
+        # 'ferot'/'ফেরত' with no expression -> return null
+        if self._check("NEWLINE", "SEMICOLON", "RBRACE", "EOF"):
             return ReturnNode(None)
         expr = self._or_expr()
         return ReturnNode(expr)
@@ -291,19 +327,22 @@ class Parser:
             op = self._advance()
             operand = self._unary()
             return UnaryOpNode(op.type, operand)
-        return self._call_or_primary()
+        return self._power()
+
+    def _power(self):
+        left = self._call_or_primary()
+        if self._check("POWER"):
+            op = self._advance()
+            right = self._unary()
+            return BinaryOpNode(left, op.type, right)
+        return left
 
     def _call_or_primary(self):
         expr = self._primary()
         # function-call syntax: identifier immediately followed by '('
         if isinstance(expr, IdentifierNode) and self._check("LPAREN"):
             self._advance()
-            args = []
-            if not self._check("RPAREN"):
-                args.append(self._or_expr())
-                while self._match("COMMA"):
-                    args.append(self._or_expr())
-            self._expect("RPAREN", "Expected ')' to close function call")
+            args = self._parse_expr_list("RPAREN", "Expected ')' to close function call")
             expr = CallNode(expr.name, args)
 
         # indexing syntax: expr[index], chainable for nested arrays e.g. matrix[0][1]
@@ -340,22 +379,22 @@ class Parser:
 
         if tok.type == "TALIKA":
             self._advance()
-            self._expect("LPAREN", "Expected '(' after 'talika'")
-            elements = []
-            if not self._check("RPAREN"):
-                elements.append(self._or_expr())
-                while self._match("COMMA"):
-                    elements.append(self._or_expr())
-            self._expect("RPAREN", "Expected ')' to close list")
+            self._expect("LPAREN", "Expected '(' after 'talika'/'তালিকা'")
+            elements = self._parse_expr_list("RPAREN", "Expected ')' to close list")
+            return ListNode(elements)
+
+        if tok.type == "LBRACKET":
+            self._advance()
+            elements = self._parse_expr_list("RBRACKET", "Expected ']' to close list")
             return ListNode(elements)
 
         if tok.type == "NAO":
             self._advance()
-            self._expect("LPAREN", "Expected '(' after 'nao'")
+            self._expect("LPAREN", "Expected '(' after 'nao'/'নাও'")
             prompt_expr = None
             if not self._check("RPAREN"):
                 prompt_expr = self._or_expr()
-            self._expect("RPAREN", "Expected ')' to close 'nao'")
+            self._expect("RPAREN", "Expected ')' to close 'nao'/'নাও'")
             return CallNode("nao", [prompt_expr] if prompt_expr else [])
 
         if tok.type == "IDENTIFIER":

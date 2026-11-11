@@ -6,8 +6,11 @@ value rakha, condition check kora, loop chalano, function call kora,
 ar screen-e output dekhano.
 
 Eita "Tree-Walking Interpreter" pattern use kore: প্রতিটা node type-এর
-জন্য একটা visit_XxxNode method ache, jeta সেই node-টার কাজ actually করে।
+জন্য একটা _exec_* / _eval_* method ache, jeta সেই node-টার কাজ actually করে।
 """
+
+import math
+import unicodedata
 
 try:
     from .ast_nodes import (
@@ -27,6 +30,67 @@ except ImportError:
     )
 
 
+# Map Banglish and native Bangla built-in names to canonical built-in handlers.
+_RAW_BUILTIN_ALIASES = {
+    # I/O
+    "nao": "nao",
+    "নাও": "nao",
+    # List / String operations
+    "dhoirgo": "dhoirgo",
+    "দৈর্ঘ্য": "dhoirgo",
+    "juktokoro": "juktokoro",
+    "যুক্তকরো": "juktokoro",
+    "যুক্ত_করো": "juktokoro",
+    "bad_dao": "bad_dao",
+    "বাদ_দাও": "bad_dao",
+    "বাদদাও": "bad_dao",
+    "shajao": "shajao",
+    "সাজাও": "shajao",
+    "ulto": "ulto",
+    "উল্টো": "ulto",
+    "jog_koro": "jog_koro",
+    "যোগ_করো": "jog_koro",
+    "যোগকরো": "jog_koro",
+    "shorbo_boro": "shorbo_boro",
+    "সর্বোচ্চ": "shorbo_boro",
+    "সর্ববড়": "shorbo_boro",
+    "সর্ব_বড়": "shorbo_boro",
+    "shorbo_choto": "shorbo_choto",
+    "সর্বনিম্ন": "shorbo_choto",
+    "সর্বছোট": "shorbo_choto",
+    "সর্ব_ছোট": "shorbo_choto",
+    "ache": "ache",
+    "আছে": "ache",
+    "porishor": "porishor",
+    "পরিসর": "porishor",
+    "boro_hater": "boro_hater",
+    "বড়_হাতের": "boro_hater",
+    "choto_hater": "choto_hater",
+    "ছোট_হাতের": "choto_hater",
+    "bhangao": "bhangao",
+    "ভাঙো": "bhangao",
+    "ভাঙ্গো": "bhangao",
+    # Type conversion & inspection
+    "purno": "purno",
+    "পূর্ণ": "purno",
+    "doshomik": "doshomik",
+    "দশমিক": "doshomik",
+    "lekha": "lekha",
+    "লেখা": "lekha",
+    "dhoron": "dhoron",
+    "ধরন": "dhoron",
+    # Math
+    "porom": "porom",
+    "পরম": "porom",
+    "borgomul": "borgomul",
+    "বর্গমূল": "borgomul",
+    "ghat": "ghat",
+    "ঘাত": "ghat",
+}
+
+BUILTIN_ALIASES = {unicodedata.normalize("NFC", k): v for k, v in _RAW_BUILTIN_ALIASES.items()}
+
+
 # ---------------------------------------------------------
 # Runtime errors & control-flow signals
 # ---------------------------------------------------------
@@ -36,17 +100,17 @@ class BanglaRuntimeError(Exception):
 
 
 class BreakSignal(Exception):
-    """thamo (break) hole ei signal internally throw hoy, loop-er kach theke dhora hoy."""
+    """thamo / থামো (break) hole ei signal internally throw hoy."""
     pass
 
 
 class ContinueSignal(Exception):
-    """cholo (continue) hole ei signal throw hoy."""
+    """cholo / চলো (continue) hole ei signal throw hoy."""
     pass
 
 
 class ReturnSignal(Exception):
-    """ferot (return) hole ei signal throw hoy, function call-er kache dhora hoy."""
+    """ferot / ফেরত (return) hole ei signal throw hoy."""
     def __init__(self, value):
         self.value = value
 
@@ -89,7 +153,7 @@ class BanglaFunction:
         self.name = name
         self.params = params
         self.body = body
-        self.closure_env = closure_env  # jekhane function-ta define hoyeche
+        self.closure_env = closure_env
 
     def __repr__(self):
         return f"<function {self.name}>"
@@ -101,6 +165,29 @@ class BanglaFunction:
 class Interpreter:
     def __init__(self):
         self.global_env = Environment()
+        self._builtin_handlers = {
+            "nao": self._builtin_nao,
+            "dhoirgo": self._builtin_dhoirgo,
+            "juktokoro": self._builtin_juktokoro,
+            "bad_dao": self._builtin_bad_dao,
+            "shajao": self._builtin_shajao,
+            "ulto": self._builtin_ulto,
+            "jog_koro": self._builtin_jog_koro,
+            "shorbo_boro": lambda n, e: self._list_extremum(n, e, find_max=True),
+            "shorbo_choto": lambda n, e: self._list_extremum(n, e, find_max=False),
+            "ache": self._builtin_ache,
+            "porishor": self._builtin_porishor,
+            "boro_hater": lambda n, e: self._transform_str(n, e, str.upper),
+            "choto_hater": lambda n, e: self._transform_str(n, e, str.lower),
+            "bhangao": self._builtin_bhangao,
+            "purno": self._builtin_purno,
+            "doshomik": self._builtin_doshomik,
+            "lekha": self._builtin_lekha,
+            "dhoron": self._builtin_dhoron,
+            "porom": self._builtin_porom,
+            "borgomul": self._builtin_borgomul,
+            "ghat": self._builtin_ghat,
+        }
 
     # ---- entry point -----------------------------------------------
     def interpret(self, program_node):
@@ -214,10 +301,7 @@ class Interpreter:
     def _eval_IndexNode(self, node, env):
         collection = self._evaluate(node.collection, env)
         index = self._evaluate(node.index_expr, env)
-        if isinstance(collection, str):
-            self._check_index(collection, index)
-            return collection[int(index)]
-        if isinstance(collection, list):
+        if isinstance(collection, (str, list)):
             self._check_index(collection, index)
             return collection[int(index)]
         raise BanglaRuntimeError(f"Index (nums[i]) শুধু array/talika বা string-এ করা যায়, পাওয়া গেছে: {collection!r}")
@@ -247,16 +331,10 @@ class Interpreter:
         # short-circuit logical operators
         if op == "AND":
             left = self._evaluate(node.left, env)
-            if not self._is_truthy(left):
-                return False
-            right = self._evaluate(node.right, env)
-            return self._is_truthy(right)
+            return self._is_truthy(self._evaluate(node.right, env)) if self._is_truthy(left) else False
         if op == "OR":
             left = self._evaluate(node.left, env)
-            if self._is_truthy(left):
-                return True
-            right = self._evaluate(node.right, env)
-            return self._is_truthy(right)
+            return True if self._is_truthy(left) else self._is_truthy(self._evaluate(node.right, env))
 
         left = self._evaluate(node.left, env)
         right = self._evaluate(node.right, env)
@@ -264,99 +342,52 @@ class Interpreter:
         if op == "PLUS":
             if isinstance(left, str) or isinstance(right, str):
                 return self._to_display_string(left) + self._to_display_string(right)
+            if isinstance(left, list) and isinstance(right, list):
+                return left + right
+            self._check_number(left, "+"); self._check_number(right, "+")
             return left + right
-        if op == "MINUS":
-            self._check_number(left, "-"); self._check_number(right, "-")
-            return left - right
-        if op == "STAR":
-            self._check_number(left, "*"); self._check_number(right, "*")
-            return left * right
-        if op == "SLASH":
-            self._check_number(left, "/"); self._check_number(right, "/")
+
+        numeric_ops = {
+            "MINUS": ("-", lambda a, b: a - b),
+            "STAR": ("*", lambda a, b: a * b),
+            "POWER": ("**", lambda a, b: a ** b),
+        }
+        if op in numeric_ops:
+            symbol, fn = numeric_ops[op]
+            self._check_number(left, symbol); self._check_number(right, symbol)
+            return fn(left, right)
+
+        if op in ("SLASH", "PERCENT"):
+            symbol = "/" if op == "SLASH" else "%"
+            self._check_number(left, symbol); self._check_number(right, symbol)
             if right == 0:
                 raise BanglaRuntimeError("শূন্য দিয়ে ভাগ করা যায় না (division by zero)")
-            return left / right
-        if op == "PERCENT":
-            self._check_number(left, "%"); self._check_number(right, "%")
-            return left % right
-        if op == "GT":
-            return left > right
-        if op == "LT":
-            return left < right
-        if op == "GTE":
-            return left >= right
-        if op == "LTE":
-            return left <= right
+            return left / right if op == "SLASH" else left % right
+
         if op == "EQ":
             return left == right
         if op == "NEQ":
             return left != right
 
+        cmp_ops = {
+            "GT": lambda a, b: a > b,
+            "LT": lambda a, b: a < b,
+            "GTE": lambda a, b: a >= b,
+            "LTE": lambda a, b: a <= b,
+        }
+        if op in cmp_ops:
+            try:
+                return cmp_ops[op](left, right)
+            except TypeError:
+                raise BanglaRuntimeError(f"'{op}' দিয়ে {left!r} এবং {right!r} তুলনা করা যায় না")
+
         raise BanglaRuntimeError(f"Unknown binary operator: {op}")
 
     def _eval_CallNode(self, node, env):
-        # built-in: nao (input)
-        if node.callee_name == "nao":
-            prompt = ""
-            if node.arguments:
-                prompt = self._to_display_string(self._evaluate(node.arguments[0], env))
-            user_input = input(prompt)
-            return user_input
-
-        # built-in: dhoirgo (length) — works on list or string
-        if node.callee_name == "dhoirgo":
-            self._require_arg_count(node, 1)
-            val = self._evaluate(node.arguments[0], env)
-            if isinstance(val, (list, str)):
-                return len(val)
-            raise BanglaRuntimeError(f"'dhoirgo' শুধু array/talika বা string-এ কাজ করে, পাওয়া গেছে: {val!r}")
-
-        # built-in: juktokoro (push/append to end of list) — mutates in place
-        if node.callee_name == "juktokoro":
-            self._require_arg_count(node, 2)
-            lst = self._evaluate(node.arguments[0], env)
-            value = self._evaluate(node.arguments[1], env)
-            if not isinstance(lst, list):
-                raise BanglaRuntimeError(f"'juktokoro' শুধু array/talika-তে কাজ করে, পাওয়া গেছে: {lst!r}")
-            lst.append(value)
-            return lst
-
-        # built-in: shajao (sort) — returns a NEW sorted list (non-mutating)
-        if node.callee_name == "shajao":
-            self._require_arg_count(node, 1)
-            lst = self._evaluate(node.arguments[0], env)
-            if not isinstance(lst, list):
-                raise BanglaRuntimeError(f"'shajao' শুধু array/talika-তে কাজ করে, পাওয়া গেছে: {lst!r}")
-            try:
-                return sorted(lst)
-            except TypeError:
-                raise BanglaRuntimeError("'shajao' এর জন্য array-এর সব element একই ধরনের হতে হবে")
-
-        # built-in: ulto (reverse) — returns a NEW reversed list
-        if node.callee_name == "ulto":
-            self._require_arg_count(node, 1)
-            lst = self._evaluate(node.arguments[0], env)
-            if isinstance(lst, list):
-                return list(reversed(lst))
-            if isinstance(lst, str):
-                return lst[::-1]
-            raise BanglaRuntimeError(f"'ulto' শুধু array/talika বা string-এ কাজ করে, পাওয়া গেছে: {lst!r}")
-
-        # built-in: jog_koro (sum of all elements)
-        if node.callee_name == "jog_koro":
-            self._require_arg_count(node, 1)
-            lst = self._evaluate(node.arguments[0], env)
-            if not isinstance(lst, list):
-                raise BanglaRuntimeError(f"'jog_koro' শুধু array/talika-তে কাজ করে, পাওয়া গেছে: {lst!r}")
-            return sum(lst)
-
-        # built-in: shorbo_boro (max) / shorbo_choto (min)
-        if node.callee_name in ("shorbo_boro", "shorbo_choto"):
-            self._require_arg_count(node, 1)
-            lst = self._evaluate(node.arguments[0], env)
-            if not isinstance(lst, list) or len(lst) == 0:
-                raise BanglaRuntimeError(f"'{node.callee_name}' একটা non-empty array/talika চায়")
-            return max(lst) if node.callee_name == "shorbo_boro" else min(lst)
+        canonical = BUILTIN_ALIASES.get(node.callee_name)
+        if canonical is not None:
+            handler = self._builtin_handlers[canonical]
+            return handler(node, env)
 
         func = env.get(node.callee_name)
         if not isinstance(func, BanglaFunction):
@@ -377,17 +408,177 @@ class Interpreter:
         except ReturnSignal as ret:
             return ret.value
 
-        return None  # function er kono explicit return na thakle
+        return None
 
-    # ---- helpers -----------------------------------------------------
-    @staticmethod
-    def _require_arg_count(node, expected):
-        if len(node.arguments) != expected:
+    # ---- built-in implementations ------------------------------------
+    def _eval_args(self, node, env, min_args, max_args=None):
+        """Validate argument count and evaluate all arguments left-to-right."""
+        max_args = min_args if max_args is None else max_args
+        count = len(node.arguments)
+        if count < min_args or count > max_args:
+            expected = f"{min_args}" if min_args == max_args else f"{min_args} থেকে {max_args}"
             raise BanglaRuntimeError(
                 f"'{node.callee_name}' এর {expected} টা argument দরকার, "
-                f"কিন্তু {len(node.arguments)} টা দেওয়া হয়েছে"
+                f"কিন্তু {count} টা দেওয়া হয়েছে"
             )
+        return [self._evaluate(arg, env) for arg in node.arguments]
 
+    def _builtin_nao(self, node, env):
+        args = self._eval_args(node, env, 0, 1)
+        prompt = self._to_display_string(args[0]) if args else ""
+        return input(prompt)
+
+    def _builtin_dhoirgo(self, node, env):
+        val = self._eval_args(node, env, 1)[0]
+        if isinstance(val, (list, str)):
+            return len(val)
+        raise BanglaRuntimeError(f"'{node.callee_name}' শুধু array/talika বা string-এ কাজ করে, পাওয়া গেছে: {val!r}")
+
+    def _builtin_juktokoro(self, node, env):
+        lst, value = self._eval_args(node, env, 2)
+        if not isinstance(lst, list):
+            raise BanglaRuntimeError(f"'{node.callee_name}' শুধু array/talika-তে কাজ করে, পাওয়া গেছে: {lst!r}")
+        lst.append(value)
+        return lst
+
+    def _builtin_bad_dao(self, node, env):
+        args = self._eval_args(node, env, 1, 2)
+        lst = args[0]
+        if not isinstance(lst, list):
+            raise BanglaRuntimeError(f"'{node.callee_name}' শুধু array/talika-তে কাজ করে, পাওয়া গেছে: {lst!r}")
+        if not lst:
+            raise BanglaRuntimeError(f"'{node.callee_name}' এর জন্য তালিকা খালি রাখা যাবে না")
+        if len(args) == 1:
+            return lst.pop()
+        self._check_index(lst, args[1])
+        return lst.pop(int(args[1]))
+
+    def _builtin_shajao(self, node, env):
+        lst = self._eval_args(node, env, 1)[0]
+        if not isinstance(lst, list):
+            raise BanglaRuntimeError(f"'{node.callee_name}' শুধু array/talika-তে কাজ করে, পাওয়া গেছে: {lst!r}")
+        try:
+            return sorted(lst)
+        except TypeError:
+            raise BanglaRuntimeError(f"'{node.callee_name}' এর জন্য array-এর সব element একই ধরনের হতে হবে")
+
+    def _builtin_ulto(self, node, env):
+        val = self._eval_args(node, env, 1)[0]
+        if isinstance(val, list):
+            return list(reversed(val))
+        if isinstance(val, str):
+            return val[::-1]
+        raise BanglaRuntimeError(f"'{node.callee_name}' শুধু array/talika বা string-এ কাজ করে, পাওয়া গেছে: {val!r}")
+
+    def _builtin_jog_koro(self, node, env):
+        lst = self._eval_args(node, env, 1)[0]
+        if not isinstance(lst, list):
+            raise BanglaRuntimeError(f"'{node.callee_name}' শুধু array/talika-তে কাজ করে, পাওয়া গেছে: {lst!r}")
+        try:
+            return sum(lst)
+        except TypeError:
+            raise BanglaRuntimeError(f"'{node.callee_name}' এর জন্য তালিকার সব মান সংখ্যা হতে হবে")
+
+    def _list_extremum(self, node, env, find_max):
+        lst = self._eval_args(node, env, 1)[0]
+        if not isinstance(lst, list) or len(lst) == 0:
+            raise BanglaRuntimeError(f"'{node.callee_name}' একটা non-empty array/talika চায়")
+        try:
+            return max(lst) if find_max else min(lst)
+        except TypeError:
+            raise BanglaRuntimeError(f"'{node.callee_name}' এর জন্য তালিকার সব মান তুলনাযোগ্য হতে হবে")
+
+    def _builtin_ache(self, node, env):
+        collection, item = self._eval_args(node, env, 2)
+        if isinstance(collection, list):
+            return item in collection
+        if isinstance(collection, str):
+            if not isinstance(item, str):
+                raise BanglaRuntimeError(f"String-এ '{node.callee_name}' খোঁজার জন্য দ্বিতীয় argument ও string হতে হবে")
+            return item in collection
+        raise BanglaRuntimeError(f"'{node.callee_name}' শুধু তালিকা বা লেখার উপর কাজ করে")
+
+    def _builtin_porishor(self, node, env):
+        args = self._eval_args(node, env, 1, 3)
+        for a in args:
+            if not isinstance(a, int) or isinstance(a, bool):
+                raise BanglaRuntimeError(f"'{node.callee_name}' এর সব মান পূর্ণসংখ্যা (integer) হতে হবে, পাওয়া গেছে: {a!r}")
+        if len(args) == 3 and args[2] == 0:
+            raise BanglaRuntimeError(f"'{node.callee_name}' এর step শূন্য (0) হতে পারবে না")
+        return list(range(*args))
+
+    def _transform_str(self, node, env, fn):
+        val = self._eval_args(node, env, 1)[0]
+        if not isinstance(val, str):
+            raise BanglaRuntimeError(f"'{node.callee_name}' শুধু string-এ কাজ করে, পাওয়া গেছে: {val!r}")
+        return fn(val)
+
+    def _builtin_bhangao(self, node, env):
+        args = self._eval_args(node, env, 1, 2)
+        text = args[0]
+        if not isinstance(text, str):
+            raise BanglaRuntimeError(f"'{node.callee_name}' শুধু string-এ কাজ করে, পাওয়া গেছে: {text!r}")
+        if len(args) == 1:
+            return text.split()
+        sep = args[1]
+        if not isinstance(sep, str) or sep == "":
+            raise BanglaRuntimeError(f"'{node.callee_name}' এর separator non-empty string হতে হবে")
+        return text.split(sep)
+
+    def _builtin_purno(self, node, env):
+        val = self._eval_args(node, env, 1)[0]
+        try:
+            return int(val)
+        except (ValueError, TypeError):
+            raise BanglaRuntimeError(f"{val!r}-কে পূর্ণসংখ্যায় (integer) রূপান্তর করা যায়নি")
+
+    def _builtin_doshomik(self, node, env):
+        val = self._eval_args(node, env, 1)[0]
+        try:
+            return float(val)
+        except (ValueError, TypeError):
+            raise BanglaRuntimeError(f"{val!r}-কে দশমিক সংখ্যায় (float) রূপান্তর করা যায়নি")
+
+    def _builtin_lekha(self, node, env):
+        val = self._eval_args(node, env, 1)[0]
+        return self._to_display_string(val)
+
+    def _builtin_dhoron(self, node, env):
+        val = self._eval_args(node, env, 1)[0]
+        if val is None:
+            return "khali"
+        if isinstance(val, bool):
+            return "shotti_mittha"
+        if isinstance(val, (int, float)):
+            return "shongkha"
+        if isinstance(val, str):
+            return "lekha"
+        if isinstance(val, list):
+            return "talika"
+        if isinstance(val, BanglaFunction):
+            return "kaj"
+        return type(val).__name__
+
+    def _builtin_porom(self, node, env):
+        val = self._eval_args(node, env, 1)[0]
+        self._check_number(val, node.callee_name)
+        return abs(val)
+
+    def _builtin_borgomul(self, node, env):
+        val = self._eval_args(node, env, 1)[0]
+        self._check_number(val, node.callee_name)
+        if val < 0:
+            raise BanglaRuntimeError("ঋণাত্মক সংখ্যার বর্গমূল বের করা যায় না")
+        res = math.sqrt(val)
+        return int(res) if res.is_integer() else res
+
+    def _builtin_ghat(self, node, env):
+        base, exp = self._eval_args(node, env, 2)
+        self._check_number(base, node.callee_name)
+        self._check_number(exp, node.callee_name)
+        return base ** exp
+
+    # ---- helpers -----------------------------------------------------
     @staticmethod
     def _is_truthy(value):
         if value is None:
@@ -396,9 +587,7 @@ class Interpreter:
             return value
         if isinstance(value, (int, float)):
             return value != 0
-        if isinstance(value, str):
-            return len(value) > 0
-        if isinstance(value, list):
+        if isinstance(value, (str, list)):
             return len(value) > 0
         return True
 

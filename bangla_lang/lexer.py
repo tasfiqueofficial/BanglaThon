@@ -1,20 +1,27 @@
 """
 Lexer (Tokenizer) for Bangla Programming Language
 ====================================================
-Kaj: Raw Bangla source code ke chotto chotto meaningful token e bhaga.
+Kaj: Raw Bangla (Banglish o Unicode Bangla) source code ke chotto
+chotto meaningful token e bhaga.
 
 Example:
     dhori x = 10
     dekhao x
+    ধরি নাম = "তাসফিক"
+    দেখাও "তুমি কেমন আছো"
 
 Token stream:
     [DHORI, IDENTIFIER(x), ASSIGN, NUMBER(10), NEWLINE, DEKHAO, IDENTIFIER(x)]
 """
 
+import unicodedata
+
+
 # ---------------------------------------------------------
-# 1. KEYWORDS — Bangla word -> Token type mapping
+# 1. KEYWORDS — Banglish & Bangla word -> Token type mapping
 # ---------------------------------------------------------
-KEYWORDS = {
+_RAW_KEYWORDS = {
+    # Banglish keywords (original syntax)
     "dhori":     "DHORI",       # var/let  -> variable declare
     "jodi":      "JODI",        # if
     "nahole":    "NAHOLE",      # else
@@ -30,11 +37,40 @@ KEYWORDS = {
     "thamo":     "BREAK",       # break
     "cholo":     "CONTINUE",    # continue
     "talika":    "TALIKA",      # list/array
-    # word-based logical operators (alternative to && || !)
     "ebong":     "AND",         # and
     "ba":        "OR",          # or
     "noy":       "NOT",         # not
+
+    # Native Bangla (বাংলা) keywords
+    "ধরি":       "DHORI",       # var/let
+    "ধরো":       "DHORI",       # var/let alias
+    "যদি":       "JODI",        # if
+    "নাহলে":     "NAHOLE",      # else
+    "নয়তো":     "NAHOLE",      # else alias
+    "যতক্ষণ":    "JOTOKKHON",   # while
+    "জন্য":      "JONNO",       # for
+    "কাজ":       "KAJ",         # function definition
+    "ফেরত":      "FEROT",       # return
+    "দেখাও":     "DEKHAO",      # print
+    "নাও":       "NAO",         # input
+    "সত্যি":     "TRUE",        # true
+    "সত্য":      "TRUE",        # true alias
+    "মিথ্যা":    "FALSE",       # false
+    "খালি":      "NULL",        # null/none
+    "থামো":      "BREAK",       # break
+    "থাম":       "BREAK",       # break alias
+    "চলো":       "CONTINUE",    # continue
+    "চল":        "CONTINUE",    # continue alias
+    "তালিকা":    "TALIKA",      # list/array
+    "এবং":       "AND",         # and
+    "বা":        "OR",          # or
+    "অথবা":      "OR",          # or alias
+    "নয়":       "NOT",         # not (NFC matches both নয় and নয়)
 }
+
+# Normalize keys to NFC so decomposed/composed keyboard variants (e.g. য় vs য+়) always match.
+KEYWORDS = {unicodedata.normalize("NFC", k): v for k, v in _RAW_KEYWORDS.items()}
+
 
 # ---------------------------------------------------------
 # 2. TOKEN class
@@ -80,6 +116,27 @@ class Lexer:
         "%": "PERCENT",
     }
 
+    TWO_CHAR_TOKENS = {
+        "==": "EQ",
+        "!=": "NEQ",
+        "<=": "LTE",
+        ">=": "GTE",
+        "&&": "AND",
+        "||": "OR",
+        "**": "POWER",
+        "+=": "PLUS_ASSIGN",
+        "-=": "MINUS_ASSIGN",
+        "*=": "STAR_ASSIGN",
+        "/=": "SLASH_ASSIGN",
+        "%=": "PERCENT_ASSIGN",
+    }
+
+    QUOTE_PAIRS = {
+        '"': '"',
+        "'": "'",
+        "“": "”",
+    }
+
     def __init__(self, source: str):
         self.source = source
         self.pos = 0
@@ -108,14 +165,21 @@ class Lexer:
         self.tokens.append(Token(type_, value, line, col))
 
     @staticmethod
+    def _is_bangla_digit(ch):
+        # Bengali numerals ০-৯ (U+09E6 to U+09EF)
+        return ch is not None and "\u09E6" <= ch <= "\u09EF"
+
+    @staticmethod
     def _is_bangla_letter(ch):
-        # Bangla Unicode block: U+0980 to U+09FF
-        return ch is not None and "\u0980" <= ch <= "\u09FF"
+        # Bangla Unicode block (U+0980 to U+09FF) excluding Bengali digits so numbers tokenize cleanly
+        return ch is not None and "\u0980" <= ch <= "\u09FF" and not Lexer._is_bangla_digit(ch)
 
     @staticmethod
     def _is_identifier_start(ch):
         return ch is not None and (
-            Lexer._is_bangla_letter(ch) or ch.isalpha() or ch == "_"
+            Lexer._is_bangla_letter(ch)
+            or (ch.isalpha() and not Lexer._is_bangla_digit(ch))
+            or ch == "_"
         )
 
     @staticmethod
@@ -129,16 +193,16 @@ class Lexer:
         while self.pos < len(self.source):
             ch = self._peek()
 
-            # Skip whitespace (except newline, which we treat as a token
-            # so the parser can use it as a statement separator)
-            if ch in (" ", "\t", "\r"):
+            # Skip whitespace and UTF-8 BOM (except newline, which acts as a statement separator)
+            if ch in (" ", "\t", "\r", "\ufeff"):
                 self._advance()
                 continue
 
-            if ch == "\n":
+            # Newline and Bengali Dari (।) act as statement separators
+            if ch in ("\n", "\u0964"):
                 line, col = self.line, self.col
                 self._advance()
-                self._add_token("NEWLINE", "\\n", line, col)
+                self._add_token("NEWLINE", "\\n" if ch == "\n" else "।", line, col)
                 continue
 
             # Comments: # eita comment
@@ -147,12 +211,12 @@ class Lexer:
                     self._advance()
                 continue
 
-            # String literals: "..."
-            if ch == '"':
-                self._read_string()
+            # String literals: "...", '...', or “...”
+            if ch in self.QUOTE_PAIRS:
+                self._read_string(self.QUOTE_PAIRS[ch])
                 continue
 
-            # Numbers: 123, 45.6
+            # Numbers: 123, 45.6, ১২৩, ৪৫.৬
             if ch.isdigit():
                 self._read_number()
                 continue
@@ -162,17 +226,13 @@ class Lexer:
                 self._read_identifier()
                 continue
 
-            # Two-char operators: == != <= >= &&  ||
+            # Two-char operators
             two = self.source[self.pos:self.pos + 2]
-            if two in ("==", "!=", "<=", ">=", "&&", "||"):
+            if two in self.TWO_CHAR_TOKENS:
                 line, col = self.line, self.col
                 self._advance()
                 self._advance()
-                mapping = {
-                    "==": "EQ", "!=": "NEQ", "<=": "LTE",
-                    ">=": "GTE", "&&": "AND", "||": "OR",
-                }
-                self._add_token(mapping[two], two, line, col)
+                self._add_token(self.TWO_CHAR_TOKENS[two], two, line, col)
                 continue
 
             # Single-char operators / punctuation
@@ -213,19 +273,19 @@ class Lexer:
         return self.tokens
 
     # ---- sub-readers ------------------------------------------------
-    def _read_string(self):
+    def _read_string(self, close_quote):
         line, col = self.line, self.col
         self._advance()  # skip opening quote
         chars = []
-        while self._peek() is not None and self._peek() != '"':
+        escape_map = {"n": "\n", "t": "\t", '"': '"', "'": "'", "\\": "\\"}
+        while self._peek() is not None and self._peek() != close_quote:
             c = self._advance()
             if c == "\\" and self._peek() is not None:
                 nxt = self._advance()
-                escape_map = {"n": "\n", "t": "\t", '"': '"', "\\": "\\"}
                 chars.append(escape_map.get(nxt, nxt))
             else:
                 chars.append(c)
-        if self._peek() != '"':
+        if self._peek() != close_quote:
             raise LexerError("Unterminated string literal", line, col)
         self._advance()  # skip closing quote
         self._add_token("STRING", "".join(chars), line, col)
@@ -249,7 +309,7 @@ class Lexer:
         chars = []
         while self._is_identifier_char(self._peek()):
             chars.append(self._advance())
-        word = "".join(chars)
+        word = unicodedata.normalize("NFC", "".join(chars))
         token_type = KEYWORDS.get(word, "IDENTIFIER")
         self._add_token(token_type, word, line, col)
 
@@ -259,13 +319,12 @@ class Lexer:
 # ---------------------------------------------------------
 if __name__ == "__main__":
     sample_code = '''
-dhori x = 10
-dhori naam = "Tasfique"
-dhori nums = talika(1, 2, 3)
-jodi (x > 5 ebong x < 100) {
-    dekhao "boro shongkha"
-} nahole {
-    dekhao "choto shongkha"
+ধরি সংখ্যা = ১০
+দেখাও "তুমি কেমন আছো"
+যদি (সংখ্যা > ৫ এবং সংখ্যা < ১০০) {
+    দেখাও "বড় সংখ্যা"
+} নাহলে {
+    দেখাও "ছোট সংখ্যা"
 }
 '''
     lexer = Lexer(sample_code)

@@ -2,7 +2,7 @@
 """
 Bangla Programming Language — CLI Runner
 ===========================================
-Kaj: ekটা .bl file (Bangla language source code) niয়ে run kore dেখায়।
+Kaj: ekটা .bl ba .bng file (Banglish ba Unicode Bangla source code) niye run kore dekhay.
 
 Usage (installed as command):
     bangla run hello.bl
@@ -26,9 +26,19 @@ except ImportError:
     __version__ = "0.1.0"
 
 
+def _configure_utf8_stdio():
+    """Ensure Bangla Unicode input/output works reliably on Windows PowerShell/CMD."""
+    for stream in (sys.stdin, sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            try:
+                stream.reconfigure(encoding="utf-8", errors="replace")
+            except Exception:
+                pass
+
+
 def run_file(filepath: str):
     try:
-        with open(filepath, "r", encoding="utf-8") as f:
+        with open(filepath, "r", encoding="utf-8-sig") as f:
             source = f.read()
     except FileNotFoundError:
         print(f"Error: ফাইল পাওয়া যায়নি — '{filepath}'")
@@ -52,7 +62,7 @@ def run_file(filepath: str):
 def run_repl():
     """Interactive mode — ekটা line diye ekটা line code run kora jay."""
     print(f"Bangla Programming Language v{__version__} — Interactive Mode")
-    print("Exit korte 'exit' likhun\n")
+    print("Exit korte 'exit' ba 'বিদায়' likhun\n")
     interpreter = Interpreter()
     while True:
         try:
@@ -60,7 +70,7 @@ def run_repl():
         except (EOFError, KeyboardInterrupt):
             print("\nBidai!")
             break
-        if line.strip() == "exit":
+        if line.strip() in ("exit", "বিদায়", "বিদায়"):
             print("Bidai!")
             break
         if not line.strip():
@@ -79,6 +89,7 @@ def run_repl():
 
 def main():
     """Entry point — 'bangla' command likhle eita call hoy."""
+    _configure_utf8_stdio()
     args = sys.argv[1:]
 
     if not args:
