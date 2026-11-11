@@ -5,7 +5,7 @@ $ErrorActionPreference = "Continue"
 
 Write-Host ""
 Write-Host "==========================================================" -ForegroundColor Green
-Write-Host "   বাংলথন (BanglaThon) — উইন্ডোজ ইউনিভার্সাল ইনস্টলার       " -ForegroundColor Cyan
+Write-Host "   বাংলাথন (BanglaThon) — উইন্ডোজ ইউনিভার্সাল ইনস্টলার       " -ForegroundColor Cyan
 Write-Host "   (কোনো পাইথন ইনস্টলেশন ছাড়াই ১০০% সরাসরি চলবে!)          " -ForegroundColor Yellow
 Write-Host "==========================================================" -ForegroundColor Green
 Write-Host ""
