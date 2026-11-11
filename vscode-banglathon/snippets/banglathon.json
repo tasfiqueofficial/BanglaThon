@@ -1,0 +1,118 @@
+{
+  "Print (Banglish)": {
+    "prefix": "dekhao",
+    "body": ["dekhao \"${1:Barta}\""],
+    "description": "Print output (dekhao)"
+  },
+  "Print (Bangla)": {
+    "prefix": "দেখাও",
+    "body": ["দেখাও \"${1:বার্তা}\""],
+    "description": "আউটপুট প্রিন্ট করুন (দেখাও)"
+  },
+  "Variable (Banglish)": {
+    "prefix": "dhori",
+    "body": ["dhori ${1:naam} = ${2:maan}"],
+    "description": "Declare a variable (dhori)"
+  },
+  "Variable (Bangla)": {
+    "prefix": "ধরি",
+    "body": ["ধরি ${1:নাম} = ${2:মান}"],
+    "description": "ভ্যারিয়েবল ঘোষণা করুন (ধরি)"
+  },
+  "If Statement (Banglish)": {
+    "prefix": "jodi",
+    "body": [
+      "jodi (${1:condition}) {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "Conditional if block (jodi)"
+  },
+  "If Statement (Bangla)": {
+    "prefix": "যদি",
+    "body": [
+      "যদি (${1:শর্ত}) {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "শর্ত যাচাই ব্লক (যদি)"
+  },
+  "If-Else Statement (Banglish)": {
+    "prefix": "jodi-nahole",
+    "body": [
+      "jodi (${1:condition}) {",
+      "\t${2}",
+      "} nahole {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "Conditional if-else block"
+  },
+  "If-Else Statement (Bangla)": {
+    "prefix": "যদি-নাহলে",
+    "body": [
+      "যদি (${1:শর্ত}) {",
+      "\t${2}",
+      "} নাহলে {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "শর্ত ও বিকল্প ব্লক (যদি...নাহলে)"
+  },
+  "For Loop (Banglish)": {
+    "prefix": "jonno",
+    "body": [
+      "jonno (dhori ${1:i} = ${2:0}; ${1:i} < ${3:10}; ${1:i} += 1) {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "For loop (jonno)"
+  },
+  "For Loop (Bangla)": {
+    "prefix": "জন্য",
+    "body": [
+      "জন্য (ধরি ${1:ক} = ${2:০}; ${1:ক} < ${3:১০}; ${1:ক} += ১) {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "For লুপ (জন্য)"
+  },
+  "While Loop (Banglish)": {
+    "prefix": "jotokkhon",
+    "body": [
+      "jotokkhon (${1:condition}) {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "While loop (jotokkhon)"
+  },
+  "While Loop (Bangla)": {
+    "prefix": "যতক্ষণ",
+    "body": [
+      "যতক্ষণ (${1:শর্ত}) {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "While লুপ (যতক্ষণ)"
+  },
+  "Function (Banglish)": {
+    "prefix": "kaj",
+    "body": [
+      "kaj ${1:func_name}(${2:params}) {",
+      "\t${0}",
+      "\tferot ${3:result}",
+      "}"
+    ],
+    "description": "Define a function (kaj)"
+  },
+  "Function (Bangla)": {
+    "prefix": "কাজ",
+    "body": [
+      "কাজ ${1:ফাংশন}(${2:প্যারামিটার}) {",
+      "\t${0}",
+      "\tফেরত ${3:ফলাফল}",
+      "}"
+    ],
+    "description": "ফাংশন তৈরি করুন (কাজ)"
+  }
+}

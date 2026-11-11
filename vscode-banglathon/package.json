@@ -1,0 +1,119 @@
+{
+  "name": "banglathon-vscode",
+  "displayName": "BanglaThon — Bangla & Banglish Language Support",
+  "description": "Syntax highlighting, smart Bangla/Banglish code snippets, and 1-click Run button for BanglaThon (.bl, .bng).",
+  "version": "0.1.0",
+  "publisher": "tasfique",
+  "license": "MIT",
+  "icon": "media/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tasfiqueofficial/BanglaThon.git"
+  },
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets"
+  ],
+  "keywords": [
+    "bangla",
+    "bengali",
+    "banglathon",
+    "banglish",
+    "programming language"
+  ],
+  "activationEvents": [
+    "onLanguage:banglathon",
+    "onCommand:banglathon.runFile",
+    "onCommand:banglathon.runInTerminal",
+    "onCommand:banglathon.openRepl"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "banglathon",
+        "aliases": [
+          "BanglaThon",
+          "Bangla",
+          "banglathon"
+        ],
+        "extensions": [
+          ".bl",
+          ".bng"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "banglathon",
+        "scopeName": "source.banglathon",
+        "path": "./syntaxes/banglathon.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "banglathon",
+        "path": "./snippets/banglathon.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "banglathon.runFile",
+        "title": "BanglaThon: Run File",
+        "icon": "$(play)"
+      },
+      {
+        "command": "banglathon.runInTerminal",
+        "title": "BanglaThon: Run in Interactive Terminal",
+        "icon": "$(terminal)"
+      },
+      {
+        "command": "banglathon.openRepl",
+        "title": "BanglaThon: Open Live Console (REPL)"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "banglathon.runFile",
+          "when": "resourceLangId == banglathon",
+          "group": "navigation"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "banglathon.runFile",
+          "when": "resourceLangId == banglathon",
+          "group": "1_run@1"
+        },
+        {
+          "command": "banglathon.runInTerminal",
+          "when": "resourceLangId == banglathon",
+          "group": "1_run@2"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "banglathon.runFile",
+        "key": "ctrl+alt+r",
+        "mac": "cmd+alt+r",
+        "when": "editorLangId == banglathon"
+      }
+    ],
+    "configuration": {
+      "title": "BanglaThon",
+      "properties": {
+        "banglathon.executablePath": {
+          "type": "string",
+          "default": "",
+          "description": "Optional custom path to the BanglaThon ('bangla') executable."
+        }
+      }
+    }
+  }
+}

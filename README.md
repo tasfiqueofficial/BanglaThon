@@ -69,7 +69,7 @@ curl -fsSL https://raw.githubusercontent.com/tasfiqueofficial/BanglaThon/main/in
 pip install --upgrade git+https://github.com/tasfiqueofficial/BanglaThon.git
 ```
 
-ইনস্টল হয়ে গেলে আপনার কম্পিউটারের **যেকোনো ফোল্ডার বা ড্রাইভ** থেকে `bangla` কমান্ড সরাসরি কাজ করবে!
+ইনস্টল হয়ে গেলে আপনার কম্পিউটারের **যেকোনো ফোল্ডার বা ড্রাইভ** থেকে `bangla` কমান্ড সরাসরি কাজ করবে — এবং পিসিতে VS Code থাকলে স্বয়ংক্রিয়ভাবে **BanglaThon VS Code Extension** (রঙিন Syntax Highlighting, স্নিপেট ও `▶ Run` বাটন) যুক্ত হয়ে যাবে!
 
 ### ২. প্রোগ্রাম রান করা (Usage):
 

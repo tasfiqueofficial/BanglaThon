@@ -173,6 +173,37 @@ try {
 # 8. Update current active terminal session PATH immediately
 $env:Path = "$binDir;C:\Windows;$env:LOCALAPPDATA\Microsoft\WindowsApps;$env:Path"
 
+# 9. Auto-install BanglaThon VS Code Extension if VS Code is installed
+$vsixPath = "$runtimeDir\vscode-banglathon\banglathon-vscode-0.1.0.vsix"
+if (Test-Path $vsixPath) {
+    $codeCli = $null
+    $codeCmd = Get-Command code -ErrorAction SilentlyContinue
+    if ($codeCmd) {
+        $codeCli = $codeCmd.Source
+    } else {
+        $vsCodeCandidates = @(
+            "$env:LOCALAPPDATA\Programs\Microsoft VS Code\bin\code.cmd",
+            "$env:ProgramFiles\Microsoft VS Code\bin\code.cmd",
+            "${env:ProgramFiles(x86)}\Microsoft VS Code\bin\code.cmd"
+        )
+        foreach ($cand in $vsCodeCandidates) {
+            if ($cand -and (Test-Path $cand)) {
+                $codeCli = $cand
+                break
+            }
+        }
+    }
+
+    if ($codeCli) {
+        Write-Host "[+] VS Code-এ BanglaThon এক্সটেনশন (Syntax Highlighting + ▶ Run) যুক্ত হচ্ছে..." -ForegroundColor Cyan
+        try { & $codeCli --install-extension $vsixPath --force *> $null } catch {}
+    } elseif (Test-Path "$HOME\.vscode\extensions") {
+        $extDest = "$HOME\.vscode\extensions\tasfique.banglathon-vscode-0.1.0"
+        New-Item -ItemType Directory -Force -Path $extDest | Out-Null
+        Copy-Item -Path "$runtimeDir\vscode-banglathon\*" -Destination $extDest -Recurse -Force -ErrorAction SilentlyContinue
+    }
+}
+
 Write-Host ""
 Write-Host "==========================================================" -ForegroundColor Green
 Write-Host " [✓] অভিনন্দন! BanglaThon সফলভাবে প্রস্তুত হয়েছে!           " -ForegroundColor Green

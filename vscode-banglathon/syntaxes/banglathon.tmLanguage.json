@@ -1,0 +1,139 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "BanglaThon",
+  "scopeName": "source.banglathon",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#strings" },
+    { "include": "#function-def" },
+    { "include": "#keywords" },
+    { "include": "#constants" },
+    { "include": "#builtins" },
+    { "include": "#numbers" },
+    { "include": "#function-call" },
+    { "include": "#operators" },
+    { "include": "#punctuation" }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.number-sign.banglathon",
+          "match": "#.*$"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.banglathon",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.banglathon",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.single.banglathon",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "name": "constant.character.escape.banglathon",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.double.smart.banglathon",
+          "begin": "“",
+          "end": "”",
+          "patterns": [
+            {
+              "name": "constant.character.escape.banglathon",
+              "match": "\\\\."
+            }
+          ]
+        }
+      ]
+    },
+    "function-def": {
+      "patterns": [
+        {
+          "match": "(?<![A-Za-z0-9_\\x{0980}-\\x{09FF}])(kaj|কাজ)\\s+([A-Za-z_\\x{0980}-\\x{09FF}][A-Za-z0-9_\\x{0980}-\\x{09FF}]*)",
+          "captures": {
+            "1": { "name": "storage.type.function.banglathon" },
+            "2": { "name": "entity.name.function.banglathon" }
+          }
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.banglathon",
+          "match": "(?<![A-Za-z0-9_\\x{0980}-\\x{09FF}])(jodi|nahole|jotokkhon|jonno|ferot|thamo|cholo|যদি|নাহলে|নয়তো|নয়তো|যতক্ষণ|জন্য|ফেরত|থামো|থাম|চলো|চল)(?![A-Za-z0-9_\\x{0980}-\\x{09FF}])"
+        },
+        {
+          "name": "storage.type.banglathon",
+          "match": "(?<![A-Za-z0-9_\\x{0980}-\\x{09FF}])(dhori|kaj|ধরি|ধরো|কাজ)(?![A-Za-z0-9_\\x{0980}-\\x{09FF}])"
+        },
+        {
+          "name": "keyword.operator.logical.banglathon",
+          "match": "(?<![A-Za-z0-9_\\x{0980}-\\x{09FF}])(ebong|ba|noy|এবং|বা|অথবা|নয়|নয়)(?![A-Za-z0-9_\\x{0980}-\\x{09FF}])"
+        }
+      ]
+    },
+    "constants": {
+      "patterns": [
+        {
+          "name": "constant.language.banglathon",
+          "match": "(?<![A-Za-z0-9_\\x{0980}-\\x{09FF}])(shotti|mittha|khali|সত্যি|সত্য|মিথ্যা|খালি)(?![A-Za-z0-9_\\x{0980}-\\x{09FF}])"
+        }
+      ]
+    },
+    "builtins": {
+      "patterns": [
+        {
+          "name": "support.function.builtin.banglathon",
+          "match": "(?<![A-Za-z0-9_\\x{0980}-\\x{09FF}])(dekhao|nao|talika|dhoirgo|juktokoro|bad_dao|shajao|ulto|jog_koro|shorbo_boro|shorbo_choto|ache|porishor|boro_hater|choto_hater|bhangao|purno|doshomik|lekha|dhoron|porom|borgomul|ghat|দেখাও|নাও|তালিকা|দৈর্ঘ্য|যুক্তকরো|যুক্ত_করো|বাদ_দাও|বাদদাও|সাজাও|উল্টো|যোগ_করো|যোগকরো|সর্বোচ্চ|সর্ববড়|সর্ববড়|সর্ব_বড়|সর্ব_বড়|সর্বনিম্ন|সর্বছোট|সর্ব_ছোট|আছে|পরিসর|বড়_হাতের|বড়_হাতের|ছোট_হাতের|ভাঙো|ভাঙ্গো|পূর্ণ|দশমিক|লেখা|ধরন|পরম|বর্গমূল|ঘাত)(?![A-Za-z0-9_\\x{0980}-\\x{09FF}])"
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.banglathon",
+          "match": "(?<![A-Za-z0-9_\\x{0980}-\\x{09FF}])([0-9]+(\\.[0-9]+)?|[\\x{09E6}-\\x{09EF}]+(\\.[\\x{09E6}-\\x{09EF}]+)?)(?![A-Za-z0-9_\\x{0980}-\\x{09FF}])"
+        }
+      ]
+    },
+    "function-call": {
+      "patterns": [
+        {
+          "name": "entity.name.function.call.banglathon",
+          "match": "([A-Za-z_\\x{0980}-\\x{09FF}][A-Za-z0-9_\\x{0980}-\\x{09FF}]*)(?=\\s*\\()"
+        }
+      ]
+    },
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.banglathon",
+          "match": "(\\*\\*|\\+=|-=|\\*=|/=|%=|==|!=|<=|>=|&&|\\|\\||!|\\+|-|\\*|/|%|<|>|=)"
+        }
+      ]
+    },
+    "punctuation": {
+      "patterns": [
+        {
+          "name": "punctuation.terminator.statement.banglathon",
+          "match": "(;|।)"
+        }
+      ]
+    }
+  }
+}

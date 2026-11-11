@@ -128,6 +128,27 @@ for rc in "$HOME/.zshrc" "$HOME/.bash_profile" "$HOME/.bashrc"; do
     fi
 done
 
+# 5. Auto-install BanglaThon VS Code Extension if VS Code is installed
+VSIX_PATH="$RUNTIME_DIR/vscode-banglathon/banglathon-vscode-0.1.0.vsix"
+if [ -f "$VSIX_PATH" ]; then
+    CODE_CLI=""
+    if command -v code >/dev/null 2>&1; then
+        CODE_CLI="$(command -v code)"
+    elif [ -x "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" ]; then
+        CODE_CLI="/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"
+    fi
+
+    if [ -n "$CODE_CLI" ]; then
+        printf "${CYAN}[+] VS Code-এ BanglaThon এক্সটেনশন (Syntax Highlighting + ▶ Run) যুক্ত হচ্ছে...${NC}\n"
+        "$CODE_CLI" --install-extension "$VSIX_PATH" --force >/dev/null 2>&1 || true
+    elif [ -d "$HOME/.vscode/extensions" ]; then
+        EXT_DEST="$HOME/.vscode/extensions/tasfique.banglathon-vscode-0.1.0"
+        rm -rf "$EXT_DEST"
+        mkdir -p "$EXT_DEST"
+        cp -R "$RUNTIME_DIR/vscode-banglathon/." "$EXT_DEST/" 2>/dev/null || true
+    fi
+fi
+
 printf "\n"
 printf "${GREEN}==========================================================${NC}\n"
 printf "${GREEN} [✓] অভিনন্দন! macOS/Linux-এ BanglaThon সফলভাবে প্রস্তুত!${NC}\n"
