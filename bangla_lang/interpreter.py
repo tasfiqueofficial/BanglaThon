@@ -10,6 +10,7 @@ Eita "Tree-Walking Interpreter" pattern use kore: প্রতিটা node typ
 """
 
 import math
+import sys
 import unicodedata
 
 try:
@@ -426,7 +427,18 @@ class Interpreter:
     def _builtin_nao(self, node, env):
         args = self._eval_args(node, env, 0, 1)
         prompt = self._to_display_string(args[0]) if args else ""
-        return input(prompt)
+        try:
+            if not sys.stdin.isatty():
+                if prompt:
+                    sys.stdout.write(prompt)
+                sys.stdout.flush()
+                line = sys.stdin.readline()
+                if line == "":
+                    raise EOFError()
+                return line.rstrip("\r\n")
+            return input(prompt)
+        except EOFError:
+            raise BanglaRuntimeError("ইনপুট নেওয়া সম্ভব হয়নি (ইনপুট স্ট্রিম বন্ধ হয়েছে)")
 
     def _builtin_dhoirgo(self, node, env):
         val = self._eval_args(node, env, 1)[0]

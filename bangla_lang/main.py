@@ -27,11 +27,14 @@ except ImportError:
 
 
 def _configure_utf8_stdio():
-    """Ensure Bangla Unicode input/output works reliably on Windows PowerShell/CMD."""
+    """Ensure Bangla Unicode input/output streams cleanly on Windows, macOS, and pipes."""
     for stream in (sys.stdin, sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
             try:
-                stream.reconfigure(encoding="utf-8", errors="replace")
+                kwargs = {"encoding": "utf-8", "errors": "replace"}
+                if stream in (sys.stdout, sys.stderr):
+                    kwargs["write_through"] = True
+                stream.reconfigure(**kwargs)
             except Exception:
                 pass
 
