@@ -198,7 +198,8 @@ if (Test-Path $vsixPath) {
         Write-Host "[+] VS Code-এ BanglaThon এক্সটেনশন (Syntax Highlighting + ▶ Run) যুক্ত হচ্ছে..." -ForegroundColor Cyan
         try { & $codeCli --install-extension $vsixPath --force *> $null } catch {}
     } elseif (Test-Path "$HOME\.vscode\extensions") {
-        $extDest = "$HOME\.vscode\extensions\tasfique.banglathon-vscode-0.1.0"
+        Remove-Item "$HOME\.vscode\extensions\tasfique.banglathon-vscode-*" -Recurse -Force -ErrorAction SilentlyContinue
+        $extDest = "$HOME\.vscode\extensions\TasfiqueOfficial.banglathon-vscode-0.1.0"
         New-Item -ItemType Directory -Force -Path $extDest | Out-Null
         Copy-Item -Path "$runtimeDir\vscode-banglathon\*" -Destination $extDest -Recurse -Force -ErrorAction SilentlyContinue
     }

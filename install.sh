@@ -142,7 +142,8 @@ if [ -f "$VSIX_PATH" ]; then
         printf "${CYAN}[+] VS Code-এ BanglaThon এক্সটেনশন (Syntax Highlighting + ▶ Run) যুক্ত হচ্ছে...${NC}\n"
         "$CODE_CLI" --install-extension "$VSIX_PATH" --force >/dev/null 2>&1 || true
     elif [ -d "$HOME/.vscode/extensions" ]; then
-        EXT_DEST="$HOME/.vscode/extensions/tasfique.banglathon-vscode-0.1.0"
+        rm -rf "$HOME/.vscode/extensions/tasfique.banglathon-vscode-"*
+        EXT_DEST="$HOME/.vscode/extensions/TasfiqueOfficial.banglathon-vscode-0.1.0"
         rm -rf "$EXT_DEST"
         mkdir -p "$EXT_DEST"
         cp -R "$RUNTIME_DIR/vscode-banglathon/." "$EXT_DEST/" 2>/dev/null || true

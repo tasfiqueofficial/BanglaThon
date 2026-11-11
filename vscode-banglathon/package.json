@@ -3,9 +3,13 @@
   "displayName": "BanglaThon — Bangla & Banglish Language Support",
   "description": "Syntax highlighting, smart Bangla/Banglish code snippets, and 1-click Run button for BanglaThon (.bl, .bng).",
   "version": "0.1.0",
-  "publisher": "tasfique",
+  "publisher": "TasfiqueOfficial",
   "license": "MIT",
   "icon": "media/icon.png",
+  "galleryBanner": {
+    "color": "#006A4E",
+    "theme": "dark"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/tasfiqueofficial/BanglaThon.git"
