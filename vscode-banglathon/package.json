@@ -111,6 +111,11 @@
         "key": "ctrl+alt+r",
         "mac": "cmd+alt+r",
         "when": "editorLangId == banglathon"
+      },
+      {
+        "command": "banglathon.runFile",
+        "key": "ctrl+alt+n",
+        "when": "editorLangId == banglathon"
       }
     ],
     "configuration": {
