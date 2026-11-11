@@ -52,10 +52,21 @@ The interpreter consists of 4 main components:
 
 ## Quick Start (এক ক্লিকে ইনস্টল ও রান)
 
-### ১. ইনস্টলেশন (যেকোনো কম্পিউটার থেকে মাত্র ১টি কমান্ড):
+### ১. ইনস্টলেশন / আপডেট (যেকোনো কম্পিউটার থেকে মাত্র ১টি কমান্ড):
 
+**Windows (PowerShell):** *(Python ছাড়াই সরাসরি চলবে)*
+```powershell
+irm https://raw.githubusercontent.com/tasfiqueofficial/BanglaThon/main/install.ps1 | iex
+```
+
+**macOS / Linux (Terminal):**
 ```bash
-pip install git+https://github.com/tasfiqueofficial/BanglaThon.git
+curl -fsSL https://raw.githubusercontent.com/tasfiqueofficial/BanglaThon/main/install.sh | sh
+```
+
+**অথবা `pip` দিয়ে:**
+```bash
+pip install --upgrade git+https://github.com/tasfiqueofficial/BanglaThon.git
 ```
 
 ইনস্টল হয়ে গেলে আপনার কম্পিউটারের **যেকোনো ফোল্ডার বা ড্রাইভ** থেকে `bangla` কমান্ড সরাসরি কাজ করবে!
