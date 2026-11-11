@@ -190,8 +190,12 @@ function formatShellInvoke(runner) {
 
 function runInTerminalWindow(runner, filePath) {
   const dir = path.dirname(filePath);
+  if (terminalInstance) {
+    terminalInstance.dispose();
+    terminalInstance = null;
+  }
   const term = getOrCreateTerminal(dir);
-  term.show(true);
+  term.show(false);
   term.sendText(`${formatShellInvoke(runner)} run "${filePath}"`);
 }
 
@@ -273,7 +277,7 @@ async function handleOpenRepl() {
     return;
   }
   const term = getOrCreateTerminal(vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || os.homedir());
-  term.show(true);
+  term.show(false);
   term.sendText(formatShellInvoke(runner));
 }
 
