@@ -129,7 +129,7 @@ for rc in "$HOME/.zshrc" "$HOME/.bash_profile" "$HOME/.bashrc"; do
 done
 
 # 5. Auto-install BanglaThon VS Code Extension if VS Code is installed
-VSIX_PATH="$RUNTIME_DIR/vscode-banglathon/banglathon-vscode-0.1.2.vsix"
+VSIX_PATH="$RUNTIME_DIR/vscode-banglathon/banglathon-vscode-2.0.0.vsix"
 if [ -f "$VSIX_PATH" ]; then
     CODE_CLI=""
     if command -v code >/dev/null 2>&1; then
@@ -144,7 +144,7 @@ if [ -f "$VSIX_PATH" ]; then
         "$CODE_CLI" --install-extension "$VSIX_PATH" --force >/dev/null 2>&1 || true
     elif [ -d "$HOME/.vscode/extensions" ]; then
         rm -rf "$HOME/.vscode/extensions/tasfique.banglathon-vscode-"* "$HOME/.vscode/extensions/TasfiqueOfficial.banglathon-vscode-"*
-        EXT_DEST="$HOME/.vscode/extensions/TasfiqueOfficial.banglathon-vscode-0.1.2"
+        EXT_DEST="$HOME/.vscode/extensions/TasfiqueOfficial.banglathon-vscode-2.0.0"
         mkdir -p "$EXT_DEST"
         cp -R "$RUNTIME_DIR/vscode-banglathon/." "$EXT_DEST/" 2>/dev/null || true
     fi

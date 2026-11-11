@@ -2,7 +2,7 @@
   "name": "banglathon-vscode",
   "displayName": "BanglaThon — Bangla & Banglish Language Support",
   "description": "Syntax highlighting, smart Bangla/Banglish code snippets, and 1-click Run button for BanglaThon (.bl, .bng).",
-  "version": "0.1.2",
+  "version": "2.0.0",
   "publisher": "TasfiqueOfficial",
   "license": "MIT",
   "icon": "media/icon.png",

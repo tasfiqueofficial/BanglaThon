@@ -174,7 +174,7 @@ try {
 $env:Path = "$binDir;C:\Windows;$env:LOCALAPPDATA\Microsoft\WindowsApps;$env:Path"
 
 # 9. Auto-install BanglaThon VS Code Extension if VS Code is installed
-$vsixPath = "$runtimeDir\vscode-banglathon\banglathon-vscode-0.1.2.vsix"
+$vsixPath = "$runtimeDir\vscode-banglathon\banglathon-vscode-2.0.0.vsix"
 if (Test-Path $vsixPath) {
     $codeCli = $null
     $codeCmd = Get-Command code -ErrorAction SilentlyContinue
@@ -201,7 +201,7 @@ if (Test-Path $vsixPath) {
     } elseif (Test-Path "$HOME\.vscode\extensions") {
         Remove-Item "$HOME\.vscode\extensions\tasfique.banglathon-vscode-*" -Recurse -Force -ErrorAction SilentlyContinue
         Remove-Item "$HOME\.vscode\extensions\TasfiqueOfficial.banglathon-vscode-*" -Recurse -Force -ErrorAction SilentlyContinue
-        $extDest = "$HOME\.vscode\extensions\TasfiqueOfficial.banglathon-vscode-0.1.2"
+        $extDest = "$HOME\.vscode\extensions\TasfiqueOfficial.banglathon-vscode-2.0.0"
         New-Item -ItemType Directory -Force -Path $extDest | Out-Null
         Copy-Item -Path "$runtimeDir\vscode-banglathon\*" -Destination $extDest -Recurse -Force -ErrorAction SilentlyContinue
     }

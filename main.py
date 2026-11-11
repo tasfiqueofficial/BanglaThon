@@ -23,7 +23,7 @@ except ImportError:
     from lexer import Lexer, LexerError
     from parser import Parser, ParserError
     from interpreter import Interpreter, BanglaRuntimeError
-    __version__ = "0.1.0"
+    __version__ = "2.0.0"
 
 
 def _configure_utf8_stdio():
