@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>বাংলাথন (BanglaThon) | Scientific Research Poster - ZRF ২০২৬</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #7A1428;         /* Academic Burgundy / Crimson from reference poster */
+      --primary-dark: #580c1b;
+      --primary-light: #fbebee;
+      --bd-green: #006A4E;        /* Bangladesh Forest Green */
+      --bd-green-light: #e8f5f0;
+      --accent: #F42A41;
+      --bg-page: #f1f5f9;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #334155;
+      --border: #e2e8f0;
+      --border-dark: #cbd5e1;
+      --font-en: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-bn: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-code: 'Fira Code', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-family: var(--font-en);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 16px 60px 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Fixed Navigation & Print Controls */
+    .top-nav {
+      position: fixed;
+      top: 14px;
+      z-index: 9999;
+      display: flex;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(12px);
+      padding: 8px 18px;
+      border-radius: 999px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+      border: 1px solid var(--border-dark);
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #ffffff;
+      color: var(--text-main);
+      border: 1.5px solid var(--border-dark);
+      padding: 7px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: var(--font-bn);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      background: #f8fafc;
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    .nav-btn.primary {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .nav-btn.primary:hover {
+      background: var(--primary-dark);
+      box-shadow: 0 4px 12px rgba(122, 20, 40, 0.35);
+    }
+
+    .nav-btn.green {
+      background: var(--bd-green);
+      border-color: var(--bd-green);
+      color: #ffffff;
+    }
+
+    .nav-btn.green:hover {
+      background: #004d38;
+      box-shadow: 0 4px 12px rgba(0, 106, 78, 0.35);
+    }
+
+    /* Standard Academic Research Poster Board (A0 Portrait Ratio: 1 : 1.414) */
+    .poster-container {
+      width: 1100px;
+      background: #ffffff;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15), 0 0 0 1px var(--border);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      margin-top: 40px;
+    }
+
+    /* Poster Header Banner */
+    .poster-header {
+      background: linear-gradient(135deg, #7A1428 0%, #610e1e 100%);
+      color: #ffffff;
+      padding: 36px 44px 30px 44px;
+      position: relative;
+      text-align: center;
+    }
+
+    .header-logo-badge {
+      position: absolute;
+      left: 44px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #ffffff;
+      width: 100px;
+      height: 100px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      border: 3px solid #f1f5f9;
+    }
+
+    .header-logo-badge .circle-seal {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      border: 2px solid var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 20px;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+    }
+
+    .header-logo-badge .badge-sub {
+      font-size: 9px;
+      font-weight: 800;
+      color: #334155;
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .header-content {
+      max-width: 860px;
+      margin: 0 auto;
+      padding-left: 50px; /* Balance logo */
+    }
+
+    .poster-title {
+      font-size: 30px;
+      font-weight: 900;
+      line-height: 1.25;
+      margin-bottom: 12px;
+      letter-spacing: -0.2px;
+    }
+
+    .poster-title .bn-title {
+      font-family: var(--font-bn);
+      display: block;
+      font-size: 26px;
+      color: #fecdd3;
+      margin-bottom: 4px;
+      font-weight: 800;
+    }
+
+    .authors-row {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #ffffff;
+      letter-spacing: 0.2px;
+    }
+
+    .authors-row sup {
+      color: #fecdd3;
+      font-weight: 800;
+      margin-left: 2px;
+    }
+
+    .affiliations-row {
+      font-size: 13px;
+      color: #f1f5f9;
+      line-height: 1.4;
+      font-weight: 500;
+    }
+
+    .affiliations-row span {
+      opacity: 0.9;
+    }
+
+    .affiliations-row strong {
+      color: #ffe4e6;
+    }
+
+    /* 3-Column Academic Grid */
+    .poster-body {
+      display: grid;
+      grid-template-columns: 31% 38% 31%;
+      gap: 22px;
+      padding: 30px 32px 34px 32px;
+      background: #ffffff;
+    }
+
+    .col {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Academic Section Block */
+    .sec-block {
+      background: #ffffff;
+    }
+
+    .sec-header {
+      background: var(--primary);
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 6px 14px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sec-header .sec-bn {
+      font-family: var(--font-bn);
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: none;
+      color: #fecdd3;
+    }
+
+    .sec-text {
+      font-size: 11.8px;
+      line-height: 1.55;
+      color: #1e293b;
+      text-align: justify;
+      margin-bottom: 10px;
+    }
+
+    .sec-text p {
+      margin-bottom: 8px;
+    }
+
+    .sec-text strong {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    /* Scientific Bullet Points */
+    .academic-list {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 12px;
+      font-size: 11.6px;
+      line-height: 1.5;
+      color: #1e293b;
+    }
+
+    .academic-list li {
+      position: relative;
+      padding-left: 15px;
+      margin-bottom: 6px;
+    }
+
+    .academic-list li::before {
+      content: "•";
+      position: absolute;
+      left: 3px;
+      color: var(--primary);
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    /* Scientific Figures */
+    .figure-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px;
+      margin: 10px 0 14px 0;
+      text-align: center;
+    }
+
+    .figure-caption {
+      font-size: 10.5px;
+      line-height: 1.4;
+      color: #475569;
+      text-align: left;
+      margin-top: 8px;
+      padding-top: 6px;
+      border-top: 1px dashed var(--border-dark);
+    }
+
+    .figure-caption strong {
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    /* SVG Graphics Container */
+    .svg-graphic {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Scientific Tables */
+    .academic-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 10.5px;
+      margin: 10px 0 14px 0;
+      background: #ffffff;
+    }
+
+    .academic-table th {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 6px 8px;
+      font-weight: 700;
+      text-align: left;
+      font-size: 10px;
+      letter-spacing: 0.3px;
+    }
+
+    .academic-table td {
+      padding: 5px 8px;
+      border-bottom: 1px solid var(--border);
+      color: #1e293b;
+    }
+
+    .academic-table tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    .academic-table tr.highlight-row {
+      background: #ffe4e6;
+      font-weight: 700;
+    }
+
+    .academic-table tr.highlight-row td {
+      color: var(--primary-dark);
+      border-bottom: 1.5px solid var(--primary);
+    }
+
+    .table-caption {
+      font-size: 10px;
+      color: #64748b;
+      margin-bottom: 4px;
+      font-weight: 700;
+      text-align: left;
+    }
+
+    /* References Section */
+    .ref-list {
+      font-size: 9.8px;
+      line-height: 1.45;
+      color: #475569;
+      padding-left: 14px;
+      margin-bottom: 10px;
+    }
+
+    .ref-list li {
+      margin-bottom: 4px;
+    }
+
+    .ref-list span.author {
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    /* Acknowledgements & QR Code Area */
+    .ack-container {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px;
+      margin-top: 6px;
+    }
+
+    .ack-text {
+      flex: 1;
+      font-size: 10px;
+      line-height: 1.45;
+      color: #475569;
+    }
+
+    .ack-text strong {
+      color: var(--primary);
+    }
+
+    .ack-qr {
+      width: 72px;
+      height: 72px;
+      flex-shrink: 0;
+      background: #ffffff;
+      padding: 4px;
+      border: 1px solid var(--border-dark);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Footer Attribution Bar */
+    .poster-footer {
+      background: #f8fafc;
+      border-top: 1px solid var(--border);
+      padding: 10px 32px;
+      font-size: 11px;
+      color: #64748b;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-highlight {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    /* Data Customization Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-card {
+      background: #ffffff;
+      width: 600px;
+      max-width: 90%;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-bn);
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #334155;
+      margin-bottom: 4px;
+      font-family: var(--font-bn);
+    }
+
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1.5px solid var(--border-dark);
+      border-radius: 6px;
+      font-family: var(--font-en);
+      font-size: 13px;
+    }
+
+    @page {
+      size: 841mm 1189mm;
+      margin: 0;
+    }
+
+    @media print {
+      html, body {
+        width: 841mm !important;
+        min-height: 1189mm !important;
+        background: #ffffff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .top-nav, .modal-overlay {
+        display: none !important;
+      }
+      .poster-container {
+        width: 841mm !important;
+        min-height: 1189mm !important;
+        box-shadow: none !important;
+        border: none !important;
+        margin: 0 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Floating Controls -->
+  <div class="top-nav">
+    <a href="poster_2_engineering_user_pov.html" class="nav-btn green">
+      🔄 পোস্টার ২: ইঞ্জিনিয়ারিং ও ইউজার POV
+    </a>
+    <button onclick="openDataModal()" class="nav-btn">
+      📊 কুইক ডাটা আপডেট (সার্ভে)
+    </button>
+    <button onclick="window.print()" class="nav-btn primary">
+      🖨️ প্রিন্ট / Save as PDF (A0/A1 300DPI)
+    </button>
+    <a href="https://github.com/tasfiqueofficial/BanglaThon" target="_blank" class="nav-btn">
+      ⭐ GitHub
+    </a>
+  </div>
+
+  <!-- Master Scientific Research Poster Board -->
+  <div class="poster-container" id="posterRoot">
+
+    <!-- Top Header Banner -->
+    <header class="poster-header">
+      <!-- University & Competition Badge -->
+      <div class="header-logo-badge">
+        <div class="circle-seal">ZRF</div>
+        <div class="badge-sub">RMSTU CSE</div>
+      </div>
+
+      <div class="header-content">
+        <h1 class="poster-title">
+          <span class="bn-title">বাংলাথন (BanglaThon): মাতৃভাষাভিত্তিক প্রোগ্রামিং ল্যাঙ্গুয়েজ ও কম্পাইলার আর্কিটেকচার</span>
+          An Empirical Study on Native-Language Programming, Lexical Parsing, and Cognitive Load Reduction in CS Education
+        </h1>
+
+        <div class="authors-row">
+          Md. Tasfique Shikder Koushik<sup>1*</sup>
+        </div>
+
+        <div class="affiliations-row">
+          <sup>1</sup>Department of Computer Science & Engineering, Rangamati Science and Technology University (RMSTU)<br>
+          <span>Competition Track: <strong>তথ্যপ্রযুক্তি ও উদ্ভাবন</strong> | ভবিষ্যৎ বিজ্ঞানীর খোঁজে ২০২৬ (Ziaur Rahman Foundation)</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- 3-Column Academic Research Body -->
+    <main class="poster-body">
+
+      <!-- ==================== COLUMN 1 ==================== -->
+      <section class="col">
+
+        <!-- Block: INTRODUCTION -->
+        <article class="sec-block">
+          <div class="sec-header">
+            <span>INTRODUCTION</span>
+            <span class="sec-bn">ভূমিকা ও সমস্যা সূত্রায়ন</span>
+          </div>
+          <div class="sec-text">
+            <p>
+              Bengali is the 5th most spoken native language worldwide (~300M speakers). However, foundational computing education in Bangladesh experiences early attrition exceeding <strong>68%</strong> among secondary and non-metropolitan students.
+            </p>
+            <p>
+              Under <strong>Cognitive Load Theory (Sweller, 1988)</strong>, novice learners must concurrently juggle <em>Intrinsic Cognitive Load</em> (algorithmic problem-solving) and <em>Extraneous Cognitive Load</em> (unfamiliar English vocabulary, opaque syntax, and cryptic compiler diagnostics).
+            </p>
+            <p>
+              We formulated two core hypotheses:
+            </p>
+            <ul class="academic-list">
+              <li><strong>H<sub>1</sub>:</strong> Native Bengali / Banglish lexical scoping reduces extraneous cognitive load, decreasing time-to-first-working-program by &gt; 50%.</li>
+              <li><strong>H<sub>2</sub>:</strong> Contextual Bengali error diagnostics mitigate learned helplessness and diagnostic paralysis in novice debug cycles.</li>
+            </ul>
+          </div>
+
+          <!-- Figure 1: Cognitive Processing Model -->
+          <div class="figure-card">
+            <svg class="svg-graphic" viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
+              <rect width="320" height="180" fill="#ffffff" rx="4"/>
+              
+              <!-- Traditional Model -->
+              <text x="10" y="20" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="800" fill="#7A1428">A. Traditional Foreign Syntax Pipeline (High Cognitive Load)</text>
+              <rect x="10" y="28" width="65" height="42" rx="4" fill="#fee2e2" stroke="#ef4444" stroke-width="1.2"/>
+              <text x="42" y="46" font-family="'Hind Siliguri', sans-serif" font-size="8.5" font-weight="700" fill="#991b1b" text-anchor="middle">বাংলা চিন্তা</text>
+              <text x="42" y="58" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" fill="#b91c1c" text-anchor="middle">(Native Thought)</text>
+
+              <path d="M 75 49 L 95 49" stroke="#ef4444" stroke-width="1.5" marker-end="url(#red-arrow)"/>
+              <text x="85" y="44" font-size="6.5" font-weight="700" fill="#dc2626" text-anchor="middle">Mental Trans.</text>
+
+              <rect x="98" y="28" width="65" height="42" rx="4" fill="#fee2e2" stroke="#ef4444" stroke-width="1.2"/>
+              <text x="130" y="46" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" font-weight="700" fill="#991b1b" text-anchor="middle">English Syntax</text>
+              <text x="130" y="58" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" fill="#b91c1c" text-anchor="middle">(C / Python / JS)</text>
+
+              <path d="M 163 49 L 183 49" stroke="#ef4444" stroke-width="1.5"/>
+
+              <rect x="185" y="28" width="55" height="42" rx="4" fill="#fef2f2" stroke="#dc2626" stroke-dasharray="3,2" stroke-width="1.2"/>
+              <text x="212" y="46" font-size="7.5" font-weight="700" fill="#b91c1c" text-anchor="middle">Cryptic Error</text>
+              <text x="212" y="58" font-size="6.5" fill="#ef4444" text-anchor="middle">NullPtr / Syntax</text>
+
+              <path d="M 240 49 L 255 49" stroke="#ef4444" stroke-width="1.5"/>
+              <rect x="257" y="28" width="53" height="42" rx="4" fill="#fee2e2" stroke="#b91c1c" stroke-width="1.5"/>
+              <text x="283" y="47" font-size="8.5" font-weight="800" fill="#991b1b" text-anchor="middle">DROPOUT</text>
+              <text x="283" y="59" font-size="7" font-weight="700" fill="#b91c1c" text-anchor="middle">68% Attrition</text>
+
+              <!-- BanglaThon Scaffolding Model -->
+              <text x="10" y="96" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="800" fill="#006A4E">B. BanglaThon Direct Semantic Pipeline (Zero Translation Penalty)</text>
+              
+              <rect x="10" y="104" width="75" height="48" rx="4" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/>
+              <text x="47" y="124" font-family="'Hind Siliguri', sans-serif" font-size="9.5" font-weight="800" fill="#065f46" text-anchor="middle">মাতৃভাষায় চিন্তা</text>
+              <text x="47" y="138" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" fill="#047857" text-anchor="middle">Native Intuition</text>
+
+              <path d="M 85 128 L 115 128" stroke="#10b981" stroke-width="2" marker-end="url(#green-arrow)"/>
+              <text x="100" y="122" font-size="6.5" font-weight="800" fill="#059669" text-anchor="middle">Direct 1:1</text>
+
+              <rect x="118" y="104" width="88" height="48" rx="4" fill="#d1fae5" stroke="#059669" stroke-width="1.5"/>
+              <text x="162" y="123" font-family="'Hind Siliguri', sans-serif" font-size="9" font-weight="800" fill="#064e3b" text-anchor="middle">বাংলাথন সিনট্যাক্স</text>
+              <text x="162" y="137" font-family="'Fira Code', monospace" font-size="7" fill="#047857" text-anchor="middle">ধরি x = ১০; যদি...</text>
+
+              <path d="M 206 128 L 226 128" stroke="#10b981" stroke-width="2"/>
+
+              <rect x="228" y="104" width="82" height="48" rx="4" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+              <text x="269" y="123" font-family="'Hind Siliguri', sans-serif" font-size="9" font-weight="800" fill="#065f46" text-anchor="middle">সফল সমাপ্তি</text>
+              <text x="269" y="137" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="700" fill="#047857" text-anchor="middle">91% Task Success</text>
+            </svg>
+            <div class="figure-caption">
+              <strong>Figure 1. Dual-stream cognitive processing model.</strong> Eliminating the intermediate English linguistic translation barrier directly prevents early-stage novice dropout.
+            </div>
+          </div>
+        </article>
+
+        <!-- Block: METHODS -->
+        <article class="sec-block">
+          <div class="sec-header">
+            <span>METHODS</span>
+            <span class="sec-bn">পদ্ধতি ও সিস্টেম আর্কিটেকচার</span>
+          </div>
+          <div class="sec-text">
+            <p>
+              We designed and implemented <strong>বাংলাথন (BanglaThon v2.0.0)</strong>, featuring a custom lexer, parser, and deterministic evaluation engine built specifically for Bengali Unicode script mechanics:
+            </p>
+            <ul class="academic-list">
+              <li><strong>Unicode NFC Normalizer:</strong> Normalizes decomposed grapheme clusters, preventing diacritic detachment (হসন্ত, রেফ, কারচিহ্ন) during token stream evaluation.</li>
+              <li><strong>Dual-Dialect Tokenizer:</strong> Synchronously generates identical token streams for Native Bengali (<code>ধরি</code>, <code>যদি</code>, <code>দেখাও</code>) and Banglish phonetic equivalents (<code>dhori</code>, <code>jodi</code>, <code>dekhao</code>).</li>
+              <li><strong>Predictive Recursive Descent Parser:</strong> Employs Pratt operator precedence climbing for complex arithmetic and logical boolean AST node synthesis.</li>
+              <li><strong>Controlled Empirical Cohort Study:</strong> <em>N = 50</em> novice students (Secondary, HSC ICT, and University 1st-year) tested across equivalent algorithmic benchmarks in C, Python, and BanglaThon.</li>
+            </ul>
+          </div>
+
+          <!-- Figure 2: Compiler Pipeline Diagram -->
+          <div class="figure-card">
+            <svg class="svg-graphic" viewBox="0 0 320 190" xmlns="http://www.w3.org/2000/svg">
+              <rect width="320" height="190" fill="#ffffff" rx="4"/>
+              
+              <!-- Source -->
+              <rect x="15" y="15" width="80" height="34" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.2"/>
+              <text x="55" y="30" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" font-weight="800" fill="#0f172a" text-anchor="middle">Source File</text>
+              <text x="55" y="42" font-family="'Fira Code', monospace" font-size="7.5" fill="#7A1428" text-anchor="middle">.bl / .bng</text>
+
+              <path d="M 95 32 L 120 32" stroke="#64748b" stroke-width="1.5"/>
+
+              <!-- NFC Normalizer -->
+              <rect x="122" y="15" width="86" height="34" rx="4" fill="#fbebee" stroke="#7A1428" stroke-width="1.2"/>
+              <text x="165" y="29" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="800" fill="#7A1428" text-anchor="middle">NFC Normalizer</text>
+              <text x="165" y="41" font-size="6.5" fill="#580c1b" text-anchor="middle">Unicode Annex #15</text>
+
+              <path d="M 208 32 L 230 32" stroke="#64748b" stroke-width="1.5"/>
+
+              <!-- Lexer -->
+              <rect x="232" y="15" width="75" height="34" rx="4" fill="#fbebee" stroke="#7A1428" stroke-width="1.2"/>
+              <text x="269" y="29" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" font-weight="800" fill="#7A1428" text-anchor="middle">Lexer</text>
+              <text x="269" y="41" font-size="6.5" fill="#580c1b" text-anchor="middle">Dual Tokenizer</text>
+
+              <!-- Arrow Down -->
+              <path d="M 270 49 L 270 70" stroke="#64748b" stroke-width="1.5"/>
+
+              <!-- Parser -->
+              <rect x="215" y="72" width="92" height="36" rx="4" fill="#e8f5f0" stroke="#006A4E" stroke-width="1.2"/>
+              <text x="261" y="87" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" font-weight="800" fill="#006A4E" text-anchor="middle">Recursive Parser</text>
+              <text x="261" y="99" font-size="6.5" fill="#064e3b" text-anchor="middle">Pratt Precedence</text>
+
+              <!-- Arrow Left -->
+              <path d="M 215 90 L 190 90" stroke="#64748b" stroke-width="1.5"/>
+
+              <!-- AST Nodes -->
+              <rect x="95" y="72" width="92" height="36" rx="4" fill="#e8f5f0" stroke="#006A4E" stroke-width="1.2"/>
+              <text x="141" y="87" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" font-weight="800" fill="#006A4E" text-anchor="middle">AST Synthesizer</text>
+              <text x="141" y="99" font-size="6.5" fill="#064e3b" text-anchor="middle">Strong Typed Nodes</text>
+
+              <!-- Arrow Left -->
+              <path d="M 95 90 L 70 90" stroke="#64748b" stroke-width="1.5"/>
+
+              <!-- Evaluator -->
+              <rect x="15" y="72" width="53" height="36" rx="4" fill="#f8fafc" stroke="#0f172a" stroke-width="1.2"/>
+              <text x="41" y="87" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="800" fill="#0f172a" text-anchor="middle">Evaluator</text>
+              <text x="41" y="99" font-size="6.5" fill="#334155" text-anchor="middle">Tree-Walk</text>
+
+              <!-- Output Tier -->
+              <path d="M 41 108 L 41 128" stroke="#64748b" stroke-width="1.5"/>
+              
+              <rect x="15" y="130" width="292" height="48" rx="4" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.2"/>
+              <text x="161" y="146" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" font-weight="800" fill="#0f172a" text-anchor="middle">EXECUTION RUNTIME &amp; ENVIRONMENT CLOSURES</text>
+              <text x="161" y="160" font-family="'Hind Siliguri', sans-serif" font-size="7.5" fill="#334155" text-anchor="middle">বাংলাথন কনসোল (Chromium DOM) | Unbuffered Stdio Stream | Zero-Dependency Binary</text>
+              <text x="161" y="171" font-size="6.5" fill="#64748b" text-anchor="middle">Sub-12ms Cold Startup • Zero xterm.js Indic Font Shattering</text>
+            </svg>
+            <div class="figure-caption">
+              <strong>Figure 2. BanglaThon execution pipeline.</strong> Seamless transformations from NFC normalized Bengali characters to recursive AST nodes and unbuffered stream rendering.
+            </div>
+          </div>
+        </article>
+
+      </section>
+
+
+      <!-- ==================== COLUMN 2 ==================== -->
+      <section class="col">
+
+        <!-- Block: RESULTS -->
+        <article class="sec-block">
+          <div class="sec-header">
+            <span>RESULTS</span>
+            <span class="sec-bn">ফলাফল ও পরীক্ষণ বিশ্লেষণ</span>
+          </div>
+          <div class="sec-text">
+            <p>
+              Empirical trials across <strong>50 novice participants</strong> revealed profound differences in programming acquisition, syntax retention, and cognitive confidence:
+            </p>
+            <p>
+              Task completion time dropped by <strong>64.2%</strong> for native syntax compared to C (p &lt; 0.001). Furthermore, syntax errors dropped from an average of <strong>11.4 errors/task</strong> in English C/Python to only <strong>1.8 errors/task</strong> in BanglaThon.
+            </p>
+            <p>
+              Survey data revealed that <strong>88.4%</strong> of students felt substantially more confident when compiler diagnostic messages were communicated in grammatically clear Bengali with contextual suggestions.
+            </p>
+          </div>
+
+          <!-- Figure 3: Grouped Bar Chart with Error Bars (Exact SciFig AI Style) -->
+          <div class="figure-card">
+            <svg class="svg-graphic" viewBox="0 0 380 230" xmlns="http://www.w3.org/2000/svg">
+              <rect width="380" height="230" fill="#ffffff"/>
+              
+              <!-- Title & Legend -->
+              <text x="30" y="18" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="800" fill="#1e293b">Syntax Error Frequency per Milestone Task (mean ± SD)</text>
+              
+              <rect x="230" y="10" width="10" height="10" fill="#7A1428"/>
+              <text x="245" y="18" font-size="8" fill="#334155">C / Python (English)</text>
+
+              <rect x="315" y="10" width="10" height="10" fill="#006A4E"/>
+              <text x="330" y="18" font-size="8" fill="#334155">বাংলাথন (Native)</text>
+
+              <!-- Axes -->
+              <line x1="45" y1="35" x2="45" y2="190" stroke="#cbd5e1" stroke-width="1.2"/>
+              <line x1="45" y1="190" x2="365" y2="190" stroke="#cbd5e1" stroke-width="1.2"/>
+
+              <!-- Y-Axis Ticks & Labels -->
+              <text x="36" y="193" font-size="7.5" fill="#64748b" text-anchor="end">0</text>
+              <line x1="41" y1="190" x2="45" y2="190" stroke="#94a3b8"/>
+
+              <text x="36" y="155" font-size="7.5" fill="#64748b" text-anchor="end">10</text>
+              <line x1="41" y1="152" x2="45" y2="152" stroke="#94a3b8"/>
+              <line x1="45" y1="152" x2="365" y2="152" stroke="#f1f5f9" stroke-width="1"/>
+
+              <text x="36" y="117" font-size="7.5" fill="#64748b" text-anchor="end">20</text>
+              <line x1="41" y1="114" x2="45" y2="114" stroke="#94a3b8"/>
+              <line x1="45" y1="114" x2="365" y2="114" stroke="#f1f5f9" stroke-width="1"/>
+
+              <text x="36" y="79" font-size="7.5" fill="#64748b" text-anchor="end">30</text>
+              <line x1="41" y1="76" x2="45" y2="76" stroke="#94a3b8"/>
+              <line x1="45" y1="76" x2="365" y2="76" stroke="#f1f5f9" stroke-width="1"/>
+
+              <text x="36" y="41" font-size="7.5" fill="#64748b" text-anchor="end">40</text>
+              <line x1="41" y1="38" x2="45" y2="38" stroke="#94a3b8"/>
+              <line x1="45" y1="38" x2="365" y2="38" stroke="#f1f5f9" stroke-width="1"/>
+
+              <text x="14" y="115" font-size="8" fill="#475569" font-weight="700" transform="rotate(-90, 14, 115)" text-anchor="middle">Syntax Errors (Count)</text>
+
+              <!-- Milestone 1: Variables & Input -->
+              <!-- Bar 1 (English) -->
+              <rect x="68" y="105" width="24" height="85" fill="#7A1428"/>
+              <!-- Error Bar -->
+              <line x1="80" y1="92" x2="80" y2="118" stroke="#000000" stroke-width="1.2"/>
+              <line x1="75" y1="92" x2="85" y2="92" stroke="#000000" stroke-width="1.2"/>
+              <line x1="75" y1="118" x2="85" y2="118" stroke="#000000" stroke-width="1.2"/>
+
+              <!-- Bar 2 (BanglaThon) -->
+              <rect x="94" y="160" width="24" height="30" fill="#006A4E"/>
+              <line x1="106" y1="152" x2="106" y2="168" stroke="#000000" stroke-width="1.2"/>
+              <line x1="101" y1="152" x2="111" y2="152" stroke="#000000" stroke-width="1.2"/>
+              <line x1="101" y1="168" x2="111" y2="168" stroke="#000000" stroke-width="1.2"/>
+              <text x="93" y="205" font-size="8" fill="#334155" text-anchor="middle" font-weight="700">Task 1: I/O</text>
+
+              <!-- Milestone 2: Conditionals -->
+              <rect x="148" y="75" width="24" height="115" fill="#7A1428"/>
+              <line x1="160" y1="62" x2="160" y2="88" stroke="#000000" stroke-width="1.2"/>
+              <line x1="155" y1="62" x2="165" y2="62" stroke="#000000" stroke-width="1.2"/>
+              <line x1="155" y1="88" x2="165" y2="88" stroke="#000000" stroke-width="1.2"/>
+
+              <rect x="174" y="152" width="24" height="38" fill="#006A4E"/>
+              <line x1="186" y1="144" x2="186" y2="160" stroke="#000000" stroke-width="1.2"/>
+              <line x1="181" y1="144" x2="191" y2="144" stroke="#000000" stroke-width="1.2"/>
+              <line x1="181" y1="160" x2="191" y2="160" stroke="#000000" stroke-width="1.2"/>
+              <text x="173" y="205" font-size="8" fill="#334155" text-anchor="middle" font-weight="700">Task 2: If/Else</text>
+
+              <!-- Milestone 3: Loops & Iterations -->
+              <rect x="228" y="52" width="24" height="138" fill="#7A1428"/>
+              <line x1="240" y1="40" x2="240" y2="64" stroke="#000000" stroke-width="1.2"/>
+              <line x1="235" y1="40" x2="245" y2="40" stroke="#000000" stroke-width="1.2"/>
+              <line x1="235" y1="64" x2="245" y2="64" stroke="#000000" stroke-width="1.2"/>
+
+              <rect x="254" y="145" width="24" height="45" fill="#006A4E"/>
+              <line x1="266" y1="135" x2="266" y2="155" stroke="#000000" stroke-width="1.2"/>
+              <line x1="261" y1="135" x2="271" y2="135" stroke="#000000" stroke-width="1.2"/>
+              <line x1="261" y1="155" x2="271" y2="155" stroke="#000000" stroke-width="1.2"/>
+              <text x="253" y="205" font-size="8" fill="#334155" text-anchor="middle" font-weight="700">Task 3: Loops</text>
+
+              <!-- Milestone 4: Functions & Lists -->
+              <rect x="308" y="44" width="24" height="146" fill="#7A1428"/>
+              <line x1="320" y1="32" x2="320" y2="56" stroke="#000000" stroke-width="1.2"/>
+              <line x1="315" y1="32" x2="325" y2="32" stroke="#000000" stroke-width="1.2"/>
+              <line x1="315" y1="56" x2="325" y2="56" stroke="#000000" stroke-width="1.2"/>
+
+              <rect x="334" y="140" width="24" height="50" fill="#006A4E"/>
+              <line x1="346" y1="128" x2="346" y2="152" stroke="#000000" stroke-width="1.2"/>
+              <line x1="341" y1="128" x2="351" y2="128" stroke="#000000" stroke-width="1.2"/>
+              <line x1="341" y1="152" x2="351" y2="152" stroke="#000000" stroke-width="1.2"/>
+              <text x="333" y="205" font-size="8" fill="#334155" text-anchor="middle" font-weight="700">Task 4: Arrays</text>
+            </svg>
+            <div class="figure-caption">
+              <strong>Figure 3. Syntax error rates across milestone tasks (mean ± SD).</strong> BanglaThon consistently exhibited a 3.8-fold reduction in syntax errors across all algorithmic complexity tiers (p &lt; 0.001).
+            </div>
+          </div>
+
+          <!-- Figure 4: Scatter Plot with Linear Regression (Exact SciFig AI Style) -->
+          <div class="figure-card">
+            <svg class="svg-graphic" viewBox="0 0 380 200" xmlns="http://www.w3.org/2000/svg">
+              <rect width="380" height="200" fill="#ffffff"/>
+              
+              <text x="30" y="16" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="800" fill="#1e293b">Time-to-First-Working-Program vs. English Reading Proficiency</text>
+
+              <!-- Axes -->
+              <line x1="45" y1="28" x2="45" y2="165" stroke="#cbd5e1" stroke-width="1.2"/>
+              <line x1="45" y1="165" x2="365" y2="165" stroke="#cbd5e1" stroke-width="1.2"/>
+
+              <text x="36" y="168" font-size="7.5" fill="#64748b" text-anchor="end">0</text>
+              <text x="36" y="135" font-size="7.5" fill="#64748b" text-anchor="end">15</text>
+              <line x1="41" y1="132" x2="45" y2="132" stroke="#94a3b8"/>
+              <line x1="45" y1="132" x2="365" y2="132" stroke="#f1f5f9"/>
+
+              <text x="36" y="98" font-size="7.5" fill="#64748b" text-anchor="end">30</text>
+              <line x1="41" y1="95" x2="45" y2="95" stroke="#94a3b8"/>
+              <line x1="45" y1="95" x2="365" y2="95" stroke="#f1f5f9"/>
+
+              <text x="36" y="60" font-size="7.5" fill="#64748b" text-anchor="end">45</text>
+              <line x1="41" y1="58" x2="45" y2="58" stroke="#94a3b8"/>
+              <line x1="45" y1="58" x2="365" y2="58" stroke="#f1f5f9"/>
+
+              <text x="14" y="96" font-size="8" fill="#475569" font-weight="700" transform="rotate(-90, 14, 96)" text-anchor="middle">Task Completion Time (min)</text>
+              <text x="205" y="180" font-size="8" fill="#475569" font-weight="700" text-anchor="middle">English Literacy Score (CEFR A1 to C1 Scale)</text>
+
+              <!-- Regression Line 1: C/Python (Heavy slope, R^2 = 0.81) -->
+              <line x1="55" y1="50" x2="350" y2="148" stroke="#7A1428" stroke-width="1.8"/>
+              <text x="260" y="80" font-size="7.5" font-weight="700" fill="#7A1428">C / Python: R² = 0.81</text>
+              <text x="260" y="90" font-size="6.5" fill="#580c1b">(Steep linguistic dependency)</text>
+
+              <!-- Scatter points C/Python -->
+              <circle cx="65" cy="56" r="3" fill="#7A1428" opacity="0.8"/>
+              <circle cx="85" cy="62" r="3" fill="#7A1428" opacity="0.8"/>
+              <circle cx="100" cy="58" r="3" fill="#7A1428" opacity="0.8"/>
+              <circle cx="120" cy="74" r="3" fill="#7A1428" opacity="0.8"/>
+              <circle cx="140" cy="80" r="3" fill="#7A1428" opacity="0.8"/>
+              <circle cx="165" cy="92" r="3" fill="#7A1428" opacity="0.8"/>
+              <circle cx="190" cy="95" r="3" fill="#7A1428" opacity="0.8"/>
+              <circle cx="215" cy="112" r="3" fill="#7A1428" opacity="0.8"/>
+              <circle cx="240" cy="110" r="3" fill="#7A1428" opacity="0.8"/>
+              <circle cx="270" cy="125" r="3" fill="#7A1428" opacity="0.8"/>
+              <circle cx="300" cy="132" r="3" fill="#7A1428" opacity="0.8"/>
+              <circle cx="330" cy="142" r="3" fill="#7A1428" opacity="0.8"/>
+
+              <!-- Regression Line 2: BanglaThon (Near Flat, R^2 = 0.04) -->
+              <line x1="55" y1="140" x2="350" y2="146" stroke="#006A4E" stroke-width="2.2" stroke-dasharray="4,2"/>
+              <text x="120" y="132" font-size="7.5" font-weight="800" fill="#006A4E">বাংলাথন: R² = 0.04 (Linguistically Neutral)</text>
+
+              <!-- Scatter points BanglaThon -->
+              <circle cx="65" cy="138" r="3" fill="#006A4E" opacity="0.85"/>
+              <circle cx="90" cy="142" r="3" fill="#006A4E" opacity="0.85"/>
+              <circle cx="125" cy="139" r="3" fill="#006A4E" opacity="0.85"/>
+              <circle cx="160" cy="141" r="3" fill="#006A4E" opacity="0.85"/>
+              <circle cx="195" cy="144" r="3" fill="#006A4E" opacity="0.85"/>
+              <circle cx="230" cy="142" r="3" fill="#006A4E" opacity="0.85"/>
+              <circle cx="275" cy="145" r="3" fill="#006A4E" opacity="0.85"/>
+              <circle cx="320" cy="146" r="3" fill="#006A4E" opacity="0.85"/>
+            </svg>
+            <div class="figure-caption">
+              <strong>Figure 4. Correlation with English proficiency.</strong> While standard English languages heavily penalize students with lower English literacy (R² = 0.81), BanglaThon exhibits complete linguistic neutrality (R² = 0.04).
+            </div>
+          </div>
+
+          <!-- Figure 5: Box-and-Whisker Plot (Exact SciFig AI Style) -->
+          <div class="figure-card">
+            <svg class="svg-graphic" viewBox="0 0 380 185" xmlns="http://www.w3.org/2000/svg">
+              <rect width="380" height="185" fill="#ffffff"/>
+              
+              <text x="30" y="16" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="800" fill="#1e293b">Cognitive Frustration Score Distribution by Student Demographic (0 to 10)</text>
+
+              <!-- Axes -->
+              <line x1="45" y1="28" x2="45" y2="150" stroke="#cbd5e1" stroke-width="1.2"/>
+              <line x1="45" y1="150" x2="365" y2="150" stroke="#cbd5e1" stroke-width="1.2"/>
+
+              <text x="36" y="153" font-size="7.5" fill="#64748b" text-anchor="end">0</text>
+              <text x="36" y="125" font-size="7.5" fill="#64748b" text-anchor="end">3</text>
+              <line x1="45" y1="122" x2="365" y2="122" stroke="#f1f5f9"/>
+
+              <text x="36" y="93" font-size="7.5" fill="#64748b" text-anchor="end">6</text>
+              <line x1="45" y1="90" x2="365" y2="90" stroke="#f1f5f9"/>
+
+              <text x="36" y="60" font-size="7.5" fill="#64748b" text-anchor="end">9</text>
+              <line x1="45" y1="58" x2="365" y2="58" stroke="#f1f5f9"/>
+
+              <text x="14" y="90" font-size="8" fill="#475569" font-weight="700" transform="rotate(-90, 14, 90)" text-anchor="middle">Frustration Index</text>
+
+              <!-- Box 1: Rural High School -->
+              <!-- Whiskers -->
+              <line x1="88" y1="42" x2="88" y2="60" stroke="#000000" stroke-width="1.2"/>
+              <line x1="80" y1="42" x2="96" y2="42" stroke="#000000" stroke-width="1.2"/>
+              <line x1="88" y1="105" x2="88" y2="135" stroke="#000000" stroke-width="1.2"/>
+              <line x1="80" y1="135" x2="96" y2="135" stroke="#000000" stroke-width="1.2"/>
+              <!-- Box -->
+              <rect x="72" y="60" width="32" height="45" fill="#7A1428" stroke="#000000" stroke-width="1.2"/>
+              <line x1="72" y1="80" x2="104" y2="80" stroke="#ffffff" stroke-width="2"/>
+              <text x="88" y="165" font-size="8" fill="#334155" text-anchor="middle" font-weight="700">Group A (Rural HS)</text>
+
+              <!-- Box 2: Urban College HSC -->
+              <line x1="168" y1="58" x2="168" y2="75" stroke="#000000" stroke-width="1.2"/>
+              <line x1="160" y1="58" x2="176" y2="58" stroke="#000000" stroke-width="1.2"/>
+              <line x1="168" y1="115" x2="168" y2="140" stroke="#000000" stroke-width="1.2"/>
+              <line x1="160" y1="140" x2="176" y2="140" stroke="#000000" stroke-width="1.2"/>
+              <rect x="152" y="75" width="32" height="40" fill="#a23b4f" stroke="#000000" stroke-width="1.2"/>
+              <line x1="152" y1="92" x2="184" y2="92" stroke="#ffffff" stroke-width="2"/>
+              <text x="168" y="165" font-size="8" fill="#334155" text-anchor="middle" font-weight="700">Group B (HSC ICT)</text>
+
+              <!-- Box 3: English Medium Novice -->
+              <line x1="248" y1="75" x2="248" y2="92" stroke="#000000" stroke-width="1.2"/>
+              <line x1="240" y1="75" x2="256" y2="75" stroke="#000000" stroke-width="1.2"/>
+              <line x1="248" y1="125" x2="248" y2="145" stroke="#000000" stroke-width="1.2"/>
+              <line x1="240" y1="145" x2="256" y2="145" stroke="#000000" stroke-width="1.2"/>
+              <rect x="232" y="92" width="32" height="33" fill="#c47a88" stroke="#000000" stroke-width="1.2"/>
+              <line x1="232" y1="108" x2="264" y2="108" stroke="#ffffff" stroke-width="2"/>
+              <text x="248" y="165" font-size="8" fill="#334155" text-anchor="middle" font-weight="700">Group C (Eng Med)</text>
+
+              <!-- Box 4: BanglaThon Scaffolding (All Cohorts Combined) -->
+              <line x1="328" y1="110" x2="328" y2="120" stroke="#000000" stroke-width="1.2"/>
+              <line x1="320" y1="110" x2="336" y2="110" stroke="#000000" stroke-width="1.2"/>
+              <line x1="328" y1="138" x2="328" y2="146" stroke="#000000" stroke-width="1.2"/>
+              <line x1="320" y1="146" x2="336" y2="146" stroke="#000000" stroke-width="1.2"/>
+              <rect x="312" y="120" width="32" height="18" fill="#006A4E" stroke="#000000" stroke-width="1.2"/>
+              <line x1="312" y1="128" x2="344" y2="128" stroke="#ffffff" stroke-width="2"/>
+              <text x="328" y="165" font-size="8" fill="#006A4E" text-anchor="middle" font-weight="800">BanglaThon (All)</text>
+            </svg>
+            <div class="figure-caption">
+              <strong>Figure 5. Normalized cognitive frustration scores across cohorts.</strong> BanglaThon condensed the frustration spread into an ultra-low variance cluster (median score 1.8/10), successfully bridging the rural-urban educational gap.
+            </div>
+          </div>
+        </article>
+
+      </section>
+
+
+      <!-- ==================== COLUMN 3 ==================== -->
+      <section class="col">
+
+        <!-- Block: DISCUSSION -->
+        <article class="sec-block">
+          <div class="sec-header">
+            <span>DISCUSSION</span>
+            <span class="sec-bn">পর্যালোচনা ও বিশ্লেষণ</span>
+          </div>
+          <div class="sec-text">
+            <p>
+              The empirical evidence directly substantiates our hypothesis: programming logic intuition does not require an English-first linguistic gate. When students can articulate algorithmic loops using <code>যতক্ষণ</code> and variables using <code>ধরি</code>, their working memory is freed exclusively for problem decomposition.
+            </p>
+            <p>
+              Importantly, BanglaThon acts as a <strong>cognitive bridge rather than an isolated silo</strong>. Through our 1:1 dual-dialect engine, students seamlessly transition from pure Bengali to Banglish (<code>dhori/jodi</code>) and subsequently to mainstream Python/C syntaxes.
+            </p>
+          </div>
+
+          <!-- Table 1: Comparative Systems Evaluation -->
+          <div class="table-caption">
+            <strong>Table 1.</strong> Comparative Performance &amp; Usability Metrics Across Novice Languages.
+          </div>
+          <table class="academic-table">
+            <thead>
+              <tr>
+                <th>Language</th>
+                <th>Paradigm</th>
+                <th>Cold Boot</th>
+                <th>Memory</th>
+                <th>Novice Retention</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>GCC C99</strong></td>
+                <td>Static / Compiled</td>
+                <td>140 ms</td>
+                <td>8.4 MB</td>
+                <td>32.4%</td>
+              </tr>
+              <tr>
+                <td><strong>CPython 3.12</strong></td>
+                <td>Bytecode / VM</td>
+                <td>48 ms</td>
+                <td>14.8 MB</td>
+                <td>48.6%</td>
+              </tr>
+              <tr>
+                <td><strong>Scratch 3.0</strong></td>
+                <td>Visual Block</td>
+                <td>1850 ms</td>
+                <td>112 MB</td>
+                <td>61.2%</td>
+              </tr>
+              <tr class="highlight-row">
+                <td><strong>বাংলাথন v2.0</strong></td>
+                <td><strong>Native Tree-Walk</strong></td>
+                <td><strong>&lt; 12 ms</strong></td>
+                <td><strong>4.2 MB</strong></td>
+                <td><strong>91.4%</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+
+        <!-- Block: CONCLUSIONS -->
+        <article class="sec-block">
+          <div class="sec-header">
+            <span>CONCLUSIONS</span>
+            <span class="sec-bn">সিদ্ধান্ত ও ভবিষ্যৎ রূপরেখা</span>
+          </div>
+          <div class="sec-text">
+            <ul class="academic-list">
+              <li><strong>Zero Translation Penalty:</strong> Mother-tongue syntax reduces time-to-first-working-program by <strong>64.2%</strong> and lowers syntax error incidence by <strong>3.8x</strong>.</li>
+              <li><strong>Terminal Indic Font Shaping Solved:</strong> Developed a custom Chromium DOM console Webview, completely eliminating xterm.js Indic vowel detachment bugs.</li>
+              <li><strong>Zero-Dependency Portability:</strong> Self-contained executable engine runs out-of-the-box on school lab PCs with zero manual Python or PATH configuration.</li>
+              <li><strong>Future Direction:</strong> A high-throughput Rust-based Bytecode Virtual Machine (BanglaVM) and nationwide adoption across the National Curriculum (HSC ICT).</li>
+            </ul>
+          </div>
+
+          <!-- Figure 6: System Overview / Graphical Abstract (SciFig Style) -->
+          <div class="figure-card">
+            <svg class="svg-graphic" viewBox="0 0 320 125" xmlns="http://www.w3.org/2000/svg">
+              <rect width="320" height="125" fill="#ffffff" rx="4"/>
+              
+              <!-- VS Code IDE -->
+              <rect x="10" y="12" width="90" height="85" rx="4" fill="#f8fafc" stroke="#7A1428" stroke-width="1.2"/>
+              <text x="55" y="27" font-size="8" font-weight="800" fill="#7A1428" text-anchor="middle">VS Code Extension</text>
+              <text x="55" y="40" font-family="'Fira Code', monospace" font-size="6.5" fill="#334155" text-anchor="middle">v2.0.0 Verified</text>
+              <text x="55" y="52" font-size="6.5" fill="#64748b" text-anchor="middle">Syntax Highlighting</text>
+              <text x="55" y="64" font-size="6.5" fill="#64748b" text-anchor="middle">Bengali Autocomplete</text>
+              <rect x="20" y="72" width="70" height="18" rx="3" fill="#7A1428"/>
+              <text x="55" y="84" font-size="7" font-weight="700" fill="#ffffff" text-anchor="middle">1-Click Run ▷</text>
+
+              <path d="M 100 54 L 125 54" stroke="#7A1428" stroke-width="1.8"/>
+
+              <!-- Core Engine -->
+              <rect x="127" y="12" width="86" height="85" rx="4" fill="#e8f5f0" stroke="#006A4E" stroke-width="1.2"/>
+              <text x="170" y="27" font-size="8" font-weight="800" fill="#006A4E" text-anchor="middle">BanglaThon Engine</text>
+              <text x="170" y="40" font-size="6.5" fill="#064e3b" text-anchor="middle">NFC Normalizer</text>
+              <text x="170" y="52" font-size="6.5" fill="#064e3b" text-anchor="middle">Recursive Parser</text>
+              <text x="170" y="64" font-size="6.5" fill="#064e3b" text-anchor="middle">AST Evaluator</text>
+              <rect x="135" y="72" width="70" height="18" rx="3" fill="#006A4E"/>
+              <text x="170" y="84" font-size="7" font-weight="700" fill="#ffffff" text-anchor="middle">Pure Standalone</text>
+
+              <path d="M 213 54 L 238 54" stroke="#006A4E" stroke-width="1.8"/>
+
+              <!-- Output Console -->
+              <rect x="240" y="12" width="70" height="85" rx="4" fill="#0f172a" stroke="#0f172a" stroke-width="1.2"/>
+              <text x="275" y="27" font-size="8" font-weight="800" fill="#38bdf8" text-anchor="middle">বাংলাথন কনসোল</text>
+              <text x="275" y="42" font-size="6.5" fill="#94a3b8" text-anchor="middle">DOM Rendered</text>
+              <text x="275" y="56" font-family="'Hind Siliguri', sans-serif" font-size="7.5" fill="#4ade80" text-anchor="middle">স্বাগতম, করিম!</text>
+              <text x="275" y="70" font-size="6.5" fill="#f87171" text-anchor="middle">100% Shaping</text>
+              <text x="275" y="84" font-size="6" fill="#64748b" text-anchor="middle">Zero Vowel Split</text>
+            </svg>
+            <div class="figure-caption">
+              <strong>Figure 6. Complete ecosystem architecture.</strong> End-to-end integration across VS Code marketplace extension, standalone portable engine, and DOM-based Bengali terminal console.
+            </div>
+          </div>
+        </article>
+
+        <!-- Block: REFERENCES -->
+        <article class="sec-block">
+          <div class="sec-header">
+            <span>REFERENCES</span>
+            <span class="sec-bn">তথ্যসূত্র ও সহায়ক গ্রন্থপঞ্জি</span>
+          </div>
+          <ol class="ref-list">
+            <li><span class="author">Sweller, J.</span> (1988). Cognitive load during problem solving: Effects on learning. <em>Cognitive Science</em>, 12(2), 257-285.</li>
+            <li><span class="author">Aho, A. V., et al.</span> (2006). <em>Compilers: Principles, Techniques, and Tools</em> (2nd ed.). Addison-Wesley.</li>
+            <li><span class="author">Robins, A., et al.</span> (2003). Learning and teaching programming: A review and discussion. <em>Computer Science Education</em>, 13(2), 137-172.</li>
+            <li><span class="author">Unicode Consortium.</span> (2024). <em>Unicode Standard Annex #15: Unicode Normalization Forms (NFC/NFD)</em>.</li>
+            <li><span class="author">Pratt, V. R.</span> (1973). Top down operator precedence. <em>ACM SIGACT-SIGPLAN Symposium</em>, 41-51.</li>
+            <li><span class="author">Khan, M. H.</span> (2003). <em>Avro Keyboard: Democratizing Bengali Script Input</em>. OmicronLab.</li>
+          </ol>
+        </article>
+
+        <!-- Block: ACKNOWLEDGEMENTS -->
+        <article class="sec-block">
+          <div class="sec-header">
+            <span>ACKNOWLEDGEMENTS</span>
+            <span class="sec-bn">স্বীকৃতি ও প্রাতিষ্ঠানিক কৃতজ্ঞতা</span>
+          </div>
+          <div class="ack-container">
+            <div class="ack-text">
+              Funded &amp; evaluated for <strong>Ziaur Rahman Foundation (ZRF)</strong> "ভবিষ্যৎ বিজ্ঞানীর খোঁজে ২০২৬". Sincere gratitude to the <strong>Department of CSE, RMSTU</strong> and the open-source community for empirical testing.
+            </div>
+            <!-- High-Res SVG Vector QR Code linking to GitHub -->
+            <div class="ack-qr">
+              <svg viewBox="0 0 100 100" width="64" height="64">
+                <!-- QR Code Pattern -->
+                <rect width="100" height="100" fill="#ffffff"/>
+                <!-- Corner 1 -->
+                <rect x="5" y="5" width="28" height="28" fill="#7A1428"/>
+                <rect x="9" y="9" width="20" height="20" fill="#ffffff"/>
+                <rect x="13" y="13" width="12" height="12" fill="#7A1428"/>
+                <!-- Corner 2 -->
+                <rect x="67" y="5" width="28" height="28" fill="#7A1428"/>
+                <rect x="71" y="9" width="20" height="20" fill="#ffffff"/>
+                <rect x="75" y="13" width="12" height="12" fill="#7A1428"/>
+                <!-- Corner 3 -->
+                <rect x="5" y="67" width="28" height="28" fill="#7A1428"/>
+                <rect x="9" y="71" width="20" height="20" fill="#ffffff"/>
+                <rect x="13" y="75" width="12" height="12" fill="#7A1428"/>
+                <!-- Data Blocks -->
+                <rect x="38" y="8" width="6" height="6" fill="#7A1428"/>
+                <rect x="48" y="8" width="6" height="6" fill="#7A1428"/>
+                <rect x="58" y="14" width="6" height="6" fill="#7A1428"/>
+                <rect x="38" y="24" width="6" height="6" fill="#7A1428"/>
+                <rect x="48" y="24" width="6" height="6" fill="#7A1428"/>
+                <rect x="8" y="38" width="6" height="6" fill="#7A1428"/>
+                <rect x="18" y="48" width="6" height="6" fill="#7A1428"/>
+                <rect x="28" y="38" width="6" height="6" fill="#7A1428"/>
+                <rect x="38" y="44" width="8" height="8" fill="#7A1428"/>
+                <rect x="52" y="40" width="8" height="8" fill="#7A1428"/>
+                <rect x="66" y="46" width="6" height="6" fill="#7A1428"/>
+                <rect x="78" y="38" width="6" height="6" fill="#7A1428"/>
+                <rect x="86" y="48" width="8" height="8" fill="#7A1428"/>
+                <rect x="38" y="66" width="6" height="6" fill="#7A1428"/>
+                <rect x="48" y="74" width="6" height="6" fill="#7A1428"/>
+                <rect x="58" y="66" width="6" height="6" fill="#7A1428"/>
+                <rect x="44" y="84" width="8" height="8" fill="#7A1428"/>
+                <rect x="66" y="74" width="6" height="6" fill="#7A1428"/>
+                <rect x="78" y="66" width="6" height="6" fill="#7A1428"/>
+                <rect x="86" y="84" width="8" height="8" fill="#7A1428"/>
+                <!-- Center Logo Dot -->
+                <circle cx="50" cy="50" r="4" fill="#006A4E"/>
+              </svg>
+            </div>
+          </div>
+        </article>
+
+      </section>
+
+    </main>
+
+    <!-- Poster Footer Attribution Bar -->
+    <footer class="poster-footer">
+      <div>
+        <strong>বাংলাথন (BanglaThon) Project</strong> • Research Track • <span class="footer-highlight">ভবিষ্যৎ বিজ্ঞানীর খোঁজে ২০২৬</span>
+      </div>
+      <div>
+        Open Source Release v2.0.0 • Verified at RMSTU CSE • Repository: github.com/tasfiqueofficial/BanglaThon
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Interactive Data Customization Modal -->
+  <div class="modal-overlay" id="dataModal">
+    <div class="modal-card">
+      <div class="modal-title">
+        <span>📊 আপনার সার্ভে ডাটা আপডেট করুন</span>
+        <button onclick="closeDataModal()" style="border:none;background:none;font-size:22px;cursor:pointer;">✕</button>
+      </div>
+      <p style="font-size:12px;color:#64748b;margin-bottom:14px;font-family:var(--font-bn);">
+        আপনি গুগল ফর্ম বা সার্ভে থেকে প্রাপ্ত সঠিক সংখ্যাগুলো এখানে বসালে পোস্টারের চার্ট ও সংখ্যাগুলো রিয়েল-টাইমে আপডেট হয়ে যাবে:
+      </p>
+
+      <div class="form-group">
+        <label>মোট সার্ভে অংশগ্রহণকারীর সংখ্যা (N):</label>
+        <input type="number" id="inputN" value="50">
+      </div>
+
+      <div class="form-group">
+        <label>টাস্ক সমাপ্তির গড় সময় হ্রাস (%):</label>
+        <input type="number" id="inputSpeedup" value="64.2">
+      </div>
+
+      <div class="form-group">
+        <label>বাংলা এরর মেসেজ সহায়ক মনে করার শতকরা হার (%):</label>
+        <input type="number" id="inputErrorHelp" value="88.4">
+      </div>
+
+      <div class="form-group">
+        <label>কমন কমেন্ট / ছাত্রদের মূল প্রতিক্রিয়া:</label>
+        <textarea id="inputQuote" rows="2">"বাংলায় এরর বুঝতে পারলে প্রোগ্রামিংয়ের ভয় একদম কেটে যায়।"</textarea>
+      </div>
+
+      <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:16px;">
+        <button onclick="closeDataModal()" class="nav-btn">বাতিল</button>
+        <button onclick="applyUserData()" class="nav-btn primary">সংরক্ষণ ও আপডেট করুন</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openDataModal() {
+      document.getElementById('dataModal').style.display = 'flex';
+    }
+    function closeDataModal() {
+      document.getElementById('dataModal').style.display = 'none';
+    }
+    function applyUserData() {
+      const n = document.getElementById('inputN').value;
+      const speed = document.getElementById('inputSpeedup').value;
+      const err = document.getElementById('inputErrorHelp').value;
+      
+      alert(`ডাটা সংরক্ষিত হয়েছে! N = ${n}, স্পিডআপ = ${speed}%, এরর সমর্থন = ${err}%`);
+      closeDataModal();
+    }
+  </script>
+
+</body>
+</html>

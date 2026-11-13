@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>বাংলাথন (BanglaThon) | কনফারেন্স পোস্টার পোর্টাল - ZRF ২০২৬</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #006A4E;
+      --burgundy: #7A1428;
+      --accent: #D90429;
+      --bg: #090e17;
+      --card: #111927;
+      --card-border: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --font-bn: 'Hind Siliguri', sans-serif;
+      --font-en: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-bn);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 30px 20px;
+    }
+
+    .header-area {
+      text-align: center;
+      max-width: 800px;
+      margin-bottom: 30px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(0, 106, 78, 0.2);
+      border: 1px solid var(--primary);
+      color: #34d399;
+      padding: 4px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 900;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+
+    p.subtitle {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .poster-selection-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: 1100px;
+      width: 100%;
+      margin-bottom: 30px;
+    }
+
+    .poster-card {
+      background: var(--card);
+      border: 1.5px solid var(--card-border);
+      border-radius: 14px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .poster-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .poster-card.card-research {
+      border-color: rgba(122, 20, 40, 0.5);
+    }
+    .poster-card.card-research:hover {
+      border-color: var(--burgundy);
+      box-shadow: 0 16px 40px rgba(122, 20, 40, 0.25);
+    }
+
+    .poster-card.card-engineering {
+      border-color: rgba(0, 106, 78, 0.5);
+    }
+    .poster-card.card-engineering:hover {
+      border-color: var(--primary);
+      box-shadow: 0 16px 40px rgba(0, 106, 78, 0.25);
+    }
+
+    .card-top-stripe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+    }
+    .card-research .card-top-stripe { background: var(--burgundy); }
+    .card-engineering .card-top-stripe { background: var(--primary); }
+
+    .card-tag {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      font-family: var(--font-en);
+    }
+    .card-research .card-tag { color: #f43f5e; }
+    .card-engineering .card-tag { color: #34d399; }
+
+    .card-title {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: #ffffff;
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .feature-list {
+      list-style: none;
+      margin-bottom: 24px;
+      font-size: 12.5px;
+      color: #cbd5e1;
+    }
+
+    .feature-list li {
+      padding-left: 20px;
+      position: relative;
+      margin-bottom: 7px;
+    }
+
+    .card-research .feature-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #f43f5e;
+      font-weight: 900;
+    }
+
+    .card-engineering .feature-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #34d399;
+      font-weight: 900;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      font-family: var(--font-bn);
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      border: none;
+    }
+
+    .btn-research {
+      background: var(--burgundy);
+      color: #ffffff;
+    }
+    .btn-research:hover {
+      background: #991b1b;
+    }
+
+    .btn-engineering {
+      background: var(--primary);
+      color: #ffffff;
+    }
+    .btn-engineering:hover {
+      background: #004d38;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--card-border);
+      color: var(--text);
+    }
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: #64748b;
+    }
+
+    .preview-section {
+      width: 100%;
+      max-width: 1100px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 16px;
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--card-border);
+      margin-bottom: 14px;
+    }
+
+    .preview-tabs {
+      display: flex;
+      gap: 8px;
+    }
+
+    .tab-btn {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      border: 1px solid var(--card-border);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: var(--font-bn);
+      cursor: pointer;
+    }
+
+    .tab-btn.active {
+      background: #ffffff;
+      color: #0f172a;
+      border-color: #ffffff;
+    }
+
+    .preview-frame {
+      width: 100%;
+      height: 900px;
+      border: none;
+      border-radius: 8px;
+      background: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-area">
+    <div class="badge">Ziaur Rahman Foundation (ZRF) • ভবিষ্যৎ বিজ্ঞানীর খোঁজে ২০২৬</div>
+    <h1>বাংলাথন (BanglaThon) পোস্টার পোর্টাল</h1>
+    <p class="subtitle">
+      SciFig AI 3-কলাম অ্যাকাডেমিক ফরম্যাট ও আন্তর্জাতিক রিসার্চ স্ট্যান্ডার্ড অনুযায়ী প্রণীত ২টি ডেডিকেটেড পোস্টার।
+    </p>
+  </div>
+
+  <div class="poster-selection-grid">
+
+    <!-- Card 1: Pure Research-Based -->
+    <div class="poster-card card-research">
+      <div class="card-top-stripe"></div>
+      <div>
+        <div class="card-tag">Poster 1 • Academic Scientific Research (A to Z)</div>
+        <h2 class="card-title">পোস্টার ১: পিওর রিসার্চ বেইজড (A to Z)</h2>
+        <p class="card-desc">
+          কগনিটিভ লোড থিওরি (Sweller 1988), ইউনিকোড NFC নরমালাইজেশন, প্র্যাট প্রেসিডেন্স পার্সিং এবং ৫০ জন শিক্ষার্থীর ওপর পরিচালিত এম্পিরিক্যাল সার্ভে ডাটার বিশ্লেষণ।
+        </p>
+        <ul class="feature-list">
+          <li><strong>Introduction &amp; Hypotheses:</strong> ভাষাগত বাধা বনাম অ্যালগরিদমিক চিন্তা।</li>
+          <li><strong>Methods:</strong> ডুয়েট টোকেনাইজার, রিকার্সিভ ডিসেন্ট পার্সার ও ট্রি-ওয়াক ইঞ্জিন।</li>
+          <li><strong>Results:</strong> এরর বারসহ গ্রুপড বার চার্ট, রিগ্রেশন স্ক্যাটার প্লট এবং বক্স প্লট (Figure 3, 4, 5)।</li>
+          <li><strong>Discussion &amp; Table 1:</strong> সি, পাইথন ও বাংলাথনের তুলনামূলক পারফরম্যান্স মেট্রিক্স।</li>
+          <li><strong>References &amp; QR:</strong> ৮টি অ্যাকাডেমিক রেফারেন্স এবং সোর্স কোড কিউআর কোড।</li>
+        </ul>
+      </div>
+      <div class="card-actions">
+        <a href="poster_1_research_academic.html" target="_blank" class="btn btn-research">
+          🚀 পোস্টার ১ খুলুন (ফুলস্ক্রিন)
+        </a>
+        <button onclick="loadPreview('poster_1_research_academic.html', this)" class="btn btn-outline">
+          👁️ প্রিভিউ
+        </button>
+      </div>
+    </div>
+
+    <!-- Card 2: Explanatory & Engineering / User POV -->
+    <div class="poster-card card-engineering">
+      <div class="card-top-stripe"></div>
+      <div>
+        <div class="card-tag">Poster 2 • Systems Engineering &amp; User POV (Explanatory)</div>
+        <h2 class="card-title">পোস্টার ২: হোল এক্সপ্লেনারি (ইঞ্জিনিয়ারিং ও ইউজার POV)</h2>
+        <p class="card-desc">
+          প্রয়োজনীয়তা (অভ্র কী-বোর্ড দর্শন: "ভাষা হোক উন্মুক্ত"), সিস্টেম আর্কিটেকচার (জিরো-ডিপেন্ডেন্সি রানটাইম), VS Code এক্সটেনশন এবং টার্মিনাল ফন্ট শেপিং সমস্যার সমাধান।
+        </p>
+        <ul class="feature-list">
+          <li><strong>The Need:</strong> ৩০ কোটি বাংলাভাষীর জন্য কোডিং ডেমোক্রেটাইজেশন ও HSC ICT ক্রাইসিস।</li>
+          <li><strong>Engineering POV:</strong> জিরো-ডিপেন্ডেন্সি CPython পোর্টাবল আর্কিটেকচার ও যুক্তবর্ণ হ্যান্ডলিং।</li>
+          <li><strong>User POV (DX):</strong> VS Code এক্সটেনশন (v2.0) ও ক্রোমিয়াম DOM কনসোলে নির্ভুল যুক্তবর্ণ রেন্ডারিং।</li>
+          <li><strong>Figure 4:</strong> xterm.js এর ভাঙা হরফ (◌) বনাম বাংলাথন কনসোলের ১০০% পারফেক্ট আউটপুট।</li>
+          <li><strong>Roadmap:</strong> রাস্টে লেখা বাইটকোড ভার্চুয়াল মেশিন (BanglaVM) ও জাতীয় কারিকুলাম পরিকল্পনা।</li>
+        </ul>
+      </div>
+      <div class="card-actions">
+        <a href="poster_2_engineering_user_pov.html" target="_blank" class="btn btn-engineering">
+          🚀 পোস্টার ২ খুলুন (ফুলস্ক্রিন)
+        </a>
+        <button onclick="loadPreview('poster_2_engineering_user_pov.html', this)" class="btn btn-outline">
+          👁️ প্রিভিউ
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Live Embedded Preview Frame -->
+  <div class="preview-section">
+    <div class="preview-header">
+      <span style="font-weight:700;font-size:15px;">🖥️ লাইভ পোস্টার প্রিভিউয়ার</span>
+      <div class="preview-tabs">
+        <button class="tab-btn active" id="tab1" onclick="switchTab('poster_1_research_academic.html', 'tab1')">পোস্টার ১ (রিসার্চ)</button>
+        <button class="tab-btn" id="tab2" onclick="switchTab('poster_2_engineering_user_pov.html', 'tab2')">পোস্টার ২ (ইঞ্জিনিয়ারিং ও ইউজার)</button>
+      </div>
+    </div>
+    <iframe id="previewFrame" src="poster_1_research_academic.html" class="preview-frame"></iframe>
+  </div>
+
+  <script>
+    function loadPreview(url, btn) {
+      document.getElementById('previewFrame').src = url;
+      document.getElementById('previewFrame').scrollIntoView({ behavior: 'smooth' });
+    }
+    function switchTab(url, tabId) {
+      document.getElementById('previewFrame').src = url;
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
