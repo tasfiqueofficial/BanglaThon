@@ -385,19 +385,207 @@
     .cm { color: #6b8f82; font-style: italic; }
 
     .code-output {
-      padding: 12px 20px;
+      padding: 12px 18px;
       background: rgba(0, 106, 78, 0.22);
       border-top: 1px solid rgba(16, 185, 129, 0.2);
       color: #a7f3d0;
       font-size: 13px;
     }
 
-    .code-output-label {
+    /* Interactive Live Editor & Playground Styles */
+    .editor-container {
+      display: flex;
+      background: #061511;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+      min-height: 250px;
+    }
+
+    .line-numbers {
+      width: 44px;
+      padding: 14px 8px;
+      text-align: right;
+      color: #3b6656;
+      font-size: 13px;
+      line-height: 1.6;
+      user-select: none;
+      background: rgba(0, 0, 0, 0.25);
+      border-right: 1px solid rgba(255, 255, 255, 0.06);
+      white-space: pre;
+    }
+
+    .code-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #e6f4ef;
+      font-size: 13.5px;
+      line-height: 1.6;
+      padding: 14px 16px;
+      resize: vertical;
+      min-height: 250px;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      white-space: pre;
+      overflow-x: auto;
+      tab-size: 4;
+    }
+
+    .code-input::placeholder {
+      color: #3b6656;
+    }
+
+    .editor-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .file-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      background: var(--green-main);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .filename {
+      color: #a7c4b9;
+      font-size: 12.5px;
+    }
+
+    .template-selector select {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #e6f4ef;
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-family: inherit;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .template-selector select option {
+      background: #071b15;
+      color: #ffffff;
+    }
+
+    .editor-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-run {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #ffffff;
+      border: none;
+      padding: 5px 14px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
+      transition: all 0.18s ease;
+    }
+
+    .btn-run:hover {
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.6);
+    }
+
+    .btn-clear {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #cbd5e1;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn-clear:hover {
+      background: rgba(255, 255, 255, 0.16);
+      color: #ffffff;
+    }
+
+    .terminal-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 6px;
+      margin-bottom: 8px;
+      border-bottom: 1px dashed rgba(16, 185, 129, 0.25);
+    }
+
+    .terminal-title {
+      font-size: 11.5px;
       color: #fbbf24;
       font-weight: 700;
-      font-size: 12px;
-      margin-bottom: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .exec-status {
+      font-size: 11px;
+      color: #94a3b8;
+    }
+
+    .exec-status.success {
+      color: #4ade80;
+      font-weight: 700;
+    }
+
+    .exec-status.error {
+      color: #f87171;
+      font-weight: 700;
+    }
+
+    .terminal-body {
+      min-height: 70px;
+      max-height: 180px;
+      overflow-y: auto;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #e6f4ef;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .terminal-body .out-line {
       display: block;
+      margin-bottom: 3px;
+    }
+
+    .terminal-body .out-error {
+      color: #fca5a5;
+      background: rgba(239, 68, 68, 0.15);
+      border-left: 3px solid #ef4444;
+      padding: 4px 8px;
+      border-radius: 4px;
+      margin-top: 4px;
+    }
+
+    .console-welcome {
+      color: #64748b;
+      font-style: italic;
     }
 
     /* Section Headings */
@@ -896,9 +1084,11 @@
       </a>
 
       <ul class="nav-links">
+        <li><a href="#playground" style="color:var(--green-main);font-weight:700;">⚡ অনলাইন প্লেগ্রাউন্ড</a></li>
         <li><a href="#install">ইনস্টল করুন</a></li>
         <li><a href="#avro-vision">আমাদের অনুপ্রেরণা</a></li>
         <li><a href="#syntax">সিনট্যাক্স</a></li>
+        <li><a href="poster/index.html" target="_blank">রিসার্চ পোস্টার</a></li>
         <li><a href="https://github.com/tasfiqueofficial/BanglaThon" target="_blank" rel="noopener">GitHub</a></li>
       </ul>
 
@@ -919,45 +1109,86 @@
           কোনো বাধা ছাড়াই!
         </h1>
         <p class="lead">
-          <strong>BanglaThon</strong> হলো বাংলা ও Banglish—উভয় সিনট্যাক্সে লেখা পূর্ণাঙ্গ প্রোগ্রামিং ল্যাঙ্গুয়েজ। কোনো আলাদা Python ইনস্টলেশন ছাড়াই Windows, macOS ও Linux-এ মাত্র ১ কমান্ডেই চালানো যায়।
+          <strong>BanglaThon</strong> হলো বাংলা ও Banglish—উভয় সিনট্যাক্সে লেখা পূর্ণাঙ্গ প্রোগ্রামিং ল্যাঙ্গুয়েজ। কোনো আলাদা Python বা সফটওয়্যার ইনস্টল ছাড়াই ব্রাউজারে সরাসরি লিখে রান করুন এবং কম্পিউটারে ১ কমান্ডে ইনস্টল করুন।
         </p>
 
         <div class="hero-actions">
-          <a href="#install" class="btn-primary">ডাউনলোড ও ইনস্টল করুন</a>
-          <a href="https://github.com/tasfiqueofficial/BanglaThon" target="_blank" rel="noopener" class="btn-outline-red">
-            GitHub রিপোজিটরি ↗
+          <a href="#playground" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            লাইভ কোড প্র্যাকটিস করুন
+          </a>
+          <a href="#install" class="btn-outline-red">
+            ১-কমান্ড ইনস্টলেশন ↓
           </a>
         </div>
 
         <div class="hero-trust">
           <span><b class="check-green">✓</b> বাংলা ও Banglish সিনট্যাক্স</span>
-          <span><b class="check-green">✓</b> Python ছাড়াই রান (Windows/Mac/Linux)</span>
+          <span><b class="check-green">✓</b> ব্রাউজারে লাইভ কোডিং প্লেগ্রাউন্ড</span>
           <span><b class="check-green">✓</b> অফিশিয়াল VS Code Extension</span>
         </div>
       </div>
 
-      <!-- Interactive Dual-Syntax Preview -->
-      <div class="code-window">
+      <!-- Interactive BanglaThon Code Playground -->
+      <div class="code-window" id="playground">
         <div class="code-header">
           <div class="window-dots">
-            <i class="dot-r"></i>
-            <i class="dot-y"></i>
-            <i class="dot-g"></i>
+            <i class="dot-r" title="Close"></i>
+            <i class="dot-y" title="Minimize"></i>
+            <i class="dot-g" title="Maximize"></i>
           </div>
-          <span class="mono" style="color:#a7c4b9;font-size:12.5px;">tas.bl</span>
+
+          <div class="editor-title-wrap">
+            <span class="file-badge">ব</span>
+            <span class="mono filename" id="editorFileName">tas.bl</span>
+          </div>
+
+          <!-- Template Selector Dropdown -->
+          <div class="template-selector">
+            <select id="codeTemplateSelect" onchange="loadSelectedTemplate(this.value)">
+              <option value="welcome">🌟 ১. হ্যালো বাংলাদেশ</option>
+              <option value="condition">🔀 ২. যদি ও নাহলে (if-else)</option>
+              <option value="loop">🔁 ৩. লুপ ও ১-১০ গণনা</option>
+              <option value="functions">📐 ৪. ফিবোনাচ্চি ফাংশন</option>
+              <option value="array">📊 ৫. তালিকা ও যোগফল</option>
+              <option value="input">💡 ৬. ব্যবহারকারী ইনপুট (নাও)</option>
+              <option value="error">⚠️ ৭. এরর মেসেজ পরীক্ষা</option>
+            </select>
+          </div>
+
           <div class="lang-toggle">
-            <button type="button" class="active" onclick="switchCode('bn', this)">বাংলা সিনট্যাক্স</button>
-            <button type="button" onclick="switchCode('en', this)">Banglish</button>
+            <button type="button" class="active" id="btnDialectBn" onclick="switchDialect('bn', this)">বাংলা</button>
+            <button type="button" id="btnDialectEn" onclick="switchDialect('en', this)">Banglish</button>
+          </div>
+
+          <!-- Run & Action Buttons -->
+          <div class="editor-actions">
+            <button type="button" class="btn-run" onclick="runPlaygroundCode()" title="কিবোর্ড শর্টকাট: Ctrl + Enter">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              <span>রান করো</span>
+            </button>
+            <button type="button" class="btn-clear" onclick="clearEditor()" title="মুছে ফেলুন">মুছো</button>
           </div>
         </div>
 
-        <div class="code-body" id="codePreview"></div>
+        <!-- Editor: Line Numbers + Textarea -->
+        <div class="editor-container">
+          <div class="line-numbers mono" id="lineNumbers">1</div>
+          <textarea id="codeEditorInput" class="code-input mono" spellcheck="false" placeholder="এখানে বাংলা বা বাংলিশ কোড লিখুন..." oninput="handleEditorInput()" onkeydown="handleEditorKeyDown(event)"></textarea>
+        </div>
 
-        <div class="code-output mono" id="codeOutput">
-          <span class="code-output-label">▶ আউটপুট (Output):</span>
-          তুমি কেমন আছো?<br />
-          ১ থেকে ১০ পর্যন্ত মৌলিক সংখ্যা: [2, 3, 5, 7]<br />
-          মোট যোগফল: 17
+        <!-- Interactive Terminal Output -->
+        <div class="code-output mono" id="terminalOutput">
+          <div class="terminal-bar">
+            <span class="terminal-title">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+              বাংলাথন কনসোল (BanglaThon Webview)
+            </span>
+            <span class="exec-status" id="execStatus">প্রস্তুত (Ready)</span>
+          </div>
+          <div class="terminal-body" id="consoleText">
+            <span class="console-welcome">উপরের কোডটি এডিট করে "রান করো" বাটনে ক্লিক করুন অথবা Ctrl + Enter চাপুন...</span>
+          </div>
         </div>
       </div>
     </div>
@@ -1239,56 +1470,966 @@
   </footer>
 
   <script>
-    const CODE_SAMPLES = {
-      bn: {
-        html: `<pre><span class="cm"># বাংলা ও Banglish একসাথে চলে!</span>
-<span class="fn">দেখাও</span> <span class="st">"তুমি কেমন আছো?"</span>
-
-<span class="kw">কাজ</span> <span class="fn">মৌলিক_কি</span>(সংখ্যা) {
-    <span class="kw">যদি</span> (সংখ্যা &lt; <span class="nm">২</span>) { <span class="kw">ফেরত</span> <span class="nm">মিথ্যা</span> }
-    <span class="kw">জন্য</span> (<span class="kw">ধরি</span> ক = <span class="nm">২</span>; ক * ক &lt;= সংখ্যা; ক += <span class="nm">১</span>) {
-        <span class="kw">যদি</span> (সংখ্যা % ক == <span class="nm">০</span>) { <span class="kw">ফেরত</span> <span class="nm">মিথ্যা</span> }
+    // -------------------------------------------------------------
+    // BanglaThon Browser-Native Runtime Engine v2.0
+    // -------------------------------------------------------------
+    function digitConvert(str) {
+      const bn = '০১২৩৪৫৬৭৮৯';
+      return str.replace(/[০-৯]/g, d => bn.indexOf(d));
     }
-    <span class="kw">ফেরত</span> <span class="nm">সত্যি</span>
-}
 
-<span class="kw">ধরি</span> তালিকা_১ = []
-<span class="kw">জন্য</span> (<span class="kw">ধরি</span> ক = <span class="nm">১</span>; ক &lt;= <span class="nm">১০</span>; ক += <span class="nm">১</span>) {
-    <span class="kw">যদি</span> (<span class="fn">মৌলিক_কি</span>(ক)) { <span class="fn">যুক্তকরো</span>(তালিকা_১, ক) }
-}
-<span class="fn">দেখাও</span> <span class="st">"১ থেকে ১০ পর্যন্ত মৌলিক সংখ্যা: "</span> + তালিকা_১
-<span class="fn">দেখাও</span> <span class="st">"মোট যোগফল: "</span> + <span class="fn">যোগ_করো</span>(তালিকা_১)</pre>`,
-        out: `<span class="code-output-label">▶ আউটপুট (Output):</span>তুমি কেমন আছো?<br/>১ থেকে ১০ পর্যন্ত মৌলিক সংখ্যা: [2, 3, 5, 7]<br/>মোট যোগফল: 17`
+    class BanglaThonWeb {
+      constructor(options = {}) {
+        this.outputCallback = options.onOutput || console.log;
+        this.inputCallback = options.onInput || (() => "0");
+        this.maxExecutionSteps = options.maxSteps || 100000;
+      }
+
+      run(sourceCode) {
+        const output = [];
+        const print = (val) => {
+          output.push(val);
+          this.outputCallback(val);
+        };
+
+        try {
+          const tokens = this.tokenize(sourceCode);
+          const ast = this.parse(tokens);
+          const env = this.createGlobalEnv(print);
+          this.stepCount = 0;
+          this.executeBlock(ast, env);
+          return { success: true, output: output.join('\n') };
+        } catch (err) {
+          const errMsg = err.message || String(err);
+          this.outputCallback('❌ এরর: ' + errMsg, true);
+          return { success: false, error: errMsg, output: output.join('\n') };
+        }
+      }
+
+      tokenize(code) {
+        const tokens = [];
+        let line = 1;
+        let i = 0;
+        const len = code.length;
+
+        while (i < len) {
+          let ch = code[i];
+          if (ch === '\n') { line++; i++; continue; }
+          if (ch === '\r') { i++; continue; }
+          if (/\s/.test(ch)) { i++; continue; }
+          if (ch === '#') {
+            while (i < len && code[i] !== '\n') i++;
+            continue;
+          }
+
+          if (ch === '"' || ch === "'") {
+            const quote = ch;
+            let strVal = '';
+            const startLine = line;
+            i++;
+            let closed = false;
+            while (i < len) {
+              if (code[i] === '\\' && i + 1 < len) {
+                strVal += code[i + 1];
+                i += 2;
+              } else if (code[i] === quote) {
+                closed = true;
+                i++;
+                break;
+              } else {
+                if (code[i] === '\n') line++;
+                strVal += code[i];
+                i++;
+              }
+            }
+            if (!closed) {
+              throw new Error(`${startLine} নম্বর লাইনে টেক্সট স্ট্রিং বন্ধ করা হয়নি (উদ্ধৃতি চিহ্ন " অনুপস্থিত)`);
+            }
+            tokens.push({ type: 'STRING', value: strVal, line: startLine });
+            continue;
+          }
+
+          if (/[0-9০-৯]/.test(ch)) {
+            let numStr = '';
+            while (i < len && /[0-9০-৯.]/.test(code[i])) {
+              numStr += code[i];
+              i++;
+            }
+            numStr = digitConvert(numStr);
+            const val = numStr.includes('.') ? parseFloat(numStr) : parseInt(numStr, 10);
+            tokens.push({ type: 'NUMBER', value: val, line });
+            continue;
+          }
+
+          const two = code.substr(i, 2);
+          if (['==', '!=', '<=', '>=', '+=', '-=', '*=', '/=', '%='].includes(two)) {
+            tokens.push({ type: two, value: two, line });
+            i += 2;
+            continue;
+          }
+
+          if ('+-*/%<>=(){}[],;:'.includes(ch)) {
+            tokens.push({ type: ch, value: ch, line });
+            i++;
+            continue;
+          }
+
+          if (/[\p{L}_\u0980-\u09FF]/u.test(ch)) {
+            let word = '';
+            while (i < len && /[\p{L}\p{N}_\u0980-\u09FF]/u.test(code[i])) {
+              word += code[i];
+              i++;
+            }
+            tokens.push({ type: 'IDENT', value: word, line });
+            continue;
+          }
+
+          throw new Error(`${line} নম্বর লাইনে অজানা চিহ্ন পাওয়া গেছে: '${ch}'`);
+        }
+
+        tokens.push({ type: 'EOF', value: null, line });
+        return tokens;
+      }
+
+      parse(tokens) {
+        let cur = 0;
+        const peek = () => tokens[cur];
+        const prev = () => tokens[cur - 1];
+        const isAtEnd = () => peek().type === 'EOF';
+        const check = (type) => isAtEnd() ? false : peek().type === type;
+        const advance = () => { if (!isAtEnd()) cur++; return prev(); };
+
+        const match = (...types) => {
+          for (const t of types) {
+            if (check(t)) {
+              advance();
+              return true;
+            }
+          }
+          return false;
+        };
+
+        const consume = (type, errMsg) => {
+          if (check(type)) return advance();
+          const p = peek();
+          throw new Error(`${p.line} নম্বর লাইন: ${errMsg} (পাওয়া গেছে '${p.value || p.type}')`);
+        };
+
+        const KW_MAP = {
+          'dhori': 'DHORI', 'ধরি': 'DHORI', 'ধরো': 'DHORI',
+          'jodi': 'JODI', 'যদি': 'JODI',
+          'nahole': 'NAHOLE', 'নাহলে': 'NAHOLE', 'নয়তো': 'NAHOLE',
+          'jotokkhon': 'JOTOKKHON', 'যতক্ষণ': 'JOTOKKHON',
+          'jonno': 'JONNO', 'জন্য': 'JONNO',
+          'kaj': 'KAJ', 'কাজ': 'KAJ',
+          'ferot': 'FEROT', 'ফেরত': 'FEROT',
+          'dekhao': 'DEKHAO', 'দেখাও': 'DEKHAO',
+          'thamo': 'BREAK', 'থামো': 'BREAK',
+          'cholo': 'CONTINUE', 'চলো': 'CONTINUE'
+        };
+
+        const isKw = (word) => KW_MAP[word] || null;
+
+        const statement = () => {
+          const p = peek();
+          if (p.type === 'IDENT') {
+            const kw = isKw(p.value);
+            if (kw === 'DHORI') { advance(); return varDeclaration(p.line); }
+            if (kw === 'DEKHAO') { advance(); return printStatement(p.line); }
+            if (kw === 'JODI') { advance(); return ifStatement(p.line); }
+            if (kw === 'JOTOKKHON') { advance(); return whileStatement(p.line); }
+            if (kw === 'JONNO') { advance(); return forStatement(p.line); }
+            if (kw === 'KAJ') { advance(); return functionDeclaration(p.line); }
+            if (kw === 'FEROT') { advance(); return returnStatement(p.line); }
+            if (kw === 'BREAK') { advance(); match(';'); return { type: 'Break', line: p.line }; }
+            if (kw === 'CONTINUE') { advance(); match(';'); return { type: 'Continue', line: p.line }; }
+          }
+
+          if (match('{')) {
+            return { type: 'Block', statements: blockStatements(), line: p.line };
+          }
+
+          return expressionStatement();
+        };
+
+        const varDeclaration = (line) => {
+          const nameTok = consume('IDENT', "ভেরিয়েবলের নাম আবশ্যক");
+          let init = null;
+          if (match('=')) {
+            init = expression();
+          }
+          match(';');
+          return { type: 'VarDecl', name: nameTok.value, init, line };
+        };
+
+        const printStatement = (line) => {
+          const args = [];
+          if (!check(';') && !check('EOF') && !check('}')) {
+            args.push(expression());
+            while (match(',')) {
+              args.push(expression());
+            }
+          }
+          match(';');
+          return { type: 'Print', args, line };
+        };
+
+        const returnStatement = (line) => {
+          let value = null;
+          if (!check(';') && !check('EOF') && !check('}')) {
+            value = expression();
+          }
+          match(';');
+          return { type: 'Return', value, line };
+        };
+
+        const ifStatement = (line) => {
+          const hasParen = match('(');
+          const condition = expression();
+          if (hasParen) consume(')', "শর্তের শেষে বন্ধনী ')' প্রয়োজন");
+          const thenBranch = statement();
+          let elseBranch = null;
+          if (peek().type === 'IDENT' && isKw(peek().value) === 'NAHOLE') {
+            advance();
+            elseBranch = statement();
+          }
+          return { type: 'If', condition, thenBranch, elseBranch, line };
+        };
+
+        const whileStatement = (line) => {
+          const hasParen = match('(');
+          const condition = expression();
+          if (hasParen) consume(')', "লুপ শর্তের শেষে বন্ধনী ')' প্রয়োজন");
+          const body = statement();
+          return { type: 'While', condition, body, line };
+        };
+
+        const forStatement = (line) => {
+          consume('(', "জন্য/jonno লুপের শুরুতে '(' প্রয়োজন");
+          let init = null;
+          if (!check(';')) {
+            if (peek().type === 'IDENT' && isKw(peek().value) === 'DHORI') {
+              advance();
+              init = varDeclaration(peek().line);
+            } else {
+              init = expressionStatement();
+            }
+          } else {
+            advance();
+          }
+
+          let condition = null;
+          if (!check(';')) condition = expression();
+          consume(';', "জন্য/jonno লুপের শর্তের পর ';' প্রয়োজন");
+
+          let increment = null;
+          if (!check(')')) increment = expression();
+          consume(')', "জন্য/jonno লুপের স্টেটমেন্টের শেষে ')' প্রয়োজন");
+
+          const body = statement();
+          return { type: 'For', init, condition, increment, body, line };
+        };
+
+        const functionDeclaration = (line) => {
+          const nameTok = consume('IDENT', "ফাংশন/কাজের নাম আবশ্যক");
+          consume('(', "প্যারামিটারের শুরুতে '(' প্রয়োজন");
+          const params = [];
+          if (!check(')')) {
+            params.push(consume('IDENT', "প্যারামিটারের নাম প্রয়োজন").value);
+            while (match(',')) {
+              params.push(consume('IDENT', "প্যারামিটারের নাম প্রয়োজন").value);
+            }
+          }
+          consume(')', "প্যারামিটারের শেষে ')' প্রয়োজন");
+          consume('{', "ফাংশন বডির শুরুতে '{' প্রয়োজন");
+          const body = blockStatements();
+          return { type: 'Function', name: nameTok.value, params, body, line };
+        };
+
+        const blockStatements = () => {
+          const stmts = [];
+          while (!check('}') && !isAtEnd()) {
+            stmts.push(statement());
+          }
+          consume('}', "ব্লক বন্ধ করতে '}' প্রয়োজন");
+          return stmts;
+        };
+
+        const expressionStatement = () => {
+          const expr = expression();
+          match(';');
+          return { type: 'Expression', expr, line: expr.line || 1 };
+        };
+
+        const expression = () => assignment();
+
+        const assignment = () => {
+          const expr = orExpr();
+          if (match('=', '+=', '-=', '*=', '/=', '%=')) {
+            const op = prev().type;
+            const value = assignment();
+            if (expr.type === 'Variable') {
+              return { type: 'Assign', name: expr.name, op, value, line: expr.line };
+            } else if (expr.type === 'Index') {
+              return { type: 'IndexAssign', target: expr.target, index: expr.index, op, value, line: expr.line };
+            }
+            throw new Error(`${expr.line} নম্বর লাইন: অবৈধ অ্যাসাইনমেন্ট লক্ষ্য`);
+          }
+          return expr;
+        };
+
+        const orExpr = () => {
+          let expr = andExpr();
+          while (match('or') || (peek().type === 'IDENT' && (peek().value === 'ba' || peek().value === 'বা'))) {
+            advance();
+            const right = andExpr();
+            expr = { type: 'Binary', left: expr, op: 'বা', right, line: expr.line };
+          }
+          return expr;
+        };
+
+        const andExpr = () => {
+          let expr = equality();
+          while (match('and') || (peek().type === 'IDENT' && (peek().value === 'ebong' || peek().value === 'এবং'))) {
+            advance();
+            const right = equality();
+            expr = { type: 'Binary', left: expr, op: 'এবং', right, line: expr.line };
+          }
+          return expr;
+        };
+
+        const equality = () => {
+          let expr = comparison();
+          while (match('==', '!=')) {
+            const op = prev().type;
+            const right = comparison();
+            expr = { type: 'Binary', left: expr, op, right, line: expr.line };
+          }
+          return expr;
+        };
+
+        const comparison = () => {
+          let expr = addition();
+          while (match('<', '<=', '>', '>=')) {
+            const op = prev().type;
+            const right = addition();
+            expr = { type: 'Binary', left: expr, op, right, line: expr.line };
+          }
+          return expr;
+        };
+
+        const addition = () => {
+          let expr = multiplication();
+          while (match('+', '-')) {
+            const op = prev().type;
+            const right = multiplication();
+            expr = { type: 'Binary', left: expr, op, right, line: expr.line };
+          }
+          return expr;
+        };
+
+        const multiplication = () => {
+          let expr = unary();
+          while (match('*', '/', '%')) {
+            const op = prev().type;
+            const right = unary();
+            expr = { type: 'Binary', left: expr, op, right, line: expr.line };
+          }
+          return expr;
+        };
+
+        const unary = () => {
+          if (match('-', '!') || (peek().type === 'IDENT' && (peek().value === 'noy' || peek().value === 'নয়' || peek().value === 'নয়'))) {
+            const opTok = prev();
+            const right = unary();
+            return { type: 'Unary', op: opTok.type === 'IDENT' ? 'নয়' : opTok.type, right, line: opTok.line };
+          }
+          return callExpr();
+        };
+
+        const callExpr = () => {
+          let expr = primary();
+          while (true) {
+            if (match('(')) {
+              const args = [];
+              if (!check(')')) {
+                args.push(expression());
+                while (match(',')) args.push(expression());
+              }
+              consume(')', "ফাংশন কলের শেষে ')' প্রয়োজন");
+              expr = { type: 'Call', callee: expr, args, line: expr.line };
+            } else if (match('[')) {
+              const index = expression();
+              consume(']', "তালিকা ইনডেক্সের শেষে ']' প্রয়োজন");
+              expr = { type: 'Index', target: expr, index, line: expr.line };
+            } else {
+              break;
+            }
+          }
+          return expr;
+        };
+
+        const primary = () => {
+          const p = peek();
+          if (match('NUMBER', 'STRING')) {
+            return { type: 'Literal', value: prev().value, line: prev().line };
+          }
+
+          if (p.type === 'IDENT') {
+            const val = p.value;
+            if (['shotti', 'সত্যি', 'সত্য', 'true'].includes(val)) {
+              advance();
+              return { type: 'Literal', value: true, line: p.line };
+            }
+            if (['mittha', 'মিথ্যা', 'false'].includes(val)) {
+              advance();
+              return { type: 'Literal', value: false, line: p.line };
+            }
+            if (['khali', 'খালি', 'null'].includes(val)) {
+              advance();
+              return { type: 'Literal', value: null, line: p.line };
+            }
+            advance();
+            return { type: 'Variable', name: val, line: p.line };
+          }
+
+          if (match('[')) {
+            const elements = [];
+            if (!check(']')) {
+              elements.push(expression());
+              while (match(',')) elements.push(expression());
+            }
+            consume(']', "তালিকার শেষে ']' প্রয়োজন");
+            return { type: 'ListLiteral', elements, line: p.line };
+          }
+
+          if (match('(')) {
+            const expr = expression();
+            consume(')', "বন্ধনী ')' প্রয়োজন");
+            return expr;
+          }
+
+          throw new Error(`${p.line} নম্বর লাইনে অপ্রত্যাশিত চিহ্ন: '${p.value || p.type}'`);
+        };
+
+        const statements = [];
+        while (!isAtEnd()) statements.push(statement());
+        return statements;
+      }
+
+      createGlobalEnv(print) {
+        const env = { values: {}, parent: null, print: print };
+
+        const bind = (names, fn) => {
+          for (const name of names) env.values[name] = fn;
+        };
+
+        bind(['nao', 'নাও', 'input', 'ইনপুট'], (prompt) => {
+          const pText = prompt !== undefined ? String(prompt) : '';
+          return this.inputCallback(pText);
+        });
+
+        bind(['dhoirgo', 'doirgho', 'দৈর্ঘ্য', 'len'], (arg) => {
+          if (Array.isArray(arg) || typeof arg === 'string') return arg.length;
+          throw new Error("দৈর্ঘ্য/len শুধুমাত্র তালিকা বা লেখার ওপর প্রযোজ্য");
+        });
+
+        bind(['juktokoro', 'যুক্তকরো'], (list, item) => {
+          if (!Array.isArray(list)) throw new Error("যুক্তকরো ফাংশনে তালিকা দিতে হবে");
+          list.push(item);
+          return list;
+        });
+
+        bind(['jog_koro', 'যোগ_করো'], (list) => {
+          if (!Array.isArray(list)) throw new Error("যোগ_করো ফাংশনে তালিকা দিতে হবে");
+          return list.reduce((a, b) => a + Number(b), 0);
+        });
+
+        bind(['bad_dao', 'বাদ_দাও'], (list, item) => {
+          if (!Array.isArray(list)) throw new Error("বাদ_দাও ফাংশনে তালিকা দিতে হবে");
+          if (item !== undefined) {
+            const idx = list.indexOf(item);
+            if (idx > -1) list.splice(idx, 1);
+          } else {
+            list.pop();
+          }
+          return list;
+        });
+
+        bind(['shajao', 'সাজাও'], (list) => {
+          if (!Array.isArray(list)) throw new Error("সাজাও ফাংশনে তালিকা দিতে হবে");
+          return [...list].sort((a, b) => a - b);
+        });
+
+        bind(['ulto', 'উল্টো'], (list) => {
+          if (!Array.isArray(list)) throw new Error("উল্টো ফাংশনে তালিকা দিতে হবে");
+          return [...list].reverse();
+        });
+
+        bind(['talika', 'তালিকা'], (...items) => items.length > 0 ? items : []);
+        bind(['purno', 'পূর্ণ'], (x) => Math.floor(Number(x)));
+        bind(['doshomik', 'দশমিক'], (x) => parseFloat(x));
+        bind(['lekha', 'লেখা'], (x) => String(x));
+        bind(['porom', 'পরম'], (x) => Math.abs(Number(x)));
+        bind(['borgomul', 'বর্গমূল'], (x) => Math.sqrt(Number(x)));
+        bind(['ghat', 'ঘাত'], (x, y) => Math.pow(Number(x), Number(y)));
+
+        bind(['porishor', 'পরিসর', 'range'], (start, end, step = 1) => {
+          if (end === undefined) { end = start; start = 0; }
+          const res = [];
+          for (let i = start; i < end; i += step) res.push(i);
+          return res;
+        });
+
+        bind(['dhoron', 'ধরন'], (val) => {
+          if (val === null || val === undefined) return "খালি";
+          if (Array.isArray(val)) return "তালিকা";
+          if (typeof val === 'number') return "সংখ্যা";
+          if (typeof val === 'string') return "লেখা";
+          if (typeof val === 'boolean') return "সত্যমিথ্যা";
+          return typeof val;
+        });
+
+        return env;
+      }
+
+      executeBlock(statements, env) {
+        for (const stmt of statements) {
+          this.stepCount++;
+          if (this.stepCount > this.maxExecutionSteps) {
+            throw new Error("লুপ অসীম (Infinite Loop) হয়ে গেছে! এক্সিকিউশন বন্ধ করা হলো");
+          }
+          const res = this.execute(stmt, env);
+          if (res && (res.type === 'return' || res.type === 'break' || res.type === 'continue')) {
+            return res;
+          }
+        }
+        return null;
+      }
+
+      execute(stmt, env) {
+        switch (stmt.type) {
+          case 'VarDecl': {
+            const val = stmt.init ? this.evalExpr(stmt.init, env) : null;
+            env.values[stmt.name] = val;
+            return null;
+          }
+          case 'Print': {
+            const parts = stmt.args.map(a => this.formatValue(this.evalExpr(a, env)));
+            env.print(parts.join(' '));
+            return null;
+          }
+          case 'Expression': {
+            this.evalExpr(stmt.expr, env);
+            return null;
+          }
+          case 'Block': {
+            const subEnv = { values: {}, parent: env, print: env.print };
+            return this.executeBlock(stmt.statements, subEnv);
+          }
+          case 'If': {
+            const cond = this.evalExpr(stmt.condition, env);
+            if (this.isTruthy(cond)) {
+              return this.execute(stmt.thenBranch, env);
+            } else if (stmt.elseBranch) {
+              return this.execute(stmt.elseBranch, env);
+            }
+            return null;
+          }
+          case 'While': {
+            while (this.isTruthy(this.evalExpr(stmt.condition, env))) {
+              this.stepCount++;
+              if (this.stepCount > this.maxExecutionSteps) throw new Error("লুপ অসীম হয়ে গেছে!");
+              const res = this.execute(stmt.body, env);
+              if (res) {
+                if (res.type === 'break') break;
+                if (res.type === 'return') return res;
+              }
+            }
+            return null;
+          }
+          case 'For': {
+            const loopEnv = { values: {}, parent: env, print: env.print };
+            if (stmt.init) this.execute(stmt.init, loopEnv);
+            while (stmt.condition ? this.isTruthy(this.evalExpr(stmt.condition, loopEnv)) : true) {
+              this.stepCount++;
+              if (this.stepCount > this.maxExecutionSteps) throw new Error("লুপ অসীম হয়ে গেছে!");
+              const res = this.execute(stmt.body, loopEnv);
+              if (res) {
+                if (res.type === 'break') break;
+                if (res.type === 'return') return res;
+              }
+              if (stmt.increment) this.evalExpr(stmt.increment, loopEnv);
+            }
+            return null;
+          }
+          case 'Function': {
+            const fn = (...args) => {
+              const fnEnv = { values: {}, parent: env, print: env.print };
+              for (let i = 0; i < stmt.params.length; i++) {
+                fnEnv.values[stmt.params[i]] = args[i] !== undefined ? args[i] : null;
+              }
+              const res = this.executeBlock(stmt.body, fnEnv);
+              return res && res.type === 'return' ? res.value : null;
+            };
+            env.values[stmt.name] = fn;
+            return null;
+          }
+          case 'Return': {
+            const val = stmt.value ? this.evalExpr(stmt.value, env) : null;
+            return { type: 'return', value: val };
+          }
+          case 'Break': return { type: 'break' };
+          case 'Continue': return { type: 'continue' };
+          default: throw new Error(`অজানা স্টেটমেন্ট: ${stmt.type}`);
+        }
+      }
+
+      evalExpr(expr, env) {
+        switch (expr.type) {
+          case 'Literal': return expr.value;
+          case 'ListLiteral': return expr.elements.map(e => this.evalExpr(e, env));
+          case 'Variable': {
+            let cur = env;
+            while (cur) {
+              if (Object.prototype.hasOwnProperty.call(cur.values, expr.name)) {
+                return cur.values[expr.name];
+              }
+              cur = cur.parent;
+            }
+            throw new Error(`${expr.line} নম্বর লাইন: '${expr.name}' নামে কোনো ভ্যারিয়েবল বা ফাংশন পাওয়া যায়নি`);
+          }
+          case 'Assign': {
+            const val = this.evalExpr(expr.value, env);
+            let cur = env;
+            let found = false;
+            while (cur) {
+              if (Object.prototype.hasOwnProperty.call(cur.values, expr.name)) {
+                cur.values[expr.name] = this.applyAssignOp(cur.values[expr.name], expr.op, val);
+                found = true;
+                return cur.values[expr.name];
+              }
+              cur = cur.parent;
+            }
+            if (!found) { env.values[expr.name] = val; return val; }
+            return val;
+          }
+          case 'Index': {
+            const target = this.evalExpr(expr.target, env);
+            const idx = this.evalExpr(expr.index, env);
+            if (target === null || target === undefined) throw new Error(`${expr.line} নম্বর লাইন: নাল (খালি) মানের ইনডেক্সিং সম্ভব নয়`);
+            return target[idx];
+          }
+          case 'IndexAssign': {
+            const target = this.evalExpr(expr.target, env);
+            const idx = this.evalExpr(expr.index, env);
+            const val = this.evalExpr(expr.value, env);
+            target[idx] = val;
+            return val;
+          }
+          case 'Unary': {
+            const r = this.evalExpr(expr.right, env);
+            if (expr.op === '-') return -r;
+            if (expr.op === '!' || expr.op === 'নয়' || expr.op === 'নয়') return !this.isTruthy(r);
+            return r;
+          }
+          case 'Binary': {
+            const l = this.evalExpr(expr.left, env);
+            const r = this.evalExpr(expr.right, env);
+            switch (expr.op) {
+              case '+': return l + r;
+              case '-': return l - r;
+              case '*': return l * r;
+              case '/': return l / r;
+              case '%': return l % r;
+              case '==': return l === r;
+              case '!=': return l !== r;
+              case '<': return l < r;
+              case '<=': return l <= r;
+              case '>': return l > r;
+              case '>=': return l >= r;
+              case 'এবং': case 'and': return this.isTruthy(l) && this.isTruthy(r);
+              case 'বা': case 'or': return this.isTruthy(l) || this.isTruthy(r);
+              default: throw new Error(`অজানা অপারেটর: ${expr.op}`);
+            }
+          }
+          case 'Call': {
+            const fn = this.evalExpr(expr.callee, env);
+            if (typeof fn !== 'function') {
+              throw new Error(`${expr.line} নম্বর লাইন: '${expr.callee.name || 'এক্সপ্রেশন'}' কোনো ফাংশন নয়`);
+            }
+            const args = expr.args.map(a => this.evalExpr(a, env));
+            return fn(...args);
+          }
+          default: throw new Error(`অজানা এক্সপ্রেশন: ${expr.type}`);
+        }
+      }
+
+      applyAssignOp(target, op, val) {
+        switch (op) {
+          case '=': return val;
+          case '+=': return target + val;
+          case '-=': return target - val;
+          case '*=': return target * val;
+          case '/=': return target / val;
+          case '%=': return target % val;
+          default: return val;
+        }
+      }
+
+      isTruthy(val) {
+        if (val === null || val === undefined || val === false || val === 0 || val === '') return false;
+        return true;
+      }
+
+      formatValue(val) {
+        if (val === null || val === undefined) return "খালি";
+        if (val === true) return "সত্যি";
+        if (val === false) return "মিথ্যা";
+        if (Array.isArray(val)) return "[" + val.map(v => this.formatValue(v)).join(", ") + "]";
+        return String(val);
+      }
+    }
+
+    // -------------------------------------------------------------
+    // Code Templates & UI Controller
+    // -------------------------------------------------------------
+    const PLAYGROUND_TEMPLATES = {
+      welcome: {
+        bn: `# বাংলাথন (BanglaThon) v2.0 - শুভ সূচনা!
+ধরি দেশ = "বাংলাদেশ"
+দেখাও "আমাদের প্রিয় মাতৃভূমি: " + দেশ
+
+ধরি বছর = ২০২৬
+দেখাও "ভবিষ্যৎ বিজ্ঞানীর খোঁজে " + বছর + " মেলায় স্বাগতম!"`,
+        en: `# BanglaThon v2.0 - Welcome!
+dhori desh = "Bangladesh"
+dekhao "Amader priyo " + desh
+
+dhori bochor = 2026
+dekhao "Bhabishyat Bigganir Khoje " + bochor + " Melay swagotom!"`
       },
-      en: {
-        html: `<pre><span class="cm"># Classic Banglish syntax also supported 100%!</span>
-<span class="fn">dekhao</span> <span class="st">"Tumi kemon acho?"</span>
+      condition: {
+        bn: `ধরি বয়স = ১৮
+দেখাও "পরীক্ষার্থীর বয়স: " + বয়স
 
-<span class="kw">kaj</span> <span class="fn">is_prime</span>(n) {
-    <span class="kw">jodi</span> (n &lt; <span class="nm">2</span>) { <span class="kw">ferot</span> <span class="nm">mittha</span> }
-    <span class="kw">jonno</span> (<span class="kw">dhori</span> i = <span class="nm">2</span>; i * i &lt;= n; i += <span class="nm">1</span>) {
-        <span class="kw">jodi</span> (n % i == <span class="nm">0</span>) { <span class="kw">ferot</span> <span class="nm">mittha</span> }
+যদি (বয়স >= ১৮) {
+    দেখাও "✓ আপনি ভোটার হতে পারবেন এবং লাইসেন্স পাবেন!"
+} নাহলে {
+    দেখাও "❌ আপনি এখনও অপ্রাপ্তবয়স্ক।"
+}`,
+        en: `dhori boyos = 18
+dekhao "Porikkharthir boyos: " + boyos
+
+jodi (boyos >= 18) {
+    dekhao "✓ Tumi voter hote parbe!"
+} nahole {
+    dekhao "❌ Tumi ekhono choto."
+}`
+      },
+      loop: {
+        bn: `ধরি সংখ্যা = ১
+ধরি মোট_যোগফল = ০
+
+যতক্ষণ (সংখ্যা <= ১০) {
+    দেখাও "পদ: " + সংখ্যা
+    মোট_যোগফল += সংখ্যা
+    সংখ্যা += ১
+}
+
+দেখাও "১ থেকে ১০ পর্যন্ত সংখ্যার মোট যোগফল: " + মোট_যোগফল`,
+        en: `dhori songkha = 1
+dhori mot_jogfol = 0
+
+jotokkhon (songkha <= 10) {
+    dekhao "Pod: " + songkha
+    mot_jogfol += songkha
+    songkha += 1
+}
+
+dekhao "1 theke 10 porjonto mot jogfol: " + mot_jogfol`
+      },
+      functions: {
+        bn: `কাজ ফিবোনাচ্চি(পদ) {
+    যদি (পদ <= ১) {
+        ফেরত পদ
     }
-    <span class="kw">ferot</span> <span class="nm">shotti</span>
+    ফেরত ফিবোনাচ্চি(পদ - ১) + ফিবোনাচ্চি(পদ - ২)
 }
 
-<span class="kw">dhori</span> primes = <span class="fn">talika</span>()
-<span class="kw">jonno</span> (<span class="kw">dhori</span> i = <span class="nm">1</span>; i &lt;= <span class="nm">10</span>; i += <span class="nm">1</span>) {
-    <span class="kw">jodi</span> (<span class="fn">is_prime</span>(i)) { <span class="fn">juktokoro</span>(primes, i) }
+দেখাও "ফিবোনাচ্চি অনুক্রম (১ থেকে ৭):"
+ধরি ক = ১
+যতক্ষণ (ক <= ৭) {
+    দেখাও "পদ " + ক + " = " + ফিবোনাচ্চি(ক)
+    ক += ১
+}`,
+        en: `kaj fibonacci(n) {
+    jodi (n <= 1) {
+        ferot n
+    }
+    ferot fibonacci(n - 1) + fibonacci(n - 2)
 }
-<span class="fn">dekhao</span> <span class="st">"1 theke 10 porjonto prime: "</span> + primes
-<span class="fn">dekhao</span> <span class="st">"Mot jogfol: "</span> + <span class="fn">jog_koro</span>(primes)</pre>`,
-        out: `<span class="code-output-label">▶ আউটপুট (Output):</span>Tumi kemon acho?<br/>1 theke 10 porjonto prime: [2, 3, 5, 7]<br/>Mot jogfol: 17`
+
+dekhao "Fibonacci Series (1 to 7):"
+dhori i = 1
+jotokkhon (i <= 7) {
+    dekhao "Pod " + i + " = " + fibonacci(i)
+    i += 1
+}`
+      },
+      array: {
+        bn: `ধরি স্কোর = [৮৫, ৯২, ৭৮, ৯০, ৯৫]
+দেখাও "মূল তালিকা: " + স্কোর
+দেখাও "মোট পদসংখ্যা: " + দৈর্ঘ্য(স্কোর)
+দেখাও "মোট নম্বর: " + যোগ_করো(স্কোর)
+দেখাও "সাজানো ক্রম: " + সাজাও(স্কোর)`,
+        en: `dhori score = [85, 92, 78, 90, 95]
+dekhao "Mul talika: " + score
+dekhao "Mot pod: " + doirgho(score)
+dekhao "Mot number: " + jog_koro(score)
+dekhao "Sajano krom: " + shajao(score)`
+      },
+      input: {
+        bn: `ধরি নাম = নাও("আপনার নাম কী: ")
+ধরি বয়স = নাও("আপনার বয়স কত: ")
+
+দেখাও "স্বাগতম, " + নাম + " সাহেব!"
+দেখাও "১০ বছর পর আপনার বয়স হবে: " + (পূর্ণ(বয়স) + ১০) + " বছর"`,
+        en: `dhori naam = nao("Apnar naam ki: ")
+dhori boyos = nao("Apnar boyos koto: ")
+
+dekhao "Swagotom, " + naam + "!"
+dekhao "10 bochor por apnar boyos hobe: " + (purno(boyos) + 10)`
+      },
+      error: {
+        bn: `# ইচ্ছাকৃত ব্র্যাকেট বাদ দিয়ে এরর পরীক্ষা
+ধরি নাম = "করিম"
+যদি (নাম == "করিম") {
+    দেখাও "স্বাগতম, " + নাম
+# লক্ষ্য করুন: এখানে শেষের '}' বাদ দেওয়া হয়েছে
+# রান বাটন ক্লিক করে দেখুন বাংলায় কী সুন্দর এরর মেসেজ আসে!`,
+        en: `# Intentional error test
+dhori naam = "Karim"
+jodi (naam == "Karim") {
+    dekhao "Swagotom, " + naam
+# Missing closing brace on purpose!
+# Click Run to see the error message!`
       }
     };
 
-    function switchCode(mode, btn) {
-      document.querySelectorAll('.lang-toggle button').forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById('codePreview').innerHTML = CODE_SAMPLES[mode].html;
-      document.getElementById('codeOutput').innerHTML = CODE_SAMPLES[mode].out;
+    let currentDialect = 'bn';
+    let currentTemplate = 'welcome';
+
+    function updateLineNumbers() {
+      const editor = document.getElementById('codeEditorInput');
+      const lines = editor.value.split('\n').length;
+      let lineStr = '';
+      for (let i = 1; i <= Math.max(lines, 1); i++) {
+        lineStr += i + '\n';
+      }
+      document.getElementById('lineNumbers').innerText = lineStr;
     }
 
+    function handleEditorInput() {
+      updateLineNumbers();
+    }
+
+    function handleEditorKeyDown(e) {
+      // Support Tab key (insert 4 spaces)
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        const editor = e.target;
+        const start = editor.selectionStart;
+        const end = editor.selectionEnd;
+        editor.value = editor.value.substring(0, start) + '    ' + editor.value.substring(end);
+        editor.selectionStart = editor.selectionEnd = start + 4;
+        updateLineNumbers();
+      }
+      // Support Ctrl + Enter or Cmd + Enter to Run
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        e.preventDefault();
+        runPlaygroundCode();
+      }
+    }
+
+    function loadSelectedTemplate(key) {
+      currentTemplate = key;
+      const editor = document.getElementById('codeEditorInput');
+      editor.value = PLAYGROUND_TEMPLATES[key][currentDialect];
+      updateLineNumbers();
+      document.getElementById('execStatus').className = 'exec-status';
+      document.getElementById('execStatus').innerText = 'প্রস্তুত (Ready)';
+    }
+
+    function switchDialect(mode, btn) {
+      currentDialect = mode;
+      document.querySelectorAll('.lang-toggle button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('editorFileName').innerText = mode === 'bn' ? 'tas.bl' : 'tas.bng';
+      loadSelectedTemplate(currentTemplate);
+    }
+
+    function clearEditor() {
+      const editor = document.getElementById('codeEditorInput');
+      editor.value = '';
+      updateLineNumbers();
+      document.getElementById('consoleText').innerHTML = '<span class="console-welcome">কোডবক্স খালি করা হয়েছে। নিজের কোড লিখুন এবং রান করুন...</span>';
+      document.getElementById('execStatus').className = 'exec-status';
+      document.getElementById('execStatus').innerText = 'ক্লিন (Clean)';
+    }
+
+    function runPlaygroundCode() {
+      const code = document.getElementById('codeEditorInput').value;
+      const consoleBox = document.getElementById('consoleText');
+      const statusEl = document.getElementById('execStatus');
+
+      consoleBox.innerHTML = '';
+      statusEl.className = 'exec-status';
+      statusEl.innerText = 'এক্সিকিউটিং...';
+
+      const startTime = performance.now();
+
+      const engine = new BanglaThonWeb({
+        onOutput: (text, isErr) => {
+          const lineDiv = document.createElement('div');
+          if (isErr) {
+            lineDiv.className = 'out-error';
+            lineDiv.innerText = text;
+          } else {
+            lineDiv.className = 'out-line';
+            lineDiv.innerText = text;
+          }
+          consoleBox.appendChild(lineDiv);
+        },
+        onInput: (promptText) => {
+          const userVal = prompt(promptText || "ইনপুট দিন: ");
+          const lineDiv = document.createElement('div');
+          lineDiv.className = 'out-line';
+          lineDiv.style.color = '#38bdf8';
+          lineDiv.innerText = `> ${promptText || ''}${userVal || ''}`;
+          consoleBox.appendChild(lineDiv);
+          return userVal !== null ? userVal : "0";
+        }
+      });
+
+      const result = engine.run(code);
+      const elapsed = (performance.now() - startTime).toFixed(1);
+
+      if (result.success) {
+        statusEl.className = 'exec-status success';
+        statusEl.innerText = `✓ সফল সমাপ্তি (${elapsed} ms)`;
+        if (!consoleBox.hasChildNodes()) {
+          consoleBox.innerHTML = '<span style="color:#64748b;font-style:italic;">(কোনো আউটপুট প্রিন্ট হয়নি — দেখতে `দেখাও` বা `dekhao` ব্যবহার করুন)</span>';
+        }
+      } else {
+        statusEl.className = 'exec-status error';
+        statusEl.innerText = `❌ এরর ধরা পড়েছে (${elapsed} ms)`;
+      }
+
+      consoleBox.scrollTop = consoleBox.scrollHeight;
+    }
+
+    // OS Switcher for Installation Section
     function switchOS(osName, btn) {
       document.querySelectorAll('.os-tab').forEach((t) => t.classList.remove('active'));
       document.querySelectorAll('.os-panel').forEach((p) => p.classList.remove('active'));
@@ -1327,15 +2468,16 @@
       onDone();
     }
 
-    // Initialize default Bangla code view and auto-detect Mac/Linux tab if opened on Mac/Linux
-    document.getElementById('codePreview').innerHTML = CODE_SAMPLES.bn.html;
-    (function autoSelectOSTab() {
+    // Initialize Default View
+    window.addEventListener('DOMContentLoaded', () => {
+      loadSelectedTemplate('welcome');
+      
       const ua = navigator.userAgent.toLowerCase();
       if (ua.includes('mac') || ua.includes('linux')) {
         const tabs = document.querySelectorAll('.os-tab');
         if (tabs[1]) switchOS('maclinux', tabs[1]);
       }
-    })();
+    });
   </script>
 </body>
 </html>
