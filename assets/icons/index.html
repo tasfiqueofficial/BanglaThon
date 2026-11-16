@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>বাংলাথন (BanglaThon) — অফিশিয়াল ব্র্যান্ড আইকন কিট</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-deep: #004d38;
+      --green-main: #006a4e;
+      --green-light: #10b981;
+      --red-main: #f42a41;
+      --bg: #090e17;
+      --card-bg: #111a27;
+      --card-border: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Hind Siliguri', sans-serif;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      max-width: 1100px;
+      width: 100%;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(0, 106, 78, 0.25);
+      border: 1px solid var(--green-main);
+      color: #34d399;
+      padding: 4px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 34px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    p.lead {
+      color: var(--text-muted);
+      font-size: 15.5px;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .icon-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .icon-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--green-light);
+      box-shadow: 0 12px 30px rgba(0, 106, 78, 0.25);
+    }
+
+    .preview-box {
+      width: 160px;
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      position: relative;
+    }
+
+    .preview-box.checker {
+      background-image: 
+        linear-gradient(45deg, #1e293b 25%, transparent 25%), 
+        linear-gradient(-45deg, #1e293b 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, #1e293b 75%), 
+        linear-gradient(-45deg, transparent 75%, #1e293b 75%);
+      background-size: 16px 16px;
+      background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .preview-box img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.4));
+    }
+
+    .icon-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .icon-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 9px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 8px;
+      text-decoration: none;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.2s;
+      border: 1px solid transparent;
+    }
+
+    .btn-png {
+      background: var(--green-main);
+      color: #ffffff;
+    }
+    .btn-png:hover { background: #008764; }
+
+    .btn-svg {
+      background: rgba(255, 255, 255, 0.08);
+      color: #e2e8f0;
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+    .btn-svg:hover { background: rgba(255, 255, 255, 0.16); }
+
+    .specs-table-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 30px;
+    }
+
+    .specs-table-card h3 {
+      font-size: 18px;
+      color: #6ee7b7;
+      margin-bottom: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+
+    th, td {
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    th {
+      color: #cbd5e1;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    td code {
+      font-family: 'JetBrains Mono', monospace;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 12.5px;
+    }
+
+    .back-nav {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .back-nav a {
+      color: #34d399;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 15px;
+    }
+    .back-nav a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="badge">BanglaThon Brand Assets</div>
+      <h1>বাংলাথন (BanglaThon) অফিশিয়াল আইকন কিট</h1>
+      <p class="lead">
+        অফিশিয়াল ব্র্যান্ডিং, অ্যাপ আইকন, ভিডিও ওয়াটারমার্ক, স্লাইড ডেক ও সোশাল মিডিয়া প্রোফাইলের জন্য উচ্চ রেজোলিউশনের ভেক্টর SVG ও আল্ট্রা-এইচডি PNG ফাইল।
+      </p>
+    </header>
+
+    <div class="grid">
+      <!-- 1. Master App Icon -->
+      <div class="icon-card">
+        <div class="preview-box">
+          <img src="banglathon-app-icon-512.png" alt="BanglaThon App Icon">
+        </div>
+        <div>
+          <h2 class="icon-title">১. মাস্টার স্কুইরকল আইকন</h2>
+          <p class="icon-desc">অফিশিয়াল অ্যাপ আইকন, ডেক্সটপ সফটওয়্যার ও ওয়েবসাইটের মূল আইকন।</p>
+        </div>
+        <div class="btn-group">
+          <a href="banglathon-app-icon-1024.png" download class="btn btn-png">PNG (1024px)</a>
+          <a href="banglathon-app-icon.svg" download class="btn btn-svg">SVG ভেক্টর</a>
+        </div>
+      </div>
+
+      <!-- 2. Code Hybrid Icon -->
+      <div class="icon-card">
+        <div class="preview-box">
+          <img src="banglathon-code-icon-512.png" alt="BanglaThon Code Icon">
+        </div>
+        <div>
+          <h2 class="icon-title">২. ডেভেলপার সিনট্যাক্স আইকন</h2>
+          <p class="icon-desc">কোডিং ব্র্যাকেটযুক্ত <code>&lt; ব /&gt;</code> আইকন — প্রোগ্রামিং বোঝাতে সেরা।</p>
+        </div>
+        <div class="btn-group">
+          <a href="banglathon-code-icon-1024.png" download class="btn btn-png">PNG (1024px)</a>
+          <a href="banglathon-code-icon.svg" download class="btn btn-svg">SVG ভেক্টর</a>
+        </div>
+      </div>
+
+      <!-- 3. Circular Avatar Icon -->
+      <div class="icon-card">
+        <div class="preview-box">
+          <img src="banglathon-circle-icon-512.png" alt="BanglaThon Circle Icon">
+        </div>
+        <div>
+          <h2 class="icon-title">৩. সার্কুলার প্রোফাইল আইকন</h2>
+          <p class="icon-desc">ইউটিউব, ফেসবুক, গিটহাব ও ভিডিও কর্নার ওয়াটারমার্কের গোল লোগো।</p>
+        </div>
+        <div class="btn-group">
+          <a href="banglathon-circle-icon-1024.png" download class="btn btn-png">PNG (1024px)</a>
+          <a href="banglathon-circle-icon.svg" download class="btn btn-svg">SVG ভেক্টর</a>
+        </div>
+      </div>
+
+      <!-- 4. Transparent Sun Emblem -->
+      <div class="icon-card">
+        <div class="preview-box checker">
+          <img src="banglathon-emblem-transparent-512.png" alt="BanglaThon Emblem Transparent">
+        </div>
+        <div>
+          <h2 class="icon-title">৪. ট্রান্সপারেন্ট এমব্লেম</h2>
+          <p class="icon-desc">কোনো ব্যাকগ্রাউন্ড ছাড়া শুধু রক্তিম সূর্য ও সাদা 'ব' (ভিডিওর ওপর বসাতে)।</p>
+        </div>
+        <div class="btn-group">
+          <a href="banglathon-emblem-transparent-1024.png" download class="btn btn-png">PNG (1024px)</a>
+          <a href="banglathon-emblem-transparent.svg" download class="btn btn-svg">SVG ভেক্টর</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Specifications Table -->
+    <div class="specs-table-card">
+      <h3>📁 সকল ফাইলের তালিকা ও ব্যবহারের নির্দেশিকা:</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>ফাইলের নাম</th>
+            <th>ফরম্যাট ও সাইজ</th>
+            <th>ব্যবহারের ক্ষেত্র</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>assets/icons/banglathon-app-icon-1024.png</code></td>
+            <td>PNG • 1024×1024 (HD)</td>
+            <td>ব্যানার, পোস্টার প্রিন্ট ও হাই-রেজোলিউশন ভিডিও থাম্বনেইল</td>
+          </tr>
+          <tr>
+            <td><code>assets/icons/banglathon-app-icon-512.png</code></td>
+            <td>PNG • 512×512</td>
+            <td>সফটওয়্যার স্প্ল্যাশ স্ক্রিন ও প্রেজেন্টেশন স্লাইড</td>
+          </tr>
+          <tr>
+            <td><code>assets/icons/banglathon-code-icon-1024.png</code></td>
+            <td>PNG • 1024×1024 (HD)</td>
+            <td>ডেভেলপার ডকুমেন্টেশন ও টেকনিক্যাল প্রেজেন্টেশন</td>
+          </tr>
+          <tr>
+            <td><code>assets/icons/banglathon-circle-icon-1024.png</code></td>
+            <td>PNG • 1024×1024 (HD)</td>
+            <td>সোশাল মিডিয়া ডিসপ্লে পিকচার (DP) ও ভিডিও ওয়াটারমার্ক</td>
+          </tr>
+          <tr>
+            <td><code>assets/icons/banglathon-emblem-transparent-1024.png</code></td>
+            <td>PNG • স্বচ্ছ ব্যাকগ্রাউন্ড</td>
+            <td>অ্যানিমেটেড ভিডিও ও কালারফুল ব্যাকগ্রাউন্ড ওভারলে</td>
+          </tr>
+          <tr>
+            <td><code>assets/icons/banglathon-app-icon.svg</code></td>
+            <td>ভেক্টর SVG (অসীম স্কেলিং)</td>
+            <td>ইলাস্ট্রেটর, ফিগমা, ক্যানভা ও প্রফেশনাল ভেক্টর এডিটর</td>
+          </tr>
+          <tr>
+            <td><code>favicon.ico</code> &amp; <code>favicon.svg</code></td>
+            <td>ICO (16-64px) &amp; SVG</td>
+            <td>ওয়েবসাইটের ব্রাউজার ট্যাব ফেভিকন</td>
+          </tr>
+          <tr>
+            <td><code>apple-touch-icon.png</code></td>
+            <td>PNG • 180×180</td>
+            <td>মোবাইল বুকমার্ক ও হোমস্ক্রিন শর্টকাট আইকন</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="back-nav">
+      <a href="../../index.html">← বাংলাথন মূল ওয়েবসাইটে ফিরে যান</a>
+    </div>
+  </div>
+
+</body>
+</html>

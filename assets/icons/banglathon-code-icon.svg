@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="codeBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#021A13" />
+      <stop offset="50%" stop-color="#063828" />
+      <stop offset="100%" stop-color="#004D38" />
+    </linearGradient>
+    <radialGradient id="codeSun" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#FF3B53" />
+      <stop offset="70%" stop-color="#F42A41" />
+      <stop offset="100%" stop-color="#9F1239" />
+    </radialGradient>
+  </defs>
+
+  <rect x="24" y="24" width="464" height="464" rx="104" ry="104"
+        fill="url(#codeBg)" stroke="#10B981" stroke-width="4" />
+  
+  <circle cx="256" cy="256" r="145" fill="url(#codeSun)" opacity="0.9" />
+
+  <!-- Code Brackets & ব -->
+  <g fill="none" stroke="#6EE7B7" stroke-width="26" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Left bracket < -->
+    <path d="M 125 210 L 85 256 L 125 302" />
+    <!-- Right bracket /> -->
+    <path d="M 390 210 L 430 256 L 390 302" />
+    <path d="M 370 205 L 345 307" stroke-width="20" stroke="#34D399" />
+  </g>
+
+  <!-- Letter ব -->
+  <g fill="none" stroke="#FFFFFF" stroke-width="28" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 180 185 L 325 185" />
+    <path d="M 292 185 L 292 328" />
+    <path d="M 292 192 L 195 256 L 292 320" />
+  </g>
+</svg>

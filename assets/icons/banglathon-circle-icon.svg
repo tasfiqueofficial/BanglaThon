@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="cirBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#004D38" />
+      <stop offset="55%" stop-color="#006A4E" />
+      <stop offset="100%" stop-color="#003624" />
+    </linearGradient>
+    <radialGradient id="cirSun" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#FF3850" />
+      <stop offset="65%" stop-color="#F42A41" />
+      <stop offset="100%" stop-color="#C2001B" />
+    </radialGradient>
+  </defs>
+
+  <circle cx="256" cy="256" r="240" fill="url(#cirBg)" stroke="#34D399" stroke-width="6" />
+  <circle cx="256" cy="256" r="165" fill="url(#cirSun)" />
+
+  <g fill="none" stroke="#FFFFFF" stroke-width="32" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 152 172 L 360 172" />
+    <path d="M 314 172 L 314 344" />
+    <path d="M 314 182 L 186 258 L 314 336" />
+  </g>
+</svg>

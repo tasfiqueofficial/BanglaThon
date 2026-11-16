@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="embSun" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#FF3850" />
+      <stop offset="65%" stop-color="#F42A41" />
+      <stop offset="100%" stop-color="#C2001B" />
+    </radialGradient>
+  </defs>
+
+  <circle cx="256" cy="256" r="230" fill="url(#embSun)" />
+
+  <g fill="none" stroke="#FFFFFF" stroke-width="38" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 130 155 L 382 155" />
+    <path d="M 330 155 L 330 365" />
+    <path d="M 330 168 L 175 260 L 330 352" />
+  </g>
+</svg>
