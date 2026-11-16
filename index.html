@@ -1010,6 +1010,135 @@
       font-weight: 600;
     }
 
+    /* Official Style Guide Section */
+    .styleguide-section {
+      background: #f8fafc;
+      border-top: 1px solid rgba(0, 106, 78, 0.12);
+      border-bottom: 1px solid rgba(0, 106, 78, 0.12);
+      position: relative;
+    }
+
+    .styleguide-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-bottom: 36px;
+    }
+
+    .style-card {
+      background: #ffffff;
+      border: 1px solid rgba(0, 106, 78, 0.14);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border-top: 3px solid var(--green-main);
+    }
+
+    .style-card.red-accent {
+      border-top-color: var(--red-crimson);
+    }
+
+    .style-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--green-main);
+    }
+
+    .style-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed #cbd5e1;
+    }
+
+    .style-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: var(--green-soft);
+      color: var(--green-deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .style-card-header h3 {
+      font-size: 18px;
+      color: var(--green-deep);
+      margin: 0;
+    }
+
+    .style-card p {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .style-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+      font-size: 12.5px;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+
+    .compare-box {
+      border-radius: 6px;
+      padding: 10px 12px;
+      line-height: 1.5;
+    }
+
+    .compare-good {
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      color: #065f46;
+    }
+
+    .compare-bad {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #991b1b;
+    }
+
+    .compare-label {
+      font-size: 11px;
+      font-weight: 800;
+      display: block;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .ideal-code-card {
+      background: var(--code-bg);
+      border: 1px solid var(--code-border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      color: #e6f4ef;
+      box-shadow: var(--shadow-md);
+      margin-top: 10px;
+    }
+
+    .ideal-code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
     /* Footer */
     footer {
       background: #041b14;
@@ -1048,7 +1177,8 @@
       .hero-grid,
       .heritage-grid,
       .features-grid,
-      .steps-grid {
+      .steps-grid,
+      .styleguide-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1058,7 +1188,8 @@
     }
 
     @media (max-width: 560px) {
-      .timeline-cards {
+      .timeline-cards,
+      .style-compare {
         grid-template-columns: 1fr;
       }
 
@@ -1088,6 +1219,7 @@
         <li><a href="#install">ইনস্টল করুন</a></li>
         <li><a href="#avro-vision">আমাদের অনুপ্রেরণা</a></li>
         <li><a href="#syntax">সিনট্যাক্স</a></li>
+        <li><a href="#styleguide">স্টাইল গাইড</a></li>
         <li><a href="poster/index.html" target="_blank">রিসার্চ পোস্টার</a></li>
         <li><a href="https://github.com/tasfiqueofficial/BanglaThon" target="_blank" rel="noopener">GitHub</a></li>
       </ul>
@@ -1109,7 +1241,7 @@
           কোনো বাধা ছাড়াই!
         </h1>
         <p class="lead">
-          <strong>BanglaThon</strong> হলো বাংলা ও Banglish—উভয় সিনট্যাক্সে লেখা পূর্ণাঙ্গ প্রোগ্রামিং ল্যাঙ্গুয়েজ। কোনো আলাদা Python বা সফটওয়্যার ইনস্টল ছাড়াই ব্রাউজারে সরাসরি লিখে রান করুন এবং কম্পিউটারে ১ কমান্ডে ইনস্টল করুন।
+          <strong>BanglaThon</strong> হলো বাংলা ও Banglish—উভয় মাধ্যমে লেখা সম্পূর্ণ মৌলিক ও স্বতন্ত্র একটি প্রোগ্রামিং ল্যাঙ্গুয়েজ। ব্রাউজারে সরাসরি লিখে প্র্যাকটিস করুন এবং নিজস্ব কম্পিউটারে মাত্র ১ কমান্ডে ইনস্টল করুন।
         </p>
 
         <div class="hero-actions">
@@ -1213,15 +1345,15 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
             macOS ও Linux
           </button>
-          <button type="button" class="os-tab" onclick="switchOS('pip', this)">
+          <button type="button" class="os-tab" onclick="switchOS('source', this)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-            Python (pip)
+            গিট সোর্স কোড (Git Source)
           </button>
         </div>
 
         <!-- Windows Panel -->
         <div class="os-panel active" id="panel-windows">
-          <p><strong>Windows PowerShell</strong> খুলুন এবং নিচের কমান্ডটি পেস্ট করে <kbd>Enter</kbd> চাপুন <em>(আলাদা কোনো Python ইনস্টল থাকা লাগবে না!)</em>:</p>
+          <p><strong>Windows PowerShell</strong> খুলুন এবং নিচের কমান্ডটি পেস্ট করে <kbd>Enter</kbd> চাপুন <em>(স্বয়ংক্রিয়ভাবে নেটিভ বাইনারি ও পাথ কনফিগার হবে)</em>:</p>
           <div class="cmd-box">
             <code class="cmd-text" id="cmd-win">irm https://raw.githubusercontent.com/tasfiqueofficial/BanglaThon/main/install.ps1 | iex</code>
             <button type="button" class="copy-btn" onclick="copyText('cmd-win', this)">কপি করুন</button>
@@ -1258,7 +1390,7 @@
             <div class="step-item">
               <span class="step-num">১</span>
               <h4>জিরো-ঝামেলা সেটআপ</h4>
-              <p>পিসিতে Python না থাকলে কোনো Xcode পপআপ ছাড়াই পোর্টেবল ইঞ্জিন নিজেই ডাউনলোড করে নেবে।</p>
+              <p>স্বয়ংক্রিয়ভাবে নেটিভ ইঞ্জিন ও কমান্ডলাইন পাথ সিস্টেমে যুক্ত হয়ে যাবে।</p>
             </div>
             <div class="step-item">
               <span class="step-num">২</span>
@@ -1273,29 +1405,29 @@
           </div>
         </div>
 
-        <!-- pip Panel -->
-        <div class="os-panel" id="panel-pip">
-          <p>যাদের পিসিতে আগে থেকেই Python ও <code>pip</code> আছে, তারা সরাসরি GitHub থেকে ইনস্টল বা আপডেট করতে পারেন:</p>
+        <!-- Source Code Panel -->
+        <div class="os-panel" id="panel-source">
+          <p>ডেভেলপার এবং অবদানকারীদের জন্য সরাসরি GitHub থেকে সোর্স কোড ক্লোন করে বিল্ড করার সহজ নিয়ম:</p>
           <div class="cmd-box">
-            <code class="cmd-text" id="cmd-pip">pip install --upgrade git+https://github.com/tasfiqueofficial/BanglaThon.git</code>
-            <button type="button" class="copy-btn" onclick="copyText('cmd-pip', this)">কপি করুন</button>
+            <code class="cmd-text" id="cmd-source">git clone https://github.com/tasfiqueofficial/BanglaThon.git && cd BanglaThon</code>
+            <button type="button" class="copy-btn" onclick="copyText('cmd-source', this)">কপি করুন</button>
           </div>
 
           <div class="steps-grid">
             <div class="step-item">
               <span class="step-num">১</span>
-              <h4>ডাইরেক্ট GitHub সোর্স</h4>
-              <p>সবশেষ ভার্সন সরাসরি GitHub <code>main</code> ব্রাঞ্চ থেকে ডাউনলোড হয়।</p>
+              <h4>সরাসরি রিপোজিটরি ক্লোন</h4>
+              <p>GitHub <code>main</code> ব্রাঞ্চ থেকে সম্পূর্ণ ওপেন-সোর্স কোডবেস ডাউনলোড হবে।</p>
             </div>
             <div class="step-item">
               <span class="step-num">২</span>
-              <h4>CLI এন্টারপয়েন্ট</h4>
-              <p>ইনস্টল হলে <code>bangla</code> ও <code>python -m bangla_lang</code> দুটোই ব্যবহার করা যায়।</p>
+              <h4>লোকাল বিল্ড ও লিংক</h4>
+              <p>লোকাল সোর্স ফোল্ডারে প্রবেশ করে সরাসরি নেটিভ সিএলআই এক্সিকিউট করুন।</p>
             </div>
             <div class="step-item">
               <span class="step-num">৩</span>
-              <h4>ভার্সন ও টেস্ট</h4>
-              <p>যাচাই করতে চালান: <code>bangla --version</code> অথবা <code>bangla run tas.bl</code></p>
+              <h4>টেস্ট ও রান</h4>
+              <p>কমান্ডলাইন থেকে সহজে যাচাই করুন: <code>bangla --version</code> অথবা <code>bangla run tas.bl</code></p>
             </div>
           </div>
         </div>
@@ -1380,8 +1512,8 @@
           <p>শুরুতে অভ্যস্ত হতে <code>dekhao</code> বা সরাসরি বাংলায় <code>দেখাও</code>, <code>ধরি</code>, <code>যদি</code> ও বাংলা সংখ্যা <code>০-৯</code>—দুটোই একসাথে ব্যবহার করা যায়।</p>
         </div>
         <div class="f-card red-top">
-          <h3>জিরো-পাইথন রানটাইম</h3>
-          <p>ইউজারের পিসিতে আগে থেকে কোনো কম্পাইলার বা Python ইনস্টল না থাকলেও এক কমান্ডেই পোর্টেবল ইঞ্জিন সেটআপ হয়ে যায়।</p>
+          <h3>স্বতন্ত্র নেটিভ রানটাইম</h3>
+          <p>সম্পূর্ণ মৌলিক ও স্বয়ংসম্পূর্ণ এক্সিকিউশন ইঞ্জিন—কোনো বাহ্যিক জটিল ডিপেন্ডেন্সি ছাড়াই এক কমান্ডেই যে কোনো সিস্টেমে প্রস্তুত হয়ে যায়।</p>
         </div>
         <div class="f-card">
           <h3>VS Code অটো-ইকোসিস্টেম</h3>
@@ -1454,6 +1586,151 @@
     </div>
   </section>
 
+  <!-- Style Guide & Coding Standards Section -->
+  <section id="styleguide" class="styleguide-section">
+    <div class="container" style="padding-top: 60px; padding-bottom: 60px;">
+      <div class="section-head">
+        <span class="section-tag red">মৌলিকত্ব ও কোডিং মানদণ্ড</span>
+        <h2>বাংলাথন অফিশিয়াল স্টাইল গাইড ও কোডিং স্ট্যান্ডার্ড</h2>
+        <p>একটি স্বয়ংসম্পূর্ণ প্রথম-শ্রেণীর ভাষার মতো বাংলাথনের রয়েছে নিজস্ব কোডিং কনভেনশন, নান্দনিক সিনট্যাক্স নীতি ও মৌলিক স্থাপত্য রীতি।</p>
+      </div>
+
+      <div class="styleguide-grid">
+        <!-- 1. Naming Conventions -->
+        <div class="style-card">
+          <div>
+            <div class="style-card-header">
+              <span class="style-icon">০১</span>
+              <h3>অর্থপূর্ণ নামকরণ রীতি (Naming Conventions)</h3>
+            </div>
+            <p>ভ্যারিয়েবল ও ফাংশনের নাম সবসময় অর্থপূর্ণ বাংলা শব্দ বা <code>snake_case</code> ব্যবহার করে লিখুন। একক বর্ণ বা অস্পষ্ট নাম পরিহার করুন। ধ্রুবক (Constants)-এর জন্য বড় হাতের বা স্পষ্ট নাম দিন।</p>
+          </div>
+          <div class="style-compare">
+            <div class="compare-box compare-good">
+              <span class="compare-label">✓ আদর্শ পদ্ধতি</span>
+              ধরি মোট_টাকা = ৫০০<br>
+              কাজ গড়_নির্ণয়(ক, খ) { ... }
+            </div>
+            <div class="compare-box compare-bad">
+              <span class="compare-label">✗ অনুৎসাহিত</span>
+              ধরি x = ৫০০  # অস্পষ্ট<br>
+              কাজ f(a, b) { ... }
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Code Structure & Indentation -->
+        <div class="style-card red-accent">
+          <div>
+            <div class="style-card-header">
+              <span class="style-icon" style="background:#fee2e2;color:#991b1b;">০২</span>
+              <h3>কোড বিন্যাস ও ৪-স্পেস ইনডেন্টেশন (Formatting)</h3>
+            </div>
+            <p>প্রতিটি শর্ত (<code>যদি</code> / <code>jodi</code>), চক্র (<code>যতক্ষণ</code> / <code>jotokhon</code>) ও ফাংশন ব্লকে ৪-স্পেস সমমানের পরিষ্কার ইনডেন্টেশন বজায় রাখুন। অপারেটরের দুই পাশে স্পেস দিন।</p>
+          </div>
+          <div class="style-compare">
+            <div class="compare-box compare-good">
+              <span class="compare-label">✓ আদর্শ পদ্ধতি</span>
+              যদি (বয়স &gt;= ১৮) {<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;দেখাও "যোগ্য ভোটার"<br>
+              }
+            </div>
+            <div class="compare-box compare-bad">
+              <span class="compare-label">✗ অনুৎসাহিত</span>
+              যদি(বয়স&gt;=১৮){দেখাও"যোগ্য ভোটার"}
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Dual-Dialect Consistency -->
+        <div class="style-card">
+          <div>
+            <div class="style-card-header">
+              <span class="style-icon">০৩</span>
+              <h3>ডুয়েল-ডায়লেক্ট ভারসাম্য (.bl বনাম .bng)</h3>
+            </div>
+            <p>বাংলা স্ক্রিপ্টের জন্য <code>.bl</code> ও রোমানাইজড বাংলিশ স্ক্রিপ্টের জন্য <code>.bng</code> ফাইল এক্সটেনশন ব্যবহার করুন। একই ফাইলে বাংলা ও বাংলিশ কীওয়ার্ডের খিচুড়ি মিশ্রণ এড়িয়ে ধারাবাহিকতা বজায় রাখুন।</p>
+          </div>
+          <div class="style-compare">
+            <div class="compare-box compare-good">
+              <span class="compare-label">✓ আদর্শ পদ্ধতি</span>
+              ধরি ফলাফল = ৮০<br>
+              যদি (ফলাফল &gt;= ৮০) { দেখাও "A+" }
+            </div>
+            <div class="compare-box compare-bad">
+              <span class="compare-label">✗ অনুৎসাহিত</span>
+              dhori ফলাফল = ৮০<br>
+              jodi (ফলাফল &gt;= ৮০) { দেখাও "A+" }
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Comments & Diagnostics -->
+        <div class="style-card red-accent">
+          <div>
+            <div class="style-card-header">
+              <span class="style-icon" style="background:#fee2e2;color:#991b1b;">০৪</span>
+              <h3>মানবিক মন্তব্য ও স্পষ্ট এরর সচেতনতা</h3>
+            </div>
+            <p>কোডের যুক্তি ও উদ্দেশ্য স্পষ্ট করতে <code>#</code> দিয়ে সহজ মাতৃভাষায় মন্তব্য (Comments) লিখুন। কোনো এরর ঘটলে বাংলাথন ডায়াগনস্টিক বার্তা ও লাইন নম্বর দেখে ত্রুটি সংশোধন করুন।</p>
+          </div>
+          <div class="style-compare">
+            <div class="compare-box compare-good">
+              <span class="compare-label">✓ আদর্শ পদ্ধতি</span>
+              # শিক্ষার্থী পাস করেছে কিনা যাচাই<br>
+              যদি (নম্বর &gt;= ৩৩) { দেখাও "পাস" }
+            </div>
+            <div class="compare-box compare-bad">
+              <span class="compare-label">✗ অনুৎসাহিত</span>
+              # কোড শুরু<br>
+              যদি (নম্বর &gt;= ৩৩) { দেখাও "পাস" }
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ideal Code Blueprint Card -->
+      <div class="ideal-code-card">
+        <div class="ideal-code-header">
+          <div>
+            <strong style="font-size:16px;color:#34d399;">💎 আদর্শ বাংলাথন কোড ব্লুপ্রিন্ট (Reference Implementation)</strong><br>
+            <small style="color:#94a3b8;">একটি সুসংহত, পরিষ্কার ও স্টাইল গাইড অনুযায়ী রচিত বাংলাথন প্রোগ্রামের নমুনা (.bl)</small>
+          </div>
+          <span style="font-size:12px;color:#a7f3d0;background:rgba(16,185,129,0.15);padding:4px 12px;border-radius:20px;border:1px solid rgba(16,185,129,0.3);">অফিশিয়াল স্ট্যান্ডার্ড</span>
+        </div>
+        <pre style="margin:0;font-family:'JetBrains Mono','Fira Code',monospace;font-size:13.5px;line-height:1.7;color:#e2e8f0;overflow-x:auto;"><code><span style="color:#6ee7b7;"># ----------------------------------------------------</span>
+<span style="color:#6ee7b7;"># প্রকল্প: শিক্ষার্থী ফলাফল ও গ্রেডিং বিশ্লেষণ</span>
+<span style="color:#6ee7b7;"># ভাষা: বাংলাথন v২.০ (আদর্শ বাংলা ডায়লেক্ট)</span>
+<span style="color:#6ee7b7;"># ----------------------------------------------------</span>
+
+<span style="color:#f472b6;">ধরি</span> স্কুল_নাম = <span style="color:#fde047;">"ঢাকা ডিজিটাল একাডেমি"</span>
+<span style="color:#f472b6;">ধরি</span> মোট_শিক্ষার্থী = <span style="color:#38bdf8;">৩</span>
+
+<span style="color:#6ee7b7;"># ফলাফল যাচাই করার নিজস্ব ফাংশন</span>
+<span style="color:#f472b6;">কাজ</span> গ্রেড_নির্ণয়(নম্বর) {
+    <span style="color:#fbbf24;">যদি</span> (নম্বর &gt;= ৮০) {
+        <span style="color:#f472b6;">ফেরত</span> <span style="color:#fde047;">"A+ (অসাধারণ)"</span>
+    } <span style="color:#fbbf24;">নতুবা</span> {
+        <span style="color:#f472b6;">ফেরত</span> <span style="color:#fde047;">"উত্তীর্ণ"</span>
+    }
+}
+
+<span style="color:#f472b6;">দেখাও</span> <span style="color:#fde047;">"--- "</span> + স্কুল_নাম + <span style="color:#fde047;">" এর বার্ষিক ফলাফল ---"</span>
+
+<span style="color:#f472b6;">ধরি</span> রোল = <span style="color:#38bdf8;">১</span>
+<span style="color:#fbbf24;">যতক্ষণ</span> (রোল &lt;= মোট_শিক্ষার্থী) {
+    <span style="color:#f472b6;">ধরি</span> প্রাপ্ত_নম্বর = রোল * ২৫ + ১০
+    <span style="color:#f472b6;">ধরি</span> মন্তব্য = গ্রেড_নির্ণয়(প্রাপ্ত_নম্বর)
+    
+    <span style="color:#f472b6;">দেখাও</span> <span style="color:#fde047;">"রোল "</span> + রোল + <span style="color:#fde047;">" : নম্বর "</span> + প্রাপ্ত_নম্বর + <span style="color:#fde047;">" -&gt; "</span> + মন্তব্য
+    রোল = রোল + <span style="color:#38bdf8;">১</span>
+}
+
+<span style="color:#f472b6;">দেখাও</span> <span style="color:#fde047;">"ফলাফল প্রক্রিয়াকরণ সফলভাবে সম্পন্ন হয়েছে!"</span></code></pre>
+      </div>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer>
     <div class="container footer-inner">
@@ -1462,6 +1739,9 @@
         <small>অভ্র কিবোর্ডের জনক মেহদী হাসান খানের “ভাষা হোক উন্মুক্ত” চেতনায় অনুপ্রাণিত • চিরতরে ফ্রি ও ওপেন-সোর্স (MIT)</small>
       </div>
       <div class="footer-links">
+        <a href="#playground">অনলাইন প্লেগ্রাউন্ড</a>
+        <a href="#styleguide">স্টাইল গাইড</a>
+        <a href="poster/index.html" target="_blank">রিসার্চ পোস্টার</a>
         <a href="https://github.com/tasfiqueofficial/BanglaThon" target="_blank" rel="noopener">GitHub</a>
         <a href="https://marketplace.visualstudio.com/items?itemName=TasfiqueOfficial.banglathon-vscode" target="_blank" rel="noopener">VS Code Extension</a>
         <a href="#install">ডাউনলোড</a>
