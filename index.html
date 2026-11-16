@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>বাংলাথন (BanglaThon) — বাংলা ও Banglish প্রোগ্রামিং ল্যাঙ্গুয়েজ | ভাষা হোক উন্মুক্ত</title>
-  <meta name="description" content="বাংলাথন (BanglaThon) — বাংলা ও Banglish সিনট্যাক্সে বিনামূল্যের ওপেন-সোর্স প্রোগ্রামিং ল্যাঙ্গুয়েজ। Windows, macOS ও Linux-এ এক কমান্ডেই ইনস্টল করুন।">
+  <title>বাংলাথন (BanglaThon): Learning to Program in Your Mother Tongue — A Native Bengali Programming Language for Beginners</title>
+  <meta name="description" content="নতুনদের জন্য মাতৃভাষায় প্রোগ্রামিং: বাংলায় কোড লেখো, বাংলায় শেখো। বাংলাথন (BanglaThon): Learning to Program in Your Mother Tongue — A Native Bengali Programming Language for Beginners। গবেষক: Tasfique Shikder Koushik, Jisra Haider Insa, Md. Anwar Hosen Fahim (Dept. of CSE, RMSTU)। Ziaur Rahman Foundation (ZRF) ভবিষ্যৎ বিজ্ঞানীর খোঁজে ২০২৬ (Track: Engineering & Innovation)।">
+  <meta name="author" content="Tasfique Shikder Koushik, Jisra Haider Insa, Md. Anwar Hosen Fahim">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -1139,6 +1140,268 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
+    /* Competition Banner */
+    .competition-banner {
+      background: linear-gradient(90deg, #004d38 0%, #006a4e 50%, #041b14 100%);
+      color: #ffffff;
+      padding: 9px 0;
+      font-size: 13px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      position: relative;
+      z-index: 101;
+    }
+
+    .banner-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .banner-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(225, 29, 72, 0.25);
+      border: 1px solid rgba(225, 29, 72, 0.45);
+      border-radius: 20px;
+      padding: 3px 12px;
+      color: #fecdd3;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.3px;
+    }
+
+    .banner-text {
+      color: #f1f5f9;
+      font-size: 13px;
+    }
+
+    .banner-team-tag {
+      color: #a7f3d0;
+      font-size: 12.5px;
+      font-weight: 600;
+    }
+
+    .banner-link {
+      color: #6ee7b7;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 12px;
+      padding: 4px 12px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .banner-link:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+    }
+
+    /* Academic Hero Tagline & Authors Card */
+    .academic-hero-tagline {
+      font-size: 15.5px;
+      font-weight: 700;
+      color: var(--green-main);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .academic-hero-tagline .accent-sub {
+      background: #ecfdf5;
+      color: var(--green-deep);
+      padding: 3px 10px;
+      border-radius: 6px;
+      border: 1px solid #bbf7d0;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .academic-authors-card {
+      background: #ffffff;
+      border: 1px solid rgba(0, 106, 78, 0.16);
+      border-left: 4px solid var(--green-main);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin: 16px 0 20px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .academic-authors-card .authors-row {
+      font-size: 14.5px;
+      color: var(--text-main);
+      line-height: 1.5;
+      margin-bottom: 5px;
+    }
+
+    .academic-authors-card .author-name {
+      font-weight: 700;
+      color: var(--green-deep);
+    }
+
+    .academic-authors-card .author-name sup {
+      color: var(--red-crimson);
+      font-weight: 800;
+      margin-left: 1px;
+    }
+
+    .academic-authors-card .affil-row {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .academic-authors-card .track-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .track-pill {
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 6px;
+      background: #f1f5f9;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+    }
+
+    .track-pill.red {
+      background: #fff1f2;
+      color: #991b1b;
+      border-color: #fecaca;
+    }
+
+    /* Research Team Section */
+    .team-section {
+      background: #ffffff;
+      border-top: 1px solid rgba(0, 106, 78, 0.12);
+      border-bottom: 1px solid rgba(0, 106, 78, 0.12);
+      position: relative;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-bottom: 30px;
+    }
+
+    .team-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius-md);
+      padding: 26px 20px;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      position: relative;
+      border-top: 3px solid var(--green-main);
+    }
+
+    .team-card.red-accent {
+      border-top-color: var(--red-crimson);
+    }
+
+    .team-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--green-main);
+    }
+
+    .team-avatar {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--green-main), var(--green-deep));
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+      box-shadow: 0 4px 14px rgba(0, 106, 78, 0.25);
+    }
+
+    .team-card h3 {
+      font-size: 17px;
+      color: var(--green-deep);
+      margin-bottom: 4px;
+    }
+
+    .team-card h3 sup {
+      color: var(--red-crimson);
+      font-weight: 800;
+    }
+
+    .team-card .team-role {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    .team-card .team-dept {
+      font-size: 12px;
+      color: var(--green-main);
+      background: var(--green-soft);
+      border: 1px solid var(--green-border);
+      padding: 3px 10px;
+      border-radius: 20px;
+      display: inline-block;
+      font-weight: 600;
+    }
+
+    .institution-card {
+      background: linear-gradient(135deg, #041b14 0%, #063828 100%);
+      border-radius: var(--radius-md);
+      padding: 24px 30px;
+      color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 18px;
+      border: 1px solid rgba(0, 106, 78, 0.4);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .competition-info-badge {
+      text-align: right;
+    }
+
+    .competition-info-badge strong {
+      display: block;
+      font-size: 15px;
+      color: #ffffff;
+      margin-bottom: 2px;
+    }
+
+    .competition-info-badge span {
+      display: block;
+      font-size: 13px;
+      color: #fecdd3;
+    }
+
+    .competition-info-badge .track-badge {
+      display: inline-block;
+      margin-top: 6px;
+      background: #e11d48;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 20px;
+    }
+
     /* Footer */
     footer {
       background: #041b14;
@@ -1178,8 +1441,23 @@
       .heritage-grid,
       .features-grid,
       .steps-grid,
-      .styleguide-grid {
+      .styleguide-grid,
+      .team-grid {
         grid-template-columns: 1fr;
+      }
+
+      .institution-card {
+        flex-direction: column;
+        text-align: left;
+      }
+
+      .competition-info-badge {
+        text-align: left;
+      }
+
+      .banner-inner {
+        flex-direction: column;
+        align-items: flex-start;
       }
 
       .nav-links {
@@ -1201,7 +1479,24 @@
 </head>
 <body>
 
-  <div class="top-ribbon"></div>
+  <!-- Top Competition & Research Announcement Banner -->
+  <div class="competition-banner">
+    <div class="container banner-inner">
+      <div class="banner-badge">
+        <span class="badge-icon">🏆</span>
+        <span>Ziaur Rahman Foundation (ZRF)</span>
+      </div>
+      <div class="banner-text">
+        “ভবিষ্যৎ বিজ্ঞানীর খোঁজে ২০২৬” (Future Scientist Search 2026) • <strong>Track: Engineering &amp; Innovation</strong>
+      </div>
+      <div class="banner-team-tag">
+        <span>🏛️ Dept. of CSE, RMSTU</span>
+      </div>
+      <a href="poster/index.html" target="_blank" class="banner-link">
+        রিসার্চ পোস্টার ও পেপার ↗
+      </a>
+    </div>
+  </div>
 
   <!-- Navbar -->
   <nav class="navbar">
@@ -1220,6 +1515,7 @@
         <li><a href="#avro-vision">আমাদের অনুপ্রেরণা</a></li>
         <li><a href="#syntax">সিনট্যাক্স</a></li>
         <li><a href="#styleguide">স্টাইল গাইড</a></li>
+        <li><a href="#research-team">টিম ও গবেষণা</a></li>
         <li><a href="poster/index.html" target="_blank">রিসার্চ পোস্টার</a></li>
         <li><a href="https://github.com/tasfiqueofficial/BanglaThon" target="_blank" rel="noopener">GitHub</a></li>
       </ul>
@@ -1236,10 +1532,36 @@
           <span class="badge-dot"></span>
           চিরতরে ১০০% ফ্রি ও ওপেন-সোর্স (MIT License)
         </div>
+
+        <div class="academic-hero-tagline">
+          <span class="accent-sub">নতুনদের জন্য মাতৃভাষায় প্রোগ্রামিং:</span> বাংলায় কোড লেখো, বাংলায় শেখো
+        </div>
+
         <h1>
-          মাতৃভাষা <span class="accent-red">বাংলায়</span> কোড লিখুন,<br />
-          কোনো বাধা ছাড়াই!
+          বাংলাথন <span class="accent-red">(BanglaThon)</span><br />
+          <span style="font-size: 22px; font-weight: 600; color: var(--green-deep); display: block; margin-top: 6px; line-height: 1.35;">
+            Learning to Program in Your Mother Tongue — A Native Bengali Programming Language for Beginners
+          </span>
         </h1>
+
+        <!-- Authors, Affiliation & Competition Track Card -->
+        <div class="academic-authors-card">
+          <div class="authors-row">
+            <strong>গবেষক দল:</strong> 
+            <span class="author-name">Tasfique Shikder Koushik<sup>1</sup></span>, 
+            <span class="author-name">Jisra Haider Insa<sup>1</sup></span>, 
+            <span class="author-name">Md. Anwar Hosen Fahim<sup>1</sup></span>
+          </div>
+          <div class="affil-row">
+            <sup>1</sup>Department of Computer Science &amp; Engineering, Rangamati Science and Technology University (RMSTU)
+          </div>
+          <div class="track-row">
+            <span class="track-pill">Ziaur Rahman Foundation (ZRF)</span>
+            <span class="track-pill">“ভবিষ্যৎ বিজ্ঞানীর খোঁজে ২০২৬”</span>
+            <span class="track-pill red">Track: Engineering &amp; Innovation</span>
+          </div>
+        </div>
+
         <p class="lead">
           <strong>BanglaThon</strong> হলো বাংলা ও Banglish—উভয় মাধ্যমে লেখা সম্পূর্ণ মৌলিক ও স্বতন্ত্র একটি প্রোগ্রামিং ল্যাঙ্গুয়েজ। ব্রাউজারে সরাসরি লিখে প্র্যাকটিস করুন এবং নিজস্ব কম্পিউটারে মাত্র ১ কমান্ডে ইনস্টল করুন।
         </p>
@@ -1731,16 +2053,78 @@
     </div>
   </section>
 
+  <!-- Research Team & Institutional Affiliation Section -->
+  <section id="research-team" class="team-section">
+    <div class="container" style="padding-top: 60px; padding-bottom: 60px;">
+      <div class="section-head">
+        <span class="section-tag red">গবেষণা ও উদ্ভাবক দল</span>
+        <h2>বাংলাথন রিসার্চ ও ডেভেলপমেন্ট টিম</h2>
+        <p>রাঙ্গামাটি বিজ্ঞান ও প্রযুক্তি বিশ্ববিদ্যালয় (RMSTU)-এর কম্পিউটার সায়েন্স অ্যান্ড ইঞ্জিনিয়ারিং বিভাগের উদ্ভাবক গবেষক দল।</p>
+      </div>
+
+      <div class="team-grid">
+        <!-- Author 1 -->
+        <div class="team-card">
+          <div class="team-avatar">TK</div>
+          <h3>Tasfique Shikder Koushik<sup>1</sup></h3>
+          <p class="team-role">লিড সিস্টেম আর্কিটেক্ট ও কম্পাইলার ডিজাইনার</p>
+          <span class="team-dept">Dept. of CSE, RMSTU</span>
+        </div>
+
+        <!-- Author 2 -->
+        <div class="team-card red-accent">
+          <div class="team-avatar" style="background: linear-gradient(135deg, #e11d48, #9f1239);">JI</div>
+          <h3>Jisra Haider Insa<sup>1</sup></h3>
+          <p class="team-role">সহ-গবেষক ও ইন্টারপ্রেটার আর্কিটেকচার</p>
+          <span class="team-dept">Dept. of CSE, RMSTU</span>
+        </div>
+
+        <!-- Author 3 -->
+        <div class="team-card">
+          <div class="team-avatar">AF</div>
+          <h3>Md. Anwar Hosen Fahim<sup>1</sup></h3>
+          <p class="team-role">সহ-গবেষক ও পেডাগজিক্যাল ইভ্যালুয়েশন</p>
+          <span class="team-dept">Dept. of CSE, RMSTU</span>
+        </div>
+      </div>
+
+      <!-- Institutional & Competition Banner Card -->
+      <div class="institution-card">
+        <div class="inst-info">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span style="font-size:26px;">🏛️</span>
+            <div>
+              <h4 style="margin:0;font-size:17.5px;color:#6ee7b7;">Department of Computer Science &amp; Engineering</h4>
+              <p style="margin:3px 0 0;font-size:14px;color:#cbd5e1;">Rangamati Science and Technology University (RMSTU), Rangamati-4500, Bangladesh</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="competition-info-badge">
+          <strong>Ziaur Rahman Foundation (ZRF)</strong>
+          <span>“ভবিষ্যৎ বিজ্ঞানীর খোঁজে ২০২৬” (Future Scientist Search 2026)</span>
+          <span class="track-badge">Track: Engineering &amp; Innovation</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer>
     <div class="container footer-inner">
       <div>
-        <strong style="color:#ffffff;font-size:16px;">বাংলাথন (BanglaThon)</strong> • তৈরি করেছেন তাসফিক (Tasfique)<br />
-        <small>অভ্র কিবোর্ডের জনক মেহদী হাসান খানের “ভাষা হোক উন্মুক্ত” চেতনায় অনুপ্রাণিত • চিরতরে ফ্রি ও ওপেন-সোর্স (MIT)</small>
+        <strong style="color:#ffffff;font-size:16.5px;">বাংলাথন (BanglaThon)</strong><br />
+        <span style="font-size:13.5px;color:#e2e8f0;display:inline-block;margin:3px 0 5px;">Learning to Program in Your Mother Tongue — A Native Bengali Programming Language for Beginners</span><br />
+        <small style="color:#94a3b8;line-height:1.6;display:block;">
+          গবেষক দল: <strong>Tasfique Shikder Koushik<sup>1</sup>, Jisra Haider Insa<sup>1</sup>, Md. Anwar Hosen Fahim<sup>1</sup></strong><br />
+          <sup>1</sup>Department of Computer Science &amp; Engineering, Rangamati Science and Technology University (RMSTU)<br />
+          Ziaur Rahman Foundation (ZRF) · “ভবিষ্যৎ বিজ্ঞানীর খোঁজে ২০২৬” · Track: Engineering &amp; Innovation
+        </small>
       </div>
       <div class="footer-links">
         <a href="#playground">অনলাইন প্লেগ্রাউন্ড</a>
         <a href="#styleguide">স্টাইল গাইড</a>
+        <a href="#research-team">টিম ও গবেষণা</a>
         <a href="poster/index.html" target="_blank">রিসার্চ পোস্টার</a>
         <a href="https://github.com/tasfiqueofficial/BanglaThon" target="_blank" rel="noopener">GitHub</a>
         <a href="https://marketplace.visualstudio.com/items?itemName=TasfiqueOfficial.banglathon-vscode" target="_blank" rel="noopener">VS Code Extension</a>
