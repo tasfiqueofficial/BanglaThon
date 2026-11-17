@@ -1439,6 +1439,134 @@
       text-decoration: underline;
     }
 
+    /* Mobile Menu Toggle & Drawer Styles */
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .mobile-toggle-btn {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: rgba(0, 106, 78, 0.08);
+      border: 1px solid rgba(0, 106, 78, 0.18);
+      cursor: pointer;
+      gap: 5px;
+      padding: 0;
+      transition: background 0.2s;
+    }
+
+    .mobile-toggle-btn:hover,
+    .mobile-toggle-btn:active {
+      background: rgba(0, 106, 78, 0.16);
+    }
+
+    .mobile-toggle-btn .bar {
+      width: 22px;
+      height: 2px;
+      background: var(--green-deep);
+      border-radius: 2px;
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+    }
+
+    .mobile-toggle-btn.active .bar-1 {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .mobile-toggle-btn.active .bar-2 {
+      opacity: 0;
+    }
+
+    .mobile-toggle-btn.active .bar-3 {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .mobile-nav-drawer {
+      display: none;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px);
+      border-bottom: 2px solid var(--green-main);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      padding: 14px 18px 24px;
+      animation: mobileDrawerSlide 0.25s ease forwards;
+      max-height: calc(100vh - 75px);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    @keyframes mobileDrawerSlide {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .mobile-nav-drawer.open {
+      display: block;
+    }
+
+    .mobile-nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .mobile-nav-list a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .mobile-nav-list a:hover,
+    .mobile-nav-list a:active {
+      background: var(--green-soft);
+      color: var(--green-deep);
+    }
+
+    .mobile-nav-list .m-icon {
+      font-size: 18px;
+      width: 24px;
+      text-align: center;
+    }
+
+    .mobile-nav-footer {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed rgba(0, 106, 78, 0.2);
+    }
+
+    .mobile-run-cta {
+      display: block;
+      padding: 13px;
+      text-align: center;
+      background: linear-gradient(135deg, var(--green-main), var(--green-deep));
+      color: #ffffff;
+      font-weight: 700;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 15px;
+      box-shadow: 0 6px 16px rgba(0, 106, 78, 0.25);
+    }
+
+    /* Enhanced Responsive Media Queries */
     @media (max-width: 900px) {
       .hero-grid,
       .heritage-grid,
@@ -1447,6 +1575,14 @@
       .styleguide-grid,
       .team-grid {
         grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none !important;
+      }
+
+      .mobile-toggle-btn {
+        display: flex;
       }
 
       .institution-card {
@@ -1461,21 +1597,290 @@
       .banner-inner {
         flex-direction: column;
         align-items: flex-start;
-      }
-
-      .nav-links {
-        display: none;
+        gap: 6px;
       }
     }
 
-    @media (max-width: 560px) {
+    @media (max-width: 768px) {
+      section {
+        padding: 48px 0 !important;
+      }
+
+      .container {
+        padding: 0 16px;
+      }
+
+      .section-head {
+        margin-bottom: 26px;
+      }
+
+      .section-head h2 {
+        font-size: clamp(22px, 6vw, 30px);
+        line-height: 1.25;
+      }
+
+      .syntax-table-wrap {
+        border-radius: var(--radius-md);
+        -webkit-overflow-scrolling: touch;
+      }
+
+      table th, table td {
+        padding: 10px 12px;
+        font-size: 13px;
+      }
+
+      .hero {
+        padding: 24px 0 36px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .hero-actions a {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .quote-spotlight {
+        padding: 20px 18px;
+      }
+
+      .quote-spotlight blockquote {
+        font-size: 20px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      /* Interactive Code Editor on Mobile */
+      .code-header {
+        padding: 10px 12px;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .window-dots {
+        order: 1;
+      }
+
+      .editor-title-wrap {
+        order: 2;
+      }
+
+      .lang-toggle {
+        order: 3;
+        margin-left: auto;
+      }
+
+      .template-selector {
+        order: 4;
+        width: 100%;
+      }
+
+      .template-selector select {
+        width: 100%;
+        padding: 7px 10px;
+        font-size: 13px;
+      }
+
+      .editor-actions {
+        order: 5;
+        width: 100%;
+        display: flex;
+        gap: 8px;
+      }
+
+      .btn-run {
+        flex: 2;
+        justify-content: center;
+        padding: 10px 14px;
+        font-size: 14px;
+      }
+
+      .btn-clear {
+        flex: 1;
+        text-align: center;
+        padding: 10px 12px;
+      }
+
+      .editor-container {
+        min-height: 220px;
+      }
+
+      .code-input {
+        font-size: 13px;
+        padding: 10px 12px;
+        min-height: 220px;
+        line-height: 1.55;
+      }
+
+      .line-numbers {
+        width: 34px;
+        padding: 10px 4px;
+        font-size: 12px;
+      }
+
+      .code-output {
+        padding: 12px 14px;
+        font-size: 12.5px;
+      }
+
+      .console-output-box {
+        max-height: 180px;
+        font-size: 12.5px;
+      }
+
+      /* Installation Section on Mobile */
+      .os-tabs {
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .os-tab {
+        padding: 12px 16px;
+        font-size: 13.5px;
+        flex: 0 0 auto;
+      }
+
+      .os-panel {
+        padding: 20px 16px;
+      }
+
+      .cmd-box {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 14px 16px;
+      }
+
+      .cmd-text {
+        font-size: 13px;
+        white-space: pre-wrap;
+        word-break: break-all;
+      }
+
+      .copy-btn {
+        width: 100%;
+        padding: 11px;
+        font-size: 14px;
+        text-align: center;
+      }
+
+      .steps-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
       .timeline-cards,
       .style-compare {
         grid-template-columns: 1fr;
       }
 
-      .os-panel {
-        padding: 20px 16px;
+      .downloads-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .direct-links {
+        width: 100%;
+      }
+
+      .mini-link {
+        flex: 1;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .ideal-code-card {
+        padding: 16px 14px;
+      }
+
+      .ideal-code-card pre {
+        font-size: 12px;
+        line-height: 1.6;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+      }
+
+      .footer-links {
+        justify-content: center;
+        gap: 12px 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav-inner {
+        height: 62px;
+      }
+
+      .brand-logo {
+        width: 36px;
+        height: 36px;
+      }
+
+      .brand-logo::before {
+        width: 22px;
+        height: 22px;
+      }
+
+      .brand-logo span {
+        font-size: 18px;
+      }
+
+      .brand-text strong {
+        font-size: 16px;
+      }
+
+      .brand-text strong span {
+        display: none;
+      }
+
+      .brand-text small {
+        font-size: 11px;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .banner-inner {
+        padding: 4px 0;
+        font-size: 11px;
+        gap: 4px;
+      }
+
+      .banner-badge {
+        font-size: 11px;
+        padding: 2px 8px;
+      }
+
+      .banner-link {
+        font-size: 11px;
+        padding: 3px 8px;
+      }
+
+      .academic-authors-card {
+        padding: 12px 14px;
+      }
+
+      .academic-authors-card .authors-row {
+        font-size: 13.5px;
+      }
+
+      .academic-authors-card .affil-row {
+        font-size: 12px;
+      }
+
+      .track-pill {
+        font-size: 11px;
+        padding: 2px 7px;
       }
     }
   </style>
@@ -1524,7 +1929,34 @@
         <li><a href="https://github.com/tasfiqueofficial/BanglaThon" target="_blank" rel="noopener">GitHub</a></li>
       </ul>
 
-      <a href="#install" class="nav-cta">এক ক্লিকে ইনস্টল ↓</a>
+      <div class="nav-actions">
+        <a href="#install" class="nav-cta">এক ক্লিকে ইনস্টল ↓</a>
+        <button type="button" class="mobile-toggle-btn" id="mobileToggleBtn" aria-label="মেন্যু খুলুন" onclick="toggleMobileMenu()">
+          <span class="bar bar-1"></span>
+          <span class="bar bar-2"></span>
+          <span class="bar bar-3"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-nav-drawer" id="mobileNavDrawer">
+      <ul class="mobile-nav-list">
+        <li><a href="#playground" onclick="closeMobileMenu()"><span class="m-icon">⚡</span>অনলাইন প্লেগ্রাউন্ড</a></li>
+        <li><a href="#install" onclick="closeMobileMenu()"><span class="m-icon">📥</span>১-কমান্ড ইনস্টলেশন</a></li>
+        <li><a href="#avro-vision" onclick="closeMobileMenu()"><span class="m-icon">📖</span>আমাদের অনুপ্রেরণা</a></li>
+        <li><a href="#syntax" onclick="closeMobileMenu()"><span class="m-icon">💻</span>সিনট্যাক্স টেবিল</a></li>
+        <li><a href="#styleguide" onclick="closeMobileMenu()"><span class="m-icon">📐</span>অফিশিয়াল স্টাইল গাইড</a></li>
+        <li><a href="#research-team" onclick="closeMobileMenu()"><span class="m-icon">👥</span>রিসার্চ ও উদ্ভাবক টিম</a></li>
+        <li><a href="poster/index.html" target="_blank" onclick="closeMobileMenu()"><span class="m-icon">📄</span>রিসার্চ পেপার ও পোস্টার</a></li>
+        <li><a href="assets/icons/index.html" target="_blank" onclick="closeMobileMenu()"><span class="m-icon">🎨</span>ব্র্যান্ড আইকন কিট</a></li>
+        <li><a href="https://github.com/tasfiqueofficial/BanglaThon" target="_blank" rel="noopener"><span class="m-icon">⭐</span>GitHub Repository</a></li>
+      </ul>
+      <div class="mobile-nav-footer">
+        <a href="#playground" class="mobile-run-cta" onclick="closeMobileMenu()">
+          ▶ সরাসরি ব্রাউজারে কোড প্র্যাকটিস করুন
+        </a>
+      </div>
     </div>
   </nav>
 
@@ -3136,6 +3568,45 @@ jodi (naam == "Karim") {
       document.body.removeChild(ta);
       onDone();
     }
+
+    // Mobile Drawer Navigation Handlers
+    function toggleMobileMenu() {
+      const drawer = document.getElementById('mobileNavDrawer');
+      const btn = document.getElementById('mobileToggleBtn');
+      if (!drawer || !btn) return;
+      const isOpen = drawer.classList.toggle('open');
+      btn.classList.toggle('active', isOpen);
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+
+    function closeMobileMenu() {
+      const drawer = document.getElementById('mobileNavDrawer');
+      const btn = document.getElementById('mobileToggleBtn');
+      if (drawer && drawer.classList.contains('open')) {
+        drawer.classList.remove('open');
+        if (btn) {
+          btn.classList.remove('active');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+        document.body.style.overflow = '';
+      }
+    }
+
+    // Close mobile menu on Escape key or outside click
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMobileMenu();
+    });
+
+    document.addEventListener('click', (e) => {
+      const drawer = document.getElementById('mobileNavDrawer');
+      const btn = document.getElementById('mobileToggleBtn');
+      if (drawer && drawer.classList.contains('open')) {
+        if (!drawer.contains(e.target) && !btn.contains(e.target)) {
+          closeMobileMenu();
+        }
+      }
+    });
 
     // Initialize Default View
     window.addEventListener('DOMContentLoaded', () => {

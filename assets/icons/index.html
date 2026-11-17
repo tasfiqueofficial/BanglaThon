@@ -224,6 +224,57 @@
       font-size: 15px;
     }
     .back-nav a:hover { text-decoration: underline; }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 24px 14px;
+      }
+
+      h1 {
+        font-size: 26px;
+      }
+
+      p.lead {
+        font-size: 14px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .icon-card {
+        padding: 20px 16px;
+      }
+
+      .preview-box {
+        width: 140px;
+        height: 140px;
+      }
+
+      .btn-group {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .btn {
+        width: 100%;
+        padding: 11px;
+        font-size: 13.5px;
+      }
+
+      .specs-table-card {
+        padding: 16px 12px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      table th, table td {
+        padding: 8px 10px;
+        font-size: 12px;
+        white-space: nowrap;
+      }
+    }
   </style>
 </head>
 <body>
