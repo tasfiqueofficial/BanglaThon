@@ -1405,6 +1405,168 @@
       border-radius: 20px;
     }
 
+    /* Publications & Books Grid */
+    .publications-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    .publication-card {
+      background: #ffffff;
+      border: 1px solid var(--gray-border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .publication-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .publication-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+    }
+
+    .publication-card.user-manual::before {
+      background: linear-gradient(90deg, var(--green-main), #10b981);
+    }
+
+    .publication-card.engineering-whitepaper::before {
+      background: linear-gradient(90deg, var(--red-main), #f43f5e);
+    }
+
+    .pub-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      width: fit-content;
+    }
+
+    .pub-badge.green {
+      background: var(--green-soft);
+      color: var(--green-main);
+      border: 1px solid var(--green-border);
+    }
+
+    .pub-badge.red {
+      background: #fff1f2;
+      color: var(--red-main);
+      border: 1px solid rgba(225, 29, 72, 0.2);
+    }
+
+    .pub-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--gray-dark);
+      margin-bottom: 6px;
+      line-height: 1.35;
+    }
+
+    .pub-sub {
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+
+    .pub-highlights {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 20px;
+      font-size: 12.5px;
+      color: #334155;
+    }
+
+    .pub-highlights li {
+      position: relative;
+      padding-left: 18px;
+      margin-bottom: 6px;
+      line-height: 1.45;
+    }
+
+    .pub-highlights li::before {
+      content: "•";
+      position: absolute;
+      left: 4px;
+      font-weight: 800;
+      color: var(--green-main);
+    }
+
+    .publication-card.engineering-whitepaper .pub-highlights li::before {
+      color: var(--red-main);
+    }
+
+    .pub-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .pub-btn {
+      flex: 1;
+      min-width: 130px;
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 8px;
+      text-decoration: none;
+      text-align: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .pub-btn-primary {
+      background: var(--green-main);
+      color: #ffffff;
+      border: 1px solid transparent;
+    }
+    .pub-btn-primary:hover {
+      background: #004d38;
+      color: #ffffff;
+    }
+
+    .pub-btn-red {
+      background: var(--red-main);
+      color: #ffffff;
+      border: 1px solid transparent;
+    }
+    .pub-btn-red:hover {
+      background: #be123c;
+      color: #ffffff;
+    }
+
+    .pub-btn-outline {
+      background: transparent;
+      border: 1px solid var(--gray-border);
+      color: var(--gray-dark);
+    }
+    .pub-btn-outline:hover {
+      background: var(--gray-bg);
+      border-color: #cbd5e1;
+    }
+
     /* Footer */
     footer {
       background: #041b14;
@@ -1920,12 +2082,12 @@
       <ul class="nav-links">
         <li><a href="#playground" style="color:var(--green-main);font-weight:700;">⚡ অনলাইন প্লেগ্রাউন্ড</a></li>
         <li><a href="#install">ইনস্টল করুন</a></li>
-        <li><a href="#avro-vision">আমাদের অনুপ্রেরণা</a></li>
         <li><a href="#syntax">সিনট্যাক্স</a></li>
         <li><a href="#styleguide">স্টাইল গাইড</a></li>
-        <li><a href="#research-team">টিম ও গবেষণা</a></li>
-        <li><a href="poster/index.html" target="_blank">রিসার্চ পোস্টার</a></li>
-        <li><a href="assets/icons/index.html" target="_blank">ব্র্যান্ড আইকন</a></li>
+        <li><a href="docs/BanglaThon_User_Manual.pdf" target="_blank" title="১০ পাতার প্রিন্ট-রেডি ইউজার ম্যানুয়াল">📖 ইউজার ম্যানুয়াল</a></li>
+        <li><a href="docs/BanglaThon_Engineering_Whitepaper.pdf" target="_blank" title="১০ পাতার ইঞ্জিনিয়ারিং হোয়াইটপেপার">📑 হোয়াইটপেপার</a></li>
+        <li><a href="poster/index.html" target="_blank">পোস্টার</a></li>
+        <li><a href="#research-team">টিম ও প্রকাশনা</a></li>
         <li><a href="https://github.com/tasfiqueofficial/BanglaThon" target="_blank" rel="noopener">GitHub</a></li>
       </ul>
 
@@ -1944,11 +2106,12 @@
       <ul class="mobile-nav-list">
         <li><a href="#playground" onclick="closeMobileMenu()"><span class="m-icon">⚡</span>অনলাইন প্লেগ্রাউন্ড</a></li>
         <li><a href="#install" onclick="closeMobileMenu()"><span class="m-icon">📥</span>১-কমান্ড ইনস্টলেশন</a></li>
-        <li><a href="#avro-vision" onclick="closeMobileMenu()"><span class="m-icon">📖</span>আমাদের অনুপ্রেরণা</a></li>
         <li><a href="#syntax" onclick="closeMobileMenu()"><span class="m-icon">💻</span>সিনট্যাক্স টেবিল</a></li>
         <li><a href="#styleguide" onclick="closeMobileMenu()"><span class="m-icon">📐</span>অফিশিয়াল স্টাইল গাইড</a></li>
-        <li><a href="#research-team" onclick="closeMobileMenu()"><span class="m-icon">👥</span>রিসার্চ ও উদ্ভাবক টিম</a></li>
+        <li><a href="docs/BanglaThon_User_Manual.pdf" target="_blank" onclick="closeMobileMenu()"><span class="m-icon">📖</span>ইউজার ম্যানুয়াল (PDF)</a></li>
+        <li><a href="docs/BanglaThon_Engineering_Whitepaper.pdf" target="_blank" onclick="closeMobileMenu()"><span class="m-icon">📑</span>হোয়াইটপেপার (PDF)</a></li>
         <li><a href="poster/index.html" target="_blank" onclick="closeMobileMenu()"><span class="m-icon">📄</span>রিসার্চ পেপার ও পোস্টার</a></li>
+        <li><a href="#research-team" onclick="closeMobileMenu()"><span class="m-icon">👥</span>রিসার্চ ও উদ্ভাবক টিম</a></li>
         <li><a href="assets/icons/index.html" target="_blank" onclick="closeMobileMenu()"><span class="m-icon">🎨</span>ব্র্যান্ড আইকন কিট</a></li>
         <li><a href="https://github.com/tasfiqueofficial/BanglaThon" target="_blank" rel="noopener"><span class="m-icon">⭐</span>GitHub Repository</a></li>
       </ul>
@@ -2542,6 +2705,73 @@
           <span class="track-badge">Track: Engineering &amp; Innovation</span>
         </div>
       </div>
+
+      <!-- Official Books & Publications Showcase -->
+      <div style="margin-top: 40px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:14px;">
+          <div>
+            <span class="section-tag green" style="margin-bottom:6px;">অফিশিয়াল প্রকাশনা</span>
+            <h3 style="font-size:22px;color:var(--gray-dark);margin:0;font-weight:800;">বাংলাথন অফিসিয়াল বুকলেট ও রিসার্চ পেপার সিরিজ</h3>
+          </div>
+          <span style="font-size:12.5px;color:#64748b;background:#f1f5f9;padding:4px 14px;border-radius:20px;border:1px solid #e2e8f0;font-weight:600;">
+            ১০ পাতার প্রিন্ট-রেডি সংস্করণ • ১০০% উন্মুক্ত
+          </span>
+        </div>
+
+        <div class="publications-grid">
+          <!-- Book 1: User Manual -->
+          <div class="publication-card user-manual">
+            <div>
+              <div class="pub-badge green">
+                <span>📘</span> ১০ পৃষ্ঠা • অফিসিয়াল ইউজার ম্যানুয়াল • v2.0
+              </div>
+              <h4 class="pub-title">বাংলাথন অফিসিয়াল ইউজার ম্যানুয়াল</h4>
+              <p class="pub-sub">
+                বাংলায় প্রোগ্রামিং শেখার পূর্ণাঙ্গ নির্দেশিকা। বর্ণমালা, ভেরিয়েবল, লজিক্যাল ডিসিশন, লুপ, ফাংশন, ইনপুট-আউটপুট মেথড এবং স্ট্যান্ডার্ড কোডিং স্টাইল গাইড।
+              </p>
+              <ul class="pub-highlights">
+                <li><strong>অধ্যায় ১-৪:</strong> ফিলোসফি, পরিবেশ সেটআপ, ডেটাটাইপ ও ভেরিয়েবল ডিক্লেয়ারেশন।</li>
+                <li><strong>অধ্যায় ৫-৭:</strong> শর্তাধীন সিদ্ধান্ত (যদি/নতুবা), লুপ ও কাস্টম ফাংশন গঠন।</li>
+                <li><strong>অধ্যায় ৮-১০:</strong> স্ট্যান্ডার্ড লাইব্রেরি, অফিসিয়াল স্টাইল গাইড ও রিসোর্স লিংক।</li>
+              </ul>
+            </div>
+            <div class="pub-actions">
+              <a href="docs/BanglaThon_User_Manual.pdf" target="_blank" class="pub-btn pub-btn-primary">
+                📥 PDF ডাউনলোড (A4)
+              </a>
+              <a href="docs/BanglaThon_User_Manual.html" target="_blank" class="pub-btn pub-btn-outline">
+                🌐 ব্রাউজারে পড়ুন (HTML)
+              </a>
+            </div>
+          </div>
+
+          <!-- Book 2: Engineering Whitepaper -->
+          <div class="publication-card engineering-whitepaper">
+            <div>
+              <div class="pub-badge red">
+                <span>📑</span> ১০ পৃষ্ঠা • ইঞ্জিনিয়ারিং হোয়াইটপেপার • সিস্টেম আর্কিটেকচার
+              </div>
+              <h4 class="pub-title">বাংলাথন ইঞ্জিনিয়ারিং হোয়াইটপেপার</h4>
+              <p class="pub-sub">
+                ডিপ-টেক সিস্টেম আর্কিটেকচার ও কম্পাইলার ডিজাইন পেপার। ডুয়েট লেক্সার, প্র্যাট প্রেসিডেন্স পার্সার, AST মেমোরি মডেল ও জিরো-ডিপেন্ডেন্সি নেটিভ রানটাইম।
+              </p>
+              <ul class="pub-highlights">
+                <li><strong>সেকশন ১-৪:</strong> ইউনিকোড NFC নরমালাইজার, টোকেনাইজার ও ডুয়েট লেক্সার আর্কিটেকচার।</li>
+                <li><strong>সেকশন ৫-৭:</strong> প্রেসিডেন্স পার্সার, AST ডিসপ্যাচ ও এনভায়রনমেন্ট স্কোপ ট্রি।</li>
+                <li><strong>সেকশন ৮-১০:</strong> সেলফ-কনটেইন্ড ডিস্ট্রিবিউশন, বেঞ্চমার্কিং ও বিচারক ডিফেন্স।</li>
+              </ul>
+            </div>
+            <div class="pub-actions">
+              <a href="docs/BanglaThon_Engineering_Whitepaper.pdf" target="_blank" class="pub-btn pub-btn-red">
+                📥 PDF ডাউনলোড (A4)
+              </a>
+              <a href="docs/BanglaThon_Engineering_Whitepaper.html" target="_blank" class="pub-btn pub-btn-outline">
+                🌐 ব্রাউজারে পড়ুন (HTML)
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -2560,7 +2790,9 @@
       <div class="footer-links">
         <a href="#playground">অনলাইন প্লেগ্রাউন্ড</a>
         <a href="#styleguide">স্টাইল গাইড</a>
-        <a href="#research-team">টিম ও গবেষণা</a>
+        <a href="docs/BanglaThon_User_Manual.pdf" target="_blank">ইউজার ম্যানুয়াল (PDF)</a>
+        <a href="docs/BanglaThon_Engineering_Whitepaper.pdf" target="_blank">হোয়াইটপেপার (PDF)</a>
+        <a href="#research-team">টিম ও প্রকাশনা</a>
         <a href="poster/index.html" target="_blank">রিসার্চ পোস্টার</a>
         <a href="assets/icons/index.html" target="_blank">ব্র্যান্ড আইকন</a>
         <a href="https://github.com/tasfiqueofficial/BanglaThon" target="_blank" rel="noopener">GitHub</a>

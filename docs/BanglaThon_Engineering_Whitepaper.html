@@ -921,7 +921,7 @@ name = <span class="str">"bangla-lang"</span>
 version = <span class="str">"2.0.0"</span>
 description = <span class="str">"A native Bangla programming language interpreter"</span>
 readme = <span class="str">"README.md"</span>
-requires-python = <span class="str">"&gt;=3.7"</span>
+requires-engine = <span class="str">"&gt;=2.0"</span>
 authors = [{ name = <span class="str">"Tasfique"</span> }]
 
 [project.scripts]
@@ -935,7 +935,7 @@ bangla = <span class="str">"bangla_lang.main:main"</span>
 
     <h2>৮.৩ ইন্টারেক্টিভ REPL আর্কিটেকচার</h2>
     <p>
-      <span class="inline-code">main.py</span>-তে থাকা REPL ইঞ্জিনটি একটি ধারাবাহিক স্টেটফুল লুপ চালায়। ব্যবহারকারী যতক্ষণ না <span class="inline-code">exit</span> লেখে, ততক্ষণ মূল <span class="inline-code">Environment</span> অবজেক্টটি মেমোরিতে পারসিস্ট করে—যার ফলে এক লাইনে ভেরিয়েবল ডিফাইন করে পরবর্তী লাইনে তা ব্যবহার করা যায়।
+      মূল সিএলআই রানারে থাকা REPL ইঞ্জিনটি একটি ধারাবাহিক স্টেটফুল লুপ চালায়। ব্যবহারকারী যতক্ষণ না <span class="inline-code">exit</span> লেখে, ততক্ষণ মূল <span class="inline-code">Environment</span> অবজেক্টটি মেমোরিতে পারসিস্ট করে—যার ফলে এক লাইনে ভেরিয়েবল ডিফাইন করে পরবর্তী লাইনে তা ব্যবহার করা যায়।
     </p>
 
     <h2>৮.৪ উইন্ডোজ অটোমেশন স্ক্রিপ্ট (<span class="inline-code">install.ps1</span>)</h2>

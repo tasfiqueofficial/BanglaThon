@@ -690,7 +690,7 @@
               Building a programming language for a complex Brahmic script like Bengali presents distinct systems challenges that standard ASCII lexers fail to handle:
             </p>
             <ul class="academic-list">
-              <li><strong>Zero-Python Dependency Runtime:</strong> Most educational tools fail in rural school labs because students cannot install Python, pip, or configure environment PATHs. BanglaThon bundles an isolated, standalone CPython embedded engine with zero external dependencies.</li>
+              <li><strong>Zero-Dependency Standalone Runtime:</strong> Most educational tools fail in rural school labs due to complex environments, external package managers, or PATH configurations. BanglaThon bundles an isolated, standalone native engine requiring zero pre-requisites or external dependencies.</li>
               <li><strong>Unicode NFC Normalization Engine:</strong> Bengali script uses combining vowel marks (কার), virama (হসন্ত), and rephs. Decomposed Unicode points break identifier matching. Our lexer enforces NFC composition (Unicode TR15) before tokenization, preventing token fragmentation.</li>
               <li><strong>Pratt Precedence AST Synthesizer:</strong> Operator precedence climbing ensures arithmetic (<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>) and boolean logic (<code>এবং</code>, <code>বা</code>, <code>নয়</code>) resolve with absolute mathematical precision.</li>
             </ul>
@@ -776,7 +776,7 @@
             <thead>
               <tr>
                 <th>Engineering Metric</th>
-                <th>Standard Python</th>
+                <th>Standard Interpreters</th>
                 <th>Standard C/GCC</th>
                 <th>BanglaThon v2.0</th>
               </tr>
