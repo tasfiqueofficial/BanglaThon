@@ -29,7 +29,7 @@
 
     @page {
       size: A4 portrait;
-      margin: 15mm 15mm 16mm 15mm;
+      margin: 10mm 12mm 10mm 12mm;
     }
 
     body {
@@ -71,7 +71,7 @@
       min-height: 297mm;
       margin: 10px auto 25px auto;
       background: white;
-      padding: 16mm 18mm 18mm 18mm;
+      padding: 12mm 14mm 12mm 14mm;
       box-shadow: 0 4px 25px rgba(0,0,0,0.08);
       position: relative;
       display: flex;
@@ -149,15 +149,20 @@
     tr:nth-child(even) { background-color: #f8fafc; }
 
     /* Code Blocks */
-    pre, code { font-family: 'Fira Code', monospace; }
+    pre, code, .code-box {
+      font-family: 'Fira Code', 'JetBrains Mono', 'Consolas', monospace;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
     .code-box {
       background: var(--code-bg);
       color: var(--code-text);
       padding: 10px 14px;
       border-radius: 6px;
       font-size: 11px;
-      line-height: 1.45;
-      margin: 8px 0;
+      line-height: 1.38;
+      margin: 6px 0;
+      font-size: 10.5px;
       border-left: 3px solid var(--green);
       overflow-x: auto;
     }
@@ -252,7 +257,7 @@
 <body>
 
   <div class="screen-toolbar">
-    <button class="print-btn" onclick="window.print()">🖨️ প্রিন্ট / Save as 10-Page PDF</button>
+    <button class="print-btn" onclick="window.print()">🖨️ প্রিন্ট / Save as PDF (A4)</button>
   </div>
 
   <!-- ==========================================
@@ -407,38 +412,30 @@ bangla run tas.bl
 
     <h2>৩.১ প্রথম প্রোগ্রাম রচনা (<span class="inline-code">hello.bl</span>)</h2>
     <p>
-      আপনার কম্পিউটারের যেকোনো টেক্সট এডিটর (যেমন: Notepad, VS Code) দিয়ে একটি নতুন ফাইল তৈরি করুন এবং সেভ করুন <span class="inline-code">hello.bl</span> নামে:
+      যেকোনো এডিটরে নতুন ফাইল তৈরি করে সেভ করুন <span class="inline-code">hello.bl</span> নামে:
     </p>
 
     <div class="code-box">
 <span class="cm"># এটি আমার প্রথম বাংলাথন প্রোগ্রাম</span>
 <span class="kw">dekhao</span> <span class="str">"আসসালামু আলাইকুম বাংলাদেশ!"</span>
-<span class="kw">dekhao</span> <span class="str">"বাংলা ভাষায় কোডিং এখন বাস্তব।"</span>
-
 <span class="kw">dhori</span> shongkha_a = <span class="num">25</span>
 <span class="kw">dhori</span> shongkha_b = <span class="num">15</span>
 <span class="kw">dekhao</span> <span class="str">"যোগফল: "</span> + (shongkha_a + shongkha_b)
     </div>
 
     <h2>৩.২ টার্মিনাল থেকে ফাইল এক্সিকিউট করা</h2>
-    <p>টার্মিনাল বা সিএমডি ওপেন করে ফাইলটি রান করার কমান্ড:</p>
+    <p>টার্মিনালে ফাইলটি রান করার কমান্ড:</p>
     <div class="code-box">
-<span class="cm"># স্ট্যান্ডার্ড রান কমান্ড:</span>
-bangla run hello.bl
-
-<span class="cm"># সরাসরি ফাইল পাথ দিয়েও চলবে:</span>
-bangla hello.bl
+bangla run hello.bl    <span class="cm"># স্ট্যান্ডার্ড রান কমান্ড</span>
+bangla hello.bl        <span class="cm"># অথবা সরাসরি ফাইল পাথ</span>
     </div>
 
     <h2>৩.৩ লাইভ ইন্টারেক্টিভ মোড (Interactive REPL Mode)</h2>
     <p>
-      যেকোনো আধুনিক ল্যাঙ্গুয়েজের মতো বাংলাথনেও রয়েছে একটি উচ্চক্ষমতাসম্পন্ন <strong>ইন্টারেক্টিভ কনসোল (REPL)</strong>। টার্মিনালে কোনো আর্গুমেন্ট ছাড়া শুধু <span class="inline-code">bangla</span> লিখলেই লাইভ মোড চালু হয়:
+      টার্মিনালে কোনো আর্গুমেন্ট ছাড়া শুধু <span class="inline-code">bangla</span> লিখলেই সরাসরি লাইভ ইন্টারেক্টিভ মোড চালু হয়:
     </p>
     <div class="code-box">
 $ bangla
-Bangla Programming Language v2.0.0 — Interactive Mode
-Exit korte 'exit' likhun
-
 &gt;&gt; <span class="kw">dhori</span> x = <span class="num">100</span>
 &gt;&gt; <span class="kw">dhori</span> y = <span class="num">50</span>
 &gt;&gt; <span class="kw">dekhao</span> x - y
@@ -446,23 +443,18 @@ Exit korte 'exit' likhun
 &gt;&gt; <span class="kw">jodi</span> (x &gt; y) { <span class="kw">dekhao</span> <span class="str">"x boro!"</span> }
 x boro!
 &gt;&gt; exit
-Bidai!
     </div>
 
     <h2>৩.৪ ফাইল এক্সটেনশন নীতি</h2>
     <p>
-      বাংলাথন সোর্স কোড মূলত দুটি এক্সটেনশন সমর্থন করে:
+      বাংলাথন মূলত <span class="inline-code">.bl</span> (স্ট্যান্ডার্ড) এবং <span class="inline-code">.bng</span> (বাংলা স্ক্রিপ্ট) এক্সটেনশন সমর্থন করে।
     </p>
-    <ul style="padding-left:18px; font-size:12px; margin-bottom:8px;">
-      <li><span class="inline-code">.bl</span> (Bangla Language) — স্ট্যান্ডার্ড এক্সটেনশন।</li>
-      <li><span class="inline-code">.bng</span> (Bangla Script) — এক্সটেন্ডেড স্ক্রিপ্ট সমর্থন।</li>
-    </ul>
 
     <h2>৩.৫ মন্তব্য ও ডকুমেন্টেশন (Comments)</h2>
-    <p>কোডের মাঝে মন্তব্য লিখতে হ্যাশ (<span class="inline-code">#</span>) চিহ্ন ব্যবহার করা হয়। ইন্টারপ্রেটার এটি এড়িয়ে যায়:</p>
+    <p>কোডের মাঝে মন্তব্য লিখতে হ্যাশ (<span class="inline-code">#</span>) চিহ্ন ব্যবহার করা হয়:</p>
     <div class="code-box">
 <span class="cm"># এটি একটি সিঙ্গেল-লাইন কমেন্ট</span>
-<span class="kw">dhori</span> roll = <span class="num">101</span> <span class="cm"># রোল নম্বর সেট করা হলো</span>
+<span class="kw">dhori</span> roll = <span class="num">101</span>   <span class="cm"># রোল নম্বর সেট করা হলো</span>
     </div>
 
     <div class="page-footer">
@@ -472,94 +464,85 @@ Bidai!
   </div>
 
   <!-- ==========================================
-       PAGE 5: সিনট্যাক্স স্পেসিফিকেশন: ভেরিয়েবল ও অপারেটরস
+       PAGE 5: সিনট্যাক্স স্পেসিফিকেশন: ভেরিয়েবল ও ডেটা টাইপ
        ========================================== -->
   <div class="page">
     <div class="page-header">
       <span class="brand">BanglaThon Manual</span>
-      <span>অধ্যায় ৪: ভেরিয়েবল, ডেটা টাইপ ও অপারেটরস</span>
+      <span>অধ্যায় ৪ (অংশ ১): ভেরিয়েবল ও ডেটা টাইপ আর্কিটেকচার</span>
     </div>
 
-    <h1>৪. ভেরিয়েবল, ডেটা টাইপ ও অপারেটরস</h1>
+    <h1>৪. ভেরিয়েবল ও মেমোরি ডেটা টাইপ</h1>
 
-    <h2>৪.১ ভেরিয়েবল ঘোষণা ও অ্যাসাইনমেন্ট</h2>
+    <h2>৪.১ ভেরিয়েবল ঘোষণা ও অ্যাসাইনমেন্ট মেকানিজম</h2>
     <p>
-      বাংলাথনে যেকোনো ভেরিয়েবল তৈরি করতে <span class="inline-code">dhori</span> কি-ওয়ার্ড ব্যবহার করা হয়:
+      বাংলাথনে যেকোনো নতুন ভেরিয়েবল তৈরি করতে <span class="inline-code">dhori</span> কি-ওয়ার্ড ব্যবহার করা হয়। এটি মেমোরিতে একটি নতুন পরিবেশ স্কোপ বাইন্ডিং তৈরি করে। পরবর্তী সময়ে বিদ্যমান ভেরিয়েবলের মান পরিবর্তনের জন্য পুনরায় <span class="inline-code">dhori</span> লেখার প্রয়োজন হয় না:
     </p>
     <div class="code-box">
-<span class="kw">dhori</span> boyosh = <span class="num">21</span>               <span class="cm"># নতুন ভেরিয়েবল তৈরি</span>
-<span class="kw">dhori</span> naam = <span class="str">"Tasfique"</span>          <span class="cm"># স্ট্রিং ভেরিয়েবল</span>
-boyosh = <span class="num">22</span>                      <span class="cm"># বিদ্যমান ভেরিয়েবলের মান পরিবর্তন</span>
+<span class="cm"># ভেরিয়েবল তৈরি ও মান সংরক্ষণ:</span>
+<span class="kw">dhori</span> nam = <span class="str">"Tasfique"</span>             <span class="cm"># স্ট্রিং ভেরিয়েবল তৈরি</span>
+<span class="kw">dhori</span> boyosh = <span class="num">21</span>                  <span class="cm"># পূর্ণসংখ্যা (Number)</span>
+<span class="kw">dhori</span> gpa = <span class="num">3.92</span>                   <span class="cm"># দশমিক সংখ্যা (Float)</span>
+<span class="kw">dhori</span> shikkharthi = shotti         <span class="cm"># বুলিয়ান ভ্যালু (Boolean)</span>
+
+<span class="kw">dekhao</span> <span class="str">"শিক্ষার্থীর নাম: "</span> + nam
+<span class="kw">dekhao</span> <span class="str">"বর্তমান বয়স: "</span> + boyosh
+
+<span class="cm"># মান পরিবর্তন (Re-assignment):</span>
+boyosh = boyosh + <span class="num">1</span>
+<span class="kw">dekhao</span> <span class="str">"পরবর্তী জন্মদিনে বয়স হবে: "</span> + boyosh
     </div>
 
-    <h2>৪.২ সমর্থিত ডেটা টাইপসমূহ (Data Types)</h2>
+    <h2>৪.২ সমর্থিত মৌলিক ডেটা টাইপসমূহ (Core Data Types)</h2>
+    <p>
+      বাংলাথন একটি আধুনিক ডাইনামিক্যালি টাইপড প্রোগ্রামিং ভাষা। এতে নিচের ৫টি মূল ডেটা টাইপ সরাসরি সমর্থিত:
+    </p>
     <table>
       <thead>
         <tr>
           <th>ডেটা টাইপ</th>
           <th>বাংলাথনে উদাহরণ</th>
           <th>ইংরেজি সমতুল্য</th>
-          <th>বিবরণ</th>
+          <th>বিবরণ ও মেমোরি মডেল</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td><strong>Number</strong></td>
-          <td><span class="inline-code">dhori x = 42</span>, <span class="inline-code">3.14</span></td>
+          <td><span class="inline-code">dhori x = 42</span>, <span class="inline-code">3.1416</span></td>
           <td>int / float</td>
-          <td>পূর্ণসংখ্যা ও দশমিক সংখ্যা</td>
+          <td>পূর্ণসংখ্যা ও ফ্লোটিং পয়েন্ট দশমিক সংখ্যা।</td>
         </tr>
         <tr>
           <td><strong>String</strong></td>
-          <td><span class="inline-code">"সোনার বাংলা"</span></td>
+          <td><span class="inline-code">"সোনার বাংলা"</span>, <span class="inline-code">"Hello"</span></td>
           <td>str</td>
-          <td>ইউনিকোড ও ল্যাটিন টেক্সট</td>
+          <td>ইউনিকোড বাংলা ও ইংরেজি ল্যাটিন ক্যারেক্টার স্ট্রিং।</td>
         </tr>
         <tr>
           <td><strong>Boolean</strong></td>
           <td><span class="inline-code">shotti</span> / <span class="inline-code">mittha</span></td>
           <td>bool (True/False)</td>
-          <td>লজিক্যাল সত্য বা মিথ্যা</td>
+          <td>লজিক্যাল শর্ত যাচাইয়ের জন্য সত্য বা মিথ্যা।</td>
         </tr>
         <tr>
           <td><strong>List/Array</strong></td>
-          <td><span class="inline-code">talika(1, 2, 3)</span></td>
+          <td><span class="inline-code">talika(10, 20, 30)</span></td>
           <td>list / array</td>
-          <td>ডাইনামিক অ্যারে মেমোরি</td>
+          <td>একাধিক উপাদানের ডাইনামিক মেমোরি অ্যারে।</td>
         </tr>
         <tr>
           <td><strong>Null</strong></td>
           <td><span class="inline-code">khali</span></td>
           <td>None / null</td>
-          <td>শূন্য বা অনির্ধারিত মান</td>
+          <td>অনির্ধারিত বা শূন্য রেফারেন্স নির্দেশ করে।</td>
         </tr>
       </tbody>
     </table>
 
-    <h2>৪.৩ গাণিতিক অপারেটরস (Arithmetic Operators)</h2>
-    <div class="code-box">
-<span class="kw">dekhao</span> <span class="num">10</span> + <span class="num">5</span>   <span class="cm"># যোগ (১৫)</span>
-<span class="kw">dekhao</span> <span class="num">10</span> - <span class="num">5</span>   <span class="cm"># বিয়োগ (৫)</span>
-<span class="kw">dekhao</span> <span class="num">10</span> * <span class="num">5</span>   <span class="cm"># গুণ (৫০)</span>
-<span class="kw">dekhao</span> <span class="num">10</span> / <span class="num">4</span>   <span class="cm"># ভাগ (২.৫)</span>
-<span class="kw">dekhao</span> <span class="num">10</span> % <span class="num">3</span>   <span class="cm"># মডুলাস বা ভাগশেষ (১)</span>
-    </div>
-
-    <h2>৪.৪ তুলনামূলক অপারেটরস (Comparison Operators)</h2>
-    <p>তুলনার ফলাফল হিসেবে সর্বদা <span class="inline-code">shotti</span> অথবা <span class="inline-code">mittha</span> রিটার্ন করে:</p>
-    <div class="code-box">
-<span class="kw">dekhao</span> <span class="num">5</span> &gt; <span class="num">3</span>    <span class="cm"># shotti (বৃহত্তর)</span>
-<span class="kw">dekhao</span> <span class="num">5</span> &lt; <span class="num">3</span>    <span class="cm"># mittha (ক্ষুদ্রতর)</span>
-<span class="kw">dekhao</span> <span class="num">5</span> == <span class="num">5</span>   <span class="cm"># shotti (সমান)</span>
-<span class="kw">dekhao</span> <span class="num">5</span> != <span class="num">3</span>   <span class="cm"># shotti (অসমান)</span>
-    </div>
-
-    <h2>৪.৫ লজিক্যাল অপারেটরস (Logical Operators)</h2>
-    <p>বাংলাথনে ইংরেজি <span class="inline-code">and</span>, <span class="inline-code">or</span>, <span class="inline-code">not</span>-এর বদলে সরাসরি বাংলা শব্দ ব্যবহৃত হয়:</p>
-    <div class="code-box">
-<span class="kw">dekhao</span> shotti <span class="kw">ebong</span> shotti  <span class="cm"># shotti (Logical AND)</span>
-<span class="kw">dekhao</span> shotti <span class="kw">ba</span> mittha     <span class="cm"># shotti (Logical OR)</span>
-<span class="kw">dekhao</span> <span class="kw">noy</span> shotti           <span class="cm"># mittha (Logical NOT)</span>
+    <div class="callout" style="margin-top:16px; padding:10px 14px; font-size:11.5px; line-height:1.55;">
+      <strong>💡 ডায়নামিক টাইপ ইনফারেন্স নীতি:</strong><br>
+      সি বা জাভার মতো ভেরিয়েবল ঘোষণার আগে <span class="inline-code">int</span> বা <span class="inline-code">string</span> উল্লেখ করার ঝামেলা নেই। রানটাইম ইঞ্জিন স্বয়ংক্রিয়ভাবে এসাইন করা মানের ধরন শনাক্ত করে যথাযথ টাইপ মেমোরিতে অ্যালোকেট করে।
     </div>
 
     <div class="page-footer">
@@ -569,7 +552,66 @@ boyosh = <span class="num">22</span>                      <span class="cm"># ব
   </div>
 
   <!-- ==========================================
-       PAGE 6: কন্ট্রোল ফ্লো — শর্ত ও লুপ
+       PAGE 6: অধ্যায় ৪ (অংশ ২): অপারেটরস ও লজিক্যাল এক্সপ্রেশন
+       ========================================== -->
+  <div class="page">
+    <div class="page-header">
+      <span class="brand">BanglaThon Manual</span>
+      <span>অধ্যায় ৪ (অংশ ২): অপারেটরস ও লজিক্যাল এক্সপ্রেশন</span>
+    </div>
+
+    <h1>৪. অপারেটরস ও লজিক্যাল এক্সপ্রেশন</h1>
+    <p>
+      বাংলাথনে হিসাবনিকাশ, দুটি মানের তুলনা এবং কন্ডিশনাল লজিক যাচাইয়ের জন্য পূর্ণাঙ্গ অপারেটর সেট রয়েছে।
+    </p>
+
+    <h2>৪.৩ গাণিতিক অপারেটরস (Arithmetic Operators)</h2>
+    <p>মৌলিক গাণিতিক অপারেশনের জন্য পূর্ণাঙ্গ লাইন-বাই-লাইন স্ক্রিপ্ট:</p>
+    <div class="code-box">
+<span class="cm"># গাণিতিক হিসাবনিকাশের বাস্তব উদাহরণ:</span>
+<span class="kw">dhori</span> a = <span class="num">20</span>
+<span class="kw">dhori</span> b = <span class="num">6</span>
+
+<span class="kw">dekhao</span> <span class="str">"যোগফল: "</span> + (a + b)            <span class="cm"># আউটপুট: ২৬</span>
+<span class="kw">dekhao</span> <span class="str">"বিয়োগফল: "</span> + (a - b)        <span class="cm"># আউটপুট: ১৪</span>
+<span class="kw">dekhao</span> <span class="str">"গুণফল: "</span> + (a * b)            <span class="cm"># আউটপুট: ১২০</span>
+<span class="kw">dekhao</span> <span class="str">"ভাগফল: "</span> + (a / b)            <span class="cm"># আউটপুট: ৩.৩৩৩৩...</span>
+<span class="kw">dekhao</span> <span class="str">"ভাগশেষ: "</span> + (a % b)           <span class="cm"># আউটপুট: ২</span>
+    </div>
+
+    <h2>৪.৪ তুলনামূলক অপারেটরস (Comparison Operators)</h2>
+    <p>দুটি মানের তুলনা যাচাই করে এবং ফলাফল হিসেবে সর্বদা <span class="inline-code">shotti</span> অথবা <span class="inline-code">mittha</span> রিটার্ন করে:</p>
+    <div class="code-box">
+<span class="cm"># শর্ত যাচাই ও তুলনামূলক অপারেশন:</span>
+<span class="kw">dhori</span> p = <span class="num">5</span>
+<span class="kw">dhori</span> q = <span class="num">3</span>
+
+<span class="kw">dekhao</span> p &gt; q       <span class="cm"># shotti (৫ তিনের চেয়ে বড়)</span>
+<span class="kw">dekhao</span> p &lt; q       <span class="cm"># mittha (৫ তিনের চেয়ে ছোট নয়)</span>
+<span class="kw">dekhao</span> p == <span class="num">5</span>     <span class="cm"># shotti (উভয় মান সমান)</span>
+<span class="kw">dekhao</span> p != q      <span class="cm"># shotti (দুটি মান অসমান)</span>
+    </div>
+
+    <h2>৪.৫ লজিক্যাল অপারেটরস (Logical Operators)</h2>
+    <p>বাংলাথনে ইংরেজি <span class="inline-code">and</span>, <span class="inline-code">or</span>, <span class="inline-code">not</span>-এর বদলে সরাসরি বাংলা শব্দ ব্যবহৃত হয়:</p>
+    <div class="code-box">
+<span class="cm"># বাস্তব জীবনের সিদ্ধান্ত গ্রহণ লজিক (ebong, ba, noy):</span>
+<span class="kw">dhori</span> brishti = shotti
+<span class="kw">dhori</span> chhata = mittha
+
+<span class="kw">dekhao</span> brishti <span class="kw">ebong</span> chhata      <span class="cm"># mittha (Logical AND: উভয় সত্য নয়)</span>
+<span class="kw">dekhao</span> brishti <span class="kw">ba</span> chhata         <span class="cm"># shotti (Logical OR: বৃষ্টি আছে)</span>
+<span class="kw">dekhao</span> <span class="kw">noy</span> chhata                <span class="cm"># shotti (Logical NOT: ছাতা নেই)</span>
+    </div>
+
+    <div class="page-footer">
+      <span>BanglaThon v2.0.0 Official Documentation</span>
+      <span class="page-num">পৃষ্ঠা ৬</span>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       PAGE 7: কন্ট্রোল ফ্লো — শর্ত ও লুপ
        ========================================== -->
   <div class="page">
     <div class="page-header">
@@ -630,12 +672,12 @@ boyosh = <span class="num">22</span>                      <span class="cm"># ব
 
     <div class="page-footer">
       <span>BanglaThon v2.0.0 Official Documentation</span>
-      <span class="page-num">পৃষ্ঠা ৬</span>
+      <span class="page-num">পৃষ্ঠা ৭</span>
     </div>
   </div>
 
   <!-- ==========================================
-       PAGE 7: ফাংশন ও স্কোপ রেজোলিউশন
+       PAGE 8: ফাংশন ও স্কোপ রেজোলিউশন
        ========================================== -->
   <div class="page">
     <div class="page-header">
@@ -697,12 +739,12 @@ boyosh = <span class="num">22</span>                      <span class="cm"># ব
 
     <div class="page-footer">
       <span>BanglaThon v2.0.0 Official Documentation</span>
-      <span class="page-num">পৃষ্ঠা ৭</span>
+      <span class="page-num">পৃষ্ঠা ৮</span>
     </div>
   </div>
 
   <!-- ==========================================
-       PAGE 8: বিল্ট-ইন ফাংশন ও সিপি লাইব্রেরি
+       PAGE 9: বিল্ট-ইন ফাংশন ও সিপি লাইব্রেরি
        ========================================== -->
   <div class="page">
     <div class="page-header">
@@ -791,7 +833,7 @@ boyosh = <span class="num">22</span>                      <span class="cm"># ব
 
     <div class="page-footer">
       <span>BanglaThon v2.0.0 Official Documentation</span>
-      <span class="page-num">পৃষ্ঠা ৮</span>
+      <span class="page-num">পৃষ্ঠা ৯</span>
     </div>
   </div>
 
@@ -854,12 +896,12 @@ boyosh = <span class="num">22</span>                      <span class="cm"># ব
 
     <div class="page-footer">
       <span>BanglaThon v2.0.0 Official Documentation</span>
-      <span class="page-num">পৃষ্ঠা ৯</span>
+      <span class="page-num">পৃষ্ঠা ১০</span>
     </div>
   </div>
 
   <!-- ==========================================
-       PAGE 10: এরর ডায়াগনস্টিকস ও আর্কিটেকচার
+       PAGE 11: এরর ডায়াগনস্টিকস ও আর্কিটেকচার
        ========================================== -->
   <div class="page">
     <div class="page-header">
@@ -932,7 +974,7 @@ boyosh = <span class="num">22</span>                      <span class="cm"># ব
 
     <div class="page-footer">
       <span>BanglaThon v2.0.0 Official Documentation</span>
-      <span class="page-num">পৃষ্ঠা ১০</span>
+      <span class="page-num">পৃষ্ঠা ১১</span>
     </div>
   </div>
 
