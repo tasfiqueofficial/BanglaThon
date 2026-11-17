@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>বাংলাথন (BanglaThon) — 2ft x 5ft X-Stand Exhibition Banner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: 24in 60in;
+      margin: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --green-dark: #003624;
+      --green-deep: #004d38;
+      --green-main: #006a4e;
+      --green-emerald: #059669;
+      --green-mint: #34d399;
+      --green-soft: #ecfdf5;
+      --green-glow: rgba(0, 106, 78, 0.15);
+
+      --red-dark: #990014;
+      --red-crimson: #d90429;
+      --red-main: #e11d48;
+      --red-bright: #ef233c;
+      --red-soft: #fff1f2;
+
+      --text-dark: #0f172a;
+      --text-muted: #475569;
+      --text-light: #64748b;
+
+      --card-border: rgba(0, 106, 78, 0.18);
+      --card-shadow: 0 16px 38px rgba(0, 54, 36, 0.08);
+    }
+
+    body {
+      width: 24in;
+      height: 60in;
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+      font-family: 'Hind Siliguri', 'Plus Jakarta Sans', sans-serif;
+      color: var(--text-dark);
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Print media resets */
+    @media print {
+      body {
+        width: 24in !important;
+        height: 60in !important;
+        background: #ffffff !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+
+    /* Background Aesthetic Pattern (Subtle Bengali Typography & Geometry) */
+    .banner-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .bg-circle-red {
+      position: absolute;
+      top: 14in;
+      right: -3in;
+      width: 14in;
+      height: 14in;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(225, 29, 72, 0.06) 0%, rgba(225, 29, 72, 0) 70%);
+    }
+
+    .bg-circle-green {
+      position: absolute;
+      bottom: 12in;
+      left: -4in;
+      width: 16in;
+      height: 16in;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 106, 78, 0.06) 0%, rgba(0, 106, 78, 0) 70%);
+    }
+
+    /* Subtle grid pattern */
+    .bg-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        radial-gradient(rgba(0, 106, 78, 0.08) 1.5px, transparent 1.5px),
+        radial-gradient(rgba(225, 29, 72, 0.06) 1.5px, transparent 1.5px);
+      background-size: 0.6in 0.6in;
+      background-position: 0 0, 0.3in 0.3in;
+      opacity: 0.7;
+    }
+
+    /* 4 Corner Grommet / Eyelet Position Guides (Safe for X-Stand Hooks) */
+    .grommet {
+      position: absolute;
+      width: 0.75in;
+      height: 0.75in;
+      border: 3px dashed rgba(100, 116, 139, 0.3);
+      border-radius: 50%;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .grommet::after {
+      content: "";
+      width: 0.35in;
+      height: 0.35in;
+      background: rgba(148, 163, 184, 0.25);
+      border: 2px solid rgba(100, 116, 139, 0.45);
+      border-radius: 50%;
+    }
+    .grommet-tl { top: 1in; left: 1in; }
+    .grommet-tr { top: 1in; right: 1in; }
+    .grommet-bl { bottom: 1in; left: 1in; }
+    .grommet-br { bottom: 1in; right: 1in; }
+
+    /* Main Container Content */
+    .banner-content {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.25in 1.4in 1.1in 1.4in;
+      text-align: center;
+    }
+
+    /* Top Institutional Header */
+    .top-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.16in;
+    }
+
+    .competition-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2in;
+      background: linear-gradient(135deg, #004d38 0%, #006a4e 100%);
+      color: #ffffff;
+      padding: 0.16in 0.45in;
+      border-radius: 9999px;
+      font-size: 0.32in;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      box-shadow: 0 8px 24px rgba(0, 77, 56, 0.22);
+      border: 2px solid rgba(52, 211, 153, 0.4);
+    }
+    .competition-pill .track-chip {
+      background: #e11d48;
+      color: #ffffff;
+      font-size: 0.26in;
+      font-weight: 800;
+      padding: 0.06in 0.24in;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .inst-text {
+      font-size: 0.28in;
+      font-weight: 600;
+      color: #334155;
+      letter-spacing: 0.2px;
+      margin-top: 0.05in;
+    }
+    .inst-text strong {
+      color: var(--green-dark);
+      font-weight: 800;
+    }
+
+    /* Hero Brand Section */
+    .hero-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 0.2in;
+      margin-bottom: 0.25in;
+    }
+
+    .logo-container {
+      position: relative;
+      width: 3.4in;
+      height: 3.4in;
+      margin-bottom: 0.28in;
+    }
+
+    .logo-glow {
+      position: absolute;
+      top: -0.3in;
+      left: -0.3in;
+      right: -0.3in;
+      bottom: -0.3in;
+      background: radial-gradient(circle, rgba(225, 29, 72, 0.22) 0%, rgba(0, 106, 78, 0.15) 50%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(20px);
+      z-index: 1;
+    }
+
+    .logo-svg {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 20px 35px rgba(0, 54, 36, 0.25));
+    }
+
+    .main-title {
+      font-size: 1.45in;
+      font-weight: 900;
+      color: var(--green-dark);
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+      margin-bottom: 0.08in;
+      text-shadow: 0 4px 18px rgba(0, 77, 56, 0.12);
+    }
+    .main-title .red-accent {
+      color: var(--red-crimson);
+    }
+
+    .title-en {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.22in;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.62in;
+      font-weight: 800;
+      color: #1e293b;
+      letter-spacing: 1px;
+      margin-bottom: 0.24in;
+    }
+    .title-en .v-tag {
+      background: #fff1f2;
+      color: #e11d48;
+      font-size: 0.3in;
+      font-weight: 800;
+      padding: 0.05in 0.22in;
+      border-radius: 9999px;
+      border: 2px solid rgba(225, 29, 72, 0.35);
+    }
+
+    .sub-headline {
+      font-size: 0.52in;
+      font-weight: 800;
+      color: #1e293b;
+      line-height: 1.3;
+      margin-bottom: 0.2in;
+      max-width: 19in;
+    }
+
+    .slogan-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.16in;
+      background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
+      color: var(--red-dark);
+      border: 2.5px solid rgba(225, 29, 72, 0.35);
+      padding: 0.16in 0.55in;
+      border-radius: 9999px;
+      font-size: 0.42in;
+      font-weight: 800;
+      margin-bottom: 0.2in;
+      box-shadow: 0 8px 20px rgba(225, 29, 72, 0.12);
+    }
+
+    .quote-badge {
+      font-size: 0.34in;
+      font-weight: 600;
+      color: var(--green-main);
+      font-style: italic;
+      letter-spacing: 0.3px;
+    }
+
+    /* Core Pillars (4 Modern Cards) */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.32in;
+      margin: 0.25in 0 0.35in 0;
+      text-align: left;
+    }
+
+    .pillar-card {
+      background: #ffffff;
+      border: 2.5px solid var(--card-border);
+      border-radius: 0.32in;
+      padding: 0.32in 0.38in;
+      box-shadow: var(--card-shadow);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .pillar-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0.12in;
+      bottom: 0;
+      background: var(--green-main);
+      border-radius: 0.32in 0 0 0.32in;
+    }
+    .pillar-card.red-card::before {
+      background: var(--red-crimson);
+    }
+
+    .pillar-header {
+      display: flex;
+      align-items: center;
+      gap: 0.18in;
+      margin-bottom: 0.12in;
+    }
+    .pillar-icon {
+      font-size: 0.48in;
+      line-height: 1;
+    }
+    .pillar-title {
+      font-size: 0.38in;
+      font-weight: 800;
+      color: var(--green-dark);
+      line-height: 1.25;
+    }
+    .pillar-card.red-card .pillar-title {
+      color: #9f1239;
+    }
+
+    .pillar-desc {
+      font-size: 0.28in;
+      color: #475569;
+      line-height: 1.45;
+      font-weight: 500;
+    }
+    .pillar-desc code {
+      font-family: 'JetBrains Mono', monospace;
+      background: #f1f5f9;
+      color: #0f172a;
+      padding: 0.02in 0.1in;
+      border-radius: 0.08in;
+      font-weight: 700;
+      font-size: 0.26in;
+    }
+
+    /* Live IDE Code Showcase Box */
+    .ide-container {
+      background: #041b14;
+      border: 3px solid rgba(52, 211, 153, 0.4);
+      border-radius: 0.32in;
+      box-shadow: 0 20px 45px rgba(0, 54, 36, 0.3);
+      overflow: hidden;
+      margin: 0.1in 0 0.35in 0;
+      text-align: left;
+    }
+
+    .ide-header {
+      background: #02261c;
+      padding: 0.18in 0.32in;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid rgba(52, 211, 153, 0.2);
+    }
+    .ide-dots {
+      display: flex;
+      gap: 0.12in;
+    }
+    .ide-dot {
+      width: 0.2in;
+      height: 0.2in;
+      border-radius: 50%;
+    }
+    .dot-red { background: #ff5f56; }
+    .dot-yellow { background: #ffbd2e; }
+    .dot-green { background: #27c93f; }
+
+    .ide-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.26in;
+      color: #6ee7b7;
+      font-weight: 700;
+    }
+    .ide-badge {
+      background: rgba(52, 211, 153, 0.15);
+      color: #34d399;
+      font-size: 0.22in;
+      padding: 0.04in 0.18in;
+      border-radius: 9999px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+    }
+
+    .ide-code {
+      padding: 0.3in 0.38in;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 0.32in;
+      line-height: 1.65;
+      color: #f8fafc;
+    }
+    .ide-code .kw { color: #f472b6; font-weight: 700; }
+    .ide-code .fn { color: #38bdf8; font-weight: 700; }
+    .ide-code .str { color: #fde047; }
+    .ide-code .op { color: #6ee7b7; }
+    .ide-code .cm { color: #94a3b8; font-style: italic; }
+
+    /* Big Call to Action & Website Keyword Card */
+    .cta-card {
+      background: linear-gradient(135deg, #004d38 0%, #006a4e 50%, #023324 100%);
+      border: 3.5px solid rgba(52, 211, 153, 0.45);
+      border-radius: 0.38in;
+      padding: 0.36in 0.45in;
+      color: #ffffff;
+      box-shadow: 0 22px 50px rgba(0, 54, 36, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.4in;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 0.25in;
+    }
+    .cta-card::after {
+      content: "";
+      position: absolute;
+      top: -1in;
+      right: -1in;
+      width: 4in;
+      height: 4in;
+      background: radial-gradient(circle, rgba(225, 29, 72, 0.28) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .cta-info {
+      text-align: left;
+      flex: 1;
+    }
+    .cta-badge {
+      display: inline-block;
+      background: #e11d48;
+      color: #ffffff;
+      font-size: 0.26in;
+      font-weight: 800;
+      padding: 0.06in 0.25in;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 0.14in;
+    }
+    .cta-heading {
+      font-size: 0.48in;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.25;
+      margin-bottom: 0.16in;
+    }
+    
+    /* Massive Website Domain / Keyword Display */
+    .domain-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.18in;
+      background: #ffffff;
+      color: var(--green-dark);
+      padding: 0.18in 0.42in;
+      border-radius: 0.2in;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.52in;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+      border: 3px solid #34d399;
+      margin-bottom: 0.14in;
+    }
+    .domain-box .globe-icon {
+      font-size: 0.52in;
+    }
+
+    .cta-subtext {
+      font-size: 0.28in;
+      color: #cbd5e1;
+      font-weight: 600;
+      display: block;
+    }
+
+    /* QR Code Box */
+    .qr-container {
+      background: #ffffff;
+      border: 3px solid #34d399;
+      border-radius: 0.25in;
+      padding: 0.22in;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.1in;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+      flex-shrink: 0;
+    }
+    .qr-svg {
+      width: 2.2in;
+      height: 2.2in;
+    }
+    .qr-label {
+      font-size: 0.22in;
+      font-weight: 800;
+      color: var(--green-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Bottom Brand Bar / Author & University Credit */
+    .bottom-bar {
+      border-top: 3px solid rgba(0, 106, 78, 0.25);
+      padding-top: 0.24in;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.08in;
+    }
+    .authors-text {
+      font-size: 0.32in;
+      font-weight: 800;
+      color: #0f172a;
+    }
+    .authors-text strong {
+      color: var(--red-crimson);
+    }
+    .dept-text {
+      font-size: 0.28in;
+      color: #475569;
+      font-weight: 600;
+    }
+    .flag-strip {
+      display: flex;
+      width: 100%;
+      height: 0.08in;
+      border-radius: 9999px;
+      overflow: hidden;
+      margin-top: 0.12in;
+    }
+    .strip-green { flex: 7; background: var(--green-main); }
+    .strip-red { flex: 3; background: var(--red-crimson); }
+  </style>
+</head>
+<body>
+
+  <!-- Background Ambience -->
+  <div class="banner-bg">
+    <div class="bg-grid"></div>
+    <div class="bg-circle-red"></div>
+    <div class="bg-circle-green"></div>
+  </div>
+
+  <!-- 4 Corner Grommet / Eyelet Position Guides (Standard X-Stand Hooks) -->
+  <div class="grommet grommet-tl" title="X-Stand Top-Left Grommet Position"></div>
+  <div class="grommet grommet-tr" title="X-Stand Top-Right Grommet Position"></div>
+  <div class="grommet grommet-bl" title="X-Stand Bottom-Left Grommet Position"></div>
+  <div class="grommet grommet-br" title="X-Stand Bottom-Right Grommet Position"></div>
+
+  <!-- Main 2ft x 5ft Content Container -->
+  <div class="banner-content">
+
+    <!-- 1. Top Institutional & Competition Badge -->
+    <div class="top-header">
+      <div class="competition-pill">
+        <span>🏛️ Ziaur Rahman Foundation (ZRF) • “ভবিষ্যৎ বিজ্ঞানীর খোঁজে ২০২৬”</span>
+        <span class="track-chip">Track: Engineering &amp; Innovation</span>
+      </div>
+      <div class="inst-text">
+        Department of Computer Science &amp; Engineering • <strong>Rangamati Science and Technology University (RMSTU)</strong>
+      </div>
+    </div>
+
+    <!-- 2. Hero Brand Identity -->
+    <div class="hero-section">
+      <div class="logo-container">
+        <div class="logo-glow"></div>
+        <!-- Circular Vector Logo SVG -->
+        <svg class="logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <defs>
+            <linearGradient id="cirBgX" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#004D38" />
+              <stop offset="55%" stop-color="#006A4E" />
+              <stop offset="100%" stop-color="#003624" />
+            </linearGradient>
+            <radialGradient id="cirSunX" cx="35%" cy="35%" r="65%">
+              <stop offset="0%" stop-color="#FF3850" />
+              <stop offset="65%" stop-color="#F42A41" />
+              <stop offset="100%" stop-color="#C2001B" />
+            </radialGradient>
+          </defs>
+          <circle cx="256" cy="256" r="240" fill="url(#cirBgX)" stroke="#34D399" stroke-width="8" />
+          <circle cx="256" cy="256" r="165" fill="url(#cirSunX)" />
+          <g fill="none" stroke="#FFFFFF" stroke-width="34" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 152 172 L 360 172" />
+            <path d="M 314 172 L 314 344" />
+            <path d="M 314 182 L 186 258 L 314 336" />
+          </g>
+          <circle cx="360" cy="172" r="8" fill="#6EE7B7" />
+        </svg>
+      </div>
+
+      <h1 class="main-title">বাংলা<span class="red-accent">থন</span></h1>
+      <div class="title-en">
+        <span>BanglaThon</span>
+        <span class="v-tag">v2.0</span>
+      </div>
+
+      <div class="sub-headline">
+        নতুনদের জন্য মাতৃভাষায় প্রোগ্রামিং
+      </div>
+
+      <div class="slogan-pill">
+        <span>🇧🇩 বাংলায় কোড লেখো, বাংলায় শেখো</span>
+      </div>
+
+      <div class="quote-badge">
+        “ভাষা হোক উন্মুক্ত • কোডিং হোক সার্বজনীন”
+      </div>
+    </div>
+
+    <!-- 3. Key Feature Pillars (4 Clean High-Impact Cards) -->
+    <div class="pillars-grid">
+      <!-- Pillar 1 -->
+      <div class="pillar-card">
+        <div class="pillar-header">
+          <span class="pillar-icon">⚡</span>
+          <h3 class="pillar-title">ব্রাউজারে লাইভ কোডিং</h3>
+        </div>
+        <p class="pillar-desc">
+          কোনো সফটওয়্যার ইনস্টলেশন ছাড়াই সরাসরি যেকোনো মোবাইল বা ল্যাপটপের ব্রাউজারে কোড লিখুন ও রান করুন।
+        </p>
+      </div>
+
+      <!-- Pillar 2 -->
+      <div class="pillar-card red-card">
+        <div class="pillar-header">
+          <span class="pillar-icon">🇧🇩</span>
+          <h3 class="pillar-title">১০০% খাঁটি বাংলা সিনট্যাক্স</h3>
+        </div>
+        <p class="pillar-desc">
+          <code>ধরি</code>, <code>দেখাও</code>, <code>যদি</code>, <code>নতুবা</code>, <code>যতক্ষণ</code>, <code>কাজ</code> — সম্পূর্ণ স্বকীয় ও প্রাকৃতিক মাতৃভাষার ব্যাকরণ।
+        </p>
+      </div>
+
+      <!-- Pillar 3 -->
+      <div class="pillar-card red-card">
+        <div class="pillar-header">
+          <span class="pillar-icon">💻</span>
+          <h3 class="pillar-title">অফিশিয়াল VS Code এক্সটেনশন</h3>
+        </div>
+        <p class="pillar-desc">
+          মাইক্রোসফট মার্কেটপ্লেসে লাইভ এক্সটেনশন: কালারফুল সিনট্যাক্স হাইলাইটিং, অটো-কমপ্লিশন ও ওয়ান-ক্লিক রান।
+        </p>
+      </div>
+
+      <!-- Pillar 4 -->
+      <div class="pillar-card">
+        <div class="pillar-header">
+          <span class="pillar-icon">🧠</span>
+          <h3 class="pillar-title">কগনিটিভ ব্রিজ ও অ্যালগরিদম</h3>
+        </div>
+        <p class="pillar-desc">
+          ভাষাগত জটিলতা দূর করে শিক্ষার্থীদের অ্যালগরিদমিক চিন্তা ও কম্পিউটেশনাল থিঙ্কিং বিকাশের উন্মুক্ত সেতুবন্ধন।
+        </p>
+      </div>
+    </div>
+
+    <!-- 4. Mini Live IDE Code Window -->
+    <div class="ide-container">
+      <div class="ide-header">
+        <div class="ide-dots">
+          <div class="ide-dot dot-red"></div>
+          <div class="ide-dot dot-yellow"></div>
+          <div class="ide-dot dot-green"></div>
+        </div>
+        <div class="ide-title">স্বাগতম_বাংলাদেশ.bl</div>
+        <div class="ide-badge">বাংলাথন রানটাইম v2.0</div>
+      </div>
+      <div class="ide-code">
+        <span class="cm"># বাংলা ভাষায় কোডিং এখন বাস্তব ও সবার জন্য উন্মুক্ত!</span><br>
+        <span class="kw">ধরি</span> দেশ = <span class="str">"বাংলাদেশ"</span><br>
+        <span class="kw">ধরি</span> ভাষা = <span class="str">"বাংলা"</span><br>
+        <span class="fn">দেখাও</span> <span class="str">"আসসালামু আলাইকুম, "</span> <span class="op">+</span> দেশ <span class="op">+</span> <span class="str">"!"</span><br>
+        <span class="fn">দেখাও</span> <span class="str">"মাতৃভাষায় কোড শেখো, বিশ্বজয়ে এগিয়ে যাও।"</span>
+      </div>
+    </div>
+
+    <!-- 5. Big Call to Action & Website Keyword Card -->
+    <div class="cta-card">
+      <div class="cta-info">
+        <span class="cta-badge">ওয়েবসাইট ও লাইভ প্লেগ্রাউন্ড</span>
+        <h2 class="cta-heading">এখনই ব্রাউজারে বাংলায় কোড প্র্যাকটিস করুন</h2>
+        
+        <!-- Massive Website Keyword -->
+        <div class="domain-box">
+          <span class="globe-icon">🌐</span>
+          <span>banglathon.vercel.app</span>
+        </div>
+
+        <span class="cta-subtext">
+          মোবাইল ক্যামেরা দিয়ে কিউআর কোড স্ক্যান করে সরাসরি কোডিং শুরু করুন • ১০০% ফ্রি
+        </span>
+      </div>
+
+      <!-- Live Scannable Vector QR Code -->
+      <div class="qr-container">
+        <!-- Embedded SVG QR Code -->
+        <svg class="qr-svg" viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg">
+          <rect width="33" height="33" fill="#ffffff" />
+          <path d="M2,2H3V3H2zM3,2H4V3H3zM4,2H5V3H4zM5,2H6V3H5zM6,2H7V3H6zM7,2H8V3H7zM8,2H9V3H8zM10,2H11V3H10zM15,2H16V3H15zM16,2H17V3H16zM17,2H18V3H17zM19,2H20V3H19zM20,2H21V3H20zM24,2H25V3H24zM25,2H26V3H25zM26,2H27V3H26zM27,2H28V3H27zM28,2H29V3H28zM29,2H30V3H29zM30,2H31V3H30zM2,3H3V4H2zM8,3H9V4H8zM13,3H14V4H13zM14,3H15V4H14zM17,3H18V4H17zM19,3H20V4H19zM24,3H25V4H24zM30,3H31V4H30zM2,4H3V5H2zM4,4H5V5H4zM5,4H6V5H5zM6,4H7V5H6zM8,4H9V5H8zM10,4H11V5H10zM11,4H12V5H11zM12,4H13V5H12zM13,4H14V5H13zM15,4H16V5H15zM19,4H20V5H19zM22,4H23V5H22zM24,4H25V5H24zM26,4H27V5H26zM27,4H28V5H27zM28,4H29V5H28zM30,4H31V5H30zM2,5H3V6H2zM4,5H5V6H4zM5,5H6V6H5zM6,5H7V6H6zM8,5H9V6H8zM11,5H12V6H11zM14,5H15V6H14zM17,5H18V6H17zM18,5H19V6H18zM19,5H20V6H19zM20,5H21V6H20zM22,5H23V6H22zM24,5H25V6H24zM26,5H27V6H26zM27,5H28V6H27zM28,5H29V6H28zM30,5H31V6H30zM2,6H3V7H2zM4,6H5V7H4zM5,6H6V7H5zM6,6H7V7H6zM8,6H9V7H8zM12,6H13V7H12zM13,6H14V7H13zM14,6H15V7H14zM17,6H18V7H17zM18,6H19V7H18zM19,6H20V7H19zM20,6H21V7H20zM24,6H25V7H24zM26,6H27V7H26zM27,6H28V7H27zM28,6H29V7H28zM30,6H31V7H30zM2,7H3V8H2zM8,7H9V8H8zM10,7H11V8H10zM11,7H12V8H11zM12,7H13V8H12zM15,7H16V8H15zM16,7H17V8H16zM18,7H19V8H18zM20,7H21V8H20zM22,7H23V8H22zM24,7H25V8H24zM30,7H31V8H30zM2,8H3V9H2zM3,8H4V9H3zM4,8H5V9H4zM5,8H6V9H5zM6,8H7V9H6zM7,8H8V9H7zM8,8H9V9H8zM10,8H11V9H10zM12,8H13V9H12zM14,8H15V9H14zM16,8H17V9H16zM18,8H19V9H18zM20,8H21V9H20zM22,8H23V9H22zM24,8H25V9H24zM25,8H26V9H25zM26,8H27V9H26zM27,8H28V9H27zM28,8H29V9H28zM29,8H30V9H29zM30,8H31V9H30zM11,9H12V10H11zM15,9H16V10H15zM20,9H21V10H20zM22,9H23V10H22zM2,10H3V11H2zM4,10H5V11H4zM8,10H9V11H8zM9,10H10V11H9zM11,10H12V11H11zM14,10H15V11H14zM15,10H16V11H15zM17,10H18V11H17zM18,10H19V11H18zM21,10H22V11H21zM22,10H23V11H22zM25,10H26V11H25zM28,10H29V11H28zM30,10H31V11H30zM2,11H3V12H2zM4,11H5V12H4zM6,11H7V12H6zM7,11H8V12H7zM11,11H12V12H11zM14,11H15V12H14zM18,11H19V12H18zM19,11H20V12H19zM21,11H22V12H21zM22,11H23V12H22zM24,11H25V12H24zM25,11H26V12H25zM29,11H30V12H29zM30,11H31V12H30zM2,12H3V13H2zM3,12H4V13H3zM4,12H5V13H4zM6,12H7V13H6zM8,12H9V13H8zM11,12H12V13H11zM14,12H15V13H14zM15,12H16V13H15zM16,12H17V13H16zM18,12H19V13H18zM19,12H20V13H19zM21,12H22V13H21zM22,12H23V13H22zM27,12H28V13H27zM28,12H29V13H28zM30,12H31V13H30zM5,13H6V14H5zM6,13H7V14H6zM11,13H12V14H11zM12,13H13V14H12zM14,13H15V14H14zM16,13H17V14H16zM17,13H18V14H17zM18,13H19V14H18zM21,13H22V14H21zM22,13H23V14H22zM25,13H26V14H25zM27,13H28V14H27zM4,14H5V15H4zM5,14H6V15H5zM7,14H8V15H7zM8,14H9V15H8zM9,14H10V15H9zM10,14H11V15H10zM13,14H14V15H13zM14,14H15V15H14zM15,14H16V15H15zM16,14H17V15H16zM20,14H21V15H20zM21,14H22V15H21zM24,14H25V15H24zM25,14H26V15H25zM30,14H31V15H30zM2,15H3V16H2zM3,15H4V16H3zM4,15H5V16H4zM10,15H11V16H10zM11,15H12V16H11zM12,15H13V16H12zM13,15H14V16H13zM14,15H15V16H14zM15,15H16V16H15zM16,15H17V16H16zM19,15H20V16H19zM21,15H22V16H21zM22,15H23V16H22zM24,15H25V16H24zM25,15H26V16H25zM29,15H30V16H29zM30,15H31V16H30zM2,16H3V17H2zM4,16H5V17H4zM8,16H9V17H8zM9,16H10V17H9zM12,16H13V17H12zM13,16H14V17H13zM17,16H18V17H17zM21,16H22V17H21zM22,16H23V17H22zM23,16H24V17H23zM24,16H25V17H24zM25,16H26V17H25zM30,16H31V17H30zM2,17H3V18H2zM4,17H5V18H4zM7,17H8V18H7zM9,17H10V18H9zM10,17H11V18H10zM15,17H16V18H15zM21,17H22V18H21zM22,17H23V18H22zM23,17H24V18H23zM25,17H26V18H25zM26,17H27V18H26zM2,18H3V19H2zM3,18H4V19H3zM5,18H6V19H5zM8,18H9V19H8zM10,18H11V19H10zM12,18H13V19H12zM15,18H16V19H15zM17,18H18V19H17zM18,18H19V19H18zM22,18H23V19H22zM24,18H25V19H24zM25,18H26V19H25zM30,18H31V19H30zM4,19H5V20H4zM5,19H6V20H5zM6,19H7V20H6zM9,19H10V20H9zM11,19H12V20H11zM12,19H13V20H12zM14,19H15V20H14zM18,19H19V20H18zM21,19H22V20H21zM23,19H24V20H23zM24,19H25V20H24zM25,19H26V20H25zM28,19H29V20H28zM29,19H30V20H29zM30,19H31V20H30zM2,20H3V21H2zM3,20H4V21H3zM5,20H6V21H5zM6,20H7V21H6zM7,20H8V21H7zM8,20H9V21H8zM10,20H11V21H10zM12,20H13V21H12zM13,20H14V21H13zM15,20H16V21H15zM16,20H17V21H16zM18,20H19V21H18zM19,20H20V21H19zM20,20H21V21H20zM21,20H22V21H21zM22,20H23V21H22zM24,20H25V21H24zM26,20H27V21H26zM27,20H28V21H27zM30,20H31V21H30zM4,21H5V22H4zM5,21H6V22H5zM9,21H10V22H9zM10,21H11V22H10zM11,21H12V22H11zM13,21H14V22H13zM14,21H15V22H14zM16,21H17V22H16zM17,21H18V22H17zM18,21H19V22H18zM20,21H21V22H20zM21,21H22V22H21zM22,21H23V22H22zM2,22H3V23H2zM3,22H4V23H3zM4,22H5V23H4zM5,22H6V23H5zM6,22H7V23H6zM8,22H9V23H8zM12,22H13V23H12zM13,22H14V23H13zM15,22H16V23H15zM16,22H17V23H16zM22,22H23V23H22zM23,22H24V23H23zM24,22H25V23H24zM25,22H26V23H25zM26,22H27V23H26zM27,22H28V23H27zM29,22H30V23H29zM10,23H11V24H10zM14,23H15V24H14zM15,23H16V24H15zM16,23H17V24H16zM20,23H21V24H20zM22,23H23V24H22zM26,23H27V24H26zM27,23H28V24H27zM28,23H29V24H28zM30,23H31V24H30zM2,24H3V25H2zM3,24H4V25H3zM4,24H5V25H4zM5,24H6V25H5zM6,24H7V25H6zM7,24H8V25H7zM8,24H9V25H8zM10,24H11V25H10zM17,24H18V25H17zM19,24H20V25H19zM20,24H21V25H20zM22,24H23V25H22zM24,24H25V25H24zM26,24H27V25H26zM30,24H31V25H30zM2,25H3V26H2zM8,25H9V26H8zM12,25H13V26H12zM14,25H15V26H14zM15,25H16V26H15zM21,25H22V26H21zM22,25H23V26H22zM26,25H27V26H26zM29,25H30V26H29zM2,26H3V27H2zM4,26H5V27H4zM5,26H6V27H5zM6,26H7V27H6zM8,26H9V27H8zM12,26H13V27H12zM14,26H15V27H14zM15,26H16V27H15zM17,26H18V27H17zM18,26H19V27H18zM21,26H22V27H21zM22,26H23V27H22zM23,26H24V27H23zM24,26H25V27H24zM25,26H26V27H25zM26,26H27V27H26zM27,26H28V27H27zM2,27H3V28H2zM4,27H5V28H4zM5,27H6V28H5zM6,27H7V28H6zM8,27H9V28H8zM12,27H13V28H12zM13,27H14V28H13zM14,27H15V28H14zM18,27H19V28H18zM20,27H21V28H20zM21,27H22V28H21zM22,27H23V28H22zM23,27H24V28H23zM26,27H27V28H26zM27,27H28V28H27zM28,27H29V28H28zM29,27H30V28H29zM2,28H3V29H2zM4,28H5V29H4zM5,28H6V29H5zM6,28H7V29H6zM8,28H9V29H8zM10,28H11V29H10zM11,28H12V29H11zM12,28H13V29H12zM14,28H15V29H14zM15,28H16V29H15zM16,28H17V29H16zM18,28H19V29H18zM19,28H20V29H19zM20,28H21V29H20zM23,28H24V29H23zM26,28H27V29H26zM29,28H30V29H29zM30,28H31V29H30zM2,29H3V30H2zM8,29H9V30H8zM13,29H14V30H13zM14,29H15V30H14zM15,29H16V30H15zM16,29H17V30H16zM17,29H18V30H17zM18,29H19V30H18zM22,29H23V30H22zM24,29H25V30H24zM26,29H27V30H26zM27,29H28V30H27zM2,30H3V31H2zM3,30H4V31H3zM4,30H5V31H4zM5,30H6V31H5zM6,30H7V31H6zM7,30H8V31H7zM8,30H9V31H8zM10,30H11V31H10zM11,30H12V31H11zM12,30H13V31H12zM15,30H16V31H15zM16,30H17V31H16zM18,30H19V31H18zM19,30H20V31H19zM20,30H21V31H20zM22,30H23V31H22zM23,30H24V31H23zM24,30H25V31H24zM25,30H26V31H25zM26,30H27V31H26zM27,30H28V31H27zM30,30H31V31H30z" fill="#004D38" />
+        </svg>
+        <span class="qr-label">লাইভ স্ক্যান করুন</span>
+      </div>
+    </div>
+
+    <!-- 6. Bottom Brand Bar (Authors & University) -->
+    <div class="bottom-bar">
+      <div class="authors-text">
+        গবেষক ও উদ্ভাবক দল: <strong>Tasfique Shikder Koushik<sup>1</sup></strong> • <strong>Jisra Haider Insa<sup>1</sup></strong> • <strong>Md. Anwar Hosen Fahim<sup>1</sup></strong>
+      </div>
+      <div class="dept-text">
+        <sup>1</sup>Department of Computer Science &amp; Engineering (CSE) • <strong>Rangamati Science and Technology University (RMSTU)</strong>
+      </div>
+      <div class="flag-strip">
+        <div class="strip-green"></div>
+        <div class="strip-red"></div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

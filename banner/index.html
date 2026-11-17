@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>বাংলাথন এক্স-স্ট্যান্ড ব্যানার (২ ফুট × ৫ ফুট) • BanglaThon X-Stand Banner Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: rgba(15, 23, 42, 0.75);
+      --card-border: rgba(52, 211, 153, 0.25);
+      --green-main: #006a4e;
+      --green-light: #10b981;
+      --green-mint: #34d399;
+      --red-crimson: #d90429;
+      --red-main: #e11d48;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 15%, #042418 0%, #090d16 65%, #02070e 100%);
+      color: var(--text);
+      font-family: 'Hind Siliguri', 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 20px 60px;
+    }
+
+    /* Top Navigation */
+    .top-nav {
+      width: 100%;
+      max-width: 1180px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 30px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .brand-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #ffffff;
+    }
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #004d38, #006a4e);
+      border: 2px solid #34d399;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 900;
+      color: #ffffff;
+    }
+    .brand-text strong {
+      font-size: 19px;
+      display: block;
+      line-height: 1.2;
+    }
+    .brand-text small {
+      font-size: 12.5px;
+      color: #34d399;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .nav-btn {
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.06);
+      color: #cbd5e1;
+      padding: 7px 16px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav-btn:hover {
+      background: rgba(52, 211, 153, 0.18);
+      color: #34d399;
+      border-color: #34d399;
+    }
+
+    /* Header Title Area */
+    .header-area {
+      text-align: center;
+      max-width: 900px;
+      margin-bottom: 35px;
+    }
+    .competition-badge {
+      display: inline-block;
+      background: rgba(0, 106, 78, 0.25);
+      border: 1.5px solid #006a4e;
+      color: #34d399;
+      padding: 5px 18px;
+      border-radius: 9999px;
+      font-size: 13.5px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      letter-spacing: 0.5px;
+    }
+    h1 {
+      font-size: 34px;
+      font-weight: 900;
+      line-height: 1.25;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #ffffff 30%, #a7f3d0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    p.lead {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Main Showcase Container (Mockup + Specs) */
+    .showcase-grid {
+      width: 100%;
+      max-width: 1180px;
+      display: grid;
+      grid-template-columns: 480px 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    /* Left Column: X-Stand Realistic Mockup Visualizer */
+    .mockup-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 30px 24px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .mockup-stage {
+      width: 100%;
+      height: 680px;
+      background: radial-gradient(circle at 50% 30%, #1a2e26 0%, #0d161d 80%);
+      border-radius: 14px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Realistic 3D X-Stand Skeleton Behind Banner */
+    .x-stand-structure {
+      position: absolute;
+      width: 250px;
+      height: 600px;
+      pointer-events: none;
+      z-index: 2;
+    }
+    /* X Tension Rods */
+    .x-rod {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 330px;
+      height: 4px;
+      background: #475569;
+      transform-origin: center;
+      border-radius: 2px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+    }
+    .x-rod-1 { transform: translate(-50%, -50%) rotate(54deg); }
+    .x-rod-2 { transform: translate(-50%, -50%) rotate(-54deg); }
+    
+    /* Central Hub */
+    .x-hub {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 24px;
+      height: 24px;
+      background: #1e293b;
+      border: 3px solid #64748b;
+      border-radius: 50%;
+      z-index: 3;
+    }
+
+    /* Tripod Legs */
+    .tripod-leg {
+      position: absolute;
+      bottom: 25px;
+      left: 50%;
+      width: 4px;
+      height: 90px;
+      background: #64748b;
+      transform-origin: top center;
+    }
+    .leg-l { transform: translateX(-50%) rotate(30deg); }
+    .leg-r { transform: translateX(-50%) rotate(-30deg); }
+    .leg-back { transform: translateX(-50%) rotate(0deg); height: 110px; opacity: 0.6; }
+
+    /* Floor Shadow */
+    .floor-shadow {
+      position: absolute;
+      bottom: 25px;
+      width: 260px;
+      height: 24px;
+      background: radial-gradient(ellipse, rgba(0, 0, 0, 0.8) 0%, transparent 75%);
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    /* Banner Print Canvas Element in Mockup */
+    .banner-graphic-mockup {
+      position: relative;
+      z-index: 10;
+      width: 220px;
+      height: 550px;
+      border-radius: 4px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.15);
+      overflow: hidden;
+      background: #ffffff;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .banner-graphic-mockup:hover {
+      transform: scale(1.02);
+    }
+    .banner-img {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+      display: block;
+    }
+
+    /* Corner Eyelets on Mockup */
+    .eyelet-hook {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #000000;
+      border: 2px solid #cbd5e1;
+      z-index: 15;
+    }
+    .hook-tl { top: 12px; left: 12px; }
+    .hook-tr { top: 12px; right: 12px; }
+    .hook-bl { bottom: 12px; left: 12px; }
+    .hook-br { bottom: 12px; right: 12px; }
+
+    /* Right Column: Specs, Features & Download Actions */
+    .details-col {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .action-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--card-border);
+      border-radius: 18px;
+      padding: 26px 28px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(12px);
+    }
+
+    .badge-label {
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #34d399;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .action-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .download-btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .btn {
+      padding: 14px 22px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: 'Hind Siliguri', sans-serif;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #006a4e 0%, #004d38 100%);
+      color: #ffffff;
+      box-shadow: 0 6px 20px rgba(0, 106, 78, 0.35);
+      border: 1px solid #34d399;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #008764 0%, #005c44 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 106, 78, 0.45);
+    }
+
+    .btn-red {
+      background: linear-gradient(135deg, #e11d48 0%, #b91c1c 100%);
+      color: #ffffff;
+      box-shadow: 0 6px 20px rgba(225, 29, 72, 0.35);
+      border: 1px solid #f43f5e;
+    }
+    .btn-red:hover {
+      background: linear-gradient(135deg, #f43f5e 0%, #dc2626 100%);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+      color: #e2e8f0;
+    }
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: #34d399;
+      color: #34d399;
+    }
+
+    /* Specs Table */
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+      font-size: 13.5px;
+    }
+    .specs-table tr {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .specs-table td {
+      padding: 10px 4px;
+    }
+    .specs-table td:first-child {
+      color: #94a3b8;
+      font-weight: 600;
+      width: 38%;
+    }
+    .specs-table td:last-child {
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    /* Highlights Pill List */
+    .highlights-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #cbd5e1;
+    }
+    .highlights-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.5;
+    }
+    .check-icon {
+      color: #34d399;
+      font-weight: 900;
+    }
+
+    /* Print Press Instruction Callout */
+    .press-callout {
+      background: rgba(0, 106, 78, 0.15);
+      border-left: 4px solid #34d399;
+      padding: 14px 18px;
+      border-radius: 0 10px 10px 0;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #e2e8f0;
+    }
+    .press-callout strong {
+      color: #6ee7b7;
+    }
+
+    @media (max-width: 900px) {
+      .showcase-grid {
+        grid-template-columns: 1fr;
+      }
+      .mockup-stage {
+        height: 540px;
+      }
+      .banner-graphic-mockup {
+        width: 180px;
+        height: 450px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="top-nav">
+    <a href="../index.html" class="brand-link">
+      <div class="brand-logo">ব</div>
+      <div class="brand-text">
+        <strong>বাংলাথন (BanglaThon)</strong>
+        <small>অফিশিয়াল এক্স-স্ট্যান্ড ব্যানার কিট</small>
+      </div>
+    </a>
+    <nav class="nav-links">
+      <a href="../index.html" class="nav-btn">⚡ মূল ওয়েবসাইট</a>
+      <a href="../poster/index.html" class="nav-btn">📄 রিসার্চ পোস্টার</a>
+      <a href="../docs/BanglaThon_User_Manual.pdf" target="_blank" class="nav-btn">📘 ইউজার ম্যানুয়াল</a>
+      <a href="../docs/BanglaThon_Engineering_Whitepaper.pdf" target="_blank" class="nav-btn">📑 হোয়াইটপেপার</a>
+      <a href="https://github.com/tasfiqueofficial/BanglaThon" target="_blank" rel="noopener" class="nav-btn">⭐ GitHub</a>
+    </nav>
+  </header>
+
+  <!-- Title & Headline -->
+  <div class="header-area">
+    <div class="competition-badge">
+      Ziaur Rahman Foundation (ZRF) • “ভবিষ্যৎ বিজ্ঞানীর খোঁজে ২০২৬” • Track: Engineering &amp; Innovation
+    </div>
+    <h1>বাংলাথন এক্স-স্ট্যান্ড প্রদর্শন ব্যানার (২ ফুট × ৫ ফুট)</h1>
+    <p class="lead">
+      সবুজ, লাল ও সাদা জাতীয় রঙে ডিজাইনকৃত ন্যূনতম (Minimalist) কিন্তু উচ্চ-প্রভাবশালী এক্স-স্ট্যান্ড ব্যানার। দূর থেকেই সহজে দৃষ্টি আকর্ষণ এবং ফোনে স্ক্যান করে সরাসরি লাইভ কোড প্র্যাকটিসের ব্যবস্থা।
+    </p>
+  </div>
+
+  <!-- Main Showcase Grid -->
+  <div class="showcase-grid">
+
+    <!-- Left: 3D X-Stand Mockup Viewer -->
+    <div class="mockup-card">
+      <div style="width:100%;display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+        <span style="font-weight:700;font-size:14px;color:#34d399;">🖥️ ৩ডি এক্স-স্ট্যান্ড সিমুলেশন ভিউ</span>
+        <span style="font-size:12px;color:#94a3b8;background:rgba(255,255,255,0.06);padding:3px 10px;border-radius:20px;">প্রস্থ: ২ ফিট | উচ্চতা: ৫ ফিট</span>
+      </div>
+
+      <div class="mockup-stage">
+        <!-- Floor Drop Shadow -->
+        <div class="floor-shadow"></div>
+
+        <!-- Behind-the-banner Tripod Structure -->
+        <div class="x-stand-structure">
+          <div class="x-rod x-rod-1"></div>
+          <div class="x-rod x-rod-2"></div>
+          <div class="x-hub"></div>
+          <div class="tripod-leg leg-back"></div>
+          <div class="tripod-leg leg-l"></div>
+          <div class="tripod-leg leg-r"></div>
+        </div>
+
+        <!-- Banner Graphic on Stand -->
+        <a href="x_stand_banner_2x5ft.html" target="_blank" title="ফুলস্ক্রিন ভিউতে দেখতে ক্লিক করুন" class="banner-graphic-mockup">
+          <img src="BanglaThon_X_Stand_Banner_2x5ft.png" alt="BanglaThon 2x5ft X-Stand Banner" class="banner-img">
+          <!-- 4 Corner Eyelet Grommets -->
+          <div class="eyelet-hook hook-tl"></div>
+          <div class="eyelet-hook hook-tr"></div>
+          <div class="eyelet-hook hook-bl"></div>
+          <div class="eyelet-hook hook-br"></div>
+        </a>
+      </div>
+
+      <p style="margin-top:14px;font-size:12.5px;color:#94a3b8;text-align:center;">
+        💡 ব্যানারের ওপর ক্লিক করে <strong>ফুল ভেক্টর রেজুলিউশনে</strong> দেখতে পারবেন।
+      </p>
+    </div>
+
+    <!-- Right: Print Details & Direct Downloads -->
+    <div class="details-col">
+
+      <!-- Action Box -->
+      <div class="action-card">
+        <span class="badge-label">ডাউনলোড ও প্রিন্ট অপশন</span>
+        <h2 class="action-title">প্রিন্ট-রেডি ফাইল ডাউনলোড করুন</h2>
+        <p style="font-size:14px;color:#cbd5e1;line-height:1.5;">
+          ডিজিটাল প্রিন্টিং প্রেসে (Flex / Vinyl Banner) সরাসরি প্রিন্ট করার জন্য আসল ২ ফুট × ৫ ফুট স্কেলের ভেক্টর PDF এবং উচ্চ-রেজুলিউশন ইমেজ ফাইল প্রস্তুত রয়েছে:
+        </p>
+
+        <div class="download-btn-group">
+          <a href="../docs/BanglaThon_X_Stand_Banner_2x5ft.pdf" target="_blank" download class="btn btn-primary">
+            📥 ডাউনলোড প্রিন্ট-রেডি PDF (২ ফুট × ৫ ফুট ভেক্টর)
+          </a>
+          <a href="BanglaThon_X_Stand_Banner_2x5ft.png" target="_blank" download class="btn btn-red">
+            🖼️ ডাউনলোড হাই-রেজুলিউশন PNG (1200 × 3000 px)
+          </a>
+          <a href="x_stand_banner_2x5ft.html" target="_blank" class="btn btn-outline">
+            🖨️ ব্রাউজারে ফুলস্ক্রিন প্রিভিউ ও ডাইরেক্ট প্রিন্ট
+          </a>
+        </div>
+      </div>
+
+      <!-- Specs Card -->
+      <div class="action-card">
+        <span class="badge-label">প্রিন্টিং প্রেস টেকনিক্যাল স্পেসিফিকেশন</span>
+        <h2 class="action-title">প্রিন্ট শপ ইন্সট্রাকশন গাইড</h2>
+
+        <table class="specs-table">
+          <tr>
+            <td>ব্যানারের আকার:</td>
+            <td><strong>২ ফুট × ৫ ফুট</strong> (২৪ ইঞ্চি × ৬০ ইঞ্চি / ৬০.৯৬ সেমি × ১৫২.৪ সেমি)</td>
+          </tr>
+          <tr>
+            <td>স্ট্যান্ডের ধরন:</td>
+            <td><strong>X-Banner Stand</strong> (৪ কোণে ৪টি গ্রোমেট/আইলেট হুক)</td>
+          </tr>
+          <tr>
+            <td>প্রস্তাবিত মেটেরিয়াল:</td>
+            <td><strong>Matt Star Flex / PVC Vinyl</strong> (রিফ্লেকশন-মুক্ত ম্যাট ফিনিশ)</td>
+          </tr>
+          <tr>
+            <td>কালার থিম:</td>
+            <td><strong>সবুজ, লাল ও সাদা</strong> (BanglaThon Heritage Tri-color)</td>
+          </tr>
+          <tr>
+            <td>মূল কিওয়ার্ড ও URL:</td>
+            <td><strong>banglathon.vercel.app</strong> (লাইভ কিউআর কোডসহ)</td>
+          </tr>
+          <tr>
+            <td>রেজুলিউশন:</td>
+            <td><strong>ভেক্টর ও আল্ট্রা-শার্প 300 DPI প্রিন্ট কোয়ালিটি</strong></td>
+          </tr>
+        </table>
+
+        <div class="press-callout" style="margin-top:18px;">
+          <strong>💡 প্রিন্টিং প্রেসকে যা বলবেন:</strong><br>
+          "২ ফিট বাই ৫ ফিট সাইজে ম্যাট স্টার ফ্লেক্সে প্রিন্ট করে ৪ কোনায় আইলেট (রিং) পাঞ্চ করে দিতে হবে, যাতে এক্স-স্ট্যান্ডে টানটান করে ঝুলাব যায়।"
+        </div>
+      </div>
+
+      <!-- Key Content Highlights -->
+      <div class="action-card">
+        <span class="badge-label">ব্যানারে উপস্থাপিত মূল বিষয়বস্তু</span>
+        <h2 class="action-title">কম কথায় সর্বোচ্চ আবেদন</h2>
+        
+        <ul class="highlights-list">
+          <li>
+            <span class="check-icon">✓</span>
+            <div><strong>বোল্ড ও গর্বিত শিরোনাম:</strong> বাংলাথন (BanglaThon v2.0) — নতুনদের জন্য মাতৃভাষায় প্রোগ্রামিং।</div>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <div><strong>৪টি প্রধান হাইলাইট:</strong> ব্রাউজারে ইনস্টলেশন-হীন লাইভ কোডিং, ১০০% খাঁটি বাংলা সিনট্যাক্স, অফিশিয়াল VS Code এক্সটেনশন এবং কগনিটিভ ব্রিজ।</div>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <div><strong>লাইভ মিনি IDE উইন্ডো:</strong> ৪ লাইনের খাঁটি বাংলাথন কোডের ভিজ্যুয়াল নমুনা (`ধরি দেশ = "বাংলাদেশ"`...)।</div>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <div><strong>স্ক্যান ও অ্যাকশন কার্ড:</strong> বিশাল <code>banglathon.vercel.app</code> ডোমেন এবং যেকোনো স্মার্টফোনে তাৎক্ষণিক স্ক্যানযোগ্য ভেক্টর QR কোড।</div>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <div><strong>উদ্ভাবক দল ও বিশ্ববিদ্যালয়:</strong> Tasfique Shikder Koushik, Jisra Haider Insa, Md. Anwar Hosen Fahim (Dept. of CSE, RMSTU)।</div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
