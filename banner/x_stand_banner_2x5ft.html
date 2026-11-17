@@ -374,20 +374,20 @@
       font-size: 0.26in;
     }
 
-    /* Live IDE Code Showcase Box */
+    /* Live IDE Code Showcase Box (Dual Syntax: Bangla + Banglish) */
     .ide-container {
       background: #041b14;
       border: 3px solid rgba(52, 211, 153, 0.4);
       border-radius: 0.32in;
       box-shadow: 0 20px 45px rgba(0, 54, 36, 0.3);
       overflow: hidden;
-      margin: 0.1in 0 0.35in 0;
+      margin: 0.1in 0 0.32in 0;
       text-align: left;
     }
 
     .ide-header {
       background: #02261c;
-      padding: 0.18in 0.32in;
+      padding: 0.16in 0.32in;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -408,7 +408,7 @@
 
     .ide-title {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.26in;
+      font-size: 0.24in;
       color: #6ee7b7;
       font-weight: 700;
     }
@@ -422,11 +422,48 @@
       font-weight: 700;
     }
 
+    .ide-split-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      padding: 0.2in 0.32in 0.24in 0.32in;
+      background: #041b14;
+    }
+    .ide-col {
+      display: flex;
+      flex-direction: column;
+    }
+    .ide-col-header {
+      margin-bottom: 0.1in;
+    }
+    .ide-col-tag {
+      display: inline-block;
+      font-size: 0.21in;
+      font-weight: 800;
+      padding: 0.04in 0.16in;
+      border-radius: 0.08in;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      letter-spacing: 0.3px;
+    }
+    .tag-bangla {
+      background: rgba(52, 211, 153, 0.2);
+      color: #34d399;
+      border: 1.5px solid rgba(52, 211, 153, 0.4);
+    }
+    .tag-banglish {
+      background: rgba(225, 29, 72, 0.2);
+      color: #fda4af;
+      border: 1.5px solid rgba(225, 29, 72, 0.45);
+    }
+    .ide-col-divider {
+      width: 2px;
+      background: rgba(52, 211, 153, 0.25);
+      margin: 0 0.26in;
+    }
+
     .ide-code {
-      padding: 0.3in 0.38in;
       font-family: 'JetBrains Mono', 'Fira Code', monospace;
-      font-size: 0.32in;
-      line-height: 1.65;
+      font-size: 0.25in;
+      line-height: 1.52;
       color: #f8fafc;
     }
     .ide-code .kw { color: #f472b6; font-weight: 700; }
@@ -688,7 +725,7 @@
       </div>
 
       <div class="slogan-pill">
-        <span>🇧🇩 বাংলায় কোড লেখো, বাংলায় শেখো</span>
+        <span>🇧🇩 বাংলা ও বাংলিশ (Banglish) — দুইভাবেই কোড লেখো, সহজে শেখো</span>
       </div>
 
       <div class="quote-badge">
@@ -712,11 +749,11 @@
       <!-- Pillar 2 -->
       <div class="pillar-card red-card">
         <div class="pillar-header">
-          <span class="pillar-icon">🇧🇩</span>
-          <h3 class="pillar-title">১০০% খাঁটি বাংলা সিনট্যাক্স</h3>
+          <span class="pillar-icon">🔤</span>
+          <h3 class="pillar-title">বাংলা ও বাংলিশ (Banglish) ডুয়াল সিনট্যাক্স</h3>
         </div>
         <p class="pillar-desc">
-          <code>ধরি</code>, <code>দেখাও</code>, <code>যদি</code>, <code>নতুবা</code>, <code>যতক্ষণ</code>, <code>কাজ</code> — সম্পূর্ণ স্বকীয় ও প্রাকৃতিক মাতৃভাষার ব্যাকরণ।
+          খাঁটি বাংলা (<code>ধরি</code>, <code>দেখাও</code>, <code>যদি</code>) কিংবা সাধারণ ইংরেজি কিবোর্ডে বাংলিশ (<code>dhori</code>, <code>dekhao</code>, <code>jodi</code>) — উভয় মোডেই পূর্ণ সমর্থন।
         </p>
       </div>
 
@@ -743,7 +780,7 @@
       </div>
     </div>
 
-    <!-- 4. Mini Live IDE Code Window -->
+    <!-- 4. Mini Live IDE Code Window (Dual Syntax: Bangla + Banglish) -->
     <div class="ide-container">
       <div class="ide-header">
         <div class="ide-dots">
@@ -751,15 +788,40 @@
           <div class="ide-dot dot-yellow"></div>
           <div class="ide-dot dot-green"></div>
         </div>
-        <div class="ide-title">স্বাগতম_বাংলাদেশ.bl</div>
+        <div class="ide-title">বাংলাথন ডুয়াল কোড ইঞ্জিন • বাংলা &amp; বাংলিশ (Banglish)</div>
         <div class="ide-badge">বাংলাথন রানটাইম v2.0</div>
       </div>
-      <div class="ide-code">
-        <span class="cm"># বাংলা ভাষায় কোডিং এখন বাস্তব ও সবার জন্য উন্মুক্ত!</span><br>
-        <span class="kw">ধরি</span> দেশ = <span class="str">"বাংলাদেশ"</span><br>
-        <span class="kw">ধরি</span> ভাষা = <span class="str">"বাংলা"</span><br>
-        <span class="fn">দেখাও</span> <span class="str">"আসসালামু আলাইকুম, "</span> <span class="op">+</span> দেশ <span class="op">+</span> <span class="str">"!"</span><br>
-        <span class="fn">দেখাও</span> <span class="str">"মাতৃভাষায় কোড শেখো, বিশ্বজয়ে এগিয়ে যাও।"</span>
+      <div class="ide-split-grid">
+        <!-- Pure Bangla Column -->
+        <div class="ide-col">
+          <div class="ide-col-header">
+            <span class="ide-col-tag tag-bangla">🇧🇩 বাংলা হরফে কোডিং (.bl)</span>
+          </div>
+          <div class="ide-code">
+            <span class="kw">ধরি</span> নাম = <span class="str">"বাংলাদেশ"</span><br>
+            <span class="kw">যদি</span> নাম == <span class="str">"বাংলাদেশ"</span>:<br>
+            &nbsp;&nbsp;<span class="fn">দেখাও</span> <span class="str">"স্বাগতম মাতৃভাষায়!"</span><br>
+            <span class="kw">নাহলে</span>:<br>
+            &nbsp;&nbsp;<span class="fn">দেখাও</span> <span class="str">"হ্যালো বিশ্ব!"</span>
+          </div>
+        </div>
+
+        <!-- Vertical Divider -->
+        <div class="ide-col-divider"></div>
+
+        <!-- Banglish Column -->
+        <div class="ide-col">
+          <div class="ide-col-header">
+            <span class="ide-col-tag tag-banglish">🔤 বাংলিশ (Banglish) মোড (.bl)</span>
+          </div>
+          <div class="ide-code">
+            <span class="kw">dhori</span> naam = <span class="str">"Bangladesh"</span><br>
+            <span class="kw">jodi</span> naam == <span class="str">"Bangladesh"</span>:<br>
+            &nbsp;&nbsp;<span class="fn">dekhao</span> <span class="str">"Swagotom matribhashay!"</span><br>
+            <span class="kw">nahole</span>:<br>
+            &nbsp;&nbsp;<span class="fn">dekhao</span> <span class="str">"Hello World!"</span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -785,7 +847,7 @@
         </div>
 
         <span class="cta-subtext">
-          মোবাইল বা পিসি থেকে সরাসরি ব্রাউজারে কোড লিখতে পাশের কিউআর কোডটি স্ক্যান করুন
+          বাংলা বা বাংলিশে লাইভ কোড লিখতে মোবাইল ক্যামেরা দিয়ে কিউআর কোড স্ক্যান করে যেকোনো ব্রাউজারে এখনই শুরু করুন
         </span>
       </div>
 
